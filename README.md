@@ -10,7 +10,7 @@ Getting Started with Git
 
 To Get Psh
 ----------
-    $ git clone git://github.com/thelmuth/Psh.git
+    $ git clone git://github.com/jonklein/Psh.git
     $ cd Psh
 
 To Update Psh

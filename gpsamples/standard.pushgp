@@ -1,0 +1,23 @@
+#
+# PushGP common configuration settings
+# Jon Klein <jk [at] spiderland.org>
+# 06/14/2008
+#
+
+### Set classes for the Push intepreter and individuals.  These
+### values can used to implement custom interpreter or individual 
+### behaviors.
+
+interpreter-class       	= org.spiderland.Psh.Interpreter
+individual-class        	= org.spiderland.Psh.PushGPIndividual
+
+# push-frame-mode		= pushstacks
+
+### Reasonable default values for GP -- may be changed by problem
+### specific configuration files
+
+tournament-size         	= 7
+trivial-geography-radius	= 0
+max-points-in-program		= 100
+mutation-mode			= fair
+fair-mutation-range     	= .3

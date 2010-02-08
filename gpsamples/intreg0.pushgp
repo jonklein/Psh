@@ -1,0 +1,54 @@
+
+#
+# A sample PushGP file for a simple test symbolic regression problem.
+# In this demo, the system solves the equation y = x, using
+# integer symbolic regression.
+#
+# Changes by Tom Helmuth
+# 01/12/2010
+#
+
+### Set classes for the Push intepreter and individuals.  These
+### values can used to implement custom interpreter or individual 
+### behaviors.
+
+interpreter-class       	= org.spiderland.Psh.Interpreter
+individual-class        	= org.spiderland.Psh.PushGPIndividual
+
+# push-frame-mode		= pushstacks
+
+### Setup some standard GP parameters
+
+mutation-percent	= 40
+crossover-percent	= 40
+simplification-percent	= 10
+
+simplify-flatten-percent= 20
+
+reproduction-simplifications = 25
+report-simplifications	= 100
+final-simplifications	= 1000
+
+max-generations		= 200
+tournament-size         = 7
+trivial-geography-radius= 0
+max-points-in-program	= 40
+mutation-mode		= fair
+fair-mutation-range     = .3
+population-size 	= 50
+execution-limit		= 80
+max-random-code-size	= 40
+
+### The problem class determines how test cases are setup and
+### how fitness scores are computed.  The IntSymbolicRegression
+### class uses a set of int inputs and a single output.
+
+problem-class		= org.spiderland.Psh.IntSymbolicRegressionNoInput
+
+#This test case is for y = x
+test-cases		= ( ( 1 1 ) ( 2 2 ) ( 5 5 ) ( 41 41 ) ( 95 95 ) ( 124 124 ) )
+
+
+#Instruction set for y = x
+instruction-set = ( INTEGER.% INTEGER.* INTEGER.+ INTEGER.- INTEGER./ INTEGER.< INTEGER.= INTEGER.> INTEGER.DUP INTEGER.FLUSH INTEGER.POP INTEGER.ROT INTEGER.STACKDEPTH INTEGER.SWAP INTEGER.ERC BOOLEAN.DUP BOOLEAN.FLUSH BOOLEAN.POP BOOLEAN.ROT BOOLEAN.STACKDEPTH BOOLEAN.SWAP EXEC.= EXEC.DO*COUNT EXEC.DO*RANGE EXEC.DO*TIMES EXEC.DUP EXEC.FLUSH EXEC.POP EXEC.ROT EXEC.STACKDEPTH EXEC.SWAP )
+

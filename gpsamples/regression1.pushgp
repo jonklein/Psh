@@ -1,0 +1,50 @@
+
+#
+# A sample PushGP file for a simple test symbolic regression problem.
+# In this demo, the system solves the equation y = 12x^2 + 5.
+#
+# Jon Klein <jk [at] spiderland.org>
+# 06/14/2008
+#
+
+### We can optionally read in some additional parameters
+include standard.pushgp
+
+### Setup some standard GP parameters
+
+population-size 	= 2000
+execution-limit		= 80
+tournament-size 	= 7
+mutation-percent	= 20
+crossover-percent	= 70
+max-generations		= 200
+max-random-code-size	= 40
+fair-mutation-range	= .3
+
+### New Parameters since version 0.1
+
+trivial-geography-radius= 10
+
+simplification-percent	= 0
+simplify-flatten-percent= 20
+
+reproduction-simplifications = 25
+report-simplifications	= 100
+final-simplifications	= 1000
+
+### The problem class determines how test cases are setup and
+### how fitness scores are computed.  The FloatSymbolicRegression
+### class uses a set of float inputs and a single output.
+
+problem-class		= org.spiderland.Psh.FloatSymbolicRegression
+
+test-cases		= ( ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) )
+
+### Other possible ways of defining test cases
+
+# test-case-class 	= Problem1Generator	# at runtime from code
+# test-case-xml		= Problem1.xml		# from an XML file
+# test-case-csv		= Problem1.csv		# from a comma separated value file
+
+instruction-set = ( FLOAT.* FLOAT.+ FLOAT.% FLOAT.DUP FLOAT.- FLOAT.SWAP FLOAT.ERC )
+

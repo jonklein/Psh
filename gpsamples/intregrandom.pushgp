@@ -1,0 +1,43 @@
+
+#
+# A sample PushGP file for a simple test symbolic regression problem.
+# In this demo, the system solves the factorial function using
+# integer symbolic regression
+#
+# Tom Helmuth
+# 01/17/2010
+#
+
+### Set classes for the Push intepreter and individuals.  These
+### values can used to implement custom interpreter or individual 
+### behaviors.
+
+interpreter-class       	= org.spiderland.Psh.Interpreter
+individual-class        	= org.spiderland.Psh.PushGPIndividual
+
+### Setup GP parameters
+
+execution-limit		= 100
+
+max-generations		= 1001
+tournament-size         = 7
+trivial-geography-radius= 0
+max-points-in-program	= 100
+mutation-mode		= fair
+fair-mutation-range     = .3
+population-size 	= 1000
+mutation-percent	= 35
+crossover-percent	= 55
+max-random-code-size	= 40
+
+### The problem class determines how test cases are setup and
+### how fitness scores are computed.  The IntSymbolicRegression
+### class uses a set of int inputs and a single output.
+
+problem-class		= org.spiderland.Psh.IntSymbolicRegressionNoInput
+
+#This test case is for factorial
+test-cases		= ((58 10) (76 85) (64 20) (94 78) (59 32) (19 79))
+
+#Instruction set for factorial
+instruction-set = (REGISTERED.INTEGER REGISTERED.EXEC REGISTERED.CODE REGISTERED.BOOLEAN TRUE FALSE)

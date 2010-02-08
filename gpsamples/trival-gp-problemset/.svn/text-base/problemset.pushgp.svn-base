@@ -1,0 +1,46 @@
+
+#
+# A common PshGP config file for a set of symbolic regression problems 
+# used in the book chapter:
+#
+# Spector, L., and J. Klein. 2005. Trivial Geography in Genetic Programming. 
+# In Genetic Programming Theory and Practice III, edited by T. Yu, R.L. Riolo, 
+# and B. Worzel, pp. 109-124. Boston, MA: Kluwer Academic Publishers. 
+#
+# http://hampshire.edu/lspector/pubs/trivial-geography-toappear.pdf
+#
+# Though the problem sets are the same as those presented in the paper, the
+# PushGP parameters and PushGP implementation are different than those used 
+# in the paper and may produce different results.
+#
+# Jon Klein <jk [at] spiderland.org>
+# 06/14/2008
+#
+
+### We can optionally read in some additional parameters
+include ../standard.pushgp
+
+### Set classes for the Push intepreter and individuals.  We 
+### can use this to implement custom interpreter behaviors.
+
+interpreter-class	= org.spiderland.Psh.Interpreter
+individual-class	= org.spiderland.Psh.PushGPIndividual
+
+### Setup some standard GP parameters
+
+population-size 	= 2000
+execution-limit		= 80
+tournament-size 	= 7
+mutation-percent	= 20
+crossover-percent	= 70
+max-generations		= 200
+max-random-code-size	= 40
+fair-mutation-range	= .3
+
+### The problem class determines how test cases are setup and
+### how fitness scores are computed.  The FloatSymbolicRegression
+### class uses a set of float inputs and a single output.
+
+problem-class		= org.spiderland.Psh.FloatSymbolicRegression
+
+instruction-set	= ( FLOAT.* FLOAT.+ FLOAT.% FLOAT.DUP FLOAT.- FLOAT.SWAP FLOAT.ERC )

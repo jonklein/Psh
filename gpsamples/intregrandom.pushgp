@@ -26,9 +26,17 @@ max-points-in-program	= 100
 mutation-mode		= fair
 fair-mutation-range     = .3
 population-size 	= 1000
-mutation-percent	= 35
+mutation-percent	= 30
 crossover-percent	= 55
+simplification-percent	= 5
 max-random-code-size	= 40
+
+simplify-flatten-percent= 20
+
+reproduction-simplifications = 25
+report-simplifications	= 100
+final-simplifications	= 1000
+
 
 ### The problem class determines how test cases are setup and
 ### how fitness scores are computed.  The IntSymbolicRegression
@@ -40,4 +48,4 @@ problem-class		= org.spiderland.Psh.IntSymbolicRegressionNoInput
 test-cases		= ((58 10) (76 85) (64 20) (94 78) (59 32) (19 79))
 
 #Instruction set for factorial
-instruction-set = (REGISTERED.INTEGER REGISTERED.EXEC REGISTERED.CODE REGISTERED.BOOLEAN TRUE FALSE)
+instruction-set = (registered.integer registered.exec registered.code registered.boolean true false)

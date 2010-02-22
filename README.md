@@ -46,7 +46,7 @@ PshInspector allows you to examine every step of a Psh program as it executes. T
 
     $ java PshInspector pushsamples/exampleProgram1.push
 
-This push file runs the psh program '(2994 5 INTEGER.+)' for 100 steps after pushing the inputs '44, 22, TRUE, 17.76'. Other sample psh programs are available in 'pushsamples/'.
+This push file runs the psh program '(2994 5 integer.+)' for 100 steps after pushing the inputs '44, 22, true, 17.76'. Other sample psh programs are available in 'pushsamples/'.
 
 Psh In More Detail
 ==================
@@ -84,7 +84,7 @@ The following parameters must be defined in the configuration file, given with e
     max-random-code-size = 40
     
     test-cases = ((1 1) (2 2) (3 6) (4 24) (5 120) (6 720))
-    instruction-set = (REGISTERED.EXEC REGISTERED.BOOLEAN INTEGER.% INTEGER.* INTEGER.+ INTEGER.- INTEGER./ INTEGER.< INTEGER.= INTEGER.> INTEGER.DUP INTEGER.FLUSH INTEGER.POP INTEGER.ROT INTEGER.STACKDEPTH INTEGER.SWAP)
+    instruction-set = (registered.exec registered.boolean integer.% integer.* integer.+ integer.- integer./ integer.< integer.= integer.> integer.dup integer.flush integer.pop integer.rot integer.stackdepth integer.swap)
 
 The following parameters are optional:
 
@@ -114,12 +114,13 @@ Major Changes since v0.1:
 Psh
 ---
 - Added problem classes for integer symbolic regression (IntSymbolicRegression.java) and integer symbolic regression without an input instruction (IntSymbolicRegressionNoInput.java).
-- Fixed 'CODE' and 'EXEC' stack iteration functions, which were not executing correctly according to Push 3.0 standards.
+- Fixed 'code' and 'exec' stack iteration functions, which were not executing correctly according to Push 3.0 standards.
+- All instructions have been converted into lower case to match Schush and other implementations.
 
 PshGP
 -----
 - PshGP now displays the error values for the best program during the generation report.
-- In config files, you can now include all instructions for a certain type using 'REGISTERED.TYPE' (e.g. 'REGISTERED.INTEGER' or 'REGISTERED.EXEC').
+- In config files, you can now include all instructions for a certain type using 'registered.type' (e.g. 'registered.integer' or 'registered.stack').
 - Implemented auto-simplification, which is used during generation and final reports. Auto-simplification may also be used as a genetic operator along with mutation and crossover.
 
 PshInspector

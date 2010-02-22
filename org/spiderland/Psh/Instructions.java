@@ -48,10 +48,6 @@ class Quote extends Instruction {
 
 
 
-
-
-
-
 class Pop extends StackInstruction {
     Pop( Stack inStack ) { super( inStack ); }
 
@@ -345,7 +341,7 @@ class FloatTan extends UnaryFloatInstruction {
 //     specifications of Push 3.0
 
 
-//Begin CODE iteration functions
+//Begin code iteration functions
 class CodeDoRange extends ObjectStackInstruction {
     CodeDoRange(Interpreter inI) { 
 	super(inI.codeStack()); 
@@ -367,10 +363,10 @@ class CodeDoRange extends ObjectStackInstruction {
 		istack.push(start);
 		start = ( start < stop ) ? ( start + 1 ) : ( start - 1 );
 
-		//trh//Made changes to correct errors with CODE.DO*RANGE
+		//trh//Made changes to correct errors with code.do*range
 		String recursiveCall = "(" + start + " " + stop + " ";
-		recursiveCall += "CODE.QUOTE ";
-		recursiveCall += code + " CODE.DO*RANGE)";
+		recursiveCall += "code.quote ";
+		recursiveCall += code + " code.do*range)";
 		
 		try{
 		    Program recursiveCallProgram = new Program(recursiveCall);
@@ -400,15 +396,15 @@ class CodeDoTimes extends ObjectStackInstruction{
 		String bodyAndIntPop = "";
 
 		if(body.charAt(0) == '('){
-		    bodyAndIntPop = "(INTEGER.POP " + body.substring(1);
+		    bodyAndIntPop = "(integer.pop " + body.substring(1);
 		}
 		else{
-		    bodyAndIntPop = "(INTEGER.POP " + body + ")";
+		    bodyAndIntPop = "(integer.pop " + body + ")";
 		}
 
 		String doRangeMacroString = "(0 " + (istack.pop() - 1);
-		doRangeMacroString += " CODE.QUOTE " + bodyAndIntPop;
-		doRangeMacroString += " CODE.DO*RANGE)";
+		doRangeMacroString += " code.quote " + bodyAndIntPop;
+		doRangeMacroString += " code.do*range)";
 
 		try{
 		    Program doRangeMacroProgram = new Program(doRangeMacroString);
@@ -435,8 +431,8 @@ class CodeDoCount extends ObjectStackInstruction{
 	if(_stack.size() > 0 && istack.size() > 0) {
 	    if(istack.top() > 0){
 		String doRangeMacroString = "(0 " + (istack.pop() - 1);
-		doRangeMacroString += " CODE.QUOTE " + _stack.pop();
-		doRangeMacroString += " CODE.DO*RANGE)";
+		doRangeMacroString += " code.quote " + _stack.pop();
+		doRangeMacroString += " code.do*range)";
 
 		try{
 		    Program doRangeMacroProgram = new Program(doRangeMacroString);
@@ -450,9 +446,9 @@ class CodeDoCount extends ObjectStackInstruction{
 
     }
 }
-//End CODE iteration functions
+//End code iteration functions
 
-//Begin EXEC iteration functions
+//Begin exec iteration functions
 
 class ExecDoRange extends ObjectStackInstruction {
     ExecDoRange(Interpreter inI) { 
@@ -475,9 +471,9 @@ class ExecDoRange extends ObjectStackInstruction {
 		istack.push(start);
 		start = ( start < stop ) ? ( start + 1 ) : ( start - 1 );
 
-		//trh//Made changes to correct errors with CODE.DO*RANGE
+		//trh//Made changes to correct errors with code.do*range
 		String recursiveCall = "(" + start + " " + stop + " ";
-		recursiveCall += "EXEC.DO*RANGE " + code + ")";
+		recursiveCall += "exec.do*range " + code + ")";
 		
 		try{
 		    Program recursiveCallProgram = new Program(recursiveCall);
@@ -507,14 +503,14 @@ class ExecDoTimes extends ObjectStackInstruction{
 		String bodyAndIntPop = "";
 
 		if(body.charAt(0) == '('){
-		    bodyAndIntPop = "(INTEGER.POP " + body.substring(1);
+		    bodyAndIntPop = "(integer.pop " + body.substring(1);
 		}
 		else{
-		    bodyAndIntPop = "(INTEGER.POP " + body + ")";
+		    bodyAndIntPop = "(integer.pop " + body + ")";
 		}
 
 		String doRangeMacroString = "(0 " + (istack.pop() - 1);
-		doRangeMacroString += " EXEC.DO*RANGE " + bodyAndIntPop + ")";
+		doRangeMacroString += " exec.do*range " + bodyAndIntPop + ")";
 
 		try{
 		    Program doRangeMacroProgram = new Program(doRangeMacroString);
@@ -541,7 +537,7 @@ class ExecDoCount extends ObjectStackInstruction{
 	if(_stack.size() > 0 && istack.size() > 0) {
 	    if(istack.top() > 0){
 		String doRangeMacroString = "(0 " + (istack.pop() - 1);
-		doRangeMacroString += " EXEC.DO*RANGE " + _stack.pop() + ")";
+		doRangeMacroString += " exec.do*range " + _stack.pop() + ")";
 
 		try{
 		    Program doRangeMacroProgram = new Program(doRangeMacroString);
@@ -554,7 +550,7 @@ class ExecDoCount extends ObjectStackInstruction{
 	}
     }
 }
-//End EXEC iteration functions.
+//End exec iteration functions.
 
 class ObjectEquals extends ObjectStackInstruction {
     ObjectEquals( ObjectStack inStack ) { super( inStack ); }
@@ -591,6 +587,14 @@ class If extends ObjectStackInstruction {
 	}
     }
 }
+
+
+//
+// Instructions for the input stack
+//
+
+
+
 
 //
 // Instructions for the activation stack

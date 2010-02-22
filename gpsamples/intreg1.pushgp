@@ -53,4 +53,4 @@ problem-class		= org.spiderland.Psh.IntSymbolicRegression
 test-cases		= ( ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) )
 
 #Instruction set for y = 12x^2 + 5
-instruction-set = ( INTEGER.* INTEGER.+ INTEGER.% INTEGER.DUP INTEGER.- INTEGER.SWAP INTEGER.ERC )
+instruction-set = ( integer.* integer.+ integer.% integer.dup integer.- integer.swap )

@@ -46,5 +46,4 @@ test-cases		= ( ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) )
 # test-case-xml		= Problem1.xml		# from an XML file
 # test-case-csv		= Problem1.csv		# from a comma separated value file
 
-instruction-set = ( FLOAT.* FLOAT.+ FLOAT.% FLOAT.DUP FLOAT.- FLOAT.SWAP FLOAT.ERC )
-
+instruction-set = ( float.* float.+ float.% float.dup float.- float.swap float.erc )

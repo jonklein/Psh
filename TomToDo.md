@@ -6,10 +6,10 @@ Done Major Changes
 - Added problem classes for integer symbolic regression (IntSymbolicRegression.java) and integer symbolic regression without an input instruction (IntSymbolicRegressionNoInput.java).
 - Make PshGP display the errors for best program
 - Implement Psh runtime examiner to see why Schush and Psh are running code and getting different results. It likely has to do with what they push on the stacks at the beginning of a run.
-- Fix CODE.DO*RANGE. Issues: 1. Recrusive call is not surrounded by parentheses. 2. Does not leave a copy of second integer on int stack.
-- Check that non-CODE.DO*RANGE  code stack iteration instructions are working correctly, i.e. have same results as with Schush
-- Fix Psh to make sure EXEC.DO*RANGE and other iterative instructions are working correctly.
-- Allow the inclusion of all instructions for a certain type using REGISTERED.TYPE (e.g. REGISTERED.INTEGER or REGISTERED.EXEC).
+- Fix code.do*range. Issues: 1. Recrusive call is not surrounded by parentheses. 2. Does not leave a copy of second integer on int stack.
+- Check that non-code.do*range  code stack iteration instructions are working correctly, i.e. have same results as with Schush
+- Fix Psh to make sure exec.do*range and other iterative instructions are working correctly.
+- Allow the inclusion of all instructions for a certain type using registered.type (e.g. registered.integer or registered.exec).
 - Implement Autosimplification function. Have Psh use Autosimplification after evolution. Autosimplify during reports. Make optional Autosimplification genetic operator.
 
 Done Minor Changes
@@ -31,26 +31,18 @@ Done Minor Changes
 
 To Do Still
 -----------
+- Make all instructions lower case.
+- Update README for lowercase instructions.
 
-- Add information about config (.pushgp) files, and about PshInspector files (.push) to README.
+- Implement input stack including the following instructions:
+1 input.makeinputsN - Creates N instructions called 'input.in0', 'input.in1', ..., 'input.in(N-1)'
+2 input.index - Pops n off of the integer stack and pushes input[n] onto corresponding stack. If integer stack is empty, acts as a no-op.
+3 input.inall - For all n in 0 to input.size, push input[n] onto the corresponding stack.
+4 input.stackdepth - Puts size of stack on integer stack.
 
-- Add GitHub site to my UMass homepage.
-
-
-
-
-- Look into input instructions in Psh - currently lacking - add auxilary stack
-
-
-
-- Add new problem classes (such as IntSymbolicRegression.java) for other problem types.
-
-
-- During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "BOOLEAN.STACKDEPTH" is used only to get a 0 on the int stack.
-
-
-
-
+- Add new problem classes (such as IntSymbolicRegression.java) for other problem types, such as the Parity problem.
+- Add to "Problem Classes" section in README
+- During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "boolean.stackdepth" is used only to get a 0 on the int stack.
 
 
 Jon's TODO

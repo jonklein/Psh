@@ -25,6 +25,10 @@ public class Interpreter {
     ObjectStack		_nameStack;
     ObjectStack		_execStack = new ObjectStack();
 
+    ObjectStack         _inputStack = new ObjectStack(); //Since the _inputStack will not change
+                                     //after initialization, it will not need
+                                     //a frame stack.
+
     ObjectStack		_intFrameStack = new ObjectStack();
     ObjectStack		_floatFrameStack = new ObjectStack();
     ObjectStack		_boolFrameStack = new ObjectStack();
@@ -57,52 +61,52 @@ public class Interpreter {
 
 	PushStacks();
 
-	DefineInstruction( "INTEGER.+", new IntegerAdd() );
-	DefineInstruction( "INTEGER.-", new IntegerSub() );
-	DefineInstruction( "INTEGER./", new IntegerDiv() );
-	DefineInstruction( "INTEGER.%", new IntegerMod() );
-	DefineInstruction( "INTEGER.*", new IntegerMul() );
-	DefineInstruction( "INTEGER.=", new IntegerEquals() );
-	DefineInstruction( "INTEGER.>", new IntegerGreaterThan() );
-	DefineInstruction( "INTEGER.<", new IntegerLessThan() );
+	DefineInstruction( "integer.+", new IntegerAdd() );
+	DefineInstruction( "integer.-", new IntegerSub() );
+	DefineInstruction( "integer./", new IntegerDiv() );
+	DefineInstruction( "integer.%", new IntegerMod() );
+	DefineInstruction( "integer.*", new IntegerMul() );
+	DefineInstruction( "integer.=", new IntegerEquals() );
+	DefineInstruction( "integer.>", new IntegerGreaterThan() );
+	DefineInstruction( "integer.<", new IntegerLessThan() );
 
-	DefineInstruction( "FLOAT.+", new FloatAdd() );
-	DefineInstruction( "FLOAT.-", new FloatSub() );
-	DefineInstruction( "FLOAT./", new FloatDiv() );
-	DefineInstruction( "FLOAT.%", new FloatMod() );
-	DefineInstruction( "FLOAT.*", new FloatMul() );
-	DefineInstruction( "FLOAT.=", new FloatEquals() );
-	DefineInstruction( "FLOAT.>", new FloatGreaterThan() );
-	DefineInstruction( "FLOAT.<", new FloatLessThan() );
+	DefineInstruction( "float.+", new FloatAdd() );
+	DefineInstruction( "float.-", new FloatSub() );
+	DefineInstruction( "float./", new FloatDiv() );
+	DefineInstruction( "float.%", new FloatMod() );
+	DefineInstruction( "float.*", new FloatMul() );
+	DefineInstruction( "float.=", new FloatEquals() );
+	DefineInstruction( "float.>", new FloatGreaterThan() );
+	DefineInstruction( "float.<", new FloatLessThan() );
 
-	DefineInstruction( "CODE.QUOTE", new Quote() );
+	DefineInstruction( "code.quote", new Quote() );
 
-	DefineInstruction( "EXEC.DO*TIMES", new ExecDoTimes(this) );
-	DefineInstruction( "CODE.DO*TIMES", new CodeDoTimes(this) );
-	DefineInstruction( "EXEC.DO*COUNT", new ExecDoCount(this) );
-	DefineInstruction( "CODE.DO*COUNT", new CodeDoCount(this) );
-	DefineInstruction( "EXEC.DO*RANGE", new ExecDoRange(this) );
-	DefineInstruction( "CODE.DO*RANGE", new CodeDoRange(this) );
-	DefineInstruction( "CODE.=", new ObjectEquals( _codeStack ) );
-	DefineInstruction( "EXEC.=", new ObjectEquals( _execStack ) );
-	DefineInstruction( "CODE.IF", new If( _codeStack ) );
-	DefineInstruction( "EXEC.IF", new If( _execStack ) );
+	DefineInstruction( "exec.do*times", new ExecDoTimes(this) );
+	DefineInstruction( "code.do*times", new CodeDoTimes(this) );
+	DefineInstruction( "exec.do*count", new ExecDoCount(this) );
+	DefineInstruction( "code.do*count", new CodeDoCount(this) );
+	DefineInstruction( "exec.do*range", new ExecDoRange(this) );
+	DefineInstruction( "code.do*range", new CodeDoRange(this) );
+	DefineInstruction( "code.=", new ObjectEquals( _codeStack ) );
+	DefineInstruction( "exec.=", new ObjectEquals( _execStack ) );
+	DefineInstruction( "code.if", new If( _codeStack ) );
+	DefineInstruction( "exec.if", new If( _execStack ) );
 
-	DefineInstruction( "TRUE", new BooleanConstant( true ) );
-	DefineInstruction( "FALSE", new BooleanConstant( false ) );
+	DefineInstruction( "true", new BooleanConstant( true ) );
+	DefineInstruction( "false", new BooleanConstant( false ) );
 
-	DefineStackInstructions( "INTEGER", _intStack );
-	DefineStackInstructions( "FLOAT", _floatStack );
-	DefineStackInstructions( "BOOLEAN", _boolStack );
-	DefineStackInstructions( "NAME", _nameStack );
-	DefineStackInstructions( "CODE", _codeStack );
-	DefineStackInstructions( "EXEC", _execStack );
+	DefineStackInstructions( "integer", _intStack );
+	DefineStackInstructions( "float", _floatStack );
+	DefineStackInstructions( "boolean", _boolStack );
+	DefineStackInstructions( "name", _nameStack );
+	DefineStackInstructions( "code", _codeStack );
+	DefineStackInstructions( "exec", _execStack );
 
-	DefineInstruction( "FRAME.PUSH", new PushFrame() );
-	DefineInstruction( "FRAME.POP", new PopFrame() );
+	DefineInstruction( "frame.push", new PushFrame() );
+	DefineInstruction( "frame.pop", new PopFrame() );
 
-	_generators.put( "FLOAT.ERC", new FloatAtomGenerator() );
-	_generators.put( "INTEGER.ERC", new IntAtomGenerator() );
+	_generators.put( "float.erc", new FloatAtomGenerator() );
+	_generators.put( "integer.erc", new IntAtomGenerator() );
     }
 
     /**
@@ -135,17 +139,18 @@ public class Interpreter {
 
 	    String name = (String)o;
 
-	    //Check for REGISTERED
-	    if(name.indexOf("REGISTERED.") == 0){
+	    //Check for registered
+	    if(name.indexOf("registered.") == 0){
 		String registeredType = name.substring(11);
 
-		if(!registeredType.equals("INTEGER") && 
-		   !registeredType.equals("FLOAT") &&
-		   !registeredType.equals("BOOLEAN") &&
-		   !registeredType.equals("EXEC") &&
-		   !registeredType.equals("CODE") &&
-		   !registeredType.equals("NAME") &&
-		   !registeredType.equals("FRAME")){
+		if(!registeredType.equals("integer") && 
+		   !registeredType.equals("float") &&
+		   !registeredType.equals("boolean") &&
+		   !registeredType.equals("exec") &&
+		   !registeredType.equals("code") &&
+		   !registeredType.equals("name") &&
+		   !registeredType.equals("input") &&
+		   !registeredType.equals("frame")){
 		    System.out.println( "Unknown instruction \"" + name + "\" in instruction set" );
 		}
 		else{
@@ -161,10 +166,10 @@ public class Interpreter {
 			}
 		    }
 
-		    if(registeredType.equals("BOOLEAN")){
-			AtomGenerator t = _generators.get("TRUE");
+		    if(registeredType.equals("boolean")){
+			AtomGenerator t = _generators.get("true");
 			_randomGenerators.add(t);
-			AtomGenerator f = _generators.get("FALSE");
+			AtomGenerator f = _generators.get("false");
 			_randomGenerators.add(f);
 		    }
 
@@ -193,12 +198,12 @@ public class Interpreter {
     }
 
     private void DefineStackInstructions( String inTypeName, Stack inStack ) {
-	DefineInstruction( inTypeName + ".POP", new Pop( inStack ) );
-	DefineInstruction( inTypeName + ".SWAP", new Swap( inStack ) );
-	DefineInstruction( inTypeName + ".ROT", new Rot( inStack ) );
-	DefineInstruction( inTypeName + ".FLUSH", new Flush( inStack ) );
-	DefineInstruction( inTypeName + ".DUP", new Dup( inStack ) );
-	DefineInstruction( inTypeName + ".STACKDEPTH", new Depth( inStack ) );
+	DefineInstruction( inTypeName + ".pop", new Pop( inStack ) );
+	DefineInstruction( inTypeName + ".swap", new Swap( inStack ) );
+	DefineInstruction( inTypeName + ".rot", new Rot( inStack ) );
+	DefineInstruction( inTypeName + ".flush", new Flush( inStack ) );
+	DefineInstruction( inTypeName + ".dup", new Dup( inStack ) );
+	DefineInstruction( inTypeName + ".stackdepth", new Depth( inStack ) );
     }
 
     /**
@@ -264,13 +269,13 @@ public class Interpreter {
 	    Program p = (Program)inObject;
 
 	    if(_useFrames) {
-		_execStack.push( "FRAME.POP" );
+		_execStack.push( "frame.pop" );
 	    }
 
 	    p.PushAllReverse( _execStack );
 
 	    if( _useFrames ) {
-		_execStack.push( "FRAME.PUSH" );
+		_execStack.push( "frame.push" );
 	    }
 
 	    return 0;
@@ -347,6 +352,14 @@ public class Interpreter {
 
     public ObjectStack nameStack() {
 	return _nameStack;
+    }
+
+    /**
+     * Fetch the active input stack. 
+     */
+
+    public ObjectStack inputStack() {
+	return _inputStack;
     }
 
 
@@ -440,6 +453,7 @@ public class Interpreter {
 	result += "float stack: "   + _floatStack + "\n";
 	result += "boolean stack: " + _boolStack + "\n";
 	result += "name stack: "    + _nameStack + "\n";
+	result += "input stack: "   + _inputStack + "\n";
 
 	return result;
     }
@@ -455,6 +469,7 @@ public class Interpreter {
 	_nameStack.clear();
 	_boolStack.clear();
 	_codeStack.clear();
+	_inputStack.clear();
     }
 
     /**

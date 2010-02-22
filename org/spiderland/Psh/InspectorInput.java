@@ -98,10 +98,10 @@ public class InspectorInput{
 	    if(token.equals("")){
 		continue;
 	    }
-	    else if(token.equals("TRUE")){
+	    else if(token.equals("true")){
 		_interpreter.boolStack().push(true);
 	    }
-	    else if(token.equals("FALSE")){
+	    else if(token.equals("false")){
 		_interpreter.boolStack().push(false);
 	    }
 	    else if (token.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")){

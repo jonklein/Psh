@@ -50,5 +50,4 @@ test-cases		= ( ( 1 1 ) ( 2 2 ) ( 5 5 ) ( 41 41 ) ( 95 95 ) ( 124 124 ) )
 
 
 #Instruction set for y = x
-instruction-set = ( INTEGER.% INTEGER.* INTEGER.+ INTEGER.- INTEGER./ INTEGER.< INTEGER.= INTEGER.> INTEGER.DUP INTEGER.FLUSH INTEGER.POP INTEGER.ROT INTEGER.STACKDEPTH INTEGER.SWAP INTEGER.ERC BOOLEAN.DUP BOOLEAN.FLUSH BOOLEAN.POP BOOLEAN.ROT BOOLEAN.STACKDEPTH BOOLEAN.SWAP EXEC.= EXEC.DO*COUNT EXEC.DO*RANGE EXEC.DO*TIMES EXEC.DUP EXEC.FLUSH EXEC.POP EXEC.ROT EXEC.STACKDEPTH EXEC.SWAP )
-
+instruction-set = ( integer.% integer.* integer.+ integer.- integer./ integer.< integer.= integer.> integer.dup integer.flush integer.pop integer.rot integer.stackdepth integer.swap integer.erc boolean.dup boolean.flush boolean.pop boolean.rot boolean.stackdepth boolean.swap exec.= exec.do*count exec.do*range exec.do*times exec.dup exec.flush exec.pop exec.rot exec.stackdepth exec.swap )

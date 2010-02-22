@@ -593,6 +593,39 @@ class If extends ObjectStackInstruction {
 // Instructions for the input stack
 //
 
+class InputIndex extends ObjectStackInstruction{
+    InputIndex(ObjectStack inStack) {super( inStack );}
+
+    public void Execute(Interpreter inI){
+	intStack istack = inI.intStack();
+
+	if(istack.size() > 0){
+	    int index = istack.pop();
+
+	    //For now we will take the index % _stack.size() to make sure
+	    //an input is returned.
+	    Object inObject = _stack.peek(index % _stack.size());
+
+	    if( inObject instanceof Integer ) {
+		_istack.push((Integer)inObject);
+	    }
+	    else if(inObject instanceof Number) {
+		floatStack fstack = inI.floatStack();
+		fstack.push(((Number)inObject).floatValue());
+	    }
+	    else if( inObject instanceof Boolean ) {
+		booleanStack bstack = inI.booleanStack();
+		bstack.push((Boolean)inObject);
+		
+	    }
+	    else{
+		//trh// ADD ERROR HERE
+	    }
+
+	}
+    }
+}
+
 
 
 

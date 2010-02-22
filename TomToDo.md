@@ -11,6 +11,7 @@ Done Major Changes
 - Fix Psh to make sure exec.do*range and other iterative instructions are working correctly.
 - Allow the inclusion of all instructions for a certain type using registered.type (e.g. registered.integer or registered.exec).
 - Implement Autosimplification function. Have Psh use Autosimplification after evolution. Autosimplify during reports. Make optional Autosimplification genetic operator.
+- Make all instructions lower case.
 
 Done Minor Changes
 ------------------
@@ -31,12 +32,12 @@ Done Minor Changes
 
 To Do Still
 -----------
-- Make all instructions lower case.
-- Update README for lowercase instructions.
+
+
 
 - Implement input stack including the following instructions:
-1 input.makeinputsN - Creates N instructions called 'input.in0', 'input.in1', ..., 'input.in(N-1)'
-2 input.index - Pops n off of the integer stack and pushes input[n] onto corresponding stack. If integer stack is empty, acts as a no-op.
+1 input.index - Pops n off of the integer stack and pushes input[n] onto corresponding stack. If integer stack is empty, acts as a no-op.
+2 input.makeinputsN - Creates N instructions called 'input.in0', 'input.in1', ..., 'input.in(N-1)'
 3 input.inall - For all n in 0 to input.size, push input[n] onto the corresponding stack.
 4 input.stackdepth - Puts size of stack on integer stack.
 

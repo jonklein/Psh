@@ -43,11 +43,11 @@ max-random-code-size	= 40
 ### how fitness scores are computed.  The IntSymbolicRegression
 ### class uses a set of int inputs and a single output.
 
-problem-class		= org.spiderland.Psh.IntSymbolicRegressionNoInput
+problem-class		= org.spiderland.Psh.IntSymbolicRegression
 
 #This test case is for y = x
 test-cases		= ( ( 1 1 ) ( 2 2 ) ( 5 5 ) ( 41 41 ) ( 95 95 ) ( 124 124 ) )
 
 
 #Instruction set for y = x
-instruction-set = ( integer.% integer.* integer.+ integer.- integer./ integer.< integer.= integer.> integer.dup integer.flush integer.pop integer.rot integer.stackdepth integer.swap integer.erc boolean.dup boolean.flush boolean.pop boolean.rot boolean.stackdepth boolean.swap exec.= exec.do*count exec.do*range exec.do*times exec.dup exec.flush exec.pop exec.rot exec.stackdepth exec.swap )
+instruction-set = ( integer.% integer.* integer.+ integer.- integer./ integer.< integer.= integer.> integer.dup integer.flush integer.pop integer.rot integer.stackdepth integer.swap integer.erc boolean.dup boolean.flush boolean.pop boolean.rot boolean.stackdepth boolean.swap exec.= exec.do*count exec.do*range exec.do*times exec.dup exec.flush exec.pop exec.rot exec.stackdepth exec.swap input.index )

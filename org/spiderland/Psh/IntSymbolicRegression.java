@@ -1,8 +1,6 @@
 
 package org.spiderland.Psh;
 
-import org.spiderland.Psh.*;
-
 public class IntSymbolicRegression extends PushGP {
     protected int			_currentInput;
     protected int 			_inputCount;
@@ -30,7 +28,7 @@ public class IntSymbolicRegression extends PushGP {
     }
 
     protected void InitInterpreter( Interpreter inInterpreter ) {
-	inInterpreter.AddInstruction( "INPUT0", new Input( 0 ) );
+	//inInterpreter.AddInstruction( "INPUT0", new Input( 0 ) );
     }
 
     protected float EvaluateTestCase( GAIndividual inIndividual, Object inInput, Object inOutput ) {
@@ -42,6 +40,9 @@ public class IntSymbolicRegression extends PushGP {
 
 	stack.push( _currentInput );
 
+	//Must be included in order to use the input stack.
+	_interpreter.inputStack().push(_currentInput);
+
 	_interpreter.Execute( ((PushGPIndividual)inIndividual)._program, _executionLimit );
 
 	int result = stack.top();
@@ -50,6 +51,7 @@ public class IntSymbolicRegression extends PushGP {
 	return result - ( (Integer)inOutput );
     }
 
+    /*
     // This is the function used for input.
     class Input extends Instruction {
 	Input( int inIndex ) { }
@@ -58,4 +60,5 @@ public class IntSymbolicRegression extends PushGP {
 	    inInterpreter.intStack().push( _currentInput );
 	}
     }
+    */
 }

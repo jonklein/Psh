@@ -2,9 +2,6 @@
 package org.spiderland.Psh;
 
 import java.util.*;
-import java.lang.*;
-
-import org.spiderland.Psh.*;
 
 /**
  * The Push language interpreter.
@@ -94,6 +91,9 @@ public class Interpreter {
 
 	DefineInstruction( "true", new BooleanConstant( true ) );
 	DefineInstruction( "false", new BooleanConstant( false ) );
+
+	DefineInstruction("input.index", new InputIndex(_inputStack));
+	DefineInstruction("input.stackdepth", new Depth(_inputStack));
 
 	DefineStackInstructions( "integer", _intStack );
 	DefineStackInstructions( "float", _floatStack );
@@ -263,7 +263,6 @@ public class Interpreter {
     }
 
     public int ExecuteInstruction( Object inObject ) {
-	Class objectClass = inObject.getClass();
 
 	if( inObject instanceof Program ) {
 	    Program p = (Program)inObject;
@@ -292,12 +291,12 @@ public class Interpreter {
 	}
 
 	if( inObject instanceof String ) {
-	    Instruction i = _instructions.get( (String)inObject );
+	    Instruction i = _instructions.get( inObject );
 
 	    if( i != null ) {
 		i.Execute( this );
 	    } else {
-		_nameStack.push( (String)inObject );
+		_nameStack.push( inObject );
 	    }
 
 	    return 0;

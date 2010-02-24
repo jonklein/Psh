@@ -5,8 +5,6 @@
 
 package org.spiderland.Psh;
 
-import org.spiderland.Psh.*;
-
 /**
  * The Push stack type for object-based data (Strings, Programs, etc.)
  */

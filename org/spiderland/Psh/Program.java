@@ -1,9 +1,6 @@
 
 package org.spiderland.Psh;
 
-import java.util.*;
-import java.lang.*;
-
 /**
  * A Push program.
  */

@@ -2,7 +2,6 @@
 package org.spiderland.Psh;
 
 import java.util.*;
-import org.spiderland.Psh.*;
 
 /**
  * The Push Genetic Programming core class.
@@ -119,7 +118,7 @@ abstract public class PushGP extends GA {
 
 	// Setup our custom interpreter class based on the params we're given
 
-	Class iclass = Class.forName( GetParam( "interpreter-class" ) );
+	Class<?> iclass = Class.forName( GetParam( "interpreter-class" ) );
 		
 	Object iObject = iclass.newInstance();
 		
@@ -138,7 +137,7 @@ abstract public class PushGP extends GA {
 	super.InitFromParameters();
     }
 
-    protected void InitInterpreter( Interpreter inInterpreter ) {};
+    abstract protected void InitInterpreter( Interpreter inInterpreter );
 
     protected PushGPIndividual Autosimplify(PushGPIndividual inIndividual, int steps){
 

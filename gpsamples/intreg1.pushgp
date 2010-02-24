@@ -28,9 +28,9 @@ max-points-in-program	= 100
 mutation-mode		= fair
 fair-mutation-range     = .3
 population-size 	= 2000
-mutation-percent	= 20
-crossover-percent	= 60
-simplification-percent	= 10
+mutation-percent	= 10
+crossover-percent	= 75
+simplification-percent	= 5
 max-generations		= 200
 max-random-code-size	= 40
 
@@ -53,4 +53,4 @@ problem-class		= org.spiderland.Psh.IntSymbolicRegression
 test-cases		= ( ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) )
 
 #Instruction set for y = 12x^2 + 5
-instruction-set = ( integer.* integer.+ integer.% integer.dup integer.- integer.swap )
+instruction-set = ( integer.* integer.+ integer.% integer.- integer.swap integer.erc registered.input )

@@ -15,8 +15,8 @@ include standard.pushgp
 population-size 	= 2000
 execution-limit		= 80
 tournament-size 	= 7
-mutation-percent	= 20
-crossover-percent	= 70
+mutation-percent	= 10
+crossover-percent	= 75
 max-generations		= 200
 max-random-code-size	= 40
 fair-mutation-range	= .3
@@ -25,7 +25,7 @@ fair-mutation-range	= .3
 
 trivial-geography-radius= 10
 
-simplification-percent	= 0
+simplification-percent	= 5
 simplify-flatten-percent= 20
 
 reproduction-simplifications = 25
@@ -46,4 +46,4 @@ test-cases		= ( ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) )
 # test-case-xml		= Problem1.xml		# from an XML file
 # test-case-csv		= Problem1.csv		# from a comma separated value file
 
-instruction-set = ( float.* float.+ float.% float.dup float.- float.swap float.erc )
+instruction-set = ( float.* float.+ float.% float.- float.dup float.swap float.erc integer.erc input.index )

@@ -15,8 +15,8 @@
 
  */
 
-import java.util.*;
-import java.io.*;
+//import java.util.*;
+//import java.io.*;
 
 import org.spiderland.Psh.*;
 
@@ -36,6 +36,15 @@ public class PshInspector{
 	int executed = 0;
 	int stepsTaken = 1;
 	String stepPrint = "";
+
+
+	/*//For testing with input stack instructions
+	_interpreter.inputStack().push(4);
+	_interpreter.inputStack().push(5);
+	_interpreter.inputStack().push(17.223);
+	_interpreter.inputStack().push(true);
+	*/
+
 
 	//Print registered instructions
 	System.out.println("Registered Instructions: " + _interpreter.GetInstructionString() + "\n");

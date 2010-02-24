@@ -3,8 +3,6 @@ package org.spiderland.Psh;
 
 import java.io.*;
 
-import org.spiderland.Psh.*;
-
 /**
  * A utility class to help read PshInspector input files.
  */
@@ -100,15 +98,21 @@ public class InspectorInput{
 	    }
 	    else if(token.equals("true")){
 		_interpreter.boolStack().push(true);
+		_interpreter.inputStack().push(true);
 	    }
 	    else if(token.equals("false")){
 		_interpreter.boolStack().push(false);
+		_interpreter.inputStack().push(false);
 	    }
 	    else if (token.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")){
-		if(token.indexOf('.') != - 1)
+		if(token.indexOf('.') != - 1){
 		    _interpreter.floatStack().push(Float.parseFloat(token));
-		else
+		    _interpreter.inputStack().push(Float.parseFloat(token));
+		}
+		else {
 		    _interpreter.intStack().push(Integer.parseInt(token));
+		    _interpreter.inputStack().push(Integer.parseInt(token));
+		}
 	    }
 	    else{
 		throw new Exception("Inputs must be of type int, float, or boolean. \"" + token + "\" is none of these.");

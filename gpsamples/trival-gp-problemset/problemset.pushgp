@@ -55,4 +55,4 @@ final-simplifications	= 1000
 
 problem-class		= org.spiderland.Psh.FloatSymbolicRegression
 
-instruction-set	= ( float.* float.+ float.% float.dup float.- float.swap float.erc )
+instruction-set	= ( float.* float.+ float.% float.dup float.- float.swap float.erc registered.input)

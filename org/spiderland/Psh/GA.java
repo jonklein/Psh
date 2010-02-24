@@ -2,7 +2,6 @@
 package org.spiderland.Psh;
 
 import java.util.*;
-import java.lang.*;
 import java.io.*;
 
 /**
@@ -34,7 +33,7 @@ public abstract class GA {
     protected HashMap< String, String > _parameters;
     protected ArrayList< GATestCase > _testCases;
     
-    protected Class _individualClass;
+    protected Class<?> _individualClass;
     
     protected OutputStream _outputStream;
 
@@ -44,7 +43,7 @@ public abstract class GA {
  */
 
     public static GA GAWithParameters( HashMap< String, String > inParams ) throws Exception {
-	Class cls = Class.forName( inParams.get( "problem-class" ) );
+	Class<?> cls = Class.forName( inParams.get( "problem-class" ) );
 
 	Object gaObject = cls.newInstance();
 	
@@ -248,7 +247,6 @@ public abstract class GA {
     
     protected void Evaluate() {
 	float totalFitness	= 0;
-	int bestIndividual 	= 0;
 	_bestFitness 		= Float.MAX_VALUE;
 	
 	for( int n = 0; n < _populations[ _currentPopulation ].length; n++ ) {
@@ -437,7 +435,7 @@ public abstract class GA {
     protected void BeginGeneration() {};
     protected void EndGeneration() {};
     
-    protected void InitIndividual( GAIndividual inIndividual ) {};
+    abstract protected void InitIndividual( GAIndividual inIndividual );
     
     abstract protected int EvaluateIndividual( GAIndividual inIndividual );
     abstract protected float EvaluateTestCase( GAIndividual inIndividual, Object inInput, Object inOutput );

@@ -13,12 +13,11 @@ Done Major Changes
 - Implement Autosimplification function. Have Psh use Autosimplification after evolution. Autosimplify during reports. Make optional Autosimplification genetic operator.
 - Make all instructions lower case.
 - Implement input stack including the following instructions:
-
-1. input.index - Pops n off of the integer stack and pushes input[n] onto corresponding stack. If integer stack is empty, acts as a no-op.
-2. input.makeinputsN - Creates N instructions called 'input.in0', 'input.in1', ..., 'input.in(N-1)'
-3. input.inall - For all n in 0 to input.size, push input[n] onto the corresponding stack.
-4. input.inallrev - For all n in input.size to 9, push input[n] onto the corresponding stack.
-5. input.stackdepth - Puts size of stack on integer stack.
+    1. input.index - Pops n off of the integer stack and pushes input[n] onto corresponding stack. If integer stack is empty, acts as a no-op.
+    2. input.makeinputsN - Creates N instructions called 'input.in0', 'input.in1', ..., 'input.in(N-1)'
+    3. input.inall - For all n in 0 to input.size, push input[n] onto the corresponding stack.
+    4. input.inallrev - For all n in input.size to 9, push input[n] onto the corresponding stack.
+    5. input.stackdepth - Puts size of stack on integer stack.
 
 
 Done Minor Changes

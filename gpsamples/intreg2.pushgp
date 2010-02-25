@@ -49,4 +49,4 @@ problem-class		= org.spiderland.Psh.IntSymbolicRegression
 test-cases		= ((1 1) (2 2) (3 6) (4 24) (5 120) (6 720))
 
 #Instruction set for factorial
-instruction-set = (registered.integer registered.exec registered.code registered.boolean registered.input )
+instruction-set = (registered.integer registered.exec registered.code registered.boolean registered.input input.makeinputs1 )

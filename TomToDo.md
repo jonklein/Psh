@@ -12,6 +12,13 @@ Done Major Changes
 - Allow the inclusion of all instructions for a certain type using registered.type (e.g. registered.integer or registered.exec).
 - Implement Autosimplification function. Have Psh use Autosimplification after evolution. Autosimplify during reports. Make optional Autosimplification genetic operator.
 - Make all instructions lower case.
+- Implement input stack including the following instructions:
+1 input.index - Pops n off of the integer stack and pushes input[n] onto corresponding stack. If integer stack is empty, acts as a no-op.
+2 input.makeinputsN - Creates N instructions called 'input.in0', 'input.in1', ..., 'input.in(N-1)'
+3 input.inall - For all n in 0 to input.size, push input[n] onto the corresponding stack.
+4 input.inallrev - For all n in input.size to 9, push input[n] onto the corresponding stack.
+5 input.stackdepth - Puts size of stack on integer stack.
+
 
 Done Minor Changes
 ------------------
@@ -33,15 +40,7 @@ Done Minor Changes
 To Do Still
 -----------
 
-
-
-- Implement input stack including the following instructions:
-1 input.index - Pops n off of the integer stack and pushes input[n] onto corresponding stack. If integer stack is empty, acts as a no-op.
-2 input.makeinputsN - Creates N instructions called 'input.in0', 'input.in1', ..., 'input.in(N-1)'
-3 input.inall - For all n in 0 to input.size, push input[n] onto the corresponding stack.
-4 input.stackdepth - Puts size of stack on integer stack.
-
-- Add new problem classes (such as IntSymbolicRegression.java) for other problem types, such as the Parity problem.
+- Add new problem classes (such as IntSymbolicRegression.java) for other problem types, such as the Parity problem. Make sure to test input.makeinputs and input.inall on problems with more than one input.
 - Add to "Problem Classes" section in README
 - During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "boolean.stackdepth" is used only to get a 0 on the int stack.
 

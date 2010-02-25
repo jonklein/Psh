@@ -597,8 +597,6 @@ class InputIndex extends ObjectStackInstruction{
 	if(istack.size() > 0 && _stack.size() > 0){
 	    int index = istack.pop();
 
-	    //For now we will take the index % _stack.size() to make sure
-	    //an input is returned.
 	    if(index < 0)
 		index = 0;
 	    if(index >= _stack.size())
@@ -626,7 +624,97 @@ class InputIndex extends ObjectStackInstruction{
     }
 }
 
+class InputInN extends Instruction{
+    protected int index;
 
+    InputInN(int inIndex) {index = inIndex;}
+
+    public void Execute(Interpreter inI){
+	ObjectStack _stack = inI.inputStack();
+
+	if(_stack.size() > index){
+	    Object inObject = _stack.peek(index);
+
+	    if( inObject instanceof Integer ) {
+		intStack istack = inI.intStack();
+		istack.push((Integer)inObject);
+	    }
+	    else if(inObject instanceof Number) {
+		floatStack fstack = inI.floatStack();
+		fstack.push(((Number)inObject).floatValue());
+	    }
+	    else if( inObject instanceof Boolean ) {
+		booleanStack bstack = inI.boolStack();
+		bstack.push((Boolean)inObject);
+		
+	    }
+	    else{
+		System.err.println("Error during input.index - object is not a legal object.");
+	    }
+
+	}
+    }
+}
+
+class InputInAll extends ObjectStackInstruction{
+    InputInAll(ObjectStack inStack) {super( inStack );}
+
+    public void Execute(Interpreter inI){
+
+	if(_stack.size() > 0){
+
+	    for(int index = 0; index < _stack.size(); index++){
+		Object inObject = _stack.peek(index);
+		
+		if( inObject instanceof Integer ) {
+		    intStack istack = inI.intStack();
+		    istack.push((Integer)inObject);
+		}
+		else if(inObject instanceof Number) {
+		    floatStack fstack = inI.floatStack();
+		    fstack.push(((Number)inObject).floatValue());
+		}
+		else if( inObject instanceof Boolean ) {
+		    booleanStack bstack = inI.boolStack();
+		    bstack.push((Boolean)inObject);
+		}
+		else{
+		    System.err.println("Error during input.index - object is not a legal object.");
+		}
+	    }
+	}
+    }
+}
+
+class InputInRev extends ObjectStackInstruction{
+    InputInRev(ObjectStack inStack) {super( inStack );}
+
+    public void Execute(Interpreter inI){
+
+	if(_stack.size() > 0){
+
+	    for(int index = _stack.size() - 1; index >= 0; index--){
+		Object inObject = _stack.peek(index);
+		
+		if( inObject instanceof Integer ) {
+		    intStack istack = inI.intStack();
+		    istack.push((Integer)inObject);
+		}
+		else if(inObject instanceof Number) {
+		    floatStack fstack = inI.floatStack();
+		    fstack.push(((Number)inObject).floatValue());
+		}
+		else if( inObject instanceof Boolean ) {
+		    booleanStack bstack = inI.boolStack();
+		    bstack.push((Boolean)inObject);
+		}
+		else{
+		    System.err.println("Error during input.index - object is not a legal object.");
+		}
+	    }
+	}
+    }
+}
 
 
 //

@@ -116,6 +116,13 @@ Psh
 - Added problem classes for integer symbolic regression (IntSymbolicRegression.java) and integer symbolic regression without an input instruction (IntSymbolicRegressionNoInput.java).
 - Fixed 'code' and 'exec' stack iteration functions, which were not executing correctly according to Push 3.0 standards.
 - All instructions have been converted into lower case to match Schush and other implementations.
+- An input stack was added, which holds all inputs. It has the following instructions:
+1 input.index - Pops n off of the integer stack and pushes input[n] onto corresponding stack. If integer stack is empty, acts as a no-op.
+2 input.makeinputsN - Creates N instructions called 'input.in0', 'input.in1', ..., 'input.in(N-1)'
+3 input.inall - For all n in 0 to input.size, push input[n] onto the corresponding stack.
+4 input.inallrev - For all n in input.size to 9, push input[n] onto the corresponding stack.
+5 input.stackdepth - Puts size of stack on integer stack.
+
 
 PshGP
 -----

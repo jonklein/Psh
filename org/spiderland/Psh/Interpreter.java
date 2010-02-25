@@ -93,6 +93,8 @@ public class Interpreter {
 	DefineInstruction( "false", new BooleanConstant( false ) );
 
 	DefineInstruction("input.index", new InputIndex(_inputStack));
+	DefineInstruction("input.inall", new InputInAll(_inputStack));
+	DefineInstruction("input.inallrev", new InputInRev(_inputStack));
 	DefineInstruction("input.stackdepth", new Depth(_inputStack));
 
 	DefineStackInstructions( "integer", _intStack );
@@ -151,7 +153,7 @@ public class Interpreter {
 		   !registeredType.equals("name") &&
 		   !registeredType.equals("input") &&
 		   !registeredType.equals("frame")){
-		    System.out.println( "Unknown instruction \"" + name + "\" in instruction set" );
+		    System.err.println( "Unknown instruction \"" + name + "\" in instruction set" );
 		}
 		else{
 		    //Legal stack type, so add all generators matching
@@ -173,6 +175,16 @@ public class Interpreter {
 			_randomGenerators.add(f);
 		    }
 
+		}
+	    }
+	    else if(name.indexOf("input.makeinputs") == 0){
+		String strnum = name.substring(16);
+		int num = Integer.parseInt(strnum);
+
+		for(int i = 0; i < num; i++){
+		    DefineInstruction("input.in" + i, new InputInN(i));
+		    AtomGenerator g = _generators.get("input.in" + i);
+		    _randomGenerators.add(g);
 		}
 	    }
 	    else{

@@ -62,6 +62,9 @@ public class InspectorInput{
 	if(indexNewline != -1)
 	    fileString = fileString.substring(0, indexNewline);
 
+	//Check for input.inN instructions
+	checkForInputIn(programString);
+
 	//Parse the inputs and load them into the interpreter
 	parseAndLoadInputs(fileString);
 
@@ -120,6 +123,55 @@ public class InspectorInput{
 	}
     }
 
+    private void checkForInputIn(String programString){
+	String added = "";
+	String numstr = "";
+	int index = 0;
+	int numindex = 0;
+	int spaceindex = 0;
+	int parenindex = 0;
+	int endindex = 0;
+
+	while(true){
+	    
+	    index = programString.indexOf("input.in");
+	    if(index == -1)
+		break;
+
+	    //System.out.println(programString + "    " + index);
+
+	    numindex = index + 8;
+	    if(!Character.isDigit(programString.charAt(numindex))){
+		programString = programString.substring(numindex);
+		continue;
+	    }
+
+	    spaceindex = programString.indexOf(' ', numindex);
+	    parenindex = programString.indexOf(')', numindex);
+	    if(spaceindex == -1)
+		endindex = parenindex;
+	    else if(parenindex == -1)
+		endindex = spaceindex;
+	    else
+		endindex = Math.min(spaceindex, parenindex);
+
+	    numstr = programString.substring(numindex, endindex);
+
+	    //Check for doubles in added
+	    if(added.indexOf(" " + numstr + " ") == -1){
+		added = added + " " + numstr + " ";
+		_interpreter.AddInstruction("input.in" + numstr,
+				      new InputInN(Integer.parseInt(numstr)));
+	    }
+
+	    programString = programString.substring(numindex);
+	}
+
+
+
+
+
+    }
 
 
 }

@@ -326,6 +326,68 @@ class FloatTan extends UnaryFloatInstruction {
     float UnaryOperator( float inValue ) { return (float)Math.tan( inValue ); }
 }
 
+//
+// Instructions for input stack
+//
+
+class InputInN extends Instruction{
+    protected int index;
+
+    InputInN(int inIndex) {index = inIndex;}
+
+    @Override
+    public void Execute(Interpreter inI){
+        inI.getInputPusher().pushInput(inI, index);
+    }
+}
+
+class InputInAll extends ObjectStackInstruction{
+    InputInAll(ObjectStack inStack) {super( inStack );}
+
+    @Override
+    public void Execute(Interpreter inI){
+
+	if(_stack.size() > 0){
+	    for(int index = 0; index < _stack.size(); index++){
+                inI.getInputPusher().pushInput(inI, index);
+	    }
+	}
+    }
+}
+
+class InputInRev extends ObjectStackInstruction{
+    InputInRev(ObjectStack inStack) {super( inStack );}
+
+    @Override
+    public void Execute(Interpreter inI){
+
+	if(_stack.size() > 0){
+	    for(int index = _stack.size() - 1; index >= 0; index--){
+                inI.getInputPusher().pushInput(inI, index);
+	    }
+	}
+    }
+}
+
+class InputIndex extends ObjectStackInstruction{
+    InputIndex(ObjectStack inStack) {super( inStack );}
+
+    @Override
+    public void Execute(Interpreter inI){
+	intStack istack = inI.intStack();
+
+	if(istack.size() > 0 && _stack.size() > 0){
+	    int index = istack.pop();
+
+	    if(index < 0)
+		index = 0;
+	    if(index >= _stack.size())
+		index = _stack.size() - 1;
+
+            inI.getInputPusher().pushInput(inI, index);
+	}
+    }
+}
 
 //
 // Instructions which can be applied to any code stack 
@@ -359,12 +421,20 @@ class CodeDoRange extends ObjectStackInstruction {
 		start = ( start < stop ) ? ( start + 1 ) : ( start - 1 );
 
 		//trh//Made changes to correct errors with code.do*range
-		String recursiveCall = "(" + start + " " + stop + " ";
-		recursiveCall += "code.quote ";
-		recursiveCall += code + " code.do*range)";
+		//String recursiveCall = "(" + start + " " + stop + " ";
+		//recursiveCall += "code.quote ";
+		//recursiveCall += code + " code.do*range)";
+
+                // ( start stop code.quote code code.do*range )
 		
 		try{
-		    Program recursiveCallProgram = new Program(recursiveCall);
+		    //Program recursiveCallProgram = new Program(inI, recursiveCall);
+                    Program recursiveCallProgram = new Program(inI);
+                    recursiveCallProgram.push(Integer.valueOf(start));
+                    recursiveCallProgram.push(Integer.valueOf(stop));
+                    recursiveCallProgram.push(inI._instructions.get("code.quote"));
+                    recursiveCallProgram.push(code);
+                    recursiveCallProgram.push(inI._instructions.get("code.do*range"));
 		    estack.push(recursiveCallProgram);
 		} catch(Exception e){
 		    System.err.println("Error while initializing a program.");
@@ -387,6 +457,25 @@ class CodeDoTimes extends ObjectStackInstruction{
 
 	if(_stack.size() > 0 && istack.size() > 0) {
 	    if(istack.top() > 0){
+                Object bodyObj = _stack.pop();
+
+                if (bodyObj instanceof Program) {
+                    // insert integer.pop in front of program
+                    ((Program)bodyObj).shove(
+                            inI._instructions.get("integer.pop"),
+                            ((Program)bodyObj)._size);
+                }
+                else
+                {
+                    // create a new program with integer.pop in front of
+                    // the popped object
+                    Program newProgram = new Program(inI);
+                    newProgram.push(inI._instructions.get("integer.pop"));
+                    newProgram.push(bodyObj);
+                    bodyObj = newProgram;
+                }
+
+                /*
 		String body = _stack.pop().toString();
 		String bodyAndIntPop = "";
 
@@ -395,14 +484,22 @@ class CodeDoTimes extends ObjectStackInstruction{
 		}
 		else{
 		    bodyAndIntPop = "(integer.pop " + body + ")";
-		}
+		}*/
 
-		String doRangeMacroString = "(0 " + (istack.pop() - 1);
-		doRangeMacroString += " code.quote " + bodyAndIntPop;
-		doRangeMacroString += " code.do*range)";
+                int stop = istack.pop() - 1;
+
+                //String doRangeMacroString = "(0 " + stop;
+		//doRangeMacroString += " code.quote " + bodyAndIntPop;
+		//doRangeMacroString += " code.do*range)";
 
 		try{
-		    Program doRangeMacroProgram = new Program(doRangeMacroString);
+		    // Program doRangeMacroProgram = new Program(inI, doRangeMacroString);
+                    Program doRangeMacroProgram = new Program(inI);
+                    doRangeMacroProgram.push(Integer.valueOf(0));
+                    doRangeMacroProgram.push(Integer.valueOf(stop));
+                    doRangeMacroProgram.push(inI._instructions.get("code.quote"));
+                    doRangeMacroProgram.push(bodyObj);
+                    doRangeMacroProgram.push(inI._instructions.get("code.do*range"));
 		    estack.push(doRangeMacroProgram);
 		} catch(Exception e){
 		    System.err.println("Error while initializing a program.");
@@ -425,12 +522,21 @@ class CodeDoCount extends ObjectStackInstruction{
 
 	if(_stack.size() > 0 && istack.size() > 0) {
 	    if(istack.top() > 0){
-		String doRangeMacroString = "(0 " + (istack.pop() - 1);
-		doRangeMacroString += " code.quote " + _stack.pop();
-		doRangeMacroString += " code.do*range)";
+                int stop = istack.pop() - 1;
+                Object bodyObj = _stack.pop();
+
+		//String doRangeMacroString = "(0 " + stop;
+		//doRangeMacroString += " code.quote " + bodyObj;
+		//doRangeMacroString += " code.do*range)";
 
 		try{
-		    Program doRangeMacroProgram = new Program(doRangeMacroString);
+		    //Program doRangeMacroProgram = new Program(inI, doRangeMacroString);
+                    Program doRangeMacroProgram = new Program(inI);
+                    doRangeMacroProgram.push(Integer.valueOf(0));
+                    doRangeMacroProgram.push(Integer.valueOf(stop));
+                    doRangeMacroProgram.push(inI._instructions.get("code.quote"));
+                    doRangeMacroProgram.push(bodyObj);
+                    doRangeMacroProgram.push(inI._instructions.get("code.do*range"));
 		    estack.push(doRangeMacroProgram);
 		} catch(Exception e){
 		    System.err.println("Error while initializing a program.");
@@ -467,11 +573,16 @@ class ExecDoRange extends ObjectStackInstruction {
 		start = ( start < stop ) ? ( start + 1 ) : ( start - 1 );
 
 		//trh//Made changes to correct errors with code.do*range
-		String recursiveCall = "(" + start + " " + stop + " ";
-		recursiveCall += "exec.do*range " + code + ")";
+		//String recursiveCall = "(" + start + " " + stop + " ";
+		//recursiveCall += "exec.do*range " + code + ")";
 		
 		try{
-		    Program recursiveCallProgram = new Program(recursiveCall);
+		    //Program recursiveCallProgram = new Program(inI, recursiveCall);
+                    Program recursiveCallProgram = new Program(inI);
+                    recursiveCallProgram.push(Integer.valueOf(start));
+                    recursiveCallProgram.push(Integer.valueOf(stop));
+                    recursiveCallProgram.push(inI._instructions.get("exec.do*range"));
+                    recursiveCallProgram.push(code);
 		    estack.push(recursiveCallProgram);
 		} catch(Exception e){
 		    System.err.println("Error while initializing a program.");
@@ -494,6 +605,27 @@ class ExecDoTimes extends ObjectStackInstruction{
 
 	if(_stack.size() > 0 && istack.size() > 0) {
 	    if(istack.top() > 0){
+                Object bodyObj = _stack.pop();
+
+                if (bodyObj instanceof Program) {
+                    // insert integer.pop in front of program
+                    ((Program)bodyObj).shove(
+                            inI._instructions.get("integer.pop"),
+                            ((Program)bodyObj)._size);
+                }
+                else
+                {
+                    // create a new program with integer.pop in front of
+                    // the popped object
+                    Program newProgram = new Program(inI);
+                    newProgram.push(inI._instructions.get("integer.pop"));
+                    newProgram.push(bodyObj);
+                    bodyObj = newProgram;
+                }
+
+                int stop = istack.pop() - 1;
+
+                /*
 		String body = _stack.pop().toString();
 		String bodyAndIntPop = "";
 
@@ -504,11 +636,17 @@ class ExecDoTimes extends ObjectStackInstruction{
 		    bodyAndIntPop = "(integer.pop " + body + ")";
 		}
 
-		String doRangeMacroString = "(0 " + (istack.pop() - 1);
-		doRangeMacroString += " exec.do*range " + bodyAndIntPop + ")";
+		String doRangeMacroString = "(0 " + stop;
+		doRangeMacroString += " exec.do*range " + bodyAndIntPop + ")";*/
+
 
 		try{
-		    Program doRangeMacroProgram = new Program(doRangeMacroString);
+		    //Program doRangeMacroProgram = new Program(inI, doRangeMacroString);
+                    Program doRangeMacroProgram = new Program(inI);
+                    doRangeMacroProgram.push(Integer.valueOf(0));
+                    doRangeMacroProgram.push(Integer.valueOf(stop));
+                    doRangeMacroProgram.push(inI._instructions.get("exec.do*range"));
+                    doRangeMacroProgram.push(bodyObj);
 		    estack.push(doRangeMacroProgram);
 		} catch(Exception e){
 		    System.err.println("Error while initializing a program.");
@@ -531,11 +669,19 @@ class ExecDoCount extends ObjectStackInstruction{
 
 	if(_stack.size() > 0 && istack.size() > 0) {
 	    if(istack.top() > 0){
-		String doRangeMacroString = "(0 " + (istack.pop() - 1);
-		doRangeMacroString += " exec.do*range " + _stack.pop() + ")";
+                int stop = istack.pop() - 1;
+                Object bodyObj = _stack.pop();
+
+		//String doRangeMacroString = "(0 " + stop;
+		//doRangeMacroString += " exec.do*range " + bodyObj + ")";
 
 		try{
-		    Program doRangeMacroProgram = new Program(doRangeMacroString);
+		    //Program doRangeMacroProgram = new Program(inI, doRangeMacroString);
+                    Program doRangeMacroProgram = new Program(inI);
+                    doRangeMacroProgram.push(Integer.valueOf(0));
+                    doRangeMacroProgram.push(Integer.valueOf(stop));
+                    doRangeMacroProgram.push(inI._instructions.get("exec.do*range"));
+                    doRangeMacroProgram.push(bodyObj);
 		    estack.push(doRangeMacroProgram);
 		} catch(Exception e){
 		    System.err.println("Error while initializing a program.");
@@ -585,139 +731,6 @@ class If extends ObjectStackInstruction {
 
 
 //
-// Instructions for the input stack
-//
-
-class InputIndex extends ObjectStackInstruction{
-    InputIndex(ObjectStack inStack) {super( inStack );}
-
-    public void Execute(Interpreter inI){
-	intStack istack = inI.intStack();
-
-	if(istack.size() > 0 && _stack.size() > 0){
-	    int index = istack.pop();
-
-	    if(index < 0)
-		index = 0;
-	    if(index >= _stack.size())
-		index = _stack.size() - 1;
-
-	    Object inObject = _stack.peek(index);
-
-	    if( inObject instanceof Integer ) {
-		istack.push((Integer)inObject);
-	    }
-	    else if(inObject instanceof Number) {
-		floatStack fstack = inI.floatStack();
-		fstack.push(((Number)inObject).floatValue());
-	    }
-	    else if( inObject instanceof Boolean ) {
-		booleanStack bstack = inI.boolStack();
-		bstack.push((Boolean)inObject);
-		
-	    }
-	    else{
-		System.err.println("Error during input.index - object is not a legal object.");
-	    }
-
-	}
-    }
-}
-
-class InputInN extends Instruction{
-    protected int index;
-
-    InputInN(int inIndex) {index = inIndex;}
-
-    public void Execute(Interpreter inI){
-	ObjectStack _stack = inI.inputStack();
-
-	if(_stack.size() > index){
-	    Object inObject = _stack.peek(index);
-
-	    if( inObject instanceof Integer ) {
-		intStack istack = inI.intStack();
-		istack.push((Integer)inObject);
-	    }
-	    else if(inObject instanceof Number) {
-		floatStack fstack = inI.floatStack();
-		fstack.push(((Number)inObject).floatValue());
-	    }
-	    else if( inObject instanceof Boolean ) {
-		booleanStack bstack = inI.boolStack();
-		bstack.push((Boolean)inObject);
-		
-	    }
-	    else{
-		System.err.println("Error during input.index - object is not a legal object.");
-	    }
-
-	}
-    }
-}
-
-class InputInAll extends ObjectStackInstruction{
-    InputInAll(ObjectStack inStack) {super( inStack );}
-
-    public void Execute(Interpreter inI){
-
-	if(_stack.size() > 0){
-
-	    for(int index = 0; index < _stack.size(); index++){
-		Object inObject = _stack.peek(index);
-		
-		if( inObject instanceof Integer ) {
-		    intStack istack = inI.intStack();
-		    istack.push((Integer)inObject);
-		}
-		else if(inObject instanceof Number) {
-		    floatStack fstack = inI.floatStack();
-		    fstack.push(((Number)inObject).floatValue());
-		}
-		else if( inObject instanceof Boolean ) {
-		    booleanStack bstack = inI.boolStack();
-		    bstack.push((Boolean)inObject);
-		}
-		else{
-		    System.err.println("Error during input.index - object is not a legal object.");
-		}
-	    }
-	}
-    }
-}
-
-class InputInRev extends ObjectStackInstruction{
-    InputInRev(ObjectStack inStack) {super( inStack );}
-
-    public void Execute(Interpreter inI){
-
-	if(_stack.size() > 0){
-
-	    for(int index = _stack.size() - 1; index >= 0; index--){
-		Object inObject = _stack.peek(index);
-		
-		if( inObject instanceof Integer ) {
-		    intStack istack = inI.intStack();
-		    istack.push((Integer)inObject);
-		}
-		else if(inObject instanceof Number) {
-		    floatStack fstack = inI.floatStack();
-		    fstack.push(((Number)inObject).floatValue());
-		}
-		else if( inObject instanceof Boolean ) {
-		    booleanStack bstack = inI.boolStack();
-		    bstack.push((Boolean)inObject);
-		}
-		else{
-		    System.err.println("Error during input.index - object is not a legal object.");
-		}
-	    }
-	}
-    }
-}
-
-
-//
 // Instructions for the activation stack
 //
 
@@ -741,6 +754,55 @@ class PushFrame extends Instruction {
 
     public void Execute( Interpreter inI ) {
 	inI.PushFrame();
+    }
+}
+
+//
+// Binary bool instructions with bool output
+//
+
+abstract class BinaryBoolInstruction extends Instruction {
+    abstract boolean BinaryOperator( boolean inA, boolean inB );
+
+    @Override
+    public void Execute( Interpreter inI ) {
+	booleanStack stack = inI.boolStack();
+
+	if( stack.size() > 1 ) {
+	    boolean a, b;
+	    a = stack.pop();
+	    b = stack.pop();
+	    stack.push( BinaryOperator( b, a ) );
+	}
+    }
+}
+
+class BoolEquals extends BinaryBoolInstruction {
+    @Override
+    boolean BinaryOperator( boolean inA, boolean inB ) { return inA == inB; }
+}
+
+class BoolAnd extends BinaryBoolInstruction {
+    @Override
+    boolean BinaryOperator( boolean inA, boolean inB ) { return inA & inB; }
+}
+
+class BoolOr extends BinaryBoolInstruction {
+    @Override
+    boolean BinaryOperator( boolean inA, boolean inB ) { return inA | inB; }
+}
+
+class BoolXor extends BinaryBoolInstruction {
+    @Override
+    boolean BinaryOperator( boolean inA, boolean inB ) { return inA ^ inB; }
+}
+
+class BoolNot extends Instruction {
+    BoolNot() {}
+
+    public void Execute( Interpreter inI ) {
+        if (inI.boolStack().size() > 0)
+            inI.boolStack().push(!inI.boolStack().pop());
     }
 }
 

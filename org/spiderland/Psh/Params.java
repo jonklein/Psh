@@ -63,6 +63,16 @@ public class Params {
 		    if( split != -1 ) {
 			String name  = line.substring( 0, split ).trim();
 			String value = line.substring( split + 1, line.length() ).trim();
+
+                        while (value.endsWith("\\"))
+                        {
+                            value = value.substring(0, value.length()-1);
+                            line = reader.readLine();
+                            if (line == null)
+                                break;
+                            linenumber++;
+                            value += line.trim();
+                        }
 	
 			inMap.put( name, value );
 		    }

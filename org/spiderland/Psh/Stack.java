@@ -1,7 +1,9 @@
 
 package org.spiderland.Psh;
 
-abstract class Stack {
+import java.io.Serializable;
+
+abstract class Stack implements Serializable {
     protected int _size;
     protected int _maxsize;
 

@@ -60,16 +60,20 @@ abstract public class PushGP extends GA {
 	if(!duringSimplify)
 	    _averageSize += ((PushGPIndividual)inIndividual)._program.programsize();
 
+        long t = System.currentTimeMillis();
+
 	for( int n = 0; n < _testCases.size(); n++ ) {
 	    GATestCase test = _testCases.get( n );
 	    float e = EvaluateTestCase( inIndividual, test._input, test._output );
 	    errors.add( e );
 	}
+        t = System.currentTimeMillis() - t;
 
 	inIndividual.SetFitness( AbsoluteSumOfErrors( errors ) );
 
 	inIndividual.SetErrors(errors);
 
+        System.out.println("Evaluated individual in " + t + " msec: fitness " + inIndividual.GetFitness());
 	return 0;
     }
 
@@ -128,7 +132,17 @@ abstract public class PushGP extends GA {
 	String framemode = GetParam( "push-frame-mode", true );
 
 	_interpreter = (Interpreter)iObject;		
-	_interpreter.SetInstructions( new Program( GetParam( "instruction-set" ) ) );
+	_interpreter.SetInstructions( new Program( _interpreter, GetParam( "instruction-set" ) ) );
+
+	iclass = Class.forName( GetParam( "inputpusher-class" ) );
+
+	iObject = iclass.newInstance();
+
+	if( ! ( iObject instanceof InputPusher ) )
+	    throw new Exception( "inputpusher-class must inherit from class InputPusher" );
+
+        _interpreter.setInputPusher((InputPusher)iObject);
+
 	InitInterpreter( _interpreter );
 
 	if( framemode != null && framemode.equals( "pushstacks" ) )
@@ -137,7 +151,7 @@ abstract public class PushGP extends GA {
 	super.InitFromParameters();
     }
 
-    abstract protected void InitInterpreter( Interpreter inInterpreter );
+    abstract protected void InitInterpreter( Interpreter inInterpreter ) throws Exception;
 
     protected PushGPIndividual Autosimplify(PushGPIndividual inIndividual, int steps){
 
@@ -173,7 +187,7 @@ abstract public class PushGP extends GA {
 		    
 		    if(trialSize > 0){
 			int pointIndex = _RNG.nextInt(trialSize);
-			trial._program.ReplaceSubtree(pointIndex, new Program());
+			trial._program.ReplaceSubtree(pointIndex, new Program(_interpreter));
 			trial._program.Flatten(pointIndex);
 			madeSimpler = true;
 		    }

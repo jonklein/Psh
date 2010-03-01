@@ -1,50 +1,63 @@
 
 package org.spiderland.Psh;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * The Push language interpreter.
  */
 
-public class Interpreter {
-    HashMap< String, Instruction > _instructions = new HashMap< String, Instruction >();
+public class Interpreter implements Serializable {
+    protected HashMap< String, Instruction > _instructions = new HashMap< String, Instruction >();
 
     // All generators
 
-    HashMap< String, AtomGenerator > _generators = new HashMap< String, AtomGenerator >();
-    ArrayList< AtomGenerator > _randomGenerators = new ArrayList< AtomGenerator >();
+    protected HashMap< String, AtomGenerator > _generators = new HashMap< String, AtomGenerator >();
+    protected ArrayList< AtomGenerator > _randomGenerators = new ArrayList< AtomGenerator >();
 
-    intStack		_intStack;
-    floatStack		_floatStack;
-    booleanStack	_boolStack;
-    ObjectStack		_codeStack;
-    ObjectStack		_nameStack;
-    ObjectStack		_execStack = new ObjectStack();
+    protected intStack		_intStack;
+    protected floatStack	_floatStack;
+    protected booleanStack	_boolStack;
+    protected ObjectStack	_codeStack;
+    protected ObjectStack	_nameStack;
+    protected ObjectStack	_execStack = new ObjectStack();
 
-    ObjectStack         _inputStack = new ObjectStack(); //Since the _inputStack will not change
+    protected ObjectStack       _inputStack = new ObjectStack(); //Since the _inputStack will not change
                                      //after initialization, it will not need
                                      //a frame stack.
 
-    ObjectStack		_intFrameStack = new ObjectStack();
-    ObjectStack		_floatFrameStack = new ObjectStack();
-    ObjectStack		_boolFrameStack = new ObjectStack();
-    ObjectStack		_codeFrameStack = new ObjectStack();
-    ObjectStack		_nameFrameStack = new ObjectStack();
+    protected ObjectStack	_intFrameStack = new ObjectStack();
+    protected ObjectStack	_floatFrameStack = new ObjectStack();
+    protected ObjectStack	_boolFrameStack = new ObjectStack();
+    protected ObjectStack	_codeFrameStack = new ObjectStack();
+    protected ObjectStack	_nameFrameStack = new ObjectStack();
 
-    boolean		_useFrames;
+    protected boolean	_useFrames;
 
-    int			_effort;
+    protected int			_effort;
 
-    int			_maxRandomInt;
-    int			_minRandomInt;
-    int			_randomIntResolution;
+    protected int			_maxRandomInt;
+    protected int			_minRandomInt;
+    protected int			_randomIntResolution;
 
-    float		_maxRandomFloat;
-    float		_minRandomFloat;
-    float		_randomFloatResolution;
+    protected float		_maxRandomFloat;
+    protected float		_minRandomFloat;
+    protected float		_randomFloatResolution;
 
-    Random		_RNG = new Random();
+    protected Random		_RNG = new Random();
+
+    protected InputPusher         _inputPusher = new InputPusher();
+
+    public InputPusher getInputPusher()
+    {
+        return _inputPusher;
+    }
+
+    public void setInputPusher(InputPusher _inputPusher)
+    {
+        this._inputPusher = _inputPusher;
+    }
 
     public Interpreter() {
 	_maxRandomInt = 10;
@@ -75,6 +88,12 @@ public class Interpreter {
 	DefineInstruction( "float.=", new FloatEquals() );
 	DefineInstruction( "float.>", new FloatGreaterThan() );
 	DefineInstruction( "float.<", new FloatLessThan() );
+
+	DefineInstruction( "boolean.=", new BoolEquals() );
+	DefineInstruction( "boolean.not", new BoolNot() );
+	DefineInstruction( "boolean.and", new BoolAnd() );
+	DefineInstruction( "boolean.or", new BoolOr() );
+	DefineInstruction( "boolean.xor", new BoolXor() );
 
 	DefineInstruction( "code.quote", new Quote() );
 
@@ -135,11 +154,23 @@ public class Interpreter {
 
 	for( int n = 0; n < inInstructionList.size(); n++ ) {
 	    Object o = inInstructionList.peek( n );
+            String name = null;
 
-	    if( ! ( o instanceof String ) ) 
+            if (o instanceof Instruction)
+            {
+		String keys[] = _instructions.keySet().toArray(new String[_instructions.size()]);
+
+                for (String key : keys)
+                    if (_instructions.get(key) == o)
+                    {
+                        name = key;
+                        break;
+                    }
+            }
+            else if( o instanceof String )
+                name = (String)o;
+            else
 		throw new RuntimeException( "Instruction list must contain a list of Push instruction names only" );
-
-	    String name = (String)o;
 
 	    //Check for registered
 	    if(name.indexOf("registered.") == 0){
@@ -204,12 +235,12 @@ public class Interpreter {
 	_randomGenerators.add( new InstructionAtomGenerator( inName ) );
     }
 
-    private void DefineInstruction( String inName, Instruction inInstruction ) {
+    protected void DefineInstruction( String inName, Instruction inInstruction ) {
 	_instructions.put( inName, inInstruction );
 	_generators.put( inName, new InstructionAtomGenerator( inName ) );
     }
 
-    private void DefineStackInstructions( String inTypeName, Stack inStack ) {
+    protected void DefineStackInstructions( String inTypeName, Stack inStack ) {
 	DefineInstruction( inTypeName + ".pop", new Pop( inStack ) );
 	DefineInstruction( inTypeName + ".swap", new Swap( inStack ) );
 	DefineInstruction( inTypeName + ".rot", new Rot( inStack ) );
@@ -302,6 +333,11 @@ public class Interpreter {
 	    return 0;
 	}
 
+        if ( inObject instanceof Instruction ) {
+            ((Instruction)inObject).Execute(this);
+            return 0;
+        }
+
 	if( inObject instanceof String ) {
 	    Instruction i = _instructions.get( inObject );
 
@@ -374,7 +410,7 @@ public class Interpreter {
     }
 
 
-    private void AssignStacksFromFrame() {
+    protected void AssignStacksFromFrame() {
 	_floatStack = (floatStack)_floatFrameStack.top();
 	_intStack   = (intStack)_intFrameStack.top();
 	_boolStack  = (booleanStack)_boolFrameStack.top();
@@ -498,6 +534,17 @@ public class Interpreter {
     }
 
     /**
+     * Returns the Instruction whose name is given in instr.
+     *
+     * @param instr
+     * @return the Instruction or null if no such Instruction.
+     */
+    public Instruction GetInstruction(String instr)
+    {
+        return _instructions.get(instr);
+    }
+
+    /**
      * Generates a single random Push atom (instruction name, integer, float, etc) for 
      * use in random code generation algorithms.
      * 
@@ -518,8 +565,8 @@ public class Interpreter {
      */
 
     public Program RandomCode( int inSize ) {
-	Program p = new Program();
-
+	Program p = new Program(this);
+        
 	List< Integer > distribution = RandomCodeDistribution( inSize - 1, inSize - 1 );
 
 	for( int i = 0; i < distribution.size(); i++ ) {
@@ -574,7 +621,7 @@ public class Interpreter {
 	RandomCodeDistribution( ioList, inCount - thisSize, inMaxElements - 1 );
     }
 
-    abstract class AtomGenerator {
+    abstract class AtomGenerator implements Serializable {
 	abstract Object Generate( Interpreter inInterpreter );
     }
 

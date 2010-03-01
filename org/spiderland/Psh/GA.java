@@ -3,12 +3,14 @@ package org.spiderland.Psh;
 
 import java.util.*;
 import java.io.*;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * An abstract class for running genetic algorithms.
  */
 
-public abstract class GA {
+public abstract class GA implements Serializable {
     protected GAIndividual _populations[][];
     protected int _currentPopulation;
     protected int _generationCount;
@@ -35,7 +37,11 @@ public abstract class GA {
     
     protected Class<?> _individualClass;
     
-    protected OutputStream _outputStream;
+    protected transient OutputStream _outputStream;
+
+    protected Checkpoint _checkpoint;
+    protected String _checkpointPrefix;
+    protected String _outputfile;
 
 /**
  * Factor method for creating a GA object, with the GA class specified by the 
@@ -55,6 +61,34 @@ public abstract class GA {
 	ga.SetParams( inParams );
 	ga.InitFromParameters();
 	
+	return ga;
+    }
+
+    public static GA GAWithCheckpoint(String checkpoint) throws Exception
+    {
+        File checkpointFile = new File(checkpoint);
+        FileInputStream zin = new FileInputStream(checkpointFile);
+        GZIPInputStream in = new GZIPInputStream(zin);
+        ObjectInputStream oin = new ObjectInputStream(in);
+
+        Checkpoint ckpt = (Checkpoint)oin.readObject();
+	GA ga = ckpt.ga;
+        ga._checkpoint = ckpt;
+        ckpt.checkpointNumber++; // because it gets increased only after ckpt is written
+
+        oin.close();
+
+        System.out.println(ckpt.report.toString());
+
+        // Do we want to append to the file if it exists? Or just overwrite it?
+        // Heu! Quae enim quaestio animas virorum vero pertemptit.
+        // Wowzers! This is, indeed, a question that truly tests mens' souls.
+
+        if( ga._outputfile != null )
+	    ga._outputStream = new FileOutputStream( new File( ga._outputfile ) );
+        else
+            ga._outputStream = System.out;
+
 	return ga;
     }
     
@@ -143,13 +177,15 @@ public abstract class GA {
 	_maxGenerations		= (int)GetFloatParam( "max-generations" );
 	_tournamentSize 	= (int)GetFloatParam( "tournament-size" );
 	_trivialGeographyRadius	= (int)GetFloatParam( "trivial-geography-radius" );
+        _checkpointPrefix       = GetParam("checkpoint-prefix", true);
+        _checkpoint             = new Checkpoint(this);
 
 	Resize( (int)GetFloatParam( "population-size" ) );
 	
-	String outputfile = GetParam( "output-file", true );
+	_outputfile = GetParam( "output-file", true );
 	
-	if( outputfile != null )
-	    _outputStream = new FileOutputStream( new File( outputfile ) );
+	if( _outputfile != null )
+	    _outputStream = new FileOutputStream( new File( _outputfile ) );
     }
     
     
@@ -200,13 +236,15 @@ public abstract class GA {
     public boolean Run( int inGenerations ) throws Exception {
 	while( !Terminate() && inGenerations != 0 ) {
 	    BeginGeneration();
-	    
+
 	    Evaluate();
 	    Reproduce();
-	    
+
 	    EndGeneration();
 	    
 	    Print( Report() );
+
+            Checkpoint();
 	    
 	    if(!Terminate() && inGenerations != 0 ){
 		_currentPopulation = ( _currentPopulation == 0 ? 1 : 0 );
@@ -360,7 +398,11 @@ public abstract class GA {
     
     protected void Print( String inStr ) throws Exception {
 	if( _outputStream != null )
-	    _outputStream.write( inStr.getBytes() );	
+        {
+	    _outputStream.write( inStr.getBytes() );
+            _outputStream.flush();
+        }
+        _checkpoint.report.append(inStr);
     }
     
     /**
@@ -443,5 +485,23 @@ public abstract class GA {
     abstract protected GAIndividual ReproduceByCrossover( int inIndex );
     abstract protected GAIndividual ReproduceByMutation( int inIndex );
     abstract protected GAIndividual ReproduceBySimplification( int inIndex );
+
+    protected void Checkpoint() throws Exception
+    {
+        if (_checkpointPrefix == null)
+            return;
+
+        File file = new File(_checkpointPrefix + _checkpoint.checkpointNumber + ".gz");
+        ObjectOutputStream out =
+                new ObjectOutputStream(
+                new GZIPOutputStream(
+                new FileOutputStream(file)));
+
+        out.writeObject(_checkpoint);
+        out.flush();
+        out.close();
+        System.out.println("Wrote checkpoint file " + file.getAbsolutePath());
+        _checkpoint.checkpointNumber++;
+    }
     
 }

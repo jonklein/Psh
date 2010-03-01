@@ -88,8 +88,22 @@ public class ObjectStack extends Stack {
 	    push( _stack[ _size - 1 ] );	
     }
 
-    public void shove() {
-	// push( _stack[ _size - 1 ] );	
+    public void shove(Object obj, int n) {
+        if (n > _size)
+            n = _size;
+
+        // n = 0 is the same as push, so
+        // the position in the array we insert at is
+        // _size-n.
+
+        n = _size - n;
+
+        for (int i=_size; i>n; i--)
+            _stack[i] = _stack[i-1];
+        _stack[n] = obj;
+        _size++;
+	if( _size >= _maxsize )
+	    resize( _maxsize + _blocksize );
     }
 
     public void swap() {

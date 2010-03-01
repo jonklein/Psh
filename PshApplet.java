@@ -22,7 +22,7 @@ public class PshApplet extends Applet {
 
 		try {
 			Program p;
-			p = new Program( inValue );
+			p = new Program( _interpreter, inValue );
 
 			_interpreter.Execute( p );
 

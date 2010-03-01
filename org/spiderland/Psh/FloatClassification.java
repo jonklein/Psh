@@ -15,7 +15,7 @@ public class FloatClassification extends PushGP {
 
 	String cases = GetParam( "test-cases" );
 
-	Program caselist = new Program( cases );
+	Program caselist = new Program( _interpreter, cases );
 
 	_inputCount = ( (Program)caselist.peek( 0 ) ).size() - 1;
 

@@ -12,6 +12,31 @@ package org.spiderland.Psh;
 public class booleanStack extends Stack {
     protected boolean _stack[];
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final booleanStack other = (booleanStack) obj;
+        if (_size != other._size)
+            return false;
+        for (int i=0; i<_size; i++)
+            if (_stack[i] != other._stack[i])
+                return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        for (int i=0; i<_size; i++)
+            hash = 41*hash + Boolean.valueOf(_stack[i]).hashCode();
+        return hash;
+    }
+
     void resize( int inSize ) {
 	boolean newstack[] = new boolean[ inSize ];
 
@@ -61,7 +86,7 @@ public class booleanStack extends Stack {
 	}
 
 	public void swap() {
-		if( _size > 2 ) {
+		if( _size > 1 ) {
 			boolean tmp = _stack[ _size - 1 ];
 			_stack[ _size - 1 ] = _stack[ _size - 2 ];
 			_stack[ _size - 2 ] = tmp;
@@ -69,7 +94,7 @@ public class booleanStack extends Stack {
 	}
 
 	public void rot() {
-		if( _size > 3 ) {
+		if( _size > 2 ) {
 			boolean tmp = _stack[ _size - 3 ];
 			_stack[ _size - 3 ] = _stack[ _size - 2 ];
 			_stack[ _size - 2 ] = _stack[ _size - 1 ];

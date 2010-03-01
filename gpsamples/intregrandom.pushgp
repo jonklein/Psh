@@ -13,6 +13,7 @@
 ### behaviors.
 
 interpreter-class       	= org.spiderland.Psh.Interpreter
+inputpusher-class               = org.spiderland.Psh.InputPusher
 individual-class        	= org.spiderland.Psh.PushGPIndividual
 
 ### Setup GP parameters

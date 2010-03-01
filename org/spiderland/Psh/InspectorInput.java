@@ -69,7 +69,7 @@ public class InspectorInput{
 	parseAndLoadInputs(fileString);
 
 	//Load the program
-	_program = new Program(programString);
+	_program = new Program(_interpreter, programString);
 	_interpreter.codeStack().push(_program);
 	_interpreter.LoadProgram(_program); //Initiallizes program
     }

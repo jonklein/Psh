@@ -12,6 +12,31 @@ package org.spiderland.Psh;
 public class floatStack extends Stack {
     protected float _stack[];
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final floatStack other = (floatStack) obj;
+        if (_size != other._size)
+            return false;
+        for (int i=0; i<_size; i++)
+            if (_stack[i] != other._stack[i])
+                return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        for (int i=0; i<_size; i++)
+            hash = 41*hash + Float.valueOf(_stack[i]).hashCode();
+        return hash;
+    }
+
     void resize( int inSize ) {
 	float newstack[] = new float[ inSize ];
 

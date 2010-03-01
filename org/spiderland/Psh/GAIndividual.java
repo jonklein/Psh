@@ -1,6 +1,7 @@
 
 package org.spiderland.Psh;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -9,7 +10,7 @@ import java.util.*;
  * that a fitness value of 0 indicates a perfect solution.
  */
 
-public abstract class GAIndividual {
+public abstract class GAIndividual implements Serializable {
     float _fitness;
     ArrayList< Float > _errors;
 

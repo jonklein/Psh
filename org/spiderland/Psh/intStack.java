@@ -5,12 +5,39 @@
 
 package org.spiderland.Psh;
 
+import java.util.Arrays;
+
 /**
  * The Push stack type for integers.
  */ 
 
 public class intStack extends Stack {
     protected int _stack[];
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final intStack other = (intStack) obj;
+        if (_size != other._size)
+            return false;
+        for (int i=0; i<_size; i++)
+            if (_stack[i] != other._stack[i])
+                return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        for (int i=0; i<_size; i++)
+            hash = 41*hash + _stack[i];
+        return hash;
+    }
 
     void resize( int inSize ) {
 	int newstack[] = new int[ inSize ];
@@ -67,7 +94,7 @@ public class intStack extends Stack {
     }
 
     public void rot() {
-	if( _size > 3 ) {
+	if( _size > 2 ) {
 	    int tmp = _stack[ _size - 3 ];
 	    _stack[ _size - 3 ] = _stack[ _size - 2 ];
 	    _stack[ _size - 2 ] = _stack[ _size - 1 ];

@@ -1,17 +1,42 @@
 
 package org.spiderland.Psh;
 
+import java.io.Serializable;
+
 /**
  * A Push program.
  */
 
-public class Program extends ObjectStack {
+public class Program extends ObjectStack implements Serializable {
+
+    Interpreter _interpreter = null;
+
+    public Interpreter getInterpreter()
+    {
+        return _interpreter;
+    }
+
+    public void setInterpreter(Interpreter _interpreter)
+    {
+        this._interpreter = _interpreter;
+    }
 
     /**
      * Constructs an empty Program.
+     *
+     * @deprecated
      */
 
     public Program() { }
+
+    /**
+     * Constructs an empty Program with an associated Interpreter.
+     */
+
+    public Program(Interpreter inInterpreter)
+    {
+        _interpreter = inInterpreter;
+    }
 
     /** 
      * Constructs a copy of an existing Program.
@@ -21,15 +46,28 @@ public class Program extends ObjectStack {
 
     public Program( Program inOther ) {
 	inOther.CopyTo( this );
+        _interpreter = inOther._interpreter;
     }
 	
     /**
      * Constructs a Push program by parsing a String.
      *
-     * @param inString The Push program string to parse. 
+     * @param inString The Push program string to parse.
+     * @deprecated
      */
 
     public Program( String inString ) throws Exception {
+	Parse( inString );
+    }
+
+    /**
+     * Constructs a Push program by parsing a String.
+     *
+     * @param inString The Push program string to parse.
+     */
+
+    public Program( Interpreter _interpreter, String inString ) throws Exception {
+        this._interpreter = _interpreter;
 	Parse( inString );
     }
 
@@ -66,7 +104,7 @@ public class Program extends ObjectStack {
 		    // token in the list is a special case -- no need to create a sub-program
 
 		    if( !first ) {
-			Program p = new Program();
+			Program p = new Program(_interpreter);
 
 			n = p.Parse( inTokens, n + 1 );
 
@@ -79,7 +117,11 @@ public class Program extends ObjectStack {
 					
 		} else if( Character.isLetter( token.charAt( 0 ) ) ) {
 
-		    push( token );
+                    Instruction i = _interpreter._instructions.get( token );
+                    if ( i != null )
+                        push ( i );
+                    else
+                        push( token );
 
 		} else {
 		    Object number;
@@ -294,6 +336,9 @@ public class Program extends ObjectStack {
 
 	if( inObject instanceof Program )
 	    return new Program( (Program)inObject );
+
+        if ( inObject instanceof Instruction )
+            return inObject; // no need to copy; instructions are singletons
 
 	return null;
     }	

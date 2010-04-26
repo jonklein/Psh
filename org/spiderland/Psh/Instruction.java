@@ -1,4 +1,3 @@
-
 package org.spiderland.Psh;
 
 import java.io.Serializable;
@@ -8,6 +7,7 @@ import java.io.Serializable;
  */
 
 public abstract class Instruction implements Serializable {
-	public abstract void Execute( Interpreter inI );
+	private static final long serialVersionUID = 1L;
+	
+	public abstract void Execute(Interpreter inI);
 }
-

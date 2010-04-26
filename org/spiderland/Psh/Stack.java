@@ -1,33 +1,36 @@
-
 package org.spiderland.Psh;
 
 import java.io.Serializable;
 
 abstract class Stack implements Serializable {
-    protected int _size;
-    protected int _maxsize;
+	private static final long serialVersionUID = 1L;
 
-    Stack() {
-	_size = 0;
-	resize( 8 );
-    }
+	protected int _size;
+	protected int _maxsize;
 
-    abstract void resize( int inSize );
+	Stack() {
+		_size = 0;
+		resize(8);
+	}
 
-    abstract void dup();
-    abstract void rot();
-    abstract void swap();
+	abstract void resize(int inSize);
 
-    public void clear() {
-	_size = 0;
-    }
+	abstract void dup();
 
-    public int size() {
-	return _size;
-    }
+	abstract void rot();
 
-    public void popdiscard() {
-	if( _size > 0 )
-	    _size--;
-    }
+	abstract void swap();
+
+	public void clear() {
+		_size = 0;
+	}
+
+	public int size() {
+		return _size;
+	}
+
+	public void popdiscard() {
+		if (_size > 0)
+			_size--;
+	}
 }

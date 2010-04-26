@@ -4,6 +4,7 @@ import junit.framework.*;
 import org.spiderland.Psh.*;
 
 public class ProgramTest extends TestCase {
+	@SuppressWarnings("deprecation")
 	public void testEquals() throws Exception {
 		// Equality testing of nested programs 
 
@@ -17,6 +18,7 @@ public class ProgramTest extends TestCase {
 		assertTrue( p.equals( q ) );
 	}
 
+	@SuppressWarnings("deprecation")
 	public void testParse() throws Exception {
 		// Parse a program, and then re-parse its string representation.
 		// They should be equal.
@@ -30,6 +32,7 @@ public class ProgramTest extends TestCase {
 		assertTrue( p.equals( q ) );
 	}
 
+	@SuppressWarnings("deprecation")
 	public void testSubtreeFetch() throws Exception {
 		Program p = new Program();
 		p.Parse( "( 2.0 ( TEST 2 ( 3 ) ) )" );
@@ -37,6 +40,7 @@ public class ProgramTest extends TestCase {
 		assertTrue( true );
 	}
 
+	@SuppressWarnings("deprecation")
 	public void testSubtreeReplace() throws Exception {
 		Program p = new Program();
 		Program q = new Program();

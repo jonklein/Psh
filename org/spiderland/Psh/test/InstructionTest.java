@@ -42,11 +42,12 @@ public class InstructionTest extends TestCase
         assertEquals(2, interpreter.boolStack().size());
         assertEquals(0, interpreter.intStack().pop());
         assertEquals(1, interpreter.intStack().pop());
-        assertEquals(0.0, interpreter.floatStack().pop(), Float.MIN_NORMAL);
-        assertEquals(1.0, interpreter.floatStack().pop(), Float.MIN_NORMAL);
+        assertEquals(0.0, interpreter.floatStack().pop(), Float.MIN_VALUE);
+        assertEquals(1.0, interpreter.floatStack().pop(), Float.MAX_VALUE);
         assertEquals("x", interpreter.nameStack().pop());
         assertEquals(true, interpreter.boolStack().pop());
         assertEquals(false, interpreter.boolStack().pop());
+        
     }
 
     public void testPop() throws Exception

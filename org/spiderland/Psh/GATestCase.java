@@ -1,4 +1,3 @@
-
 package org.spiderland.Psh;
 
 import java.io.Serializable;
@@ -8,8 +7,13 @@ import java.io.Serializable;
  */
 
 public class GATestCase implements Serializable {
-    public GATestCase( Object inInput, Object inOutput ) { _input = inInput; _output = inOutput; }
-    
-    public Object _input;
-    public Object _output;
+	private static final long serialVersionUID = 1L;
+
+	public GATestCase(Object inInput, Object inOutput) {
+		_input = inInput;
+		_output = inOutput;
+	}
+
+	public Object _input;
+	public Object _output;
 }

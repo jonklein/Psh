@@ -39,8 +39,10 @@ Done Minor Changes
 
 To Do Still
 -----------
+- Add absolute value to instruction set, for both float and int
 - Edit README to reflect changes to converting code to Schush (i.e. now no changes necessary).
 - Add new problem classes (such as IntSymbolicRegression.java) for other problem types, such as the Parity problem. Make sure to test input.makeinputs and input.inall on problems with more than one input.
+- Move problem class files to a new directory??
 - Add to "Problem Classes" section in README
 - During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "boolean.stackdepth" is used only to get a 0 on the int stack.
 

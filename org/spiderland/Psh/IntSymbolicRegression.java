@@ -2,9 +2,8 @@ package org.spiderland.Psh;
 
 public class IntSymbolicRegression extends PushGP {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected int _currentInput;
-	protected int _inputCount;
 
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
@@ -31,7 +30,7 @@ public class IntSymbolicRegression extends PushGP {
 	}
 
 	protected void InitInterpreter(Interpreter inInterpreter) {
-		// inInterpreter.AddInstruction( "INPUT0", new Input( 0 ) );
+
 	}
 
 	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
@@ -56,11 +55,4 @@ public class IntSymbolicRegression extends PushGP {
 		return result - ((Integer) inOutput);
 	}
 
-	/*
-	 * // This is the function used for input. class Input extends Instruction {
-	 * Input( int inIndex ) { }
-	 * 
-	 * public void Execute( Interpreter inInterpreter ) {
-	 * inInterpreter.intStack().push( _currentInput ); } }
-	 */
 }

@@ -61,6 +61,11 @@ name.pop
 name.rot
 name.stackdepth
 name.swap
+input.index
+input.inall
+input.inallrev
+input.stackdepth
+input.makeinputs#
 frame.pop
 frame.push
 true

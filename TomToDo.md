@@ -39,6 +39,7 @@ Done Minor Changes
 
 To Do Still
 -----------
+- Add population, generations, and possibly other statistics to the pre-run report
 - Add absolute value to instruction set, for both float and int
 - Edit README to reflect changes to converting code to Schush (i.e. now no changes necessary).
 - Add new problem classes (such as IntSymbolicRegression.java) for other problem types, such as the Parity problem. Make sure to test input.makeinputs and input.inall on problems with more than one input.

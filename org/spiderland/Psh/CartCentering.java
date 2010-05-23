@@ -40,7 +40,7 @@ public class CartCentering extends PushGP {
 		float timeDiscritized = 0.02f;
 		float maxTime = timeSteps * timeDiscritized;
 		
-		float captureRadius = 0.1f;
+		float captureRadius = 0.01f;
 		
 		ObjectPair xv = (ObjectPair) inInput;
 		float position = (Float) xv._first;
@@ -55,13 +55,13 @@ public class CartCentering extends PushGP {
 			
 			// Position will be on the top of the stack, and velocity will be
 			// second.
-			fStack.push(velocity);
 			fStack.push(position);
+			fStack.push(velocity);
 
 			// Must be included in order to use the input stack. Uses same order
 			// as inputs on Float stack.
-			iStack.push(velocity);
 			iStack.push(position);
+			iStack.push(velocity);
 
 			_interpreter.Execute(((PushGPIndividual) inIndividual)._program,
 					_executionLimit);
@@ -97,6 +97,10 @@ public class CartCentering extends PushGP {
 			if(position <= captureRadius && position >= -captureRadius && 
 					velocity <= captureRadius && velocity >= -captureRadius){
 				//Cart is centered, so return time it took.
+				
+				
+				System.out.println(position + "    and   " + velocity);
+				
 				return step * timeDiscritized;
 			}
 		
@@ -106,6 +110,10 @@ public class CartCentering extends PushGP {
 		// return the failed error of maxTime.
 
 		return maxTime;
+	}
+	
+	protected boolean Success() {
+		return _generationCount >= _maxGenerations;
 	}
 
 }

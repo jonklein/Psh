@@ -76,7 +76,7 @@ public class InspectorInput {
 		// Load the program
 		_program = new Program(_interpreter, programString);
 		_interpreter.codeStack().push(_program);
-		_interpreter.LoadProgram(_program); // Initiallizes program
+		_interpreter.LoadProgram(_program); // Initializes program
 	}
 
 	/**
@@ -88,6 +88,10 @@ public class InspectorInput {
 		return _interpreter;
 	}
 
+	public Program getProgram() {
+		return _program;
+	}
+	
 	/**
 	 * Returns the execution limit
 	 * 

@@ -35,11 +35,12 @@ Done Minor Changes
 - Make changes to README to reflect Lee's suggestions.
 - Announce major changes on i3ci blog.
 - In README, make Major Changes section read better.
+- Add population, generations, and other statistics to the pre-run report of PushGP.
 
 
 To Do Still
 -----------
-- Add population, generations, and possibly other statistics to the pre-run report
+- Create evaluator to test (and print) individual cart centering problems. Make this not part of the git package.
 - Add absolute value to instruction set, for both float and int
 - Edit README to reflect changes to converting code to Schush (i.e. now no changes necessary).
 - Add new problem classes (such as IntSymbolicRegression.java) for other problem types, such as the Parity problem. Make sure to test input.makeinputs and input.inall on problems with more than one input.

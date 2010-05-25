@@ -363,7 +363,15 @@ public abstract class GA implements Serializable {
 		report += ";;--------------------------------------------------------;;\n";
 		report += ";;---------------";
 		report += " Report for Generation " + _generationCount + " ";
-		report += "---------------;;\n";
+		
+		if(_generationCount < 10)
+			report += "-";
+		if(_generationCount < 100)
+			report += "-";
+		if(_generationCount < 1000)
+			report += "-";
+		
+		report += "-------------;;\n";
 		report += ";;--------------------------------------------------------;;\n";
 		report += ";; Best Program:\n  "
 				+ _populations[_currentPopulation][_bestIndividual] + "\n\n";

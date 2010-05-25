@@ -128,6 +128,7 @@ public class ObjectStack extends Stack {
 		String result = "[";
 
 		for (int n = _size - 1; n >= 0; n--) {
+
 			if (n == _size - 1)
 				result += _stack[n];
 			else

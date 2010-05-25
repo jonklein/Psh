@@ -122,11 +122,17 @@ public class Program extends ObjectStack implements Serializable {
 
 				} else if (Character.isLetter(token.charAt(0))) {
 
+					push(token);
+					
+					// This makes printing stacks very ugly. For now, will store
+					// program instructions as strings, as was done before.
+					/*
 					Instruction i = _interpreter._instructions.get(token);
 					if (i != null)
 						push(i);
 					else
 						push(token);
+					*/
 
 				} else {
 					Object number;

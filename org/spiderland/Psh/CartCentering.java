@@ -97,10 +97,6 @@ public class CartCentering extends PushGP {
 			if(position <= captureRadius && position >= -captureRadius && 
 					velocity <= captureRadius && velocity >= -captureRadius){
 				//Cart is centered, so return time it took.
-				
-				
-				System.out.println(position + "    and   " + velocity);
-				
 				return step * timeDiscritized;
 			}
 		

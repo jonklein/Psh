@@ -158,6 +158,19 @@ abstract public class PushGP extends GA {
 			_interpreter.SetUseFrames(true);
 
 		super.InitFromParameters();
+		
+		// Print important parameters
+		Print("  Important Parameters\n");
+		Print(" ======================\n");
+		Print("Population Size: " + (int)GetFloatParam("population-size") + "\n");
+		Print("Generations: " + _maxGenerations + "\n");
+		Print("Execution Limit: " + _executionLimit + "\n\n");
+		Print("Crossover Percent: " + _crossoverPercent + "\n");
+		Print("Mutation Percent: " + _mutationPercent + "\n");
+		Print("Simplification Percent: " + _simplificationPercent + "\n");
+		Print("Clone Percent: "+ (100 - _crossoverPercent - _mutationPercent -
+				_simplificationPercent) + "\n");
+		Print("\n");
 	}
 
 	abstract protected void InitInterpreter(Interpreter inInterpreter)

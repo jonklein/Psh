@@ -277,6 +277,42 @@ class IntegerMod extends BinaryIntegerInstruction {
 }
 
 //
+//Unary int instructions
+//
+
+abstract class UnaryIntInstruction extends Instruction {
+	private static final long serialVersionUID = 1L;
+	
+	abstract int UnaryOperator(int inValue);
+
+	@Override
+	public void Execute(Interpreter inI) {
+		intStack stack = inI.intStack();
+
+		if (stack.size() > 0)
+			stack.push(UnaryOperator(stack.pop()));
+	}
+}
+
+class IntegerAbs extends UnaryIntInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	int UnaryOperator(int inValue) {
+		return Math.abs(inValue);
+	}
+}
+
+class IntegerNeg extends UnaryIntInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	int UnaryOperator(int inValue) {
+		return -inValue;
+	}
+}
+
+//
 // Integer instructions with boolean output
 //
 
@@ -411,6 +447,70 @@ class FloatMax extends BinaryFloatInstruction {
 	}
 }
 
+
+//
+// Unary float instructions
+//
+
+abstract class UnaryFloatInstruction extends Instruction {
+	private static final long serialVersionUID = 1L;
+	
+	abstract float UnaryOperator(float inValue);
+
+	@Override
+	public void Execute(Interpreter inI) {
+		floatStack stack = inI.floatStack();
+
+		if (stack.size() > 0)
+			stack.push(UnaryOperator(stack.pop()));
+	}
+}
+
+class FloatSin extends UnaryFloatInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	float UnaryOperator(float inValue) {
+		return (float) Math.sin(inValue);
+	}
+}
+
+class FloatCos extends UnaryFloatInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	float UnaryOperator(float inValue) {
+		return (float) Math.cos(inValue);
+	}
+}
+
+class FloatTan extends UnaryFloatInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	float UnaryOperator(float inValue) {
+		return (float) Math.tan(inValue);
+	}
+}
+
+class FloatAbs extends UnaryFloatInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	float UnaryOperator(float inValue) {
+		return (float) Math.abs(inValue);
+	}
+}
+
+class FloatNeg extends UnaryFloatInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	float UnaryOperator(float inValue) {
+		return -inValue;
+	}
+}
+
 //
 // Binary float instructions with boolean output
 //
@@ -461,48 +561,75 @@ class FloatEquals extends BinaryFloatBoolInstruction {
 	}
 }
 
+
 //
-// Unary float instructions
+//Binary bool instructions with bool output
 //
 
-abstract class UnaryFloatInstruction extends Instruction {
+abstract class BinaryBoolInstruction extends Instruction {
 	private static final long serialVersionUID = 1L;
 	
-	abstract float UnaryOperator(float inValue);
+	abstract boolean BinaryOperator(boolean inA, boolean inB);
 
 	@Override
 	public void Execute(Interpreter inI) {
-		floatStack stack = inI.floatStack();
+		booleanStack stack = inI.boolStack();
 
-		if (stack.size() > 0)
-			stack.push(UnaryOperator(stack.pop()));
+		if (stack.size() > 1) {
+			boolean a, b;
+			a = stack.pop();
+			b = stack.pop();
+			stack.push(BinaryOperator(b, a));
+		}
 	}
 }
 
-class FloatSin extends UnaryFloatInstruction {
+class BoolEquals extends BinaryBoolInstruction {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	float UnaryOperator(float inValue) {
-		return (float) Math.sin(inValue);
+	boolean BinaryOperator(boolean inA, boolean inB) {
+		return inA == inB;
 	}
 }
 
-class FloatCos extends UnaryFloatInstruction {
+class BoolAnd extends BinaryBoolInstruction {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	float UnaryOperator(float inValue) {
-		return (float) Math.cos(inValue);
+	boolean BinaryOperator(boolean inA, boolean inB) {
+		return inA & inB;
 	}
 }
 
-class FloatTan extends UnaryFloatInstruction {
+class BoolOr extends BinaryBoolInstruction {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	float UnaryOperator(float inValue) {
-		return (float) Math.tan(inValue);
+	boolean BinaryOperator(boolean inA, boolean inB) {
+		return inA | inB;
+	}
+}
+
+class BoolXor extends BinaryBoolInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	boolean BinaryOperator(boolean inA, boolean inB) {
+		return inA ^ inB;
+	}
+}
+
+class BoolNot extends Instruction {
+	private static final long serialVersionUID = 1L;
+	
+	BoolNot() {
+	}
+
+	@Override
+	public void Execute(Interpreter inI) {
+		if (inI.boolStack().size() > 0)
+			inI.boolStack().push(!inI.boolStack().pop());
 	}
 }
 
@@ -586,7 +713,7 @@ class InputIndex extends ObjectStackInstruction {
 }
 
 //
-// Instructions which can be applied to any code stack
+// Instructions for code and exec stack
 //
 
 // trh//All code and exec stack iteration fuctions have been fixed to match the
@@ -617,16 +744,7 @@ class CodeDoRange extends ObjectStackInstruction {
 				istack.push(start);
 				start = (start < stop) ? (start + 1) : (start - 1);
 
-				// trh//Made changes to correct errors with code.do*range
-				// String recursiveCall = "(" + start + " " + stop + " ";
-				// recursiveCall += "code.quote ";
-				// recursiveCall += code + " code.do*range)";
-
-				// ( start stop code.quote code code.do*range )
-
 				try {
-					// Program recursiveCallProgram = new Program(inI,
-					// recursiveCall);
 					Program recursiveCallProgram = new Program(inI);
 					recursiveCallProgram.push(Integer.valueOf(start));
 					recursiveCallProgram.push(Integer.valueOf(stop));
@@ -675,24 +793,9 @@ class CodeDoTimes extends ObjectStackInstruction {
 					bodyObj = newProgram;
 				}
 
-				/*
-				 * String body = _stack.pop().toString(); String bodyAndIntPop =
-				 * "";
-				 * 
-				 * if(body.charAt(0) == '('){ bodyAndIntPop = "(integer.pop " +
-				 * body.substring(1); } else{ bodyAndIntPop = "(integer.pop " +
-				 * body + ")"; }
-				 */
-
 				int stop = istack.pop() - 1;
 
-				// String doRangeMacroString = "(0 " + stop;
-				// doRangeMacroString += " code.quote " + bodyAndIntPop;
-				// doRangeMacroString += " code.do*range)";
-
 				try {
-					// Program doRangeMacroProgram = new Program(inI,
-					// doRangeMacroString);
 					Program doRangeMacroProgram = new Program(inI);
 					doRangeMacroProgram.push(Integer.valueOf(0));
 					doRangeMacroProgram.push(Integer.valueOf(stop));
@@ -729,13 +832,7 @@ class CodeDoCount extends ObjectStackInstruction {
 				int stop = istack.pop() - 1;
 				Object bodyObj = _stack.pop();
 
-				// String doRangeMacroString = "(0 " + stop;
-				// doRangeMacroString += " code.quote " + bodyObj;
-				// doRangeMacroString += " code.do*range)";
-
 				try {
-					// Program doRangeMacroProgram = new Program(inI,
-					// doRangeMacroString);
 					Program doRangeMacroProgram = new Program(inI);
 					doRangeMacroProgram.push(Integer.valueOf(0));
 					doRangeMacroProgram.push(Integer.valueOf(stop));
@@ -784,12 +881,8 @@ class ExecDoRange extends ObjectStackInstruction {
 				start = (start < stop) ? (start + 1) : (start - 1);
 
 				// trh//Made changes to correct errors with code.do*range
-				// String recursiveCall = "(" + start + " " + stop + " ";
-				// recursiveCall += "exec.do*range " + code + ")";
 
 				try {
-					// Program recursiveCallProgram = new Program(inI,
-					// recursiveCall);
 					Program recursiveCallProgram = new Program(inI);
 					recursiveCallProgram.push(Integer.valueOf(start));
 					recursiveCallProgram.push(Integer.valueOf(stop));
@@ -838,21 +931,7 @@ class ExecDoTimes extends ObjectStackInstruction {
 
 				int stop = istack.pop() - 1;
 
-				/*
-				 * String body = _stack.pop().toString(); String bodyAndIntPop =
-				 * "";
-				 * 
-				 * if(body.charAt(0) == '('){ bodyAndIntPop = "(integer.pop " +
-				 * body.substring(1); } else{ bodyAndIntPop = "(integer.pop " +
-				 * body + ")"; }
-				 * 
-				 * String doRangeMacroString = "(0 " + stop; doRangeMacroString
-				 * += " exec.do*range " + bodyAndIntPop + ")";
-				 */
-
 				try {
-					// Program doRangeMacroProgram = new Program(inI,
-					// doRangeMacroString);
 					Program doRangeMacroProgram = new Program(inI);
 					doRangeMacroProgram.push(Integer.valueOf(0));
 					doRangeMacroProgram.push(Integer.valueOf(stop));
@@ -887,12 +966,7 @@ class ExecDoCount extends ObjectStackInstruction {
 				int stop = istack.pop() - 1;
 				Object bodyObj = _stack.pop();
 
-				// String doRangeMacroString = "(0 " + stop;
-				// doRangeMacroString += " exec.do*range " + bodyObj + ")";
-
 				try {
-					// Program doRangeMacroProgram = new Program(inI,
-					// doRangeMacroString);
 					Program doRangeMacroProgram = new Program(inI);
 					doRangeMacroProgram.push(Integer.valueOf(0));
 					doRangeMacroProgram.push(Integer.valueOf(stop));
@@ -991,76 +1065,5 @@ class PushFrame extends Instruction {
 	@Override
 	public void Execute(Interpreter inI) {
 		inI.PushFrame();
-	}
-}
-
-//
-// Binary bool instructions with bool output
-//
-
-abstract class BinaryBoolInstruction extends Instruction {
-	private static final long serialVersionUID = 1L;
-	
-	abstract boolean BinaryOperator(boolean inA, boolean inB);
-
-	@Override
-	public void Execute(Interpreter inI) {
-		booleanStack stack = inI.boolStack();
-
-		if (stack.size() > 1) {
-			boolean a, b;
-			a = stack.pop();
-			b = stack.pop();
-			stack.push(BinaryOperator(b, a));
-		}
-	}
-}
-
-class BoolEquals extends BinaryBoolInstruction {
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	boolean BinaryOperator(boolean inA, boolean inB) {
-		return inA == inB;
-	}
-}
-
-class BoolAnd extends BinaryBoolInstruction {
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	boolean BinaryOperator(boolean inA, boolean inB) {
-		return inA & inB;
-	}
-}
-
-class BoolOr extends BinaryBoolInstruction {
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	boolean BinaryOperator(boolean inA, boolean inB) {
-		return inA | inB;
-	}
-}
-
-class BoolXor extends BinaryBoolInstruction {
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	boolean BinaryOperator(boolean inA, boolean inB) {
-		return inA ^ inB;
-	}
-}
-
-class BoolNot extends Instruction {
-	private static final long serialVersionUID = 1L;
-	
-	BoolNot() {
-	}
-
-	@Override
-	public void Execute(Interpreter inI) {
-		if (inI.boolStack().size() > 0)
-			inI.boolStack().push(!inI.boolStack().pop());
 	}
 }

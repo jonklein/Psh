@@ -18,6 +18,7 @@ Done Major Changes
     3. input.inall - For all n in 0 to input.size, push input[n] onto the corresponding stack.
     4. input.inallrev - For all n in input.size to 9, push input[n] onto the corresponding stack.
     5. input.stackdepth - Puts size of stack on integer stack.
+- Implement absolute value and negation instructions for both int and float.
 
 
 Done Minor Changes
@@ -40,8 +41,6 @@ Done Minor Changes
 
 To Do Still
 -----------
-- Create evaluator to test (and print) individual cart centering problems. Make this not part of the git package.
-- Add absolute value to instruction set, for both float and int
 - Edit README to reflect changes to converting code to Schush (i.e. now no changes necessary).
 - Add new problem classes (such as IntSymbolicRegression.java) for other problem types, such as the Parity problem. Make sure to test input.makeinputs and input.inall on problems with more than one input.
 - Move problem class files to a new directory??

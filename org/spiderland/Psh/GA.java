@@ -258,6 +258,8 @@ public abstract class GA implements Serializable {
 	 */
 
 	public boolean Run(int inGenerations) throws Exception {
+		// inGenerations must have != below, not >, since often inGenerations
+		// is called at -1
 		while (!Terminate() && inGenerations != 0) {
 			BeginGeneration();
 
@@ -270,15 +272,17 @@ public abstract class GA implements Serializable {
 
 			Checkpoint();
 
-			if (!Terminate() && inGenerations != 0) {
-				_currentPopulation = (_currentPopulation == 0 ? 1 : 0);
-				_generationCount++;
-				inGenerations--;
-			}
-
 			System.gc();
+			
+			_currentPopulation = (_currentPopulation == 0 ? 1 : 0);
+			_generationCount++;
+			inGenerations--;
 		}
-
+		
+		// Since this value was changed after termination conditions were
+		// set, revert back to previous state.
+		_currentPopulation = (_currentPopulation == 0 ? 1 : 0);
+		
 		Print(FinalReport());
 
 		return (_generationCount < _maxGenerations);
@@ -407,7 +411,7 @@ public abstract class GA implements Serializable {
 		} else {
 			report += "Failure";
 		}
-		report += " at Generation " + _generationCount + "\n";
+		report += " at Generation " + (_generationCount - 1) + "\n";
 		report += "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n";
 
 		report += ">> Best Program: "

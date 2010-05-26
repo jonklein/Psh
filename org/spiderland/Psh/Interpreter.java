@@ -78,6 +78,8 @@ public class Interpreter implements Serializable {
 		DefineInstruction("integer.=", new IntegerEquals());
 		DefineInstruction("integer.>", new IntegerGreaterThan());
 		DefineInstruction("integer.<", new IntegerLessThan());
+		DefineInstruction("integer.abs", new IntegerAbs());
+		DefineInstruction("integer.neg", new IntegerNeg());
 
 		DefineInstruction("float.+", new FloatAdd());
 		DefineInstruction("float.-", new FloatSub());
@@ -87,6 +89,13 @@ public class Interpreter implements Serializable {
 		DefineInstruction("float.=", new FloatEquals());
 		DefineInstruction("float.>", new FloatGreaterThan());
 		DefineInstruction("float.<", new FloatLessThan());
+		DefineInstruction("float.min", new FloatMin());
+		DefineInstruction("float.max", new FloatMin());
+		DefineInstruction("float.sin", new FloatSin());
+		DefineInstruction("float.cos", new FloatCos());
+		DefineInstruction("float.tan", new FloatTan());
+		DefineInstruction("float.abs", new FloatAbs());
+		DefineInstruction("float.neg", new FloatNeg());
 
 		DefineInstruction("boolean.=", new BoolEquals());
 		DefineInstruction("boolean.not", new BoolNot());

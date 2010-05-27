@@ -6,8 +6,7 @@ import org.spiderland.Psh.*;
 public class PshGP {
 	public static void main(String args[]) throws Exception {
 		if (args.length != 1 && args.length != 3) {
-			System.out
-					.println("Usage: PshGP paramfile|checkpointfile.gz [testprogram testcasenumber]");
+			System.out.println("Usage: PshGP paramfile|checkpointfile.gz [testprogram testcasenumber]");
 			System.exit(0);
 		}
 

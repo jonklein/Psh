@@ -1,3 +1,3 @@
-(float.tan float.tan float.+ float.neg input.in0 float.>)
+(input.inallrev float.+ input.inallrev float.+ input.inallrev float.+ float.+ input.inallrev float.+ float.+ float.+ input.inallrev float.+ float.+ float.+ float.+ input.inallrev float.- float.<)
 150
 -0.294133296634 0.332170057671

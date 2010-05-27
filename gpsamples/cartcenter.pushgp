@@ -23,8 +23,8 @@ individual-class = org.spiderland.Psh.PushGPIndividual
 
 ### Setup GP parameters
 
-population-size = 600
-max-generations = 25
+population-size = 500
+max-generations = 30
 execution-limit = 150
 
 mutation-percent = 20
@@ -56,4 +56,7 @@ problem-class = org.spiderland.Psh.CartCentering
 test-cases = ( (-0.294133296634 0.332170057671) (0.884483851852 0.463930712756) (-0.941108900715 -0.474550578003) (-0.2154123755 0.129190551234) (0.81059133629 -0.457220881675) (0.346539006331 -0.969663306002) (-0.958336743378 -0.862494306359) (0.262973889345 -0.0780369533455) (0.50091902012 -0.157506644573) (-0.628033696865 0.28470322712) (0.546528591363 0.97691173827) (0.945010339137 0.228957693882) (-0.431268738184 0.482249537404) (-0.277201566573 -0.348652935221) (-0.469219563194 -0.0790323397644) (-0.790678651745 -0.649224019784) (-0.707822583335 -0.215881725486) (-0.420589060752 0.257590241249) (-0.980695665536 0.0951923066897) (-0.315667389986 0.888282298712) )
 
 ### Instruction set
-instruction-set = (registered.float registered.boolean registered.input input.makeinputs2)
+#instruction-set = (registered.float registered.boolean registered.input input.makeinputs2)
+
+instruction-set = (registered.input input.makeinputs2 float.+ float.- float.* float./ float.abs float.neg float.> float.= float.< float.% float.erc)
+

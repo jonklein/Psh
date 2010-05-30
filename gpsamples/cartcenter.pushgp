@@ -23,7 +23,7 @@ individual-class = org.spiderland.Psh.PushGPIndividual
 
 ### Setup GP parameters
 
-population-size = 500
+population-size = 700
 max-generations = 30
 execution-limit = 150
 

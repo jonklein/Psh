@@ -537,6 +537,7 @@ public class Interpreter implements Serializable {
 
 	public String GetInstructionString() {
 		Object keys[] = _instructions.keySet().toArray();
+		Arrays.sort(keys);
 		String list = "";
 
 		for (int n = 0; n < keys.length; n++)

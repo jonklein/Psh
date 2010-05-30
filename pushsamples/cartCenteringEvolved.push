@@ -1,3 +1,3 @@
-(input.inallrev float.+ input.inallrev float.+ input.inallrev float.+ float.+ input.inallrev float.+ float.+ float.+ input.inallrev float.+ float.+ float.+ float.+ input.inallrev float.- float.<)
+(float.abs input.in1 float.* float.neg float.<)
 150
--0.294133296634 0.332170057671
+0.884483851852 0.463930712756

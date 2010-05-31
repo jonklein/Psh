@@ -1,5 +1,14 @@
 package org.spiderland.Psh;
 
+/**
+ *  A sample PushGP file for testing the cart centering problem. This solves
+ * the cart centering problem as described in John Koza's Genetic Programming,
+ * chapter 7.1. In this problem, a cart is placed on a 1-dimensional,
+ * frictionless track. At every time, the cart has a position and velocity on
+ * the track. The problem is to stop the cart at the origin (within reasonable
+ * approximations) by applying a fixed-magnitude force to accelerate the cart
+ * in the forward or backward direction.
+ */
 public class CartCentering extends PushGP {
 	private static final long serialVersionUID = 1L;
 

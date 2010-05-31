@@ -30,7 +30,6 @@ public class IntSymbolicRegression extends PushGP {
 	}
 
 	protected void InitInterpreter(Interpreter inInterpreter) {
-
 	}
 
 	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,

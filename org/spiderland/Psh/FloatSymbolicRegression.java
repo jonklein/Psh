@@ -4,7 +4,6 @@ public class FloatSymbolicRegression extends PushGP {
 	private static final long serialVersionUID = 1L;
 
 	protected float _currentInput;
-	protected int _inputCount;
 
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
@@ -31,7 +30,6 @@ public class FloatSymbolicRegression extends PushGP {
 	}
 
 	protected void InitInterpreter(Interpreter inInterpreter) {
-		// inInterpreter.AddInstruction( "INPUT0", new Input( 0 ) );
 	}
 
 	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
@@ -44,6 +42,9 @@ public class FloatSymbolicRegression extends PushGP {
 
 		stack.push(_currentInput);
 
+		// Must be included in order to use the input stack.
+		_interpreter.inputStack().push(_currentInput);
+
 		_interpreter.Execute(((PushGPIndividual) inIndividual)._program,
 				_executionLimit);
 
@@ -52,12 +53,5 @@ public class FloatSymbolicRegression extends PushGP {
 
 		return result - ((Float) inOutput);
 	}
-
-	/*
-	 * class Input extends Instruction { Input( int inIndex ) { }
-	 * 
-	 * public void Execute( Interpreter inInterpreter ) {
-	 * inInterpreter.floatStack().push( _currentInput ); } }
-	 */
 
 }

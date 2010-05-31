@@ -37,12 +37,11 @@ Done Minor Changes
 - Announce major changes on i3ci blog.
 - In README, make Major Changes section read better.
 - Add population, generations, and other statistics to the pre-run report of PushGP.
+- Add to "Problem Classes" section in README
 
 
 To Do Still
 -----------
-- Move problem class files to a new directory??
-- Add to "Problem Classes" section in README
 - Add float.erc and integer.erc to their respective registered instructions (i.e. for registered.float)
 - Examine how ERCs are added to PshGP, and how Koza or others recommend using them.
 - During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "boolean.stackdepth" is used only to get a 0 on the int stack.
@@ -58,10 +57,10 @@ Some things TODO before a 1.0 release:
 - x trivial GP problem sets
 - x unfair mutation
 
-- documentation //trh//important
+- documentation
 - x trivial geography
 - CSV reader
 - classification problems //trh//what are these?
-- parity problem //trh//important
-- boolean instructions //trh//important
-- instruction review //trh//important
+- parity problem //trh//semi-important
+- x boolean instructions //trh//important
+- instruction review

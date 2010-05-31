@@ -1,15 +1,10 @@
 package org.spiderland.Psh;
 
-//import org.spiderland.Psh.*;
-import java.util.*;
-
 public class FloatClassification extends PushGP {
 	private static final long serialVersionUID = 1L;
 
 	float _currentInput;
-	HashSet<Integer> _categories;
 	int _inputCount;
-	int _index;
 
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
@@ -42,9 +37,6 @@ public class FloatClassification extends PushGP {
 	}
 
 	protected void InitInterpreter(Interpreter inInterpreter) {
-		for (int n = 0; n < _inputCount; n++)
-			inInterpreter.AddInstruction("INPUT" + n, new Input(n));
-
 	}
 
 	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
@@ -66,15 +58,4 @@ public class FloatClassification extends PushGP {
 		return result - ((Float) inOutput);
 	}
 
-	protected class Input extends Instruction {
-		private static final long serialVersionUID = 1L;
-
-		Input(int inIndex) {
-			_index = inIndex;
-		}
-
-		public void Execute(Interpreter inInterpreter) {
-			inInterpreter.floatStack().push(_currentInput);
-		}
-	}
 }

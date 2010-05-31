@@ -61,6 +61,7 @@ The following parameters must be defined in the configuration file, given with e
 
     interpreter-class = org.spiderland.Psh.Interpreter
     individual-class = org.spiderland.Psh.PushGPIndividual
+    inputpusher-class = org.spiderland.Psh.InputPusher
     problem-class = org.spiderland.Psh.IntSymbolicRegression
     
     max-generations = 200
@@ -96,13 +97,24 @@ PshInspector Files
 ------------------
 In order to inspect the execution of a program, PshInspector takes a push program file with the extension '.push'. After every step of the program, the stacks of the interpreter are displayed. The input file contains the following, separated by new lines:
 
-- Program: The psh program to run
+- Program: The Psh program to run
 - ExecutionLimit: Maximum execution steps
 - Input(optional): Any inputs to be pushed before execution, separated by spaces. The inputs are pushed in the order in which they are given. Note: Only int, float, and boolean inputs are accepted.
 
 Problem Classes
 ---------------
-See [Jon Klein's Instructions](http://www.spiderland.org/Psh/docs.html). More coming soon...
+PshGP uses problem classes, implemented as Java classes, to determine certain aspects of the run, such as how to compute fitness values. The choice of problem class determines how test case data is interpreted, and which stacks are used for test case input and output. In addition, certain inherited methods in both GA.java and PushGP.java may be overwritten for further customization.
+
+Psh comes with a few standard problem classes. The following problem classes are currently implemented:
+- FloatSymbolicRegression.java: Maps an input floating point value to an output floating point value. Error value is computed as the difference between the desired output value and the top value on the float stack.
+- IntSymbolicRegression.java: Maps an input integer value to an output integer value. Error value is computed as the difference between the desired output value and the top value on the integer stack.
+- CartCentering.java: Maps two input floats (position and velocity) to a boolean value that represents a forward or backward force applied to a cart. The error is the amount of time required to stop the cart at the origin. For more information, see the problem class file.
+
+In order to perform runs for other types of problems, you can implement your own custom problem classes. Please note the following:
+- You will likely want to implement the InitFromParamenters method, which can be used to set up test cases. If so, make sure to also call its parent method.
+- In PshGP, the term fitness actually refers to error values, which means that lower values are considered more fit and that 0.0 represents no error. The EvaluateTestCase method must be implemented by any problem class, and should compute an individual's fitness, with lower values being better.
+- The InitInterpreter method must be implemented by all problem classes though many times this method is simply left empty.
+- There are other optional methods that can be overwritten or extended in the GA.java and PushGP.java classes. For example, the CartCentering.java problem class implements the Success method in order to override the conditions that PushGP uses to identify a successful run.
 
 Changelog
 =========
@@ -110,6 +122,7 @@ Changelog
 Major Changes since v0.3:
 -------------------------
 - Added new integer and float instructions: abs, neg, sin, cos, tan, max, min.
+- Added new boolean instructions: and, or, xor, not.
 - Added problem class for the cart centering problem (CartCentering.java), an optimal control problem.
 
 Major Changes since v0.2:

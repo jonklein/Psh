@@ -3,7 +3,7 @@ Psh
 
 Psh is a Java implementation of the Push programming language and of PushGP. Push is a stack-based language designed for evolutionary computation, specifically genetic programming. PushGP is a genetic programming system that evolves programs in Push. More information about Push and PushGP can be found [here](http://hampshire.edu/lspector/push.html).
 
-Psh is licensed under the GNU General Public License.
+Psh is licensed under the GNU General Public License. This is v0.3 of Psh.
 
 Getting Started with Git
 ========================
@@ -104,17 +104,16 @@ Problem Classes
 ---------------
 See [Jon Klein's Instructions](http://www.spiderland.org/Psh/docs.html). More coming soon...
 
-Converting Psh Programs to Schush Programs
-------------------------------------------
-You may have noticed that Psh programs are not executable in Shcush, since Psh instructions use all capitals, and Schush instructions use all lower case. In order to convert a Psh program into a Schush program, we have provided a C++ program that converts the standard input file from a Psh program into a Schush program, which is sent to standard output. The converter is located at 'tools/converter/PshToSchush'.
+Changelog
+=========
 
-Major Changes since v0.1:
-=========================
+Major Changes since v0.3:
+-------------------------
+- Added new integer and float instructions: abs, neg, sin, cos, tan, max, min.
+- Added problem class for the cart centering problem (CartCentering.java), an optimal control problem.
 
-Psh
----
-- Added problem classes for integer symbolic regression (IntSymbolicRegression.java) and integer symbolic regression without an input instruction (IntSymbolicRegressionNoInput.java).
-- Fixed 'code' and 'exec' stack iteration functions, which were not executing correctly according to Push 3.0 standards.
+Major Changes since v0.2:
+-------------------------
 - All instructions have been converted into lower case to match Schush and other implementations.
 - An input stack was added, which holds all inputs. It has the following instructions:
     1. input.index - Pops n off of the integer stack and pushes input[n] onto corresponding stack. If integer stack is empty, acts as a no-op.
@@ -122,14 +121,12 @@ Psh
     3. input.inall - For all n in 0 to input.size, push input[n] onto the corresponding stack.
     4. input.inallrev - For all n in input.size to 9, push input[n] onto the corresponding stack.
     5. input.stackdepth - Puts size of stack on integer stack.
-
-
-PshGP
------
-- PshGP now displays the error values for the best program during the generation report.
 - In config files, you can now include all instructions for a certain type using 'registered.type' (e.g. 'registered.integer' or 'registered.stack').
 - Implemented auto-simplification, which is used during generation and final reports. Auto-simplification may also be used as a genetic operator along with mutation and crossover.
 
-PshInspector
-------------
+Major Changes since v0.1:
+-------------------------
+- Added problem classes for integer symbolic regression (IntSymbolicRegression.java) and integer symbolic regression without an input instruction (IntSymbolicRegressionNoInput.java).
+- Fixed 'code' and 'exec' stack iteration functions, which were not executing correctly according to Push 3.0 standards.
+- PshGP now displays the error values for the best program during the generation report.
 - PshInspector was created to inspect interpreter stacks of push programs as they execute. This can be used to catch errors and trace executions. To run, see Using PshInspector section above.

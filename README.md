@@ -106,11 +106,13 @@ Problem Classes
 PshGP uses problem classes, implemented as Java classes, to determine certain aspects of the run, such as how to compute fitness values. The choice of problem class determines how test case data is interpreted, and which stacks are used for test case input and output. In addition, certain inherited methods in both GA.java and PushGP.java may be overwritten for further customization.
 
 Psh comes with a few standard problem classes. The following problem classes are currently implemented:
+
 - FloatSymbolicRegression.java: Maps an input floating point value to an output floating point value. Error value is computed as the difference between the desired output value and the top value on the float stack.
 - IntSymbolicRegression.java: Maps an input integer value to an output integer value. Error value is computed as the difference between the desired output value and the top value on the integer stack.
 - CartCentering.java: Maps two input floats (position and velocity) to a boolean value that represents a forward or backward force applied to a cart. The error is the amount of time required to stop the cart at the origin. For more information, see the problem class file.
 
 In order to perform runs for other types of problems, you can implement your own custom problem classes. Please note the following:
+
 - You will likely want to implement the InitFromParamenters method, which can be used to set up test cases. If so, make sure to also call its parent method.
 - In PshGP, the term fitness actually refers to error values, which means that lower values are considered more fit and that 0.0 represents no error. The EvaluateTestCase method must be implemented by any problem class, and should compute an individual's fitness, with lower values being better.
 - The InitInterpreter method must be implemented by all problem classes though many times this method is simply left empty.

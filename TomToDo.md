@@ -19,6 +19,7 @@ Done Major Changes
     4. input.inallrev - For all n in input.size to 9, push input[n] onto the corresponding stack.
     5. input.stackdepth - Puts size of stack on integer stack.
 - Implement absolute value and negation instructions for both int and float.
+- Implement new problem class CartCentering.java, that is used for the Cart Centering problem described by Koza in Genetic Programming.
 
 
 Done Minor Changes
@@ -33,7 +34,6 @@ Done Minor Changes
 - Make sure trivial-geography is actually being used. It's parameter appears only in the function TournamentSelectionIndex, which is never being called.
 - Get working version uploaded to GitHub
 - Remove "//trh//" type comments, clean up things for release v0.2
-- Make changes to README to reflect Lee's suggestions.
 - Announce major changes on i3ci blog.
 - In README, make Major Changes section read better.
 - Add population, generations, and other statistics to the pre-run report of PushGP.
@@ -41,11 +41,9 @@ Done Minor Changes
 
 To Do Still
 -----------
-- Add float.erc and integer.erc to their respective registered instructions (i.e. for registered.float)
-- Edit README to reflect changes to converting code to Schush (i.e. now no changes necessary).
-- Add new problem classes (such as IntSymbolicRegression.java) for other problem types, such as the Parity problem. Make sure to test input.makeinputs and input.inall on problems with more than one input.
 - Move problem class files to a new directory??
 - Add to "Problem Classes" section in README
+- Add float.erc and integer.erc to their respective registered instructions (i.e. for registered.float)
 - Examine how ERCs are added to PshGP, and how Koza or others recommend using them.
 - During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "boolean.stackdepth" is used only to get a 0 on the int stack.
 

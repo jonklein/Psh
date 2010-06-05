@@ -8,26 +8,17 @@
 # 06/14/2008
 #
 # Changes by Tom Helmuth
-# 01/12/2010
+# 06/05/2010
 #
-
-### Set classes for the Push intepreter and individuals.  These
-### values can used to implement custom interpreter or individual 
-### behaviors.
-
-interpreter-class       	= org.spiderland.Psh.Interpreter
-inputpusher-class               = org.spiderland.Psh.InputPusher
-individual-class        	= org.spiderland.Psh.PushGPIndividual
-
-# push-frame-mode		= pushstacks
 
 ### Setup some standard GP parameters
 
 tournament-size         = 7
-trivial-geography-radius= 10
+#trivial-geography-radius= 10
 max-points-in-program	= 100
 mutation-mode		= fair
-fair-mutation-range     = .3
+fair-mutation-range     = .5
+
 population-size 	= 2000
 mutation-percent	= 10
 crossover-percent	= 75
@@ -37,7 +28,6 @@ max-random-code-size	= 40
 
 execution-limit		= 80
 
-simplify-flatten-percent= 20
 
 reproduction-simplifications = 25
 report-simplifications	= 100

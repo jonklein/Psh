@@ -20,6 +20,7 @@ Done Major Changes
     5. input.stackdepth - Puts size of stack on integer stack.
 - Implement absolute value and negation instructions for both int and float.
 - Implement new problem class CartCentering.java, that is used for the Cart Centering problem described by Koza in Genetic Programming.
+- Change Psh over to Apache 2.0 license.
 
 
 Done Minor Changes
@@ -43,7 +44,7 @@ Done Minor Changes
 
 To Do Still
 -----------
-- Change Psh over to Apache 2.0 license.
+- Release v1.0 of Psh, including changing the README version number.
 - Add float.erc and integer.erc to their respective registered instructions (i.e. for registered.float)
 - Examine how ERCs are added to PshGP, and how Koza or others recommend using them.
 - During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "boolean.stackdepth" is used only to get a 0 on the int stack.
@@ -62,7 +63,7 @@ Some things TODO before a 1.0 release:
 - documentation
 - x trivial geography
 - CSV reader
-- classification problems //trh//what are these?
+- classification problems //trh//what are these? - check out Koza
 - parity problem //trh//semi-important
 - x boolean instructions //trh//important
 - instruction review

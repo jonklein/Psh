@@ -1,24 +1,36 @@
-/** PshInspector pshFile
-
- PshInspector can be used to inspect the execution of a Psh program.
- After every step of the program, the stacks of the interpreter
- are displayed. The Psh program is given to PshInspector through
- the file pshFile. pshFile is an input file containing the
- following, separated by new lines:
-
- - Program: The psh program to run
- - ExecutionLimit: Maximum execution steps
- - Input(optional): Any inputs to be pushed before execution,
- separated by spaces. Note: Only int, float, and
- boolean inputs are accepted.
-
+/*
+ * Copyright 2009-2010 Jon Klein
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
-//import java.util.*;
-//import java.io.*;
 
 import org.spiderland.Psh.*;
 
+/**
+ * PshInspector pshFile
+ * 
+ * PshInspector can be used to inspect the execution of a Psh program.
+ * After every step of the program, the stacks of the interpreter
+ * are displayed. The Psh program is given to PshInspector through
+ * the file pshFile. pshFile is an input file containing the
+ * following, separated by new lines:
+ *
+ * - Program: The psh program to run
+ * - ExecutionLimit: Maximum execution steps
+ * - Input(optional): Any inputs to be pushed before execution,
+ *                    separated by spaces. Note: Only int, float, and
+ *                    boolean inputs are accepted.
+ */
 public class PshInspector {
 	public static void main(String args[]) throws Exception {		
 
@@ -35,13 +47,6 @@ public class PshInspector {
 		int executed = 0;
 		int stepsTaken = 1;
 		String stepPrint = "";
-
-		/*
-		 * //For testing with input stack instructions
-		 * _interpreter.inputStack().push(4); _interpreter.inputStack().push(5);
-		 * _interpreter.inputStack().push(17.223);
-		 * _interpreter.inputStack().push(true);
-		 */
 
 		// Print registered instructions
 		System.out.println("Registered Instructions: "

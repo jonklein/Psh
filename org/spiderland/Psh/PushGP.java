@@ -114,21 +114,40 @@ abstract public class PushGP extends GA {
 	}
 
 	protected void InitFromParameters() throws Exception {
+		// Default parameters to be used when optional parameters are not
+		// given.
+		float defaultFairMutationRange = 0.3f;
+		float defaultsimplifyFlattenPercent = 20f;
+		String defaultInterpreterClass = "org.spiderland.Psh.Interpreter";
+		String defaultInputPusherClass = "org.spiderland.Psh.InputPusher";
+		
 		_maxRandomCodeSize = (int) GetFloatParam("max-random-code-size");
 		_executionLimit = (int) GetFloatParam("execution-limit");
-		_fairMutationRange = GetFloatParam("fair-mutation-range");
 		_maxPointsInProgram = (int) GetFloatParam("max-points-in-program");
+		
 		_useFairMutation = "fair".equals(GetParam("mutation-mode", true));
+		_fairMutationRange = GetFloatParam("fair-mutation-range", true);
+		if(Float.isNaN(_fairMutationRange)){
+			_fairMutationRange = defaultFairMutationRange;
+		}
 
 		_simplificationPercent = GetFloatParam("simplification-percent");
-		_simplifyFlattenPercent = GetFloatParam("simplify-flatten-percent");
+		_simplifyFlattenPercent = GetFloatParam("simplify-flatten-percent", true);
+		if(Float.isNaN(_simplifyFlattenPercent)){
+			_simplifyFlattenPercent = defaultsimplifyFlattenPercent;
+		}
+		
 		_reproductionSimplifications = (int) GetFloatParam("reproduction-simplifications");
 		_reportSimplifications = (int) GetFloatParam("report-simplifications");
 		_finalSimplifications = (int) GetFloatParam("final-simplifications");
 
 		// Setup our custom interpreter class based on the params we're given
-
-		Class<?> iclass = Class.forName(GetParam("interpreter-class"));
+		String interpreterClass = GetParam("interpreter-class", true);
+		if(interpreterClass == null){
+			interpreterClass = defaultInterpreterClass;
+		}
+		
+		Class<?> iclass = Class.forName(interpreterClass);
 
 		Object iObject = iclass.newInstance();
 
@@ -142,7 +161,12 @@ abstract public class PushGP extends GA {
 		_interpreter.SetInstructions(new Program(_interpreter,
 				GetParam("instruction-set")));
 
-		iclass = Class.forName(GetParam("inputpusher-class"));
+		String inputpusherClass = GetParam("inputpusher-class", true);
+		if(inputpusherClass == null){
+			inputpusherClass = defaultInputPusherClass;
+		}
+		
+		iclass = Class.forName(inputpusherClass);
 
 		iObject = iclass.newInstance();
 
@@ -286,8 +310,7 @@ abstract public class PushGP extends GA {
 		int newsize = 0;
 
 		if (_useFairMutation) {
-			int range = (int) Math.max(1, _fairMutationRange * oldsize);
-
+			int range = (int) Math.max(1, _fairMutationRange * oldsize);			
 			newsize = Math.max(1, oldsize + _RNG.nextInt(2 * range) - range);
 		} else {
 			newsize = _RNG.nextInt(_maxRandomCodeSize);

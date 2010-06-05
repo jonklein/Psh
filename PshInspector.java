@@ -20,7 +20,7 @@
 import org.spiderland.Psh.*;
 
 public class PshInspector {
-	public static void main(String args[]) throws Exception {
+	public static void main(String args[]) throws Exception {		
 
 		if (args.length != 1) {
 			System.out.println("Usage: PshInspector inputfile");

@@ -59,38 +59,38 @@ PshGP runs are setup using configuration files which have the extension '.pushgp
 
 The following parameters must be defined in the configuration file, given with example values:
 
-    interpreter-class = org.spiderland.Psh.Interpreter
-    individual-class = org.spiderland.Psh.PushGPIndividual
-    inputpusher-class = org.spiderland.Psh.InputPusher
     problem-class = org.spiderland.Psh.IntSymbolicRegression
     
     max-generations = 200
     population-size = 1000
     execution-limit = 150
     max-points-in-program = 100
+    max-random-code-size = 40
     
     tournament-size = 7
-    trivial-geography-radius = 10
-    
     mutation-percent = 30
     crossover-percent = 55
     simplification-percent = 5
-    simplify-flatten-percent= 20
     
     reproduction-simplifications = 25
     report-simplifications = 100
     final-simplifications = 1000
     
-    fair-mutation-range = .3
-    max-random-code-size = 40
-    
     test-cases = ((1 1) (2 2) (3 6) (4 24) (5 120) (6 720))
-    instruction-set = (registered.exec registered.boolean integer.% integer.* integer.+ integer.- integer./ integer.< integer.= integer.> integer.dup integer.flush integer.pop integer.rot integer.stackdepth integer.swap)
+    instruction-set = (registered.exec registered.boolean integer.% integer.* integer.+ integer.- integer./ integer.dup)
 
 The following parameters are optional:
 
-    output-file = out.txt
+    trivial-geography-radius = 10
+    simplify-flatten-percent = 20
     mutation-mode = fair
+    fair-mutation-range = .3
+    
+    interpreter-class = org.spiderland.Psh.Interpreter
+    individual-class = org.spiderland.Psh.PushGPIndividual
+    inputpusher-class = org.spiderland.Psh.InputPusher
+    
+    output-file = out.txt
     push-frame-mode = pushstacks
 
 PshInspector Files
@@ -126,6 +126,7 @@ Major Changes since v0.3:
 - Added new integer and float instructions: abs, neg, sin, cos, tan, max, min.
 - Added new boolean instructions: and, or, xor, not.
 - Added problem class for the cart centering problem (CartCentering.java), an optimal control problem.
+- Made many parameters of .pushgp files optional. This should make creating .pushgp files for new users much simpler, as many parameters are rarely (if ever) changed. Optional parameters are listed in this readme.
 
 Major Changes since v0.2:
 -------------------------

@@ -179,6 +179,9 @@ public abstract class GA implements Serializable {
 			throw new Exception("Could not locate required parameter \""
 					+ inName + "\"");
 
+		if(value == null)
+			return Float.NaN;
+		
 		return Float.parseFloat(value);
 	}
 
@@ -190,13 +193,30 @@ public abstract class GA implements Serializable {
 	 */
 
 	protected void InitFromParameters() throws Exception {
-		_individualClass = Class.forName(GetParam("individual-class"));
+		// Default parameters to be used when optional parameters are not
+		// given.
+		int defaultTrivialGeographyRadius = 0;
+		String defaultIndividualClass = "org.spiderland.Psh.PushGPIndividual";
+		
+		String individualClass = GetParam("individual-class", true);
+		if(individualClass == null){
+			individualClass = defaultIndividualClass;
+		}
+		_individualClass = Class.forName(individualClass);
 
 		_mutationPercent = GetFloatParam("mutation-percent");
 		_crossoverPercent = GetFloatParam("crossover-percent");
 		_maxGenerations = (int) GetFloatParam("max-generations");
 		_tournamentSize = (int) GetFloatParam("tournament-size");
-		_trivialGeographyRadius = (int) GetFloatParam("trivial-geography-radius");
+		
+		// trivial-geography-radius is an optional parameter
+		if(Float.isNaN(GetFloatParam("trivial-geography-radius", true))){
+			_trivialGeographyRadius = defaultTrivialGeographyRadius;
+		}
+		else{
+			_trivialGeographyRadius = (int) GetFloatParam("trivial-geography-radius", true);
+		}
+		
 		_checkpointPrefix = GetParam("checkpoint-prefix", true);
 		_checkpoint = new Checkpoint(this);
 

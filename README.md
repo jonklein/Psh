@@ -141,6 +141,7 @@ Major Changes since v0.3:
 - Added new boolean instructions: and, or, xor, not.
 - Added problem class for the cart centering problem (CartCentering.java), an optimal control problem.
 - Made many parameters of .pushgp files optional. This should make creating .pushgp files for new users much simpler, as many parameters are rarely (if ever) changed. Optional parameters are listed in this readme.
+- Change Psh over to Apache 2.0 license.
 
 Major Changes since v0.2:
 -------------------------

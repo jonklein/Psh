@@ -75,13 +75,13 @@ public class Interpreter implements Serializable {
 	}
 
 	public Interpreter() {
+		_minRandomInt = -10;
 		_maxRandomInt = 10;
-		_minRandomInt = 0;
 		_randomIntResolution = 1;
 
+		_minRandomFloat = -10.0f;
 		_maxRandomFloat = 10.0f;
-		_minRandomFloat = 0.0f;
-		_randomFloatResolution = .5f;
+		_randomFloatResolution = .01f;
 		_useFrames = false;
 
 		PushStacks();
@@ -231,6 +231,14 @@ public class Interpreter implements Serializable {
 						_randomGenerators.add(t);
 						AtomGenerator f = _generators.get("false");
 						_randomGenerators.add(f);
+					}
+					if (registeredType.equals("integer")) {
+						AtomGenerator g = _generators.get("integer.erc");
+						_randomGenerators.add(g);
+					}
+					if (registeredType.equals("float")) {
+						AtomGenerator g = _generators.get("float.erc");
+						_randomGenerators.add(g);
 					}
 
 				}

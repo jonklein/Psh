@@ -40,13 +40,14 @@ Done Minor Changes
 - Add population, generations, and other statistics to the pre-run report of PushGP.
 - Add to "Problem Classes" section in README
 - Made many parameters of .pushgp files optional. This should make creating .pushgp files for new users much simpler, as many parameters are rarely (if ever) changed.
+- Add float.erc and integer.erc to their respective registered instructions (i.e. for registered.float)
 
 
 To Do Still
 -----------
 - Release v1.0 of Psh, including changing the README version number.
-- Add float.erc and integer.erc to their respective registered instructions (i.e. for registered.float)
-- Examine how ERCs are added to PshGP, and how Koza or others recommend using them.
+- Examine how ERCs are added to PshGP, and how people recommend using them.
+  - Add ERC parameters as optional parameters to .pushgp files. (min, max, resolution)
 - During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "boolean.stackdepth" is used only to get a 0 on the int stack.
 
 

@@ -48,7 +48,9 @@ To Do Still
 - Release v1.0 of Psh, including changing the README version number.
 - Keep track of the number of fitness evaluations during a run, and display it during generation and final reports. Possibly make this optional, as a parameter, but likely make it non-optional.
 - Examine how ERCs are added to PshGP, and how people recommend using them.
-  - MAybe add ERC parameters as optional parameters to .pushgp files. (min, max, resolution)
+  - Maybe add ERC parameters as optional parameters to .pushgp files. (min, max, resolution)
+- Create more difficult float regression example that uses many test cases, and to do so creates it's test cases using TestCaseGenerator.java.
+- Add co-evolution fitness predictors. This will be a big project (make a git branch).
 - During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "boolean.stackdepth" is used only to get a 0 on the int stack.
 
 

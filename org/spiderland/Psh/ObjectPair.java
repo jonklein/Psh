@@ -34,7 +34,7 @@ public class ObjectPair implements Serializable {
 	public Object _second;
 	
 	public String toString(){
-		return _first.toString() + _second.toString();
+		return "<" + _first.toString() + ", " + _second.toString() + ">";
 	}
 	
 }

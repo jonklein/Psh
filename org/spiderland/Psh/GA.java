@@ -417,6 +417,7 @@ public abstract class GA implements Serializable {
 				+ _populations[_currentPopulation][_bestIndividual] + "\n\n";
 
 		report += ";; Best Program Fitness: " + _bestFitness + "\n";
+		report += ";; Best Program Mean Fitness: " + (_bestFitness / _testCases.size()) + "\n";
 		report += ";; Best Program Errors: (";
 		for (int i = 0; i < _testCases.size(); i++) {
 			if (i != 0)
@@ -453,6 +454,7 @@ public abstract class GA implements Serializable {
 		report += ">> Best Program: "
 				+ _populations[_currentPopulation][_bestIndividual] + "\n";
 		report += ">> Fitness: " + _bestFitness + "\n";
+		report += ">> Mean Fitness (over test cases): " + (_bestFitness / _testCases.size()) + "\n";
 		report += ">> Errors: (";
 		for (int i = 0; i < _testCases.size(); i++) {
 			if (i != 0)

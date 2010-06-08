@@ -130,7 +130,7 @@ In order to perform runs for other types of problems, you can implement your own
 - You will likely want to implement the InitFromParamenters method, which can be used to set up test cases. If so, make sure to also call its parent method.
 - In PshGP, the term fitness actually refers to error values, which means that lower values are considered more fit and that 0.0 represents no error. The EvaluateTestCase method must be implemented by any problem class, and should compute an individual's fitness, with lower values being better.
 - The InitInterpreter method must be implemented by all problem classes though many times this method is simply left empty.
-- There are other optional methods that can be overwritten or extended in the GA.java and PushGP.java classes. For example, the CartCentering.java problem class implements the Success method in order to override the conditions that PushGP uses to identify a successful run.
+- There are other optional methods that can be overwritten or extended in the GA.java and PushGP.java classes. For example, the CartCentering.java problem class implements the Success method in order to override the conditions that GA uses to identify a successful run.
 
 Changelog
 =========

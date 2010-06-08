@@ -73,5 +73,9 @@ public class FloatSymbolicRegression extends PushGP {
 
 		return result - ((Float) inOutput);
 	}
+	
+	protected boolean Success() {
+		return _bestFitness <= 0.1 * _testCases.size();
+	}
 
 }

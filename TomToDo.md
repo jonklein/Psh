@@ -41,16 +41,18 @@ Done Minor Changes
 - Add to "Problem Classes" section in README
 - Made many parameters of .pushgp files optional. This should make creating .pushgp files for new users much simpler, as many parameters are rarely (if ever) changed.
 - Add float.erc and integer.erc to their respective registered instructions (i.e. for registered.float)
+- The number of fitness evaluations is now displayed during reports.
 
 
 To Do Still
 -----------
 - Release v1.0 of Psh, including changing the README version number.
-- Keep track of the number of fitness evaluations during a run, and display it during generation and final reports. Possibly make this optional, as a parameter, but likely make it non-optional.
 - Examine how ERCs are added to PshGP, and how people recommend using them.
   - Maybe add ERC parameters as optional parameters to .pushgp files. (min, max, resolution)
 - Create more difficult float regression example that uses many test cases, and to do so creates it's test cases using TestCaseGenerator.java.
+- Make way to conduct multiple runs and get statistics about those runs, to compare things such as population, generations, or use of ERCs.
 - Add co-evolution fitness predictors. This will be a big project (make a git branch).
+  - Many GA an PushGP methods are can be overwritten in order to implement co-evolution.
 - During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "boolean.stackdepth" is used only to get a 0 on the int stack.
 
 

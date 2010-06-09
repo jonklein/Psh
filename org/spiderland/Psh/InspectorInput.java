@@ -91,7 +91,6 @@ public class InspectorInput {
 
 		// Load the program
 		_program = new Program(_interpreter, programString);
-		_interpreter.codeStack().push(_program);
 		_interpreter.LoadProgram(_program); // Initializes program
 	}
 

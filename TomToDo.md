@@ -43,6 +43,7 @@ Done Minor Changes
 - Add float.erc and integer.erc to their respective registered instructions (i.e. for registered.float)
 - The number of fitness evaluations is now displayed during reports.
 - Release v1.0 of Psh, including changing the README version number.
+- The parameters that affect Ephemeral Random Constant creation, such as the minimum random integer, are now available as optional .pushgp parameters. 
 
 
 To Do Still

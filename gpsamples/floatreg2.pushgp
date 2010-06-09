@@ -49,3 +49,7 @@ trivial-geography-radius = 20
 simplify-flatten-percent = 20
 mutation-mode = fair
 fair-mutation-range = .5
+
+min-random-float = -2.0
+max-random-float = 2.0
+random-float-resolution = 0.01

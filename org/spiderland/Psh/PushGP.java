@@ -97,38 +97,6 @@ abstract public class PushGP extends GA {
 		return 0;
 	}
 
-	protected String Report() {
-		String report = super.Report();
-		PushGPIndividual simplified = Autosimplify(
-				(PushGPIndividual) _populations[_currentPopulation][_bestIndividual],
-				_reportSimplifications);
-
-		report += ";; Mean Program Size: " + _averageSize + "\n\n";
-
-		report += ";; Partial Simplification (may beat best):\n  ";
-		report += simplified._program + "\n";
-		report += ";; Partial Simplification Size: ";
-		report += simplified._program.programsize() + "\n\n";
-
-		return report;
-	}
-
-	protected String FinalReport() {
-		String report = super.FinalReport() + "\n";
-
-		PushGPIndividual simplified = Autosimplify(
-				(PushGPIndividual) _populations[_currentPopulation][_bestIndividual],
-				_finalSimplifications);
-
-		report += "<<<<<<<<<< After Simplification >>>>>>>>>>\n";
-		report += ">> Best Program: ";
-		report += simplified._program + "\n";
-		report += ">> Size: ";
-		report += simplified._program.programsize() + "\n\n";
-
-		return report;
-	}
-
 	protected void InitFromParameters() throws Exception {
 		// Default parameters to be used when optional parameters are not
 		// given.
@@ -157,6 +125,59 @@ abstract public class PushGP extends GA {
 		_reportSimplifications = (int) GetFloatParam("report-simplifications");
 		_finalSimplifications = (int) GetFloatParam("final-simplifications");
 
+		// Setup ERC parameters
+		int minRandomInt;
+		int defaultMinRandomInt = -10;
+		int maxRandomInt;
+		int defaultMaxRandomInt = 10;
+		int randomIntResolution;
+		int defaultRandomIntResolution = 1;
+		
+		if(Float.isNaN(GetFloatParam("min-random-integer", true))){
+			minRandomInt = defaultMinRandomInt;
+		}
+		else {
+			minRandomInt = (int) GetFloatParam("min-random-integer", true);
+		}
+		if(Float.isNaN(GetFloatParam("max-random-integer", true))){
+			maxRandomInt = defaultMaxRandomInt;
+		}
+		else {
+			maxRandomInt = (int) GetFloatParam("max-random-integer", true);
+		}
+		if(Float.isNaN(GetFloatParam("random-integer-resolution", true))){
+			randomIntResolution = defaultRandomIntResolution;
+		}
+		else {
+			randomIntResolution = (int) GetFloatParam("random-integer-resolution", true);
+		}
+		
+		float minRandomFloat;
+		float defaultMinRandomFloat = -10.0f;
+		float maxRandomFloat;
+		float defaultMaxRandomFloat = 10.0f;
+		float randomFloatResolution;
+		float defaultRandomFloatResolution = 0.01f;
+		
+		if(Float.isNaN(GetFloatParam("min-random-float", true))){
+			minRandomFloat = defaultMinRandomFloat;
+		}
+		else {
+			minRandomFloat = GetFloatParam("min-random-float", true);
+		}
+		if(Float.isNaN(GetFloatParam("max-random-float", true))){
+			maxRandomFloat = defaultMaxRandomFloat;
+		}
+		else {
+			maxRandomFloat = GetFloatParam("max-random-float", true);
+		}
+		if(Float.isNaN(GetFloatParam("random-float-resolution", true))){
+			randomFloatResolution = defaultRandomFloatResolution;
+		}
+		else {
+			randomFloatResolution = GetFloatParam("random-float-resolution", true);
+		}
+		
 		// Setup our custom interpreter class based on the params we're given
 		String interpreterClass = GetParam("interpreter-class", true);
 		if(interpreterClass == null){
@@ -176,6 +197,9 @@ abstract public class PushGP extends GA {
 		_interpreter = (Interpreter) iObject;
 		_interpreter.SetInstructions(new Program(_interpreter,
 				GetParam("instruction-set")));
+		_interpreter.SetRandomParameters(minRandomInt, maxRandomInt,
+				randomIntResolution, minRandomFloat, maxRandomFloat,
+				randomFloatResolution);
 
 		String inputpusherClass = GetParam("inputpusher-class", true);
 		if(inputpusherClass == null){
@@ -216,6 +240,38 @@ abstract public class PushGP extends GA {
 	abstract protected void InitInterpreter(Interpreter inInterpreter)
 			throws Exception;
 
+	protected String Report() {
+		String report = super.Report();
+		PushGPIndividual simplified = Autosimplify(
+				(PushGPIndividual) _populations[_currentPopulation][_bestIndividual],
+				_reportSimplifications);
+
+		report += ";; Mean Program Size: " + _averageSize + "\n\n";
+
+		report += ";; Partial Simplification (may beat best):\n  ";
+		report += simplified._program + "\n";
+		report += ";; Partial Simplification Size: ";
+		report += simplified._program.programsize() + "\n\n";
+
+		return report;
+	}
+
+	protected String FinalReport() {
+		String report = super.FinalReport() + "\n";
+
+		PushGPIndividual simplified = Autosimplify(
+				(PushGPIndividual) _populations[_currentPopulation][_bestIndividual],
+				_finalSimplifications);
+
+		report += "<<<<<<<<<< After Simplification >>>>>>>>>>\n";
+		report += ">> Best Program: ";
+		report += simplified._program + "\n";
+		report += ">> Size: ";
+		report += simplified._program.programsize() + "\n\n";
+
+		return report;
+	}
+	
 	protected PushGPIndividual Autosimplify(PushGPIndividual inIndividual,
 			int steps) {
 

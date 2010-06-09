@@ -48,8 +48,6 @@ Done Minor Changes
 
 To Do Still
 -----------
-- Examine how ERCs are added to PshGP, and how people recommend using them.
-  - Maybe add ERC parameters as optional parameters to .pushgp files. (min, max, resolution)
 - Create more difficult float regression example that uses many test cases, and to do so creates it's test cases using TestCaseGenerator.java.
 - Make way to conduct multiple runs and get statistics about those runs, to compare things such as population, generations, or use of ERCs.
 - Add co-evolution fitness predictors. This will be a big project (make a git branch).

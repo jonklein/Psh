@@ -42,11 +42,11 @@ Done Minor Changes
 - Made many parameters of .pushgp files optional. This should make creating .pushgp files for new users much simpler, as many parameters are rarely (if ever) changed.
 - Add float.erc and integer.erc to their respective registered instructions (i.e. for registered.float)
 - The number of fitness evaluations is now displayed during reports.
+- Release v1.0 of Psh, including changing the README version number.
 
 
 To Do Still
 -----------
-- Release v1.0 of Psh, including changing the README version number.
 - Examine how ERCs are added to PshGP, and how people recommend using them.
   - Maybe add ERC parameters as optional parameters to .pushgp files. (min, max, resolution)
 - Create more difficult float regression example that uses many test cases, and to do so creates it's test cases using TestCaseGenerator.java.

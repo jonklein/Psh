@@ -65,6 +65,8 @@ public class Interpreter implements Serializable {
 	protected Random _RNG = new Random();
 
 	protected InputPusher _inputPusher = new InputPusher();
+	
+	private static long _evaluationExecutions = 0;
 
 	public InputPusher getInputPusher() {
 		return _inputPusher;
@@ -302,19 +304,20 @@ public class Interpreter implements Serializable {
 	 */
 
 	public int Execute(Program inProgram, int inMaxSteps) {
-		_codeStack.push(inProgram);
-		LoadProgram(inProgram); // Initiallizes program
+		_evaluationExecutions++;
+		LoadProgram(inProgram); // Initializes program
 		return Step(inMaxSteps);
 	}
 
 	/**
-	 * Loads a Push program into the interpreter's exec stack.
+	 * Loads a Push program into the interpreter's exec and code stacks.
 	 * 
 	 * @param inProgram
 	 *            The program to load.
 	 */
 
 	public void LoadProgram(Program inProgram) {
+		_codeStack.push(inProgram);
 		_execStack.push(inProgram);
 	}
 
@@ -580,6 +583,15 @@ public class Interpreter implements Serializable {
 		return _instructions.get(instr);
 	}
 
+	/**
+	 * Returns the number of evaluation executions so far this run.
+	 * 
+	 * @return The number of evaluation executions during this run.
+	 */
+	public static long GetEvaluationExecutions(){
+		return _evaluationExecutions;
+	}
+	
 	/**
 	 * Generates a single random Push atom (instruction name, integer, float,
 	 * etc) for use in random code generation algorithms.

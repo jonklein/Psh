@@ -88,8 +88,19 @@ public class CartCentering extends PushGP {
 			iStack.push(position);
 			iStack.push(velocity);
 			
+			/*
 			_interpreter.Execute(((PushGPIndividual) inIndividual)._program,
 					_executionLimit);
+			*/
+			
+			try {
+				_interpreter.Execute(new Program("(input.stackdepth input.index float.abs float.* float.neg float.<)"),
+						_executionLimit);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
 			
 			// If there is no boolean on the stack, the program has failed to
 			// return a reasonable output. So, return a penalty fitness of

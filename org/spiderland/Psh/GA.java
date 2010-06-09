@@ -417,7 +417,8 @@ public abstract class GA implements Serializable {
 				+ _populations[_currentPopulation][_bestIndividual] + "\n\n";
 
 		report += ";; Best Program Fitness: " + _bestFitness + "\n";
-		report += ";; Best Program Mean Fitness: " + (_bestFitness / _testCases.size()) + "\n";
+		report += ";; Best Program Mean Fitness: "
+				+ (_bestFitness / _testCases.size()) + "\n";
 		report += ";; Best Program Errors: (";
 		for (int i = 0; i < _testCases.size(); i++) {
 			if (i != 0)
@@ -428,6 +429,8 @@ public abstract class GA implements Serializable {
 		report += ")\n";
 		report += ";; Best Program Size: " + _bestSize + "\n\n";
 
+		report += ";; Number of Evaluations Thus Far: "
+			+ Interpreter.GetEvaluationExecutions() + "\n";
 		String mem = String
 				.valueOf(Runtime.getRuntime().totalMemory() / 10000000.0f);
 		report += ";; Memory usage: " + mem + "\n";
@@ -450,11 +453,19 @@ public abstract class GA implements Serializable {
 		}
 		report += " at Generation " + (_generationCount - 1) + "\n";
 		report += "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n";
+		
+		// Note: The number of evaluations here will likely be higher than that
+		// given during the last generational report, since evaluations made
+		// during simplification count towards the total number of
+		// simplifications.
+		report += ">> Number of Evaluations: "
+			+ Interpreter.GetEvaluationExecutions() + "\n";
 
 		report += ">> Best Program: "
 				+ _populations[_currentPopulation][_bestIndividual] + "\n";
 		report += ">> Fitness: " + _bestFitness + "\n";
-		report += ">> Mean Fitness (over test cases): " + (_bestFitness / _testCases.size()) + "\n";
+		report += ">> Mean Fitness of Best Program Over Test Cases: "
+				+ (_bestFitness / _testCases.size()) + "\n";
 		report += ">> Errors: (";
 		for (int i = 0; i < _testCases.size(); i++) {
 			if (i != 0)

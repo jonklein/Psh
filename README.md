@@ -17,7 +17,7 @@ Psh
 
 Psh is a Java implementation of the Push programming language and of PushGP. Push is a stack-based language designed for evolutionary computation, specifically genetic programming. PushGP is a genetic programming system that evolves programs in Push. More information about Push and PushGP can be found [here](http://hampshire.edu/lspector/push.html).
 
-This is v0.3 of Psh.
+This is v1.0 of Psh.
 
 Getting Started with Git
 ========================

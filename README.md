@@ -93,12 +93,19 @@ The following parameters must be defined in the configuration file, given with e
     test-cases = ((1 1) (2 2) (3 6) (4 24) (5 120) (6 720))
     instruction-set = (registered.exec registered.boolean integer.% integer.* integer.+ integer.- integer./ integer.dup)
 
-The following parameters are optional:
+The following parameters are optional. If not specified, the default values below will be used for these parameters, except for the parameters `mutation-mode`, `output-file`, and `push-frame-mode`, which significantly change the run when specified.
 
     trivial-geography-radius = 10
     simplify-flatten-percent = 20
     mutation-mode = fair
     fair-mutation-range = .3
+    
+    min-random-integer = -10
+    max-random-integer = 10
+    random-integer-resolution = 1
+    min-random-float = -10.0
+    max-random-float = 10.0
+    random-float-resolution = 0.01
     
     interpreter-class = org.spiderland.Psh.Interpreter
     individual-class = org.spiderland.Psh.PushGPIndividual
@@ -134,6 +141,10 @@ In order to perform runs for other types of problems, you can implement your own
 
 Changelog
 =========
+
+Major Changes since v1.0:
+-------------------------
+- The parameters that affect Ephemeral Random Constant creation, such as the minimum random integer, are now available as optional configuration parameters. See Configuration Files above for more details.
 
 Major Changes since v0.3:
 -------------------------

@@ -68,24 +68,9 @@ public class Interpreter implements Serializable {
 	
 	private static long _evaluationExecutions = 0;
 
-	public InputPusher getInputPusher() {
-		return _inputPusher;
-	}
-
-	public void setInputPusher(InputPusher _inputPusher) {
-		this._inputPusher = _inputPusher;
-	}
-
 	public Interpreter() {
-		_minRandomInt = -10;
-		_maxRandomInt = 10;
-		_randomIntResolution = 1;
-
-		_minRandomFloat = -10.0f;
-		_maxRandomFloat = 10.0f;
-		_randomFloatResolution = .01f;
+		
 		_useFrames = false;
-
 		PushStacks();
 
 		DefineInstruction("integer.+", new IntegerAdd());
@@ -283,6 +268,29 @@ public class Interpreter implements Serializable {
 		DefineInstruction(inTypeName + ".flush", new Flush(inStack));
 		DefineInstruction(inTypeName + ".dup", new Dup(inStack));
 		DefineInstruction(inTypeName + ".stackdepth", new Depth(inStack));
+	}
+	
+	/**
+	 * Sets the parameters for the ERCs.
+	 * 
+	 * @param minRandomInt
+	 * @param maxRandomInt
+	 * @param randomIntResolution
+	 * @param minRandomFloat
+	 * @param maxRandomFloat
+	 * @param randomFloatResolution
+	 */
+	public void SetRandomParameters(int minRandomInt, int maxRandomInt,
+			int randomIntResolution, float minRandomFloat,
+			float maxRandomFloat, float randomFloatResolution) {
+		
+		_minRandomInt = minRandomInt;
+		_maxRandomInt = maxRandomInt;
+		_randomIntResolution = randomIntResolution;
+
+		_minRandomFloat = minRandomFloat;
+		_maxRandomFloat = maxRandomFloat;
+		_randomFloatResolution = randomFloatResolution;
 	}
 
 	/**
@@ -592,6 +600,14 @@ public class Interpreter implements Serializable {
 		return _evaluationExecutions;
 	}
 	
+	public InputPusher getInputPusher() {
+		return _inputPusher;
+	}
+
+	public void setInputPusher(InputPusher _inputPusher) {
+		this._inputPusher = _inputPusher;
+	}
+	
 	/**
 	 * Generates a single random Push atom (instruction name, integer, float,
 	 * etc) for use in random code generation algorithms.
@@ -722,4 +738,5 @@ public class Interpreter implements Serializable {
 			return r + _minRandomInt;
 		}
 	}
+
 }

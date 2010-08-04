@@ -33,6 +33,7 @@ public class CoevolvedFloatSymbolicRegression extends PushGP {
 	protected float _currentInput;
 	
 	protected long _effort;
+	protected float _predictorEffortPercent;
 	protected GA _predictorGA;
 
 	protected void InitFromParameters() throws Exception {
@@ -61,7 +62,14 @@ public class CoevolvedFloatSymbolicRegression extends PushGP {
 		}
 		
 		//Create and initialize predictors
+		_predictorEffortPercent = GetFloatParam("PREDICTOR-effort-percent", true);
 		_predictorGA = GA.GAWithParameters(GetPredictorParameters(_parameters));
+		
+		
+		
+		
+		_predictorGA.Run();
+		//System.exit(0);
 		
 		
 	}
@@ -129,11 +137,30 @@ public class CoevolvedFloatSymbolicRegression extends PushGP {
 	}
 
 	private HashMap<String, String> GetPredictorParameters(
-			HashMap<String, String> parameters) {
+			HashMap<String, String> parameters) throws Exception {
 		
 		HashMap<String, String> predictorParameters = new HashMap<String, String>();
 		
-		predictorParameters.put("alphabet", "soup");/////////////obviously change later
+		predictorParameters.put("problem-class", GetParam("PREDICTOR-problem-class"));
+		predictorParameters.put("population-size", GetParam("PREDICTOR-population-size"));
+		predictorParameters.put("mutation-percent", GetParam("PREDICTOR-mutation-percent"));
+		predictorParameters.put("crossover-percent", GetParam("PREDICTOR-crossover-percent"));
+		predictorParameters.put("tournament-size", GetParam("PREDICTOR-tournament-size"));
+		predictorParameters.put("trivial-geography-radius", GetParam("PREDICTOR-trivial-geography-radius"));
+		
+		
+		///? remove below
+		predictorParameters.put("problem-class", "org.spiderland.Psh.IntSymbolicRegression");
+		predictorParameters.put("max-random-code-size","35");
+		predictorParameters.put("execution-limit","150");
+		predictorParameters.put("max-points-in-program","50");
+		predictorParameters.put("simplification-percent","5");
+		predictorParameters.put("reproduction-simplifications","20");
+		predictorParameters.put("report-simplifications","100");
+		predictorParameters.put("final-simplifications","1000");
+		predictorParameters.put("max-generations","10000");
+		predictorParameters.put("instruction-set","(registered.integer registered.input)");
+		predictorParameters.put("test-cases","((1 1) (2 3) (3 5) (4 7) (5 9) (6 11) (7 13) (8 15) (9 17) (10 19))");
 		
 		return predictorParameters;
 	}

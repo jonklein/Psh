@@ -23,7 +23,7 @@
 ### Setup solution GP parameters
 
 population-size = 200
-max-generations = 3000
+max-generations = 1000
 execution-limit = 150
 
 mutation-percent = 15
@@ -52,6 +52,7 @@ instruction-set = (registered.float input.makeinputs1)
 
 ### Setup predictor GP parameters
 
+PREDICTOR-problem-class = org.spiderland.Psh.RankPredictor
 PREDICTOR-population-size = 10
 PREDICTOR-effort-percent = 5
 

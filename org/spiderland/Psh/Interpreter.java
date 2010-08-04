@@ -52,8 +52,9 @@ public class Interpreter implements Serializable {
 
 	protected boolean _useFrames;
 
-	protected int _effort;
-
+	protected int _totalStepsTaken;
+	protected long _evaluationExecutions = 0;
+	
 	protected int _maxRandomInt;
 	protected int _minRandomInt;
 	protected int _randomIntResolution;
@@ -65,8 +66,6 @@ public class Interpreter implements Serializable {
 	protected Random _RNG = new Random();
 
 	protected InputPusher _inputPusher = new InputPusher();
-	
-	private static long _evaluationExecutions = 0;
 
 	public Interpreter() {
 		
@@ -348,7 +347,7 @@ public class Interpreter implements Serializable {
 			executed++;
 		}
 
-		_effort += executed;
+		_totalStepsTaken += executed;
 
 		return executed;
 	}
@@ -596,7 +595,7 @@ public class Interpreter implements Serializable {
 	 * 
 	 * @return The number of evaluation executions during this run.
 	 */
-	public static long GetEvaluationExecutions(){
+	public long GetEvaluationExecutions(){
 		return _evaluationExecutions;
 	}
 	

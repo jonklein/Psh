@@ -34,7 +34,6 @@ public abstract class GA implements Serializable {
 
 	protected float _mutationPercent;
 	protected float _crossoverPercent;
-	protected float _migrationPercent; // not implemented
 
 	protected float _bestFitness;
 	protected float _meanFitness;
@@ -236,7 +235,7 @@ public abstract class GA implements Serializable {
 		_checkpointPrefix = GetParam("checkpoint-prefix", true);
 		_checkpoint = new Checkpoint(this);
 
-		Resize((int) GetFloatParam("population-size"));
+		ResizeAndInitialize((int) GetFloatParam("population-size"));
 
 		_outputfile = GetParam("output-file", true);
 
@@ -251,7 +250,7 @@ public abstract class GA implements Serializable {
 	 *            the size of the new GA population.
 	 */
 
-	protected void Resize(int inSize) throws Exception {
+	protected void ResizeAndInitialize(int inSize) throws Exception {
 		_populations = new GAIndividual[2][inSize];
 		_currentPopulation = 0;
 		_generationCount = 0;
@@ -570,9 +569,17 @@ public abstract class GA implements Serializable {
 		return total;
 	}
 
+	/**
+	 * Called at the beginning of each generation. This method may be overridden
+	 * by subclasses to customize GA behavior.
+	 */
 	protected void BeginGeneration() {
 	};
 
+	/**
+	 * Called at the end of each generation. This method may be overridden by
+	 * subclasses to customize GA behavior.
+	 */
 	protected void EndGeneration() {
 	};
 

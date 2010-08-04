@@ -89,7 +89,6 @@ abstract public class PushGP extends GA {
 		t = System.currentTimeMillis() - t;
 
 		inIndividual.SetFitness(AbsoluteSumOfErrors(errors));
-
 		inIndividual.SetErrors(errors);
 
 		//System.out.println("Evaluated individual in " + t + " msec: fitness "

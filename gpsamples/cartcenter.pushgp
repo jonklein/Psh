@@ -36,12 +36,8 @@ individual-class = org.spiderland.Psh.PushGPIndividual
 
 ### Setup GP parameters
 
-
-population-size = 10
-max-generations = 2
-
-#population-size = 700
-#max-generations = 30
+population-size = 700
+max-generations = 30
 execution-limit = 150
 
 mutation-percent = 20
@@ -52,9 +48,6 @@ tournament-size = 7
 trivial-geography-radius = 10
 max-points-in-program = 100
 mutation-mode = fair
-#fair-mutation-range = 1.0
-
-
 
 max-random-code-size = 40
 simplify-flatten-percent = 20

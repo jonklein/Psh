@@ -21,7 +21,7 @@
 # 01/17/2010
 #
 
-### Set classes for the Push intepreter and individuals.  These
+### Set classes for the Push interpreter and individuals.  These
 ### values can used to implement custom interpreter or individual 
 ### behaviors.
 

@@ -21,7 +21,6 @@ import java.util.*;
 /**
  * The Push Genetic Programming core class.
  */
-
 abstract public class PushGP extends GA {
 	private static final long serialVersionUID = 1L;
 	
@@ -30,72 +29,17 @@ abstract public class PushGP extends GA {
 	protected int _maxPointsInProgram;
 	protected float _fairMutationRange;
 	protected int _executionLimit;
-	protected float _averageSize;
 	protected boolean _useFairMutation;
 
+	protected float _averageSize;
+	protected int _bestSize;
+	
 	protected float _simplificationPercent;
 	protected float _simplifyFlattenPercent;
 	protected int _reproductionSimplifications;
 	protected int _reportSimplifications;
 	protected int _finalSimplifications;
-
-	protected void BeginGeneration() {
-		_averageSize = 0;
-	}
-
-	protected void EndGeneration() {
-		_averageSize /= _populations[0].length;
-	}
-
-	public void RunTestProgram(Program p, int inTestCaseIndex) {
-		PushGPIndividual i = new PushGPIndividual(p);
-		GATestCase test = _testCases.get(inTestCaseIndex);
-
-		System.out.println("Executing program: " + p);
-
-		EvaluateTestCase(i, test._input, test._output);
-
-		System.out.println(_interpreter);
-	}
-
-	protected void InitIndividual(GAIndividual inIndividual) {
-		PushGPIndividual i = (PushGPIndividual) inIndividual;
-
-		int randomCodeSize = _RNG.nextInt(_maxRandomCodeSize) + 2;
-		Program p = _interpreter.RandomCode(randomCodeSize);
-
-		i.SetProgram(p);
-	}
-
-	protected int EvaluateIndividual(GAIndividual inIndividual) {
-		return EvaluateIndividual(inIndividual, false);
-	}
-
-	protected int EvaluateIndividual(GAIndividual inIndividual,
-			boolean duringSimplify) {
-		ArrayList<Float> errors = new ArrayList<Float>();
-
-		if (!duringSimplify)
-			_averageSize += ((PushGPIndividual) inIndividual)._program
-					.programsize();
-
-		long t = System.currentTimeMillis();
-
-		for (int n = 0; n < _testCases.size(); n++) {
-			GATestCase test = _testCases.get(n);
-			float e = EvaluateTestCase(inIndividual, test._input, test._output);
-			errors.add(e);
-		}
-		t = System.currentTimeMillis() - t;
-
-		inIndividual.SetFitness(AbsoluteSumOfErrors(errors));
-		inIndividual.SetErrors(errors);
-
-		//System.out.println("Evaluated individual in " + t + " msec: fitness "
-		//		+ inIndividual.GetFitness());
-		return 0;
-	}
-
+	
 	protected void InitFromParameters() throws Exception {
 		// Default parameters to be used when optional parameters are not
 		// given.
@@ -234,6 +178,74 @@ abstract public class PushGP extends GA {
 		Print("Clone Percent: "+ (100 - _crossoverPercent - _mutationPercent -
 				_simplificationPercent) + "\n");
 		Print("\n");
+	}
+
+	protected void InitIndividual(GAIndividual inIndividual) {
+		PushGPIndividual i = (PushGPIndividual) inIndividual;
+
+		int randomCodeSize = _RNG.nextInt(_maxRandomCodeSize) + 2;
+		Program p = _interpreter.RandomCode(randomCodeSize);
+
+		i.SetProgram(p);
+	}
+	
+	protected void BeginGeneration() {
+		_averageSize = 0;
+	}
+
+	protected void EndGeneration() {
+		_averageSize /= _populations[0].length;
+	}
+	
+	protected void Evaluate() {
+		float totalFitness = 0;
+		_bestFitness = Float.MAX_VALUE;
+
+		for (int n = 0; n < _populations[_currentPopulation].length; n++) {
+			GAIndividual i = _populations[_currentPopulation][n];
+
+			EvaluateIndividual(i);
+
+			totalFitness += i.GetFitness();
+
+			if (i.GetFitness() < _bestFitness) {
+				_bestFitness = i.GetFitness();
+				_bestIndividual = n;
+				_bestSize = ((PushGPIndividual) i)._program.programsize();
+				_bestErrors = i.GetErrors();
+			}
+		}
+
+		_meanFitness = totalFitness / _populations[_currentPopulation].length;
+	}
+
+	protected int EvaluateIndividual(GAIndividual inIndividual) {
+		return EvaluateIndividual(inIndividual, false);
+	}
+
+	protected int EvaluateIndividual(GAIndividual inIndividual,
+			boolean duringSimplify) {
+		ArrayList<Float> errors = new ArrayList<Float>();
+
+		if (!duringSimplify)
+			_averageSize += ((PushGPIndividual) inIndividual)._program
+					.programsize();
+
+		long t = System.currentTimeMillis();
+
+		for (int n = 0; n < _testCases.size(); n++) {
+			GATestCase test = _testCases.get(n);
+			float e = EvaluateTestCase(inIndividual, test._input, test._output);
+			errors.add(e);
+		}
+		t = System.currentTimeMillis() - t;
+
+		inIndividual.SetFitness(AbsoluteSumOfErrors(errors));
+		inIndividual.SetErrors(errors);
+
+		//System.out.println("Evaluated individual in " + t + " msec: fitness "
+		//		+ inIndividual.GetFitness());
+		return 0;
 	}
 
 	abstract protected void InitInterpreter(Interpreter inInterpreter)
@@ -454,4 +466,15 @@ abstract public class PushGP extends GA {
 		return i;
 	}
 
+	public void RunTestProgram(Program p, int inTestCaseIndex) {
+		PushGPIndividual i = new PushGPIndividual(p);
+		GATestCase test = _testCases.get(inTestCaseIndex);
+
+		System.out.println("Executing program: " + p);
+
+		EvaluateTestCase(i, test._input, test._output);
+
+		System.out.println(_interpreter);
+	}
+	
 }

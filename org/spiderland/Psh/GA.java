@@ -40,11 +40,10 @@ public abstract class GA implements Serializable {
 	protected int _bestIndividual;
 
 	protected ArrayList<Float> _bestErrors;
-	protected int _bestSize;
 
-	protected int _trivialGeographyRadius;
-	protected int _tournamentSize;
 	protected int _maxGenerations;
+	protected int _tournamentSize;
+	protected int _trivialGeographyRadius;
 
 	protected Random _RNG;
 
@@ -113,7 +112,6 @@ public abstract class GA implements Serializable {
 		_RNG = new Random();
 		_testCases = new ArrayList<GATestCase>();
 		_bestFitness = Float.MAX_VALUE;
-		_bestSize = 0;
 		_outputStream = System.out;
 	}
 
@@ -244,7 +242,8 @@ public abstract class GA implements Serializable {
 	}
 
 	/**
-	 * Sets the population size and resets the GA generation count.
+	 * Sets the population size and resets the GA generation count, as well as
+	 * initializing the population with random individuals.
 	 * 
 	 * @param inSize
 	 *            the size of the new GA population.
@@ -360,7 +359,6 @@ public abstract class GA implements Serializable {
 			if (i.GetFitness() < _bestFitness) {
 				_bestFitness = i.GetFitness();
 				_bestIndividual = n;
-				_bestSize = ((PushGPIndividual) i)._program.programsize();
 				_bestErrors = i.GetErrors();
 			}
 		}
@@ -549,8 +547,6 @@ public abstract class GA implements Serializable {
 	abstract protected GAIndividual ReproduceByCrossover(int inIndex);
 
 	abstract protected GAIndividual ReproduceByMutation(int inIndex);
-
-	abstract protected GAIndividual ReproduceBySimplification(int inIndex);
 
 	protected void Checkpoint() throws Exception {
 		if (_checkpointPrefix == null)

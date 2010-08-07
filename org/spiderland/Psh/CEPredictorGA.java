@@ -39,6 +39,10 @@ public abstract class CEPredictorGA extends GA {
 		super.InitFromParameters();
 	}
 	
+	/**
+	 * Runs a single generation.
+	 * @throws Exception
+	 */
 	public void RunGeneration() throws Exception{
 		Run(1);
 	}

@@ -21,13 +21,18 @@ package org.spiderland.Psh;
  * predictors. 
  */
 
-public abstract class CEPredictorGAIndividual extends GAIndividual {
+public abstract class CEPredictionGAIndividual extends GAIndividual {
 	private static final long serialVersionUID = 1L;
 	
-	CEPredictorGAIndividual() {
+	CEPredictionGAIndividual() {
 	}
 
-	public abstract float PredictSolutionFitness(GAIndividual gaIndividual);
+	/**
+	 * Predicts the fitness of the PushGPIndividual
+	 * @param pgpIndividual
+	 * @return
+	 */
+	public abstract float PredictSolutionFitness(PushGPIndividual pgpIndividual);
 	
 	public String toString() {
 		return "CE PREDICTOR INDIVIDUAL";

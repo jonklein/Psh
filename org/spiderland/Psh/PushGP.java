@@ -219,11 +219,11 @@ abstract public class PushGP extends GA {
 		_meanFitness = totalFitness / _populations[_currentPopulation].length;
 	}
 
-	protected int EvaluateIndividual(GAIndividual inIndividual) {
-		return EvaluateIndividual(inIndividual, false);
+	protected void EvaluateIndividual(GAIndividual inIndividual) {
+		EvaluateIndividual(inIndividual, false);
 	}
 
-	protected int EvaluateIndividual(GAIndividual inIndividual,
+	protected void EvaluateIndividual(GAIndividual inIndividual,
 			boolean duringSimplify) {
 		ArrayList<Float> errors = new ArrayList<Float>();
 
@@ -245,7 +245,6 @@ abstract public class PushGP extends GA {
 
 		//System.out.println("Evaluated individual in " + t + " msec: fitness "
 		//		+ inIndividual.GetFitness());
-		return 0;
 	}
 
 	abstract protected void InitInterpreter(Interpreter inInterpreter)

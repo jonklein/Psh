@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * An abstract GP indivudal class containing a fitness value. The fitness value
+ * An abstract GP individual class containing a fitness value. The fitness value
  * represents an individual's <i>error</i> values, such that <i>lower</i>
  * fitness values are better and such that a fitness value of 0 indicates a
  * perfect solution.

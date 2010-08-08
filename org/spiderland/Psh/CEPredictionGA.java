@@ -23,83 +23,67 @@ package org.spiderland.Psh;
  * individual, or it may be referring to something similar, such as the
  * individual's rank.
  */
-public abstract class CEPredictorGA extends GA {
+public abstract class CEPredictionGA extends GA {
 	private static final long serialVersionUID = 1L;
 
-	//Note: Oldest trainer has the highest index; newest trainer has the lowest
-	//      index.
+	// Note: Oldest trainer has the highest index; newest trainer has the lowest
+	// index.
 	protected PushGPIndividual _trainerPopulation[];
+	protected float _trainerFitnesses[];
 	protected int _generationsBetweenTrainers;
 	protected int _trainerPopulationSize;
-	
+
 	protected PushGP _solutionGA;
-	
+
 	@Override
 	protected void InitFromParameters() throws Exception {
 		_generationsBetweenTrainers = (int) GetFloatParam("generations-between-trainers");
 		_trainerPopulationSize = (int) GetFloatParam("trainer-population-size");
-		
+
 		super.InitFromParameters();
 	}
-	
+
 	/**
 	 * Runs a single generation.
+	 * 
 	 * @throws Exception
 	 */
-	public void RunGeneration() throws Exception{
+	public void RunGeneration() throws Exception {
 		Run(1);
 	}
-	
+
 	@Override
 	protected void BeginGeneration() {
-		if(_generationCount % _generationsBetweenTrainers == 
-			(-1) % _generationsBetweenTrainers){
+		if (_generationCount % _generationsBetweenTrainers == (-1)
+				% _generationsBetweenTrainers) {
 			// Time to add a new trainer
 			AddNewTrainer();
-			CalculateTrainerFitnesses();
+			EvaluateTrainerFitnesses();
 		}
 	}
-	
+
 	@Override
 	protected boolean Terminate() {
 		// TODO Make sure it makes sense for this GA to never terminate.
 		return false;
 	}
 
-	/**
-	 * Evaluates a CEPredictorGAIndividual's fitness, based on the difference
-	 * between the prediction of the fitness and the actual fitness of the
-	 * trainers.
-	 */
-	@Override
-	protected int EvaluateIndividual(GAIndividual inIndividual) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
-			Object inOutput) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 	protected void SetGAandTrainers(PushGP inGA) {
 		SetSolutionGA(inGA);
 		InitTrainerPopulation();
 	}
-	
+
 	private void SetSolutionGA(PushGP inGA) {
 		_solutionGA = inGA;
 	}
-	
+
 	/**
 	 * This must be private, since there must be a _solutionGA set before this
 	 * method is invoked. Use SetGAandTrainers() instead.
 	 */
 	private void InitTrainerPopulation() {
 		_trainerPopulation = new PushGPIndividual[_trainerPopulationSize];
-		
+
 		PushGPIndividual individual = new PushGPIndividual();
 
 		for (int i = 0; i < _trainerPopulationSize; i++) {
@@ -107,16 +91,38 @@ public abstract class CEPredictorGA extends GA {
 			_solutionGA.InitIndividual(_trainerPopulation[i]);
 		}
 	}
-	
-	@Override
-	protected abstract void InitIndividual(GAIndividual inIndividual);	
 
-	@Override
-	protected abstract GAIndividual ReproduceByCrossover(int inIndex);
+	protected String Report() {
+		return "";
+	}
 
-	@Override
-	protected abstract GAIndividual ReproduceByMutation(int inIndex);
+	protected String FinalReport() {
+		return "";
+	}
 	
+	/**
+	 * Initiates inIndividual as a random predictor individual.
+	 */
+	@Override
+	protected abstract void InitIndividual(GAIndividual inIndividual);
+	
+	/**
+	 * Evaluates a CEPredictorGAIndividual's fitness, based on the difference
+	 * between the prediction of the fitness and the actual fitness of the
+	 * trainers.
+	 */
+	@Override
+	protected abstract void EvaluateIndividual(GAIndividual inIndividual);
+
+	/**
+	 * Determines the predictor's fitness on a trainer, where the trainer is the
+	 * inInput, and the trainer's actual fitness (or rank, whatever is to be
+	 * predicted) is inOutput.
+	 */
+	@Override
+	protected abstract float EvaluateTestCase(GAIndividual inIndividual,
+			Object inInput, Object inOutput);
+
 	/**
 	 * Adds a new trainer from the solution population to the trainer
 	 * population. The solution individual is chosen with the highest variance
@@ -125,24 +131,19 @@ public abstract class CEPredictorGA extends GA {
 	protected abstract void AddNewTrainer();
 
 	/**
-	 * Trainer fitnesses may be calculated and stored differently depending
-	 * on the type of predictor. For example, fitness predictors will calculate
-	 * and store fitnesses, where rank predictors will calculate fitnesses
-	 * but will only store the rank of the trainers.
-	 * 
-	 * On second thoughts, even rank predictors will need the exact fitnesses
-	 * to determine the rank of new trainers.
-	 * 
-	 * TODO Make sure above makes sense when implementing predictors.
+	 * Trainer fitnesses may be calculated and stored differently depending on
+	 * the type of predictor. For example, fitness predictors will calculate and
+	 * store fitnesses, where rank predictors will calculate fitnesses but will
+	 * only need the rank of the trainers. The fitnesses of trainers are stored
+	 * in _trainerFitnesses, but subclasses may store other data such as rank in
+	 * order to compare individuals.
 	 */
-	protected abstract void CalculateTrainerFitnesses();
+	protected abstract void EvaluateTrainerFitnesses();
 
-	protected String Report() {
-		return "";
-	}
-	
-	protected String FinalReport() {
-		return "";
-	}
-	
+	@Override
+	protected abstract GAIndividual ReproduceByCrossover(int inIndex);
+
+	@Override
+	protected abstract GAIndividual ReproduceByMutation(int inIndex);
+
 }

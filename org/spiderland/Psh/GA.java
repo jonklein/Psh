@@ -539,7 +539,7 @@ public abstract class GA implements Serializable {
 
 	abstract protected void InitIndividual(GAIndividual inIndividual);
 
-	abstract protected int EvaluateIndividual(GAIndividual inIndividual);
+	abstract protected void EvaluateIndividual(GAIndividual inIndividual);
 
 	abstract protected float EvaluateTestCase(GAIndividual inIndividual,
 			Object inInput, Object inOutput);

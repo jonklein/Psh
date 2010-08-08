@@ -34,7 +34,7 @@ public class CEFloatSymbolicRegression extends PushGP {
 	
 	protected long _effort;
 	protected float _predictorEffortPercent;
-	protected CEPredictorGA _predictorGA;
+	protected CEPredictionGA _predictorGA;
 
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
@@ -63,7 +63,7 @@ public class CEFloatSymbolicRegression extends PushGP {
 		
 		//Create and initialize predictors
 		_predictorEffortPercent = GetFloatParam("PREDICTOR-effort-percent", true);
-		_predictorGA = (CEPredictorGA) GA.GAWithParameters(GetPredictorParameters(_parameters));
+		_predictorGA = (CEPredictionGA) GA.GAWithParameters(GetPredictorParameters(_parameters));
 		_predictorGA.SetGAandTrainers(this);
 		
 		
@@ -76,7 +76,7 @@ public class CEFloatSymbolicRegression extends PushGP {
 	protected void InitInterpreter(Interpreter inInterpreter) {
 	}
 	
-	protected int EvaluateIndividual(GAIndividual inIndividual,
+	protected void EvaluateIndividual(GAIndividual inIndividual,
 			boolean duringSimplify) {
 		ArrayList<Float> errors = new ArrayList<Float>();
 
@@ -99,7 +99,6 @@ public class CEFloatSymbolicRegression extends PushGP {
 		//System.out.println("Evaluated individual in " + t + " msec: fitness "
 		//		+ inIndividual.GetFitness());
 		
-		return 0;
 	}
 
 	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,

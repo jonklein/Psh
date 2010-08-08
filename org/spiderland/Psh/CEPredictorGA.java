@@ -18,7 +18,10 @@ package org.spiderland.Psh;
 
 /**
  * An abstract class for a population of co-evolving predictors of fitness,
- * rank, or something similar.
+ * rank, or something similar. In this class, "fitness" or "predicted fitness"
+ * of a solution individual may be referring to the actual fitness of the
+ * individual, or it may be referring to something similar, such as the
+ * individual's rank.
  */
 public abstract class CEPredictorGA extends GA {
 	private static final long serialVersionUID = 1L;
@@ -63,6 +66,11 @@ public abstract class CEPredictorGA extends GA {
 		return false;
 	}
 
+	/**
+	 * Evaluates a CEPredictorGAIndividual's fitness, based on the difference
+	 * between the prediction of the fitness and the actual fitness of the
+	 * trainers.
+	 */
 	@Override
 	protected int EvaluateIndividual(GAIndividual inIndividual) {
 		// TODO Auto-generated method stub

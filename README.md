@@ -145,6 +145,7 @@ Changelog
 Major Changes since v1.0:
 -------------------------
 - The parameters that affect Ephemeral Random Constant creation, such as the minimum random integer, are now available as optional configuration parameters. See Configuration Files above for more details.
+- Implement new instructions: integer.pow, integer.min, integer.max, float.exp, float.pow. Also, fixed a bug in float.max.
 
 Major Changes since v0.3:
 -------------------------

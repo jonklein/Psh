@@ -3,9 +3,12 @@ integer.*
 integer.+
 integer.-
 integer./
+integer.pow
 integer.<
 integer.=
 integer.>
+integer.max
+integer.min
 integer.abs
 integer.dup
 integer.flush
@@ -22,6 +25,7 @@ float./
 float.<
 float.=
 float.>
+float.pow
 float.abs
 float.cos
 float.dup
@@ -35,6 +39,7 @@ float.sin
 float.stackdepth
 float.swap
 float.tan
+float.exp
 boolean.=
 boolean.and
 boolean.dup

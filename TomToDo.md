@@ -21,6 +21,7 @@ Done Major Changes
 - Implement absolute value and negation instructions for both int and float.
 - Implement new problem class CartCentering.java, that is used for the Cart Centering problem described by Koza in Genetic Programming.
 - Change Psh over to Apache 2.0 license.
+- Implement new instructions: integer.pow, integer.min, integer.max, float.exp, float.pow
 
 
 Done Minor Changes
@@ -44,6 +45,7 @@ Done Minor Changes
 - The number of fitness evaluations is now displayed during reports.
 - Release v1.0 of Psh, including changing the README version number.
 - The parameters that affect Ephemeral Random Constant creation, such as the minimum random integer, are now available as optional .pushgp parameters. 
+- Fixed a bug in float.max
 
 
 To Do Still

@@ -292,6 +292,33 @@ class IntegerMod extends BinaryIntegerInstruction {
 	}
 }
 
+class IntegerPow extends BinaryIntegerInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	int BinaryOperator(int inA, int inB) {
+		return (int) Math.pow(inA, inB);
+	}
+}
+
+class IntegerMin extends BinaryIntegerInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	int BinaryOperator(int inA, int inB) {
+		return Math.min(inA, inB);
+	}
+}
+
+class IntegerMax extends BinaryIntegerInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	int BinaryOperator(int inA, int inB) {
+		return Math.max(inA, inB);
+	}
+}
+
 //
 //Unary int instructions
 //
@@ -445,6 +472,15 @@ class FloatMod extends BinaryFloatInstruction {
 	}
 }
 
+class FloatPow extends BinaryFloatInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	float BinaryOperator(float inA, float inB) {
+		return (float) Math.pow(inA, inB);
+	}
+}
+
 class FloatMin extends BinaryFloatInstruction {
 	private static final long serialVersionUID = 1L;
 	
@@ -506,6 +542,15 @@ class FloatTan extends UnaryFloatInstruction {
 	@Override
 	float UnaryOperator(float inValue) {
 		return (float) Math.tan(inValue);
+	}
+}
+
+class FloatExp extends UnaryFloatInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	float UnaryOperator(float inValue) {
+		return (float) Math.exp(inValue);
 	}
 }
 

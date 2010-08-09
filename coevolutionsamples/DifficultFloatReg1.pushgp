@@ -14,26 +14,25 @@
 
 #
 # A difficult symbolic regression problem that needs many test cases. Will be
-# used to test TestCaseGenerator.java.
+# used to test TestCaseGenerator.java. The problem to be solved is 
+#                          y = (e ^ |x|) * sin(x)
 #
 # Tom Helmuth
 # 8/9/10
 #
 
-### Setup solution GP parameters
+### Setup required parameters
 
-population-size = 200
-max-generations = 1000
-execution-limit = 150
+population-size = 150
+max-generations = 20000
+execution-limit = 200
 
-mutation-percent = 15
-crossover-percent = 75
+mutation-percent = 10
+crossover-percent = 80
 simplification-percent = 5
 
 tournament-size = 7
-trivial-geography-radius = 10
 max-points-in-program = 100
-mutation-mode = fair
 
 max-random-code-size = 40
 simplify-flatten-percent = 10
@@ -42,25 +41,19 @@ reproduction-simplifications = 25
 report-simplifications = 100
 final-simplifications = 2000
 
-
 ### Setup problem class and test cases.
 
-problem-class = org.spiderland.Psh.CEFloatSymbolicRegression
-test-cases = ((1 7) (2 20) (3 39) (4 64) (5 95) (6 132) (7 175))
+problem-class = org.spiderland.Psh.FloatSymbolicRegression
 instruction-set = (registered.float input.makeinputs1)
+test-cases = ((1 7) (2 20) (3 39) (4 64) (5 95) (6 132) (7 175))
 
+### Setup Optional Parameters
 
-### Setup predictor GP parameters
+trivial-geography-radius = 10
+simplify-flatten-percent = 5
+mutation-mode = fair
+fair-mutation-range = .5
 
-PREDICTOR-problem-class = org.spiderland.Psh.RankPredictor
-PREDICTOR-population-size = 10
-PREDICTOR-effort-percent = 5
-
-PREDICTOR-trainer-population-size = 10
-PREDICTOR-generations-between-trainers = 50
-
-PREDICTOR-mutation-percent = 10
-PREDICTOR-crossover-percent = 75
-
-PREDICTOR-tournament-size = 2
-PREDICTOR-trivial-geography-radius = 0
+min-random-float = -10.0
+max-random-float = 10.0
+random-float-resolution = 0.001

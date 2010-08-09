@@ -14,7 +14,15 @@
  * limitations under the License.
  */
 
-package org.spiderland.Psh;
+package org.spiderland.Psh.ProbClass;
+
+import org.spiderland.Psh.GAIndividual;
+import org.spiderland.Psh.GATestCase;
+import org.spiderland.Psh.Interpreter;
+import org.spiderland.Psh.Program;
+import org.spiderland.Psh.PushGP;
+import org.spiderland.Psh.PushGPIndividual;
+import org.spiderland.Psh.intStack;
 
 /**
  * This problem class implements symbolic regression for integers. See also
@@ -52,7 +60,7 @@ public class IntSymbolicRegression extends PushGP {
 	protected void InitInterpreter(Interpreter inInterpreter) {
 	}
 
-	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
+	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
 			Object inOutput) {
 		_interpreter.ClearStacks();
 

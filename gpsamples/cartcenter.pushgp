@@ -62,7 +62,7 @@ final-simplifications = 1000
 ### class uses a set of test case position-velocity pairs that are
 ### initial positions for the simulation
 
-problem-class = org.spiderland.Psh.CartCentering
+problem-class = org.spiderland.Psh.ProbClass.CartCentering
 
 ### Each test case is a random pair in ([-1,1], [-1,1]).
 

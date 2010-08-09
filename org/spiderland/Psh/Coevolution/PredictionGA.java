@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-package org.spiderland.Psh;
+package org.spiderland.Psh.Coevolution;
+
+import org.spiderland.Psh.GA;
+import org.spiderland.Psh.GAIndividual;
+import org.spiderland.Psh.PushGP;
+import org.spiderland.Psh.PushGPIndividual;
 
 /**
  * An abstract class for a population of co-evolving predictors of fitness,
@@ -23,7 +28,7 @@ package org.spiderland.Psh;
  * individual, or it may be referring to something similar, such as the
  * individual's rank.
  */
-public abstract class CEPredictionGA extends GA {
+public abstract class PredictionGA extends GA {
 	private static final long serialVersionUID = 1L;
 
 	// Note: Oldest trainer has the highest index; newest trainer has the lowest
@@ -122,7 +127,7 @@ public abstract class CEPredictionGA extends GA {
 	 * predicted) is inOutput.
 	 */
 	@Override
-	protected abstract float EvaluateTestCase(GAIndividual inIndividual,
+	public abstract float EvaluateTestCase(GAIndividual inIndividual,
 			Object inInput, Object inOutput);
 
 	/**

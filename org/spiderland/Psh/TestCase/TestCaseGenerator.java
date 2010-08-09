@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package org.spiderland.Psh;
+package org.spiderland.Psh.TestCase;
+
+import org.spiderland.Psh.ObjectPair;
 
 /**
  * A class allowing for the runtime creation of custom test cases.
@@ -29,13 +31,13 @@ abstract public class TestCaseGenerator {
 	/**
 	 * @returns The number of cases the generator will create.
 	 */
-	abstract int TestCaseCount();
+	abstract public int TestCaseCount();
 
 	/**
 	 * @returns Test case at index n as an ObjectPair, where _first is the input
 	 *          and _second is the output. The types of the objects may depend
 	 *          on the problem type.
 	 */
-	abstract ObjectPair TestCase(int inIndex);
+	abstract public ObjectPair TestCase(int inIndex);
 
 }

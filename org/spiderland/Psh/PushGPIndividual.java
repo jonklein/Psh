@@ -26,7 +26,7 @@ public class PushGPIndividual extends GAIndividual {
 	
 	public Program _program;
 
-	PushGPIndividual() {
+	public PushGPIndividual() {
 	}
 
 	PushGPIndividual(Program inProgram) {

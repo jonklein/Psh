@@ -36,7 +36,7 @@ public abstract class GAIndividual implements Serializable {
 		return _fitness;
 	}
 
-	void SetFitness(float inFitness) {
+	public void SetFitness(float inFitness) {
 		_fitness = inFitness;
 	}
 
@@ -44,7 +44,7 @@ public abstract class GAIndividual implements Serializable {
 		return _errors;
 	}
 
-	void SetErrors(ArrayList<Float> inErrors) {
+	public void SetErrors(ArrayList<Float> inErrors) {
 		_errors = inErrors;
 	}
 

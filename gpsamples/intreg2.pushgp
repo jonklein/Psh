@@ -57,10 +57,11 @@ final-simplifications	= 1000
 ### how fitness scores are computed.  The IntSymbolicRegression
 ### class uses a set of int inputs and a single output.
 
-problem-class		= org.spiderland.Psh.IntSymbolicRegression
+problem-class		= org.spiderland.Psh.ProbClass.IntSymbolicRegression
 
 #This test case is for factorial
 test-cases		= ((1 1) (2 2) (3 6) (4 24) (5 120) (6 720))
 
 #Instruction set for factorial
-instruction-set = (registered.integer registered.exec registered.code registered.boolean registered.input input.makeinputs1 )
+#instruction-set = (registered.integer registered.exec registered.code registered.boolean registered.input input.makeinputs1 )
+instruction-set = (registered.integer input.makeinputs1)

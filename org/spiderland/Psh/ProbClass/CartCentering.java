@@ -14,7 +14,17 @@
  * limitations under the License.
  */
 
-package org.spiderland.Psh;
+package org.spiderland.Psh.ProbClass;
+
+import org.spiderland.Psh.GAIndividual;
+import org.spiderland.Psh.GATestCase;
+import org.spiderland.Psh.Interpreter;
+import org.spiderland.Psh.ObjectPair;
+import org.spiderland.Psh.ObjectStack;
+import org.spiderland.Psh.Program;
+import org.spiderland.Psh.PushGP;
+import org.spiderland.Psh.booleanStack;
+import org.spiderland.Psh.floatStack;
 
 /**
  * A sample problem class for testing the cart centering problem. This solves
@@ -58,7 +68,7 @@ public class CartCentering extends PushGP {
 		
 	}
 
-	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
+	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
 			Object inOutput) {
 		
 		int timeSteps = 1000;

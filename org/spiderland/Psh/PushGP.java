@@ -177,7 +177,7 @@ abstract public class PushGP extends GA {
 		Print("\n");
 	}
 
-	protected void InitIndividual(GAIndividual inIndividual) {
+	public void InitIndividual(GAIndividual inIndividual) {
 		PushGPIndividual i = (PushGPIndividual) inIndividual;
 
 		int randomCodeSize = _RNG.nextInt(_maxRandomCodeSize) + 2;
@@ -247,7 +247,7 @@ abstract public class PushGP extends GA {
 	abstract protected void InitInterpreter(Interpreter inInterpreter)
 			throws Exception;
 	
-	protected void EvaluateTrainerExactFitness(PushGPIndividual inTrainer){
+	public void EvaluateTrainerExactFitness(PushGPIndividual inTrainer){
 	}
 
 	protected String Report() {

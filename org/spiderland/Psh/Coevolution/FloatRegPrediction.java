@@ -1,13 +1,16 @@
-package org.spiderland.Psh;
+package org.spiderland.Psh.Coevolution;
 
-public class CEFloatRegPrediction extends CEPredictionGA {
+import org.spiderland.Psh.GAIndividual;
+import org.spiderland.Psh.PushGPIndividual;
+
+public class FloatRegPrediction extends PredictionGA {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void InitIndividual(GAIndividual inIndividual) {
-		CEFloatRegPredictionIndividual i = (CEFloatRegPredictionIndividual) inIndividual;
+		FloatRegPredictionIndividual i = (FloatRegPredictionIndividual) inIndividual;
 
-		int[] samples = new int[CEFloatRegPredictionIndividual._sampleSize];
+		int[] samples = new int[FloatRegPredictionIndividual._sampleSize];
 		for(int j = 0; j < samples.length; j++){
 			samples[j] = _RNG.nextInt(_testCases.size());
 			
@@ -22,7 +25,7 @@ public class CEFloatRegPrediction extends CEPredictionGA {
 	}
 
 	@Override
-	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
+	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
 			Object inOutput) {
 		// TODO Auto-generated method stub
 		return 0;

@@ -43,10 +43,10 @@ final-simplifications = 2000
 
 ### Setup problem class and test cases.
 
-problem-class = org.spiderland.Psh.FloatSymbolicRegression
+problem-class = org.spiderland.Psh.ProbClass.FloatSymbolicRegression
 instruction-set = (registered.float input.makeinputs1)
 
-test-case-class = coevolutionsamples.TestCaseGenerators.CEFloatReg1TestCase
+test-case-class = org.spiderland.Psh.TestCase.FloatRegTestCases1
 
 ### Setup Optional Parameters
 

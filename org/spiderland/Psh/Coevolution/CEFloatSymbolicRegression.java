@@ -14,10 +14,19 @@
  * limitations under the License.
  */
 
-package org.spiderland.Psh;
+package org.spiderland.Psh.Coevolution;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.spiderland.Psh.GA;
+import org.spiderland.Psh.GAIndividual;
+import org.spiderland.Psh.GATestCase;
+import org.spiderland.Psh.Interpreter;
+import org.spiderland.Psh.Program;
+import org.spiderland.Psh.PushGP;
+import org.spiderland.Psh.PushGPIndividual;
+import org.spiderland.Psh.floatStack;
 
 /**
  * This problem class implements symbolic regression for floating point numbers
@@ -34,7 +43,7 @@ public class CEFloatSymbolicRegression extends PushGP {
 	
 	protected long _effort;
 	protected float _predictorEffortPercent;
-	protected CEPredictionGA _predictorGA;
+	protected PredictionGA _predictorGA;
 
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
@@ -63,7 +72,7 @@ public class CEFloatSymbolicRegression extends PushGP {
 		
 		//Create and initialize predictors
 		_predictorEffortPercent = GetFloatParam("PREDICTOR-effort-percent", true);
-		_predictorGA = (CEPredictionGA) GA.GAWithParameters(GetPredictorParameters(_parameters));
+		_predictorGA = (PredictionGA) GA.GAWithParameters(GetPredictorParameters(_parameters));
 		_predictorGA.SetGAandTrainers(this);
 		
 		
@@ -103,7 +112,7 @@ public class CEFloatSymbolicRegression extends PushGP {
 	/**
 	 * Evaluates a trainer's exact fitness and sets it.
 	 */
-	protected void EvaluateTrainerExactFitness(PushGPIndividual inTrainer){
+	public void EvaluateTrainerExactFitness(PushGPIndividual inTrainer){
 		ArrayList<Float> errors = new ArrayList<Float>();
 
 		for (int n = 0; n < _testCases.size(); n++) {
@@ -116,7 +125,7 @@ public class CEFloatSymbolicRegression extends PushGP {
 		inTrainer.SetErrors(errors);	
 	}
 
-	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
+	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
 			Object inOutput) {
 		_effort++;
 		

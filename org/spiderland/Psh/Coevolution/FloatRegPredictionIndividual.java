@@ -1,8 +1,13 @@
-package org.spiderland.Psh;
+package org.spiderland.Psh.Coevolution;
 
 import java.util.ArrayList;
 
-public class CEFloatRegPredictionIndividual extends CEPredictionGAIndividual {
+import org.spiderland.Psh.GAIndividual;
+import org.spiderland.Psh.GATestCase;
+import org.spiderland.Psh.PushGP;
+import org.spiderland.Psh.PushGPIndividual;
+
+public class FloatRegPredictionIndividual extends PredictionGAIndividual {
 	private static final long serialVersionUID = 1L;
 
 	// The sample test cases used for fitness prediction.
@@ -11,12 +16,12 @@ public class CEFloatRegPredictionIndividual extends CEPredictionGAIndividual {
 	
 	protected PushGP _solutionGA;
 	
-	CEFloatRegPredictionIndividual(PushGP inSolutionGA) {
+	FloatRegPredictionIndividual(PushGP inSolutionGA) {
 		_sampleIndices = new int[_sampleSize];
 		_solutionGA = inSolutionGA;
 	}
 
-	CEFloatRegPredictionIndividual(PushGP inSolutionGA, int[] inSamples) {
+	FloatRegPredictionIndividual(PushGP inSolutionGA, int[] inSamples) {
 		_sampleIndices = new int[_sampleSize];
 		for(int i = 0; i < _sampleSize; i++){
 			_sampleIndices[i] = inSamples[i];
@@ -47,7 +52,7 @@ public class CEFloatRegPredictionIndividual extends CEPredictionGAIndividual {
 
 	@Override
 	public GAIndividual clone() {
-		return new CEFloatRegPredictionIndividual(_solutionGA, _sampleIndices);
+		return new FloatRegPredictionIndividual(_solutionGA, _sampleIndices);
 	}
 
 }

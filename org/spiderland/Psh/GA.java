@@ -48,7 +48,7 @@ public abstract class GA implements Serializable {
 	protected Random _RNG;
 
 	protected HashMap<String, String> _parameters;
-	protected ArrayList<GATestCase> _testCases;
+	public ArrayList<GATestCase> _testCases;
 
 	protected Class<?> _individualClass;
 
@@ -555,7 +555,7 @@ public abstract class GA implements Serializable {
 
 	abstract protected void EvaluateIndividual(GAIndividual inIndividual);
 
-	abstract protected float EvaluateTestCase(GAIndividual inIndividual,
+	abstract public float EvaluateTestCase(GAIndividual inIndividual,
 			Object inInput, Object inOutput);
 
 	abstract protected GAIndividual ReproduceByCrossover(int inIndex);

@@ -14,7 +14,17 @@
  * limitations under the License.
  */
 
-package org.spiderland.Psh;
+package org.spiderland.Psh.ProbClass;
+
+import org.spiderland.Psh.GAIndividual;
+import org.spiderland.Psh.GATestCase;
+import org.spiderland.Psh.Interpreter;
+import org.spiderland.Psh.ObjectPair;
+import org.spiderland.Psh.Program;
+import org.spiderland.Psh.PushGP;
+import org.spiderland.Psh.PushGPIndividual;
+import org.spiderland.Psh.floatStack;
+import org.spiderland.Psh.TestCase.TestCaseGenerator;
 
 /**
  * This problem class implements symbolic regression for floating point numbers.
@@ -84,7 +94,7 @@ public class FloatSymbolicRegression extends PushGP {
 	protected void InitInterpreter(Interpreter inInterpreter) {
 	}
 
-	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
+	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
 			Object inOutput) {
 		_interpreter.ClearStacks();
 

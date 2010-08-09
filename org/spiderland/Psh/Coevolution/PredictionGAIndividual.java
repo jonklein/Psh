@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-package org.spiderland.Psh;
+package org.spiderland.Psh.Coevolution;
 
 import java.util.ArrayList;
+
+import org.spiderland.Psh.GAIndividual;
+import org.spiderland.Psh.PushGPIndividual;
 
 /**
  * An abstract CEPredictorGA individual class for developing co-evolved
  * predictors. 
  */
 
-public abstract class CEPredictionGAIndividual extends GAIndividual {
+public abstract class PredictionGAIndividual extends GAIndividual {
 	private static final long serialVersionUID = 1L;
 
 	/**

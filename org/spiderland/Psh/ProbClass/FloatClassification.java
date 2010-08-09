@@ -14,7 +14,15 @@
  * limitations under the License.
  */
 
-package org.spiderland.Psh;
+package org.spiderland.Psh.ProbClass;
+
+import org.spiderland.Psh.GAIndividual;
+import org.spiderland.Psh.GATestCase;
+import org.spiderland.Psh.Interpreter;
+import org.spiderland.Psh.Program;
+import org.spiderland.Psh.PushGP;
+import org.spiderland.Psh.PushGPIndividual;
+import org.spiderland.Psh.floatStack;
 
 public class FloatClassification extends PushGP {
 	private static final long serialVersionUID = 1L;
@@ -55,7 +63,7 @@ public class FloatClassification extends PushGP {
 	protected void InitInterpreter(Interpreter inInterpreter) {
 	}
 
-	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
+	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
 			Object inOutput) {
 		_interpreter.ClearStacks();
 

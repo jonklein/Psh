@@ -126,7 +126,7 @@ Problem Classes
 ---------------
 PshGP uses problem classes, implemented as Java classes, to determine certain aspects of the run, such as how to compute fitness values. The choice of problem class determines how test case data is interpreted, and which stacks are used for test case input and output. In addition, certain inherited methods in both GA.java and PushGP.java may be overwritten for further customization.
 
-Psh comes with a few standard problem classes. The following problem classes are currently implemented:
+Psh comes with a few standard problem classes. The following problem classes are currently implemented, and are in the ProbClass subpackage:
 
 - FloatSymbolicRegression.java: Maps an input floating point value to an output floating point value. Error value is computed as the difference between the desired output value and the top value on the float stack.
 - IntSymbolicRegression.java: Maps an input integer value to an output integer value. Error value is computed as the difference between the desired output value and the top value on the integer stack.
@@ -146,6 +146,7 @@ Major Changes since v1.0:
 -------------------------
 - The parameters that affect Ephemeral Random Constant creation, such as the minimum random integer, are now available as optional configuration parameters. See Configuration Files above for more details.
 - Implement new instructions: integer.pow, integer.min, integer.max, float.exp, float.pow. Also, fixed a bug in float.max.
+- Moved problem classes and test cases to their own packages to reduce clutter.
 
 Major Changes since v0.3:
 -------------------------

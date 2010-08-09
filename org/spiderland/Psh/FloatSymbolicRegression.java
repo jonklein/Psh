@@ -28,25 +28,57 @@ public class FloatSymbolicRegression extends PushGP {
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
 
-		String cases = GetParam("test-cases");
-
-		Program caselist = new Program(_interpreter, cases);
-
-		for (int i = 0; i < caselist.size(); i++) {
-			Program p = (Program) caselist.peek(i);
-
-			if (p.size() < 2)
-				throw new Exception("Not enough elements for fitness case \""
-						+ p + "\"");
-
-			Float in = new Float(p.peek(0).toString());
-			Float out = new Float(p.peek(1).toString());
-
-			Print(";; Fitness case #" + i + " input: " + in + " output: " + out
-					+ "\n");
-
-			_testCases.add(new GATestCase(in, out));
+		String cases = GetParam("test-cases", true);
+		String casesClass = GetParam("test-case-class", true);		
+		if(cases == null && casesClass == null){
+			throw new Exception("No acceptable test-case parameter.");
 		}
+		
+		if(casesClass != null){
+			// Get test cases from the TestCasesClass.
+			Class<?> iclass = Class.forName(casesClass);
+			Object iObject = iclass.newInstance();
+			if (!(iObject instanceof TestCaseGenerator)){
+				throw (new Exception("test-case-class must inherit from class TestCaseGenerator"));
+			}
+			
+			TestCaseGenerator testCaseGenerator = (TestCaseGenerator) iObject;
+			int numTestCases = testCaseGenerator.TestCaseCount();
+			
+			for(int i = 0; i < numTestCases; i++){
+				ObjectPair testCase = testCaseGenerator.TestCase(i);
+				
+				Float in = (Float) testCase._first;
+				Float out = (Float) testCase._second;
+				
+				Print(";; Fitness case #" + i + " input: " + in + " output: "
+						+ out + "\n");
+
+				_testCases.add(new GATestCase(in, out));
+			}
+		}
+		else {
+			// Get test cases from test-cases.
+			Program caselist = new Program(_interpreter, cases);
+
+			for (int i = 0; i < caselist.size(); i++) {
+				Program p = (Program) caselist.peek(i);
+
+				if (p.size() < 2)
+					throw new Exception(
+							"Not enough elements for fitness case \"" + p
+									+ "\"");
+
+				Float in = new Float(p.peek(0).toString());
+				Float out = new Float(p.peek(1).toString());
+
+				Print(";; Fitness case #" + i + " input: " + in + " output: "
+						+ out + "\n");
+
+				_testCases.add(new GATestCase(in, out));
+			}
+		}
+		
 	}
 
 	protected void InitInterpreter(Interpreter inInterpreter) {

@@ -16,8 +16,6 @@
 
 package org.spiderland.Psh;
 
-import java.util.*;
-
 /**
  * A class allowing for the runtime creation of custom test cases.
  * 
@@ -27,15 +25,17 @@ import java.util.*;
  */
 
 abstract public class TestCaseGenerator {
+
 	/**
 	 * @returns The number of cases the generator will create.
 	 */
-
 	abstract int TestCaseCount();
 
 	/**
-	 * @returns A test case...
+	 * @returns Test case at index n as an ObjectPair, where _first is the input
+	 *          and _second is the output. The types of the objects may depend
+	 *          on the problem type.
 	 */
+	abstract ObjectPair TestCase(int inIndex);
 
-	abstract HashMap<String, Object> TestCase(int inIndex);
 }

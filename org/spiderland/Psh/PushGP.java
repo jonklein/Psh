@@ -126,16 +126,11 @@ abstract public class PushGP extends GA {
 		if(interpreterClass == null){
 			interpreterClass = defaultInterpreterClass;
 		}
-		
 		Class<?> iclass = Class.forName(interpreterClass);
-
 		Object iObject = iclass.newInstance();
-
 		if (!(iObject instanceof Interpreter))
 			throw (new Exception(
 					"interpreter-class must inherit from class Interpreter"));
-
-		String framemode = GetParam("push-frame-mode", true);
 
 		_interpreter = (Interpreter) iObject;
 		_interpreter.SetInstructions(new Program(_interpreter,
@@ -143,6 +138,8 @@ abstract public class PushGP extends GA {
 		_interpreter.SetRandomParameters(minRandomInt, maxRandomInt,
 				randomIntResolution, minRandomFloat, maxRandomFloat,
 				randomFloatResolution);
+
+		String framemode = GetParam("push-frame-mode", true);
 
 		String inputpusherClass = GetParam("inputpusher-class", true);
 		if(inputpusherClass == null){

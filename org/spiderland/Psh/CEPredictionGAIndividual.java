@@ -16,6 +16,8 @@
 
 package org.spiderland.Psh;
 
+import java.util.ArrayList;
+
 /**
  * An abstract CEPredictorGA individual class for developing co-evolved
  * predictors. 
@@ -23,16 +25,27 @@ package org.spiderland.Psh;
 
 public abstract class CEPredictionGAIndividual extends GAIndividual {
 	private static final long serialVersionUID = 1L;
-	
-	CEPredictionGAIndividual() {
-	}
 
 	/**
-	 * Predicts the fitness of the PushGPIndividual
+	 * Predicts the fitness of the input PushGPIndividual
 	 * @param pgpIndividual
 	 * @return
 	 */
 	public abstract float PredictSolutionFitness(PushGPIndividual pgpIndividual);
+	
+	/**
+	 * Computes the absolute-average-of-errors fitness from an error vector.
+	 * 
+	 * @return the average error value for the vector.
+	 */
+	protected float AbsoluteAverageOfErrors(ArrayList<Float> inArray) {
+		float total = 0.0f;
+
+		for (int n = 0; n < inArray.size(); n++)
+			total += Math.abs(inArray.get(n));
+
+		return (total / inArray.size());
+	}
 	
 	public String toString() {
 		return "CE PREDICTOR INDIVIDUAL";

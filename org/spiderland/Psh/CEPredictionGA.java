@@ -57,8 +57,10 @@ public abstract class CEPredictionGA extends GA {
 		if (_generationCount % _generationsBetweenTrainers == (-1)
 				% _generationsBetweenTrainers) {
 			// Time to add a new trainer
-			AddNewTrainer();
-			EvaluateTrainerFitnesses();
+			
+			//TODO Fix below with the new functions
+			/*AddNewTrainer();
+			EvaluateTrainerFitnesses();*/
 		}
 	}
 
@@ -124,12 +126,20 @@ public abstract class CEPredictionGA extends GA {
 			Object inInput, Object inOutput);
 
 	/**
-	 * Adds a new trainer from the solution population to the trainer
+	 * Chooses a new trainer from the solution population to add to the trainer
 	 * population. The solution individual is chosen with the highest variance
 	 * of the predictions from the predictors.
 	 */
-	protected abstract void AddNewTrainer();
+	protected abstract PushGPIndividual ChooseNewTrainer();
 
+	/**
+	 * Calculates and sets inTrainer's fitness.
+	 * @param inTrainer
+	 */
+	protected void EvaluateTrainer(PushGPIndividual inTrainer){
+		_solutionGA.EvaluateTrainerExactFitness(inTrainer);
+	}
+	
 	/**
 	 * Trainer fitnesses may be calculated and stored differently depending on
 	 * the type of predictor. For example, fitness predictors will calculate and

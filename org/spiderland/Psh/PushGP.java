@@ -249,6 +249,9 @@ abstract public class PushGP extends GA {
 
 	abstract protected void InitInterpreter(Interpreter inInterpreter)
 			throws Exception;
+	
+	protected void EvaluateTrainerExactFitness(PushGPIndividual inTrainer){
+	}
 
 	protected String Report() {
 		String report = super.Report();

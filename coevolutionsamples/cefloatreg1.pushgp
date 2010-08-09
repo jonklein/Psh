@@ -1,0 +1,66 @@
+# Copyright 2009-2010 Jon Klein
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#
+# First trials of co-evolved predictors for float symbolic regression. Evolving
+# symbolic regression for y = 3x^2 + 4x
+#
+# Tom Helmuth
+# 8/3/10
+#
+
+### Setup solution GP parameters
+
+population-size = 200
+max-generations = 1000
+execution-limit = 150
+
+mutation-percent = 15
+crossover-percent = 75
+simplification-percent = 5
+
+tournament-size = 7
+trivial-geography-radius = 10
+max-points-in-program = 100
+mutation-mode = fair
+
+max-random-code-size = 40
+simplify-flatten-percent = 10
+
+reproduction-simplifications = 25
+report-simplifications = 100
+final-simplifications = 2000
+
+
+### Setup problem class and test cases.
+
+problem-class = org.spiderland.Psh.CEFloatSymbolicRegression
+test-cases = ((1 7) (2 20) (3 39) (4 64) (5 95) (6 132) (7 175))
+instruction-set = (registered.float input.makeinputs1)
+
+
+### Setup predictor GP parameters
+
+PREDICTOR-problem-class = org.spiderland.Psh.RankPredictor
+PREDICTOR-population-size = 10
+PREDICTOR-effort-percent = 5
+
+PREDICTOR-trainer-population-size = 10
+PREDICTOR-generations-between-trainers = 50
+
+PREDICTOR-mutation-percent = 10
+PREDICTOR-crossover-percent = 75
+
+PREDICTOR-tournament-size = 2
+PREDICTOR-trivial-geography-radius = 0

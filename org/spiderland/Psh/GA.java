@@ -522,6 +522,20 @@ public abstract class GA implements Serializable {
 
 		return total;
 	}
+	
+	/**
+	 * Computes the absolute-average-of-errors fitness from an error vector.
+	 * 
+	 * @return the average error value for the vector.
+	 */
+	protected float AbsoluteAverageOfErrors(ArrayList<Float> inArray) {
+		float total = 0.0f;
+
+		for (int n = 0; n < inArray.size(); n++)
+			total += Math.abs(inArray.get(n));
+
+		return (total / inArray.size());
+	}
 
 	/**
 	 * Called at the beginning of each generation. This method may be overridden

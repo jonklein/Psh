@@ -5,8 +5,14 @@ public class CEFloatRegPrediction extends CEPredictionGA {
 
 	@Override
 	protected void InitIndividual(GAIndividual inIndividual) {
-		// TODO Auto-generated method stub
+		CEFloatRegPredictionIndividual i = (CEFloatRegPredictionIndividual) inIndividual;
 
+		int[] samples = new int[CEFloatRegPredictionIndividual._sampleSize];
+		for(int j = 0; j < samples.length; j++){
+			samples[j] = _RNG.nextInt(_testCases.size());
+			
+		}
+		i.SetSampleIndicesAndSolutionGA(_solutionGA, samples);
 	}
 
 	@Override
@@ -23,9 +29,9 @@ public class CEFloatRegPrediction extends CEPredictionGA {
 	}
 	
 	@Override
-	protected void AddNewTrainer() {
+	protected PushGPIndividual ChooseNewTrainer() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 	
 	@Override

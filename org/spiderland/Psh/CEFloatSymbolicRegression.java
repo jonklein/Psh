@@ -76,6 +76,9 @@ public class CEFloatSymbolicRegression extends PushGP {
 	protected void InitInterpreter(Interpreter inInterpreter) {
 	}
 	
+	/**
+	 * Evaluates a solution individual using the best predictor so far.
+	 */
 	protected void EvaluateIndividual(GAIndividual inIndividual,
 			boolean duringSimplify) {
 		ArrayList<Float> errors = new ArrayList<Float>();
@@ -84,21 +87,33 @@ public class CEFloatSymbolicRegression extends PushGP {
 			_averageSize += ((PushGPIndividual) inIndividual)._program
 					.programsize();
 
-		long t = System.currentTimeMillis();
 
 		for (int n = 0; n < _testCases.size(); n++) {
 			GATestCase test = _testCases.get(n);
 			float e = EvaluateTestCase(inIndividual, test._input, test._output);
 			errors.add(e);
 		}
-		t = System.currentTimeMillis() - t;
 
 		inIndividual.SetFitness(AbsoluteSumOfErrors(errors));
 		inIndividual.SetErrors(errors);
 
-		//System.out.println("Evaluated individual in " + t + " msec: fitness "
-		//		+ inIndividual.GetFitness());
 		
+	}
+	
+	/**
+	 * Evaluates a trainer's exact fitness and sets it.
+	 */
+	protected void EvaluateTrainerExactFitness(PushGPIndividual inTrainer){
+		ArrayList<Float> errors = new ArrayList<Float>();
+
+		for (int n = 0; n < _testCases.size(); n++) {
+			GATestCase test = _testCases.get(n);
+			float e = EvaluateTestCase(inTrainer, test._input, test._output);
+			errors.add(e);
+		}
+
+		inTrainer.SetFitness(AbsoluteAverageOfErrors(errors));
+		inTrainer.SetErrors(errors);	
 	}
 
 	protected float EvaluateTestCase(GAIndividual inIndividual, Object inInput,

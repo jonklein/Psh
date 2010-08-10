@@ -62,14 +62,16 @@ public class InspectorInput {
 
 		// Get programString
 		int indexNewline = fileString.indexOf("\n");
-		String programString = fileString.substring(0, indexNewline);
+		String programString = fileString.substring(0, indexNewline).trim();
 		fileString = fileString.substring(indexNewline + 1);
 
 		// Get _executionLimit
 		indexNewline = fileString.indexOf("\n");
 		if (indexNewline != -1) {
-			_executionLimit = Integer.parseInt(fileString.substring(0,
-					indexNewline));
+			
+			String limitString = fileString.substring(0,indexNewline).trim();
+			
+			_executionLimit = Integer.parseInt(limitString);
 			fileString = fileString.substring(indexNewline + 1);
 		} else {
 			// If here, no inputs to be pushed were included
@@ -81,7 +83,7 @@ public class InspectorInput {
 		// at this point, then can still do the following with correct result.
 		indexNewline = fileString.indexOf("\n");
 		if (indexNewline != -1)
-			fileString = fileString.substring(0, indexNewline);
+			fileString = fileString.substring(0, indexNewline).trim();
 
 		// Check for input.inN instructions
 		checkForInputIn(programString);

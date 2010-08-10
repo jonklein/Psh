@@ -202,9 +202,9 @@ abstract public class PushGP extends GA {
 			GAIndividual i = _populations[_currentPopulation][n];
 
 			EvaluateIndividual(i);
-			
-			totalFitness += i.GetFitness();
 
+			totalFitness += i.GetFitness();
+			
 			if (i.GetFitness() < _bestFitness) {
 				_bestFitness = i.GetFitness();
 				_bestIndividual = n;
@@ -213,7 +213,7 @@ abstract public class PushGP extends GA {
 			}
 		}
 		
-		_meanFitness = totalFitness / _populations[_currentPopulation].length;
+		_meanFitness = totalFitness / _populations[_currentPopulation].length;	
 	}
 
 	protected void EvaluateIndividual(GAIndividual inIndividual) {

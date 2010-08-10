@@ -111,8 +111,7 @@ public class FloatSymbolicRegression extends PushGP {
 				_executionLimit);
 
 		float result = stack.top();
-		// System.out.println( _interpreter + " " + result );
-
+		
 		return result - ((Float) inOutput);
 	}
 

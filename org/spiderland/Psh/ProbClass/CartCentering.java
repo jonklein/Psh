@@ -34,6 +34,8 @@ import org.spiderland.Psh.floatStack;
  * the track. The problem is to stop the cart at the origin (within reasonable
  * approximations) by applying a fixed-magnitude force to accelerate the cart
  * in the forward or backward direction.
+ * 
+ * Note: Cart centering does not yet support test case generators.
  */
 public class CartCentering extends PushGP {
 	private static final long serialVersionUID = 1L;

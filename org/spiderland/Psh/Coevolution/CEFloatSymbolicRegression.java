@@ -23,10 +23,12 @@ import org.spiderland.Psh.GA;
 import org.spiderland.Psh.GAIndividual;
 import org.spiderland.Psh.GATestCase;
 import org.spiderland.Psh.Interpreter;
+import org.spiderland.Psh.ObjectPair;
 import org.spiderland.Psh.Program;
 import org.spiderland.Psh.PushGP;
 import org.spiderland.Psh.PushGPIndividual;
 import org.spiderland.Psh.floatStack;
+import org.spiderland.Psh.TestCase.TestCaseGenerator;
 
 /**
  * This problem class implements symbolic regression for floating point numbers
@@ -49,25 +51,55 @@ public class CEFloatSymbolicRegression extends PushGP {
 		super.InitFromParameters();
 		
 		_effort = 0;
+		
+		String cases = GetParam("test-cases", true);
+		String casesClass = GetParam("test-case-class", true);
+		if (cases == null && casesClass == null) {
+			throw new Exception("No acceptable test-case parameter.");
+		}
 
-		String cases = GetParam("test-cases");
+		if (casesClass != null) {
+			// Get test cases from the TestCasesClass.
+			Class<?> iclass = Class.forName(casesClass);
+			Object iObject = iclass.newInstance();
+			if (!(iObject instanceof TestCaseGenerator)) {
+				throw (new Exception(
+						"test-case-class must inherit from class TestCaseGenerator"));
+			}
 
-		Program caselist = new Program(_interpreter, cases);
+			TestCaseGenerator testCaseGenerator = (TestCaseGenerator) iObject;
+			int numTestCases = testCaseGenerator.TestCaseCount();
 
-		for (int i = 0; i < caselist.size(); i++) {
-			Program p = (Program) caselist.peek(i);
+			for (int i = 0; i < numTestCases; i++) {
+				ObjectPair testCase = testCaseGenerator.TestCase(i);
 
-			if (p.size() < 2)
-				throw new Exception("Not enough elements for fitness case \""
-						+ p + "\"");
+				Float in = (Float) testCase._first;
+				Float out = (Float) testCase._second;
 
-			Float in = new Float(p.peek(0).toString());
-			Float out = new Float(p.peek(1).toString());
+				Print(";; Fitness case #" + i + " input: " + in + " output: "
+						+ out + "\n");
 
-			Print(";; Fitness case #" + i + " input: " + in + " output: " + out
-					+ "\n");
-
-			_testCases.add(new GATestCase(in, out));
+				_testCases.add(new GATestCase(in, out));
+			}
+		} else {
+			// Get test cases from test-cases.
+			Program caselist = new Program(_interpreter, cases);
+	
+			for (int i = 0; i < caselist.size(); i++) {
+				Program p = (Program) caselist.peek(i);
+	
+				if (p.size() < 2)
+					throw new Exception("Not enough elements for fitness case \""
+							+ p + "\"");
+	
+				Float in = new Float(p.peek(0).toString());
+				Float out = new Float(p.peek(1).toString());
+	
+				Print(";; Fitness case #" + i + " input: " + in + " output: " + out
+						+ "\n");
+	
+				_testCases.add(new GATestCase(in, out));
+			}
 		}
 		
 		//Create and initialize predictors

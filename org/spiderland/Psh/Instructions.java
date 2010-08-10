@@ -252,6 +252,21 @@ class IntegerAdd extends BinaryIntegerInstruction {
 	
 	@Override
 	int BinaryOperator(int inA, int inB) {
+		// Test for overflow
+		if((Math.abs(inA) > Integer.MAX_VALUE / 10) ||
+				(Math.abs(inB) > Integer.MAX_VALUE / 10)){
+			long lA = (long) inA;
+			long lB = (long) inB;
+			if(lA + lB != inA + inB){
+				if(inA > 0){
+					return Integer.MAX_VALUE;
+				}
+				else{
+					return Integer.MIN_VALUE;
+				}
+			}
+		}
+		
 		return inA + inB;
 	}
 }
@@ -261,6 +276,21 @@ class IntegerSub extends BinaryIntegerInstruction {
 	
 	@Override
 	int BinaryOperator(int inA, int inB) {
+		// Test for overflow
+		if((Math.abs(inA) > Integer.MAX_VALUE / 10) ||
+				(Math.abs(inB) > Integer.MAX_VALUE / 10)){
+			long lA = (long) inA;
+			long lB = (long) inB;
+			if(lA - lB != inA - inB){
+				if(inA > 0){
+					return Integer.MAX_VALUE;
+				}
+				else{
+					return Integer.MIN_VALUE;
+				}
+			}
+		}
+		
 		return inA - inB;
 	}
 }
@@ -279,6 +309,21 @@ class IntegerMul extends BinaryIntegerInstruction {
 	
 	@Override
 	int BinaryOperator(int inA, int inB) {
+		// Test for overflow
+		if((Math.abs(inA) > Math.sqrt(Integer.MAX_VALUE - 1)) ||
+				(Math.abs(inB) > Math.sqrt(Integer.MAX_VALUE - 1))){
+			long lA = (long) inA;
+			long lB = (long) inB;
+			if(lA * lB != inA * inB){
+				if((inA > 0 && inB > 0) || (inA < 0 && inB < 0)){
+					return Integer.MAX_VALUE;
+				}
+				else{
+					return Integer.MIN_VALUE;
+				}
+			}
+		}
+		
 		return inA * inB;
 	}
 }
@@ -297,7 +342,19 @@ class IntegerPow extends BinaryIntegerInstruction {
 	
 	@Override
 	int BinaryOperator(int inA, int inB) {
-		return (int) Math.pow(inA, inB);
+		// Test for overflow
+		double result = Math.pow(inA, inB);
+		if(Double.isInfinite(result) && result > 0){
+			return Integer.MAX_VALUE;
+		}
+		if(Double.isInfinite(result) && result < 0){
+			return Integer.MIN_VALUE;
+		}
+		if(Double.isNaN(result)){
+			return 0;
+		}
+		
+		return (int) result;
 	}
 }
 
@@ -351,6 +408,10 @@ class IntegerNeg extends UnaryIntInstruction {
 	
 	@Override
 	int UnaryOperator(int inValue) {
+		// Test for overflow
+		if(inValue == Integer.MIN_VALUE)
+			return Integer.MAX_VALUE;
+		
 		return -inValue;
 	}
 }
@@ -432,7 +493,16 @@ class FloatAdd extends BinaryFloatInstruction {
 	
 	@Override
 	float BinaryOperator(float inA, float inB) {
-		return inA + inB;
+		// Test for overflow
+		float result = inA + inB;
+		if(Float.isInfinite(result) && result > 0){
+			return Float.MAX_VALUE;
+		}
+		if(Float.isInfinite(result) && result < 0){
+			return (1.0f - Float.MAX_VALUE);
+		}
+		
+		return result;
 	}
 }
 
@@ -441,6 +511,15 @@ class FloatSub extends BinaryFloatInstruction {
 	
 	@Override
 	float BinaryOperator(float inA, float inB) {
+		// Test for overflow
+		float result = inA - inB;
+		if(Float.isInfinite(result) && result > 0){
+			return Float.MAX_VALUE;
+		}
+		if(Float.isInfinite(result) && result < 0){
+			return (1.0f - Float.MAX_VALUE);
+		}
+		
 		return inA - inB;
 	}
 }
@@ -450,6 +529,18 @@ class FloatMul extends BinaryFloatInstruction {
 	
 	@Override
 	float BinaryOperator(float inA, float inB) {
+		// Test for overflow
+		float result = inA * inB;
+		if(Float.isInfinite(result) && result > 0){
+			return Float.MAX_VALUE;
+		}
+		if(Float.isInfinite(result) && result < 0){
+			return (1.0f - Float.MAX_VALUE);
+		}
+		if(Float.isNaN(result)){
+			return 0.0f;
+		}
+		
 		return inA * inB;
 	}
 }
@@ -459,7 +550,19 @@ class FloatDiv extends BinaryFloatInstruction {
 	
 	@Override
 	float BinaryOperator(float inA, float inB) {
-		return inB != 0.0f ? (inA / inB) : 0.0f;
+		// Test for overflow
+		float result = inA / inB;
+		if(Float.isInfinite(result) && result > 0){
+			return Float.MAX_VALUE;
+		}
+		if(Float.isInfinite(result) && result < 0){
+			return (1.0f - Float.MAX_VALUE);
+		}
+		if(Float.isNaN(result)){
+			return 0.0f;
+		}
+		
+		return result;
 	}
 }
 
@@ -477,11 +580,18 @@ class FloatPow extends BinaryFloatInstruction {
 	
 	@Override
 	float BinaryOperator(float inA, float inB) {
+		// Test for overflow
 		float result = (float) Math.pow(inA, inB);
-		// Return 0 if the result is infinite or not a number.
-		if(Float.isInfinite(result) || Float.isNaN(result)){
+		if(Float.isInfinite(result) && result > 0){
+			return Float.MAX_VALUE;
+		}
+		if(Float.isInfinite(result) && result < 0){
+			return (1.0f - Float.MAX_VALUE);
+		}
+		if(Float.isNaN(result)){
 			return 0.0f;
 		}
+		
 		return result;
 	}
 }
@@ -546,7 +656,19 @@ class FloatTan extends UnaryFloatInstruction {
 	
 	@Override
 	float UnaryOperator(float inValue) {
-		return (float) Math.tan(inValue);
+		// Test for overflow
+		float result = (float) Math.tan(inValue);
+		if(Float.isInfinite(result) && result > 0){
+			return Float.MAX_VALUE;
+		}
+		if(Float.isInfinite(result) && result < 0){
+			return (1.0f - Float.MAX_VALUE);
+		}
+		if(Float.isNaN(result)){
+			return 0.0f;
+		}
+		
+		return result;
 	}
 }
 
@@ -555,7 +677,19 @@ class FloatExp extends UnaryFloatInstruction {
 	
 	@Override
 	float UnaryOperator(float inValue) {
-		return (float) Math.exp(inValue);
+		// Test for overflow
+		float result = (float) Math.exp(inValue);
+		if(Float.isInfinite(result) && result > 0){
+			return Float.MAX_VALUE;
+		}
+		if(Float.isInfinite(result) && result < 0){
+			return (1.0f - Float.MAX_VALUE);
+		}
+		if(Float.isNaN(result)){
+			return 0.0f;
+		}
+		
+		return result;
 	}
 }
 

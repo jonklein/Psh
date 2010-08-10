@@ -36,7 +36,7 @@ public abstract class GA implements Serializable {
 	protected float _crossoverPercent;
 
 	protected float _bestFitness;
-	protected float _meanFitness;
+	protected double _meanFitness;
 	protected int _bestIndividual;
 
 	protected ArrayList<Float> _bestErrors;
@@ -346,7 +346,7 @@ public abstract class GA implements Serializable {
 	 */
 
 	protected void Evaluate() {
-		float totalFitness = 0;
+		double totalFitness = 0;
 		_bestFitness = Float.MAX_VALUE;
 
 		for (int n = 0; n < _populations[_currentPopulation].length; n++) {
@@ -517,8 +517,9 @@ public abstract class GA implements Serializable {
 	protected float AbsoluteSumOfErrors(ArrayList<Float> inArray) {
 		float total = 0.0f;
 
-		for (int n = 0; n < inArray.size(); n++)
+		for (int n = 0; n < inArray.size(); n++){
 			total += Math.abs(inArray.get(n));
+		}
 
 		return total;
 	}

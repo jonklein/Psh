@@ -202,7 +202,7 @@ abstract public class PushGP extends GA {
 			GAIndividual i = _populations[_currentPopulation][n];
 
 			EvaluateIndividual(i);
-
+			
 			totalFitness += i.GetFitness();
 
 			if (i.GetFitness() < _bestFitness) {
@@ -212,7 +212,7 @@ abstract public class PushGP extends GA {
 				_bestErrors = i.GetErrors();
 			}
 		}
-
+		
 		_meanFitness = totalFitness / _populations[_currentPopulation].length;
 	}
 

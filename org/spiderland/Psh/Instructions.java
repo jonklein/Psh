@@ -477,7 +477,12 @@ class FloatPow extends BinaryFloatInstruction {
 	
 	@Override
 	float BinaryOperator(float inA, float inB) {
-		return (float) Math.pow(inA, inB);
+		float result = (float) Math.pow(inA, inB);
+		// Return 0 if the result is infinite or not a number.
+		if(Float.isInfinite(result) || Float.isNaN(result)){
+			return 0.0f;
+		}
+		return result;
 	}
 }
 

@@ -39,35 +39,35 @@ public class FloatSymbolicRegression extends PushGP {
 		super.InitFromParameters();
 
 		String cases = GetParam("test-cases", true);
-		String casesClass = GetParam("test-case-class", true);		
-		if(cases == null && casesClass == null){
+		String casesClass = GetParam("test-case-class", true);
+		if (cases == null && casesClass == null) {
 			throw new Exception("No acceptable test-case parameter.");
 		}
-		
-		if(casesClass != null){
+
+		if (casesClass != null) {
 			// Get test cases from the TestCasesClass.
 			Class<?> iclass = Class.forName(casesClass);
 			Object iObject = iclass.newInstance();
-			if (!(iObject instanceof TestCaseGenerator)){
-				throw (new Exception("test-case-class must inherit from class TestCaseGenerator"));
+			if (!(iObject instanceof TestCaseGenerator)) {
+				throw (new Exception(
+						"test-case-class must inherit from class TestCaseGenerator"));
 			}
-			
+
 			TestCaseGenerator testCaseGenerator = (TestCaseGenerator) iObject;
 			int numTestCases = testCaseGenerator.TestCaseCount();
-			
-			for(int i = 0; i < numTestCases; i++){
+
+			for (int i = 0; i < numTestCases; i++) {
 				ObjectPair testCase = testCaseGenerator.TestCase(i);
-				
+
 				Float in = (Float) testCase._first;
 				Float out = (Float) testCase._second;
-				
+
 				Print(";; Fitness case #" + i + " input: " + in + " output: "
 						+ out + "\n");
 
 				_testCases.add(new GATestCase(in, out));
 			}
-		}
-		else {
+		} else {
 			// Get test cases from test-cases.
 			Program caselist = new Program(_interpreter, cases);
 
@@ -88,7 +88,7 @@ public class FloatSymbolicRegression extends PushGP {
 				_testCases.add(new GATestCase(in, out));
 			}
 		}
-		
+
 	}
 
 	protected void InitInterpreter(Interpreter inInterpreter) {
@@ -115,7 +115,7 @@ public class FloatSymbolicRegression extends PushGP {
 
 		return result - ((Float) inOutput);
 	}
-	
+
 	protected boolean Success() {
 		return _bestFitness <= 0.1 * _testCases.size();
 	}

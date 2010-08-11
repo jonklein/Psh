@@ -46,7 +46,7 @@ final-simplifications = 2000
 ### Setup problem class and test cases.
 
 problem-class = org.spiderland.Psh.Coevolution.CEFloatSymbolicRegression
-test-cases = ((1 7) (2 20) (3 39) (4 64) (5 95) (6 132) (7 175))
+test-case-class = org.spiderland.Psh.TestCase.CEFloatRegTestCases1
 instruction-set = (registered.float input.makeinputs1)
 
 

@@ -52,7 +52,7 @@ instruction-set = (registered.float input.makeinputs1)
 
 ### Setup predictor GP parameters
 
-PREDICTOR-problem-class = org.spiderland.Psh.Coevolution.FitnessPredictor
+PREDICTOR-problem-class = org.spiderland.Psh.Coevolution.FloatRegFitPrediction
 PREDICTOR-population-size = 10
 PREDICTOR-effort-percent = 5
 

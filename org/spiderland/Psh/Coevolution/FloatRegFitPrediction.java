@@ -3,7 +3,7 @@ package org.spiderland.Psh.Coevolution;
 import org.spiderland.Psh.GAIndividual;
 import org.spiderland.Psh.PushGPIndividual;
 
-public class FloatRegPrediction extends PredictionGA {
+public class FloatRegFitPrediction extends PredictionGA {
 	private static final long serialVersionUID = 1L;
 
 	@Override

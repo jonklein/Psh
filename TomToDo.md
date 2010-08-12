@@ -22,6 +22,7 @@ Done Major Changes
 - Implement new problem class CartCentering.java, that is used for the Cart Centering problem described by Koza in Genetic Programming.
 - Change Psh over to Apache 2.0 license.
 - Implement new instructions: integer.pow, integer.min, integer.max, float.exp, float.pow
+- Create more difficult float regression example that uses many test cases, and to do so creates it's test cases using TestCaseGenerator.java.
 
 
 Done Minor Changes
@@ -50,10 +51,10 @@ Done Minor Changes
 
 To Do Still
 -----------
-- Create more difficult float regression example that uses many test cases, and to do so creates it's test cases using TestCaseGenerator.java.
 - Make way to conduct multiple runs and get statistics about those runs, to compare things such as population, generations, or use of ERCs.
 - Add co-evolution fitness predictors. This will be a big project (make a git branch).
   - Many GA an PushGP methods are can be overwritten in order to implement co-evolution.
+- Add instructions for integer.fromfloat, float.frominteger, etc.
 - During Auto-simplification, instead of only flattening or removing random points, could run a subprogram for a bit, and then replace it by whatever constants are left on the stacks. This would be useful when code like "boolean.stackdepth" is used only to get a 0 on the int stack.
 
 

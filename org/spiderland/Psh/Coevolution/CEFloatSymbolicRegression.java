@@ -107,9 +107,10 @@ public class CEFloatSymbolicRegression extends PushGP {
 		_predictorGA = (PredictionGA) GA.GAWithParameters(GetPredictorParameters(_parameters));
 		_predictorGA.SetGAandTrainers(this);
 		
+		System.out.println("yay, made it!");
 		
 		//_predictorGA.Run();
-		//System.exit(0);
+		System.exit(0);
 		
 		
 	}
@@ -207,7 +208,7 @@ public class CEFloatSymbolicRegression extends PushGP {
 		
 		
 		///? remove below
-		predictorParameters.put("problem-class", "org.spiderland.Psh.IntSymbolicRegression");
+		predictorParameters.put("problem-class", "org.spiderland.Psh.ProbClass.IntSymbolicRegression");
 		predictorParameters.put("max-random-code-size","35");
 		predictorParameters.put("execution-limit","150");
 		predictorParameters.put("max-points-in-program","50");

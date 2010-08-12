@@ -148,6 +148,7 @@ Major Changes since v1.0:
 - Implement new instructions: integer.pow, integer.min, integer.max, float.exp, float.pow. Also, fixed a bug in float.max.
 - Moved problem classes and test cases to their own packages to reduce clutter.
 - Fixed holes in many integer and float instructions that could cause underflow, overflow, or NaN errors.
+- Made FloatSymbolicRegression and IntSymbolicRegression as well as co-evolved FloatSymbolicRegression work with test-case generators.
 
 Major Changes since v0.3:
 -------------------------

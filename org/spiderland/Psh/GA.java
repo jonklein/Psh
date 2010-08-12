@@ -65,6 +65,9 @@ public abstract class GA implements Serializable {
 
 	public static GA GAWithParameters(HashMap<String, String> inParams)
 			throws Exception {
+		
+		System.out.println("\n\n" + inParams.get("problem-class"));//trh
+		
 		Class<?> cls = Class.forName(inParams.get("problem-class"));
 
 		Object gaObject = cls.newInstance();

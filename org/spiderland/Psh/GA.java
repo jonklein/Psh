@@ -292,7 +292,7 @@ public abstract class GA implements Serializable {
 	 */
 
 	public boolean Run(int inGenerations) throws Exception {
-		// inGenerations must have != below, not >, since often inGenerations
+		// inGenerations below must have !=, not >, since often inGenerations
 		// is called at -1
 		while (!Terminate() && inGenerations != 0) {
 			BeginGeneration();

@@ -31,16 +31,23 @@ public abstract class GAIndividual implements Serializable {
 
 	float _fitness;
 	ArrayList<Float> _errors;
+	
+	boolean _fitnessSet;
 
-	float GetFitness() {
+	public boolean FitnessIsSet(){
+		return _fitnessSet;
+	}
+	
+	public float GetFitness() {
 		return _fitness;
 	}
 
 	public void SetFitness(float inFitness) {
 		_fitness = inFitness;
+		_fitnessSet = true;
 	}
 
-	ArrayList<Float> GetErrors() {
+	public ArrayList<Float> GetErrors() {
 		return _errors;
 	}
 

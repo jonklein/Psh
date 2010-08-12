@@ -106,12 +106,12 @@ public class CEFloatSymbolicRegression extends PushGP {
 				true);
 		_predictorGA = PredictionGA.PredictionGAWithParameters(this,
 				GetPredictorParameters(_parameters));
-		
-		
-		
-		System.out.println("yay, made it!");
 
-		// _predictorGA.Run();
+		//trh
+		_predictorGA.Run();
+		
+		//trh
+		System.out.println("&&&&&&&&&&&&made it through run");
 		System.exit(0);
 
 	}

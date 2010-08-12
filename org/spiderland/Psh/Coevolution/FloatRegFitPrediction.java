@@ -1,5 +1,7 @@
 package org.spiderland.Psh.Coevolution;
 
+import java.util.ArrayList;
+
 import org.spiderland.Psh.GAIndividual;
 import org.spiderland.Psh.PushGPIndividual;
 
@@ -9,10 +11,6 @@ public class FloatRegFitPrediction extends PredictionGA {
 	@Override
 	protected void InitIndividual(GAIndividual inIndividual) {
 		FloatRegFitPredictionIndividual i = (FloatRegFitPredictionIndividual) inIndividual;
-
-		
-
-		System.out.println("-------- new individual");
 		
 		int[] samples = new int[FloatRegFitPredictionIndividual._sampleSize];
 		for(int j = 0; j < samples.length; j++){
@@ -23,17 +21,41 @@ public class FloatRegFitPrediction extends PredictionGA {
 
 	@Override
 	protected void EvaluateIndividual(GAIndividual inIndividual) {
-		// TODO Auto-generated method stub
+		
+		FloatRegFitPredictionIndividual predictor = (FloatRegFitPredictionIndividual) inIndividual;
+		ArrayList<Float> errors = new ArrayList<Float>();
 
+		for(int i = 0; i < _trainerPopulationSize; i++){
+			float e = predictor.PredictSolutionFitness(_trainerPopulation.get(i));
+			errors.add(e);
+		}
+		
+		predictor.SetFitness(AbsoluteAverageOfErrors(errors));
+		predictor.SetErrors(errors);
 	}
 
+	/**
+	 * Determines the predictor's fitness on a trainer, where the trainer is the
+	 * inInput, and the trainer's actual fitness is inOutput. The fitness of
+	 * the predictor is the absolute error between the prediction and the
+	 * trainer's actual fitness.
+	 * 
+	 * @return Predictor's fitness (i.e. error) for the given trainer.
+	 * @throws Exception 
+	 */
 	@Override
 	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
 			Object inOutput) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		PushGPIndividual trainer = (PushGPIndividual) inInput;
+		float trainerFitness = (Float) inOutput;
+
+		float predictedTrainerFitness = ((PredictionGAIndividual) inIndividual)
+				.PredictSolutionFitness(trainer);
+
+		return Math.abs(predictedTrainerFitness - trainerFitness);
 	}
-	
+
 	@Override
 	protected PushGPIndividual ChooseNewTrainer() {
 		// TODO Auto-generated method stub
@@ -42,8 +64,11 @@ public class FloatRegFitPrediction extends PredictionGA {
 	
 	@Override
 	protected void EvaluateTrainerFitnesses() {
-		// TODO Auto-generated method stub
-
+		for(PushGPIndividual trainer : _trainerPopulation){
+			if(!trainer.FitnessIsSet()){
+				EvaluateTrainer(trainer);
+			}	
+		}
 	}
 
 	@Override

@@ -31,8 +31,9 @@ public abstract class PredictionGAIndividual extends GAIndividual {
 
 	/**
 	 * Predicts the fitness of the input PushGPIndividual
-	 * @param pgpIndividual
-	 * @return
+	 * 
+	 * @param individual to predict the fitness of
+	 * @return predicted fitness
 	 */
 	public abstract float PredictSolutionFitness(PushGPIndividual pgpIndividual);
 	
@@ -48,10 +49,6 @@ public abstract class PredictionGAIndividual extends GAIndividual {
 			total += Math.abs(inArray.get(n));
 
 		return (total / inArray.size());
-	}
-	
-	public String toString() {
-		return "CE PREDICTOR INDIVIDUAL";
 	}
 
 }

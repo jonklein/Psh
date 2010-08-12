@@ -8,12 +8,15 @@ public class FloatRegFitPrediction extends PredictionGA {
 
 	@Override
 	protected void InitIndividual(GAIndividual inIndividual) {
-		FloatRegPredictionIndividual i = (FloatRegPredictionIndividual) inIndividual;
+		FloatRegFitPredictionIndividual i = (FloatRegFitPredictionIndividual) inIndividual;
 
-		int[] samples = new int[FloatRegPredictionIndividual._sampleSize];
+		
+
+		System.out.println("-------- new individual");
+		
+		int[] samples = new int[FloatRegFitPredictionIndividual._sampleSize];
 		for(int j = 0; j < samples.length; j++){
-			samples[j] = _RNG.nextInt(_testCases.size());
-			
+			samples[j] = _RNG.nextInt(_solutionGA._testCases.size());
 		}
 		i.SetSampleIndicesAndSolutionGA(_solutionGA, samples);
 	}

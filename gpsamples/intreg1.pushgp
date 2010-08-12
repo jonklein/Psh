@@ -41,7 +41,6 @@ max-random-code-size	= 40
 
 execution-limit		= 80
 
-
 reproduction-simplifications = 25
 report-simplifications	= 100
 final-simplifications	= 1000

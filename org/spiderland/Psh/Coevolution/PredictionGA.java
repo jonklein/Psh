@@ -16,6 +16,8 @@
 
 package org.spiderland.Psh.Coevolution;
 
+import java.util.HashMap;
+
 import org.spiderland.Psh.GA;
 import org.spiderland.Psh.GAIndividual;
 import org.spiderland.Psh.PushGP;
@@ -40,11 +42,42 @@ public abstract class PredictionGA extends GA {
 
 	protected PushGP _solutionGA;
 
+	/**
+	 * Customizes GA.GAWithParameters to allow the inclusion of the solution GA,
+	 * which is required for the initialization of the prediction GA.
+	 * 
+	 * @param ceFloatSymbolicRegression
+	 * @param getPredictorParameters
+	 * @return
+	 * @throws Exception 
+	 */
+	public static PredictionGA PredictionGAWithParameters(PushGP inSolutionGA,
+			HashMap<String, String> inParams) throws Exception {
+
+		Class<?> cls = Class.forName(inParams.get("problem-class"));
+		Object gaObject = cls.newInstance();
+		if (!(gaObject instanceof PredictionGA))
+			throw (new Exception("Predictor problem-class must inherit from"
+					+ " class PredictorGA"));
+
+		PredictionGA ga = (PredictionGA) gaObject;
+
+		// Must set the solution GA before InitFromParameters, since the latter
+		// uses _solutionGA while creating the predictor population.
+		ga.SetSolutionGA(inSolutionGA);
+		ga.SetParams(inParams);
+		ga.InitFromParameters();
+
+		return null;
+	}
+
 	@Override
 	protected void InitFromParameters() throws Exception {
 		_generationsBetweenTrainers = (int) GetFloatParam("generations-between-trainers");
 		_trainerPopulationSize = (int) GetFloatParam("trainer-population-size");
 
+		InitTrainerPopulation();
+		
 		super.InitFromParameters();
 	}
 
@@ -62,10 +95,11 @@ public abstract class PredictionGA extends GA {
 		if (_generationCount % _generationsBetweenTrainers == (-1)
 				% _generationsBetweenTrainers) {
 			// Time to add a new trainer
-			
-			//TODO Fix below with the new functions
-			/*AddNewTrainer();
-			EvaluateTrainerFitnesses();*/
+
+			// TODO Fix below with the new functions
+			/*
+			 * AddNewTrainer(); EvaluateTrainerFitnesses();
+			 */
 		}
 	}
 
@@ -75,12 +109,7 @@ public abstract class PredictionGA extends GA {
 		return false;
 	}
 
-	protected void SetGAandTrainers(PushGP inGA) {
-		SetSolutionGA(inGA);
-		InitTrainerPopulation();
-	}
-
-	private void SetSolutionGA(PushGP inGA) {
+	protected void SetSolutionGA(PushGP inGA) {
 		_solutionGA = inGA;
 	}
 
@@ -106,13 +135,13 @@ public abstract class PredictionGA extends GA {
 	protected String FinalReport() {
 		return "";
 	}
-	
+
 	/**
 	 * Initiates inIndividual as a random predictor individual.
 	 */
 	@Override
 	protected abstract void InitIndividual(GAIndividual inIndividual);
-	
+
 	/**
 	 * Evaluates a CEPredictorGAIndividual's fitness, based on the difference
 	 * between the prediction of the fitness and the actual fitness of the
@@ -139,12 +168,13 @@ public abstract class PredictionGA extends GA {
 
 	/**
 	 * Calculates and sets inTrainer's fitness.
+	 * 
 	 * @param inTrainer
 	 */
-	protected void EvaluateTrainer(PushGPIndividual inTrainer){
+	protected void EvaluateTrainer(PushGPIndividual inTrainer) {
 		_solutionGA.EvaluateTrainerExactFitness(inTrainer);
 	}
-	
+
 	/**
 	 * Trainer fitnesses may be calculated and stored differently depending on
 	 * the type of predictor. For example, fitness predictors will calculate and

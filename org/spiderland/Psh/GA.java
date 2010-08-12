@@ -66,8 +66,6 @@ public abstract class GA implements Serializable {
 	public static GA GAWithParameters(HashMap<String, String> inParams)
 			throws Exception {
 		
-		System.out.println("\n\n" + inParams.get("problem-class"));//trh
-		
 		Class<?> cls = Class.forName(inParams.get("problem-class"));
 
 		Object gaObject = cls.newInstance();
@@ -265,12 +263,11 @@ public abstract class GA implements Serializable {
 
 		GAIndividual individual = (GAIndividual) iObject;
 
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < inSize; j++) {
-				_populations[i][j] = individual.clone();
-				InitIndividual(_populations[i][j]);
-			}
+		for (int i = 0; i < inSize; i++) {
+			_populations[0][i] = individual.clone();
+			InitIndividual(_populations[0][i]);
 		}
+
 	}
 
 	/**

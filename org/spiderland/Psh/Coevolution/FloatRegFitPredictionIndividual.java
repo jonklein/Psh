@@ -7,7 +7,7 @@ import org.spiderland.Psh.GATestCase;
 import org.spiderland.Psh.PushGP;
 import org.spiderland.Psh.PushGPIndividual;
 
-public class FloatRegPredictionIndividual extends PredictionGAIndividual {
+public class FloatRegFitPredictionIndividual extends PredictionGAIndividual {
 	private static final long serialVersionUID = 1L;
 
 	// The sample test cases used for fitness prediction.
@@ -16,12 +16,17 @@ public class FloatRegPredictionIndividual extends PredictionGAIndividual {
 	
 	protected PushGP _solutionGA;
 	
-	FloatRegPredictionIndividual(PushGP inSolutionGA) {
+	public FloatRegFitPredictionIndividual() {
+		_sampleIndices = new int[_sampleSize];
+		_solutionGA = null;
+	}
+	
+	public FloatRegFitPredictionIndividual(PushGP inSolutionGA) {
 		_sampleIndices = new int[_sampleSize];
 		_solutionGA = inSolutionGA;
 	}
 
-	FloatRegPredictionIndividual(PushGP inSolutionGA, int[] inSamples) {
+	FloatRegFitPredictionIndividual(PushGP inSolutionGA, int[] inSamples) {
 		_sampleIndices = new int[_sampleSize];
 		for(int i = 0; i < _sampleSize; i++){
 			_sampleIndices[i] = inSamples[i];
@@ -52,7 +57,7 @@ public class FloatRegPredictionIndividual extends PredictionGAIndividual {
 
 	@Override
 	public GAIndividual clone() {
-		return new FloatRegPredictionIndividual(_solutionGA, _sampleIndices);
+		return new FloatRegFitPredictionIndividual(_solutionGA, _sampleIndices);
 	}
 
 }

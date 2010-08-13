@@ -296,12 +296,12 @@ public abstract class GA implements Serializable {
 		// is called at -1
 		while (!Terminate() && inGenerations != 0) {
 			BeginGeneration();
-
+			
 			Evaluate();
 			Reproduce();
 
 			EndGeneration();
-
+			
 			Print(Report());
 
 			Checkpoint();
@@ -351,7 +351,7 @@ public abstract class GA implements Serializable {
 
 		for (int n = 0; n < _populations[_currentPopulation].length; n++) {
 			GAIndividual i = _populations[_currentPopulation][n];
-
+			
 			EvaluateIndividual(i);
 
 			totalFitness += i.GetFitness();
@@ -538,6 +538,22 @@ public abstract class GA implements Serializable {
 		return (total / inArray.size());
 	}
 
+	/**
+	 * Retrieves GAIndividual at index i from the current population.
+	 * @param i
+	 * @return GAIndividual at index i
+	 */
+	public GAIndividual GetIndividualFromPopulation(int i){
+		return _populations[_currentPopulation][i];
+	}
+	
+	/**
+	 * @return population size
+	 */
+	public int GetPopulationSize(){
+		return _populations[_currentPopulation].length;
+	}
+	
 	/**
 	 * Called at the beginning of each generation. This method may be overridden
 	 * by subclasses to customize GA behavior.

@@ -11,7 +11,7 @@ public class FloatRegFitPredictionIndividual extends PredictionGAIndividual {
 	private static final long serialVersionUID = 1L;
 
 	// The sample test cases used for fitness prediction.
-	public int _sampleIndices[];
+	private int _sampleIndices[];
 	protected static int _sampleSize = 8;
 	
 	protected PushGP _solutionGA;
@@ -25,13 +25,34 @@ public class FloatRegFitPredictionIndividual extends PredictionGAIndividual {
 		_sampleIndices = new int[_sampleSize];
 		_solutionGA = inSolutionGA;
 	}
-
+	
 	public FloatRegFitPredictionIndividual(PushGP inSolutionGA, int[] inSamples) {
 		_sampleIndices = new int[_sampleSize];
 		for(int i = 0; i < _sampleSize; i++){
 			_sampleIndices[i] = inSamples[i];
 		}
 		_solutionGA = inSolutionGA;
+	}
+	
+
+	/**
+	 * Gets the given sample index
+	 * 
+	 * @param inIndex
+	 * @return sample index
+	 */
+	public int GetSampleIndex(int inIndex){
+		return _sampleIndices[inIndex];
+	}
+	
+	/**
+	 * Sets one of the sample indices to a new sample index.
+	 * 
+	 * @param index
+	 * @param sample
+	 */
+	public void SetSampleIndex(int inIndex, int inSample){
+		_sampleIndices[inIndex] = inSample;
 	}
 	
 	public void SetSampleIndicesAndSolutionGA(PushGP inSolutionGA, int[] inSamples){
@@ -41,6 +62,8 @@ public class FloatRegFitPredictionIndividual extends PredictionGAIndividual {
 		}
 		_solutionGA = inSolutionGA;
 	}
+	
+	
 	
 	@Override
 	public float PredictSolutionFitness(PushGPIndividual pgpIndividual) {

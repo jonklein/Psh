@@ -37,10 +37,10 @@ public abstract class PredictionGA extends GA {
 	// Note: Oldest trainer has the lowest index; newest trainer has the highest
 	// index.
 	protected ArrayList<PushGPIndividual> _trainerPopulation;
-	protected ArrayList<Float> _trainerFitnesses;
 	protected int _generationsBetweenTrainers;
 	protected int _trainerPopulationSize;
 
+	// The solution population and genetic algorithm.
 	protected PushGP _solutionGA;
 
 	/**
@@ -93,14 +93,19 @@ public abstract class PredictionGA extends GA {
 
 	@Override
 	protected void BeginGeneration() {
-		if (_generationCount % _generationsBetweenTrainers == (-1)
-				% _generationsBetweenTrainers) {
+		if (_generationCount % _generationsBetweenTrainers == _generationsBetweenTrainers - 1) {
 			// Time to add a new trainer
-
-			// TODO Fix below with the new functions
-			/*
-			 * AddNewTrainer(); EvaluateTrainerFitnesses();
-			 */
+			PushGPIndividual newTrainer = (PushGPIndividual) ChooseNewTrainer().clone();
+			EvaluateTrainer(newTrainer);
+			
+			_trainerPopulation.remove(0);
+			_trainerPopulation.add(newTrainer);
+			
+			//trh
+			System.out.println("ADDING NEW TRAINER: " + newTrainer);
+			
+			
+			EvaluateTrainerFitnesses();
 		}
 	}
 
@@ -109,6 +114,51 @@ public abstract class PredictionGA extends GA {
 		return false;
 	}
 
+	/**
+	 * Chooses a new trainer from the solution population to add to the trainer
+	 * population. The solution individual is chosen with the highest variance
+	 * of the predictions from the current predictor population.
+	 */
+	protected PushGPIndividual ChooseNewTrainer() {
+		ArrayList<Float> individualVariances = new ArrayList<Float>();
+		
+		for (int i = 0; i < _solutionGA.GetPopulationSize(); i++) {
+			PushGPIndividual individual = (PushGPIndividual) _solutionGA
+					.GetIndividualFromPopulation(i);
+
+			ArrayList<Float> predictions = new ArrayList<Float>();
+			for (int j = 0; j < _populations[_currentPopulation].length; j++) {
+				PredictionGAIndividual predictor = (PredictionGAIndividual) _populations[_currentPopulation][j];
+				predictions.add(predictor.PredictSolutionFitness(individual));		
+			}
+
+			individualVariances.add(Variance(predictions));
+		}
+
+		// Find individual with the highest variance
+		int highestVarianceIndividual = 0;
+		float highestVariance = individualVariances.get(0);
+
+		for (int i = 0; i < _solutionGA.GetPopulationSize(); i++) {
+			if (highestVariance < individualVariances.get(i)) {
+				highestVarianceIndividual = i;
+				highestVariance = individualVariances.get(i);
+			}
+		}
+
+		return (PushGPIndividual) _solutionGA
+				.GetIndividualFromPopulation(highestVarianceIndividual);
+	}
+
+	/**
+	 * Calculates and sets inTrainer's fitness.
+	 * 
+	 * @param inTrainer
+	 */
+	protected void EvaluateTrainer(PushGPIndividual inTrainer) {
+		_solutionGA.EvaluateTrainerExactFitness(inTrainer);
+	}
+	
 	protected void SetSolutionGA(PushGP inGA) {
 		_solutionGA = inGA;
 	}
@@ -126,6 +176,8 @@ public abstract class PredictionGA extends GA {
 			_trainerPopulation.add((PushGPIndividual) individual.clone());
 			_solutionGA.InitIndividual(_trainerPopulation.get(i));
 		}
+		
+		EvaluateTrainerFitnesses();
 	}
 
 	protected String Report() {
@@ -134,6 +186,25 @@ public abstract class PredictionGA extends GA {
 
 	protected String FinalReport() {
 		return "";
+	}
+	
+	private Float Variance(ArrayList<Float> list) {
+		float sampleMean = SampleMean(list);
+		float sum = 0;
+		
+		for(float element : list){
+			sum += (element - sampleMean) * (element - sampleMean);
+		}
+		
+		return (sum / (list.size() - 1));
+	}
+
+	private float SampleMean(ArrayList<Float> list) {
+		float total = 0;
+		for(float element : list){
+			total += element;
+		}
+		return (total / list.size());
 	}
 
 	/**
@@ -162,35 +233,20 @@ public abstract class PredictionGA extends GA {
 			Object inInput, Object inOutput);
 
 	/**
-	 * Chooses a new trainer from the solution population to add to the trainer
-	 * population. The solution individual is chosen with the highest variance
-	 * of the predictions from the predictors.
-	 */
-	protected abstract PushGPIndividual ChooseNewTrainer();
-
-	/**
-	 * Calculates and sets inTrainer's fitness.
-	 * 
-	 * @param inTrainer
-	 */
-	protected void EvaluateTrainer(PushGPIndividual inTrainer) {
-		_solutionGA.EvaluateTrainerExactFitness(inTrainer);
-	}
-
-	/**
-	 * Trainer fitnesses may be calculated and stored differently depending on
-	 * the type of predictor. For example, fitness predictors will calculate and
-	 * store fitnesses, where rank predictors will calculate fitnesses but will
-	 * only need the rank of the trainers. The fitnesses of trainers are stored
-	 * in _trainerFitnesses, but subclasses may store other data such as rank in
-	 * order to compare individuals.
+	 * Actual fitnesses of trainers will always be stored as part of the
+	 * PushGPIndividual object. Some predictor types, such as rank predictors,
+	 * will also need a separate storage of data, such as a method of storing
+	 * the ranking of the predictors. Others, such as fitness predictors, may
+	 * just need the fitness information directly from the trainers. This
+	 * function may be used to make sure fitnesses or ranks are updated, i.e. to
+	 * recalculate rank order with the addition of a new trainer.
 	 */
 	protected abstract void EvaluateTrainerFitnesses();
 
 	@Override
-	protected abstract GAIndividual ReproduceByCrossover(int inIndex);
-
-	@Override
 	protected abstract GAIndividual ReproduceByMutation(int inIndex);
+	
+	@Override
+	protected abstract GAIndividual ReproduceByCrossover(int inIndex);
 
 }

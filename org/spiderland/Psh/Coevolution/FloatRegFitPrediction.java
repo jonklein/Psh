@@ -25,7 +25,7 @@ public class FloatRegFitPrediction extends PredictionGA {
 		FloatRegFitPredictionIndividual predictor = (FloatRegFitPredictionIndividual) inIndividual;
 		ArrayList<Float> errors = new ArrayList<Float>();
 
-		for(int i = 0; i < _trainerPopulationSize; i++){
+		for(int i = 0; i < _trainerPopulationSize; i++){			
 			float e = predictor.PredictSolutionFitness(_trainerPopulation.get(i));
 			errors.add(e);
 		}
@@ -57,12 +57,6 @@ public class FloatRegFitPrediction extends PredictionGA {
 	}
 
 	@Override
-	protected PushGPIndividual ChooseNewTrainer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
 	protected void EvaluateTrainerFitnesses() {
 		for(PushGPIndividual trainer : _trainerPopulation){
 			if(!trainer.FitnessIsSet()){
@@ -71,16 +65,35 @@ public class FloatRegFitPrediction extends PredictionGA {
 		}
 	}
 
-	@Override
-	protected GAIndividual ReproduceByCrossover(int inIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/**
+	 * Mutates an individual by choosing an index at random and randomizing
+	 * its training point among possible individuals.
+	 */
 	@Override
 	protected GAIndividual ReproduceByMutation(int inIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		FloatRegFitPredictionIndividual i = (FloatRegFitPredictionIndividual) ReproduceByClone(inIndex);
+
+		int index = _RNG.nextInt(FloatRegFitPredictionIndividual._sampleSize);
+		i.SetSampleIndex(index, _RNG.nextInt(_solutionGA._testCases.size()));
+		
+		return i;
 	}
 
+	@Override
+	protected GAIndividual ReproduceByCrossover(int inIndex) {
+		FloatRegFitPredictionIndividual a = (FloatRegFitPredictionIndividual) ReproduceByClone(inIndex);
+		FloatRegFitPredictionIndividual b = (FloatRegFitPredictionIndividual) TournamentSelect(
+				_tournamentSize, inIndex);
+		
+		// crossoverPoint is the first index of a that will be changed to the
+		// gene from b.
+		int crossoverPoint = _RNG
+				.nextInt(FloatRegFitPredictionIndividual._sampleSize - 1) + 1;
+		for (int i = crossoverPoint; i < FloatRegFitPredictionIndividual._sampleSize; i++) {
+			a.SetSampleIndex(i, b.GetSampleIndex(i));
+		}
+
+		return a;
+	}
+	
 }

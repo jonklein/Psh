@@ -107,6 +107,10 @@ public class CEFloatSymbolicRegression extends PushGP {
 		_predictorGA = PredictionGA.PredictionGAWithParameters(this,
 				GetPredictorParameters(_parameters));
 
+		
+		//trh
+		System.out.println("\n\n BEGIN PREDICTOR.RUN");
+		
 		//trh
 		_predictorGA.Run();
 		
@@ -218,14 +222,14 @@ public class CEFloatSymbolicRegression extends PushGP {
 		// /trh// ??? remove below
 		// predictorParameters.put("problem-class",
 		// "org.spiderland.Psh.ProbClass.IntSymbolicRegression");
-		predictorParameters.put("max-random-code-size", "35");
-		predictorParameters.put("execution-limit", "150");
-		predictorParameters.put("max-points-in-program", "50");
-		predictorParameters.put("simplification-percent", "5");
-		predictorParameters.put("reproduction-simplifications", "20");
-		predictorParameters.put("report-simplifications", "100");
-		predictorParameters.put("final-simplifications", "1000");
-		predictorParameters.put("max-generations", "10000");
+		//predictorParameters.put("max-random-code-size", "35");
+		//predictorParameters.put("execution-limit", "150");
+		//predictorParameters.put("max-points-in-program", "50");
+		//predictorParameters.put("simplification-percent", "5");
+		//predictorParameters.put("reproduction-simplifications", "20");
+		//predictorParameters.put("report-simplifications", "100");
+		//predictorParameters.put("final-simplifications", "1000");
+		predictorParameters.put("max-generations", "100");
 		// predictorParameters.put("instruction-set","(registered.integer registered.input)");
 		// predictorParameters.put("test-cases","((1 1) (2 3) (3 5) (4 7) (5 9) (6 11) (7 13) (8 15) (9 17) (10 19))");
 

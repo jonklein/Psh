@@ -196,7 +196,7 @@ abstract public class PushGP extends GA {
 	
 	protected void Evaluate() {
 		float totalFitness = 0;
-		_bestFitness = Float.MAX_VALUE;
+		_bestMeanFitness = Float.MAX_VALUE;
 
 		for (int n = 0; n < _populations[_currentPopulation].length; n++) {
 			GAIndividual i = _populations[_currentPopulation][n];
@@ -205,15 +205,15 @@ abstract public class PushGP extends GA {
 
 			totalFitness += i.GetFitness();
 			
-			if (i.GetFitness() < _bestFitness) {
-				_bestFitness = i.GetFitness();
+			if (i.GetFitness() < _bestMeanFitness) {
+				_bestMeanFitness = i.GetFitness();
 				_bestIndividual = n;
 				_bestSize = ((PushGPIndividual) i)._program.programsize();
 				_bestErrors = i.GetErrors();
 			}
 		}
 		
-		_meanFitness = totalFitness / _populations[_currentPopulation].length;	
+		_populationMeanFitness = totalFitness / _populations[_currentPopulation].length;	
 	}
 
 	public void EvaluateIndividual(GAIndividual inIndividual) {
@@ -237,7 +237,7 @@ abstract public class PushGP extends GA {
 		}
 		t = System.currentTimeMillis() - t;
 
-		inIndividual.SetFitness(AbsoluteSumOfErrors(errors));
+		inIndividual.SetFitness(AbsoluteAverageOfErrors(errors));
 		inIndividual.SetErrors(errors);
 
 		//System.out.println("Evaluated individual in " + t + " msec: fitness "
@@ -253,10 +253,7 @@ abstract public class PushGP extends GA {
 		report += ";; Best Program:\n  "
 				+ _populations[_currentPopulation][_bestIndividual] + "\n\n";
 
-		report += ";; Best Program Fitness: " + _bestFitness + "\n";
-		report += ";; Best Program Mean Fitness: "
-				+ (_bestFitness / _testCases.size()) + "\n";
-
+		report += ";; Best Program Fitness (mean): " + _bestMeanFitness + "\n";
 		if(_testCases.size() == _bestErrors.size()){
 			report += ";; Best Program Errors: (";
 			for (int i = 0; i < _testCases.size(); i++) {
@@ -267,10 +264,9 @@ abstract public class PushGP extends GA {
 			}
 			report += ")\n";
 		}
-		
 		report += ";; Best Program Size: " + _bestSize + "\n\n";
 
-		report += ";; Mean Fitness: " + _meanFitness + "\n";
+		report += ";; Mean Fitness: " + _populationMeanFitness + "\n";
 		report += ";; Mean Program Size: " + _averageSize + "\n";
 
 		PushGPIndividual simplified = Autosimplify(
@@ -307,17 +303,17 @@ abstract public class PushGP extends GA {
 
 		report += ">> Best Program: "
 				+ _populations[_currentPopulation][_bestIndividual] + "\n";
-		report += ">> Fitness: " + _bestFitness + "\n";
-		report += ">> Mean Fitness of Best Program Over Test Cases: "
-				+ (_bestFitness / _testCases.size()) + "\n";
-		report += ">> Errors: (";
-		for (int i = 0; i < _testCases.size(); i++) {
-			if (i != 0)
-				report += " ";
-			report += "(" + _testCases.get(i)._input + " ";
-			report += Math.abs(_bestErrors.get(i)) + ")";
+		report += ">> Fitness (mean): " + _bestMeanFitness + "\n";
+		if(_testCases.size() == _bestErrors.size()){
+			report += ">> Errors: (";
+			for (int i = 0; i < _testCases.size(); i++) {
+				if (i != 0)
+					report += " ";
+				report += "(" + _testCases.get(i)._input + " ";
+				report += Math.abs(_bestErrors.get(i)) + ")";
+			}
+			report += ")\n";
 		}
-		report += ")\n";
 		report += ">> Size: " + _bestSize + "\n\n";
 		
 		report += "<<<<<<<<<< After Simplification >>>>>>>>>>\n";

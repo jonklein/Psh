@@ -23,6 +23,7 @@ import org.spiderland.Psh.ObjectPair;
 import org.spiderland.Psh.ObjectStack;
 import org.spiderland.Psh.Program;
 import org.spiderland.Psh.PushGP;
+import org.spiderland.Psh.PushGPIndividual;
 import org.spiderland.Psh.booleanStack;
 import org.spiderland.Psh.floatStack;
 
@@ -67,7 +68,6 @@ public class CartCentering extends PushGP {
 	}
 
 	protected void InitInterpreter(Interpreter inInterpreter) {
-		
 	}
 
 	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
@@ -100,24 +100,12 @@ public class CartCentering extends PushGP {
 			iStack.push(position);
 			iStack.push(velocity);
 			
-			/*
 			_interpreter.Execute(((PushGPIndividual) inIndividual)._program,
 					_executionLimit);
-			*/
-			
-			try {
-				_interpreter.Execute(new Program("(input.stackdepth input.index float.abs float.* float.neg float.<)"),
-						_executionLimit);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			
 			
 			// If there is no boolean on the stack, the program has failed to
 			// return a reasonable output. So, return a penalty fitness of
 			// twice the maximum time.
-			
 			if(bStack.size() == 0){
 				return 2 * maxTime;
 			}
@@ -127,7 +115,6 @@ public class CartCentering extends PushGP {
 			// NOTE: If result == True, we will apply the force in the positive
 			// direction, and if result == False, we will apply the force in
 			// the negative direction.
-			
 			boolean positiveForce = bStack.top();
 			float acceleration;
 			

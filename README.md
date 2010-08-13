@@ -149,6 +149,7 @@ Major Changes since v1.0:
 - Moved problem classes and test cases to their own packages to reduce clutter.
 - Fixed holes in many integer and float instructions that could cause underflow, overflow, or NaN errors.
 - Made FloatSymbolicRegression and IntSymbolicRegression as well as co-evolved FloatSymbolicRegression work with test-case generators.
+- PshGP now primarily uses the mean of test case errors for an individual's error instead of the total sum of the errors.
 
 Major Changes since v0.3:
 -------------------------

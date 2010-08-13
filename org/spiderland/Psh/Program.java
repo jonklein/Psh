@@ -275,7 +275,7 @@ public class Program extends ObjectStack implements Serializable {
 		return false;
 	}
 
-	protected void Flatten(int inIndex) {
+	public void Flatten(int inIndex) {
 		if (inIndex < _size) {
 			// If here, the index to be flattened is in this program. So, push
 			// the rest of the program onto a new program, and replace this with

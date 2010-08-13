@@ -35,6 +35,7 @@ import org.spiderland.Psh.TestCase.TestCaseGenerator;
  * effort it takes compared to the effort of the co-evolving predictor
  * population, and use about 95% of the effort. Effort based on the number of
  * evaluation executions thus far, which is tracked by the interpreter.
+ * 
  */
 public class CEFloatSymbolicRegression extends PushGP {
 	private static final long serialVersionUID = 1L;
@@ -134,7 +135,7 @@ public class CEFloatSymbolicRegression extends PushGP {
 	/**
 	 * Evaluates a solution individual using the best predictor so far.
 	 */
-	protected void EvaluateIndividual(GAIndividual inIndividual,
+	protected void PredictIndividual(GAIndividual inIndividual,
 			boolean duringSimplify) {
 		
 		FloatRegFitPredictionIndividual predictor = (FloatRegFitPredictionIndividual) _predictorGA.GetBestPredictor();
@@ -228,6 +229,93 @@ public class CEFloatSymbolicRegression extends PushGP {
 		// predictorParameters.put("test-cases","((1 1) (2 3) (3 5) (4 7) (5 9) (6 11) (7 13) (8 15) (9 17) (10 19))");
 
 		return predictorParameters;
+	}
+	
+	/**
+	 * NOTE: This is entirely copied from PushGP, except EvaluateIndividual
+	 * was changed to PredictIndividual, as noted below.
+	 */
+	protected void Evaluate() {
+		float totalFitness = 0;
+		_bestMeanFitness = Float.MAX_VALUE;
+
+		for (int n = 0; n < _populations[_currentPopulation].length; n++) {
+			GAIndividual i = _populations[_currentPopulation][n];
+
+			PredictIndividual(i, false);
+
+			totalFitness += i.GetFitness();
+			
+			if (i.GetFitness() < _bestMeanFitness) {
+				_bestMeanFitness = i.GetFitness();
+				_bestIndividual = n;
+				_bestSize = ((PushGPIndividual) i)._program.programsize();
+				_bestErrors = i.GetErrors();
+			}
+		}
+		
+		_populationMeanFitness = totalFitness / _populations[_currentPopulation].length;	
+	}
+	
+	/**
+	 * NOTE: This is entirely copied from PushGP, except EvaluateIndividual
+	 * was changed to PredictIndividual, as noted below (twice).
+	 */
+	protected PushGPIndividual Autosimplify(PushGPIndividual inIndividual,
+			int steps) {
+
+		PushGPIndividual simplest = (PushGPIndividual) inIndividual.clone();
+		PushGPIndividual trial = (PushGPIndividual) inIndividual.clone();
+		PredictIndividual(simplest, true); // Changed from EvaluateIndividual
+		float bestError = simplest.GetFitness();
+
+		boolean madeSimpler = false;
+
+		for (int i = 0; i < steps; i++) {
+			madeSimpler = false;
+			float method = _RNG.nextInt(100);
+
+			if (trial._program.programsize() <= 0)
+				break;
+			if (method < _simplifyFlattenPercent) {
+				// Flatten random thing
+				int pointIndex = _RNG.nextInt(trial._program.programsize());
+				Object point = trial._program.Subtree(pointIndex);
+
+				if (point instanceof Program) {
+					trial._program.Flatten(pointIndex);
+					madeSimpler = true;
+				}
+			} else {
+				// Remove small number of random things
+				int numberToRemove = _RNG.nextInt(3) + 1;
+
+				for (int j = 0; j < numberToRemove; j++) {
+					int trialSize = trial._program.programsize();
+
+					if (trialSize > 0) {
+						int pointIndex = _RNG.nextInt(trialSize);
+						trial._program.ReplaceSubtree(pointIndex, new Program(
+								_interpreter));
+						trial._program.Flatten(pointIndex);
+						madeSimpler = true;
+					}
+				}
+			}
+
+			if (madeSimpler) {
+				PredictIndividual(trial, true); // Changed from EvaluateIndividual
+
+				if (trial.GetFitness() <= bestError) {
+					simplest = (PushGPIndividual) trial.clone();
+					bestError = trial.GetFitness();
+				}
+			}
+
+			trial = (PushGPIndividual) simplest.clone();
+		}
+
+		return simplest;
 	}
 
 }

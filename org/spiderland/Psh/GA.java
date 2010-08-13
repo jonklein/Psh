@@ -35,8 +35,8 @@ public abstract class GA implements Serializable {
 	protected float _mutationPercent;
 	protected float _crossoverPercent;
 
-	protected float _bestFitness;
-	protected double _meanFitness;
+	protected float _bestMeanFitness;
+	protected double _populationMeanFitness;
 	protected int _bestIndividual;
 
 	protected ArrayList<Float> _bestErrors;
@@ -112,7 +112,7 @@ public abstract class GA implements Serializable {
 	protected GA() {
 		_RNG = new Random();
 		_testCases = new ArrayList<GATestCase>();
-		_bestFitness = Float.MAX_VALUE;
+		_bestMeanFitness = Float.MAX_VALUE;
 		_outputStream = System.out;
 	}
 
@@ -339,7 +339,7 @@ public abstract class GA implements Serializable {
 	 */
 
 	protected boolean Success() {
-		return _bestFitness == 0.0;
+		return _bestMeanFitness == 0.0;
 	}
 
 	/**
@@ -349,7 +349,7 @@ public abstract class GA implements Serializable {
 
 	protected void Evaluate() {
 		double totalFitness = 0;
-		_bestFitness = Float.MAX_VALUE;
+		_bestMeanFitness = Float.MAX_VALUE;
 
 		for (int n = 0; n < _populations[_currentPopulation].length; n++) {
 			GAIndividual i = _populations[_currentPopulation][n];
@@ -358,14 +358,14 @@ public abstract class GA implements Serializable {
 
 			totalFitness += i.GetFitness();
 
-			if (i.GetFitness() < _bestFitness) {
-				_bestFitness = i.GetFitness();
+			if (i.GetFitness() < _bestMeanFitness) {
+				_bestMeanFitness = i.GetFitness();
 				_bestIndividual = n;
 				_bestErrors = i.GetErrors();
 			}
 		}
 
-		_meanFitness = totalFitness / _populations[_currentPopulation].length;
+		_populationMeanFitness = totalFitness / _populations[_currentPopulation].length;
 	}
 
 	/**
@@ -508,22 +508,6 @@ public abstract class GA implements Serializable {
 
 	protected GAIndividual ReproduceByClone(int inIndex) {
 		return TournamentSelect(_tournamentSize, inIndex).clone();
-	}
-
-	/**
-	 * Computes the absolute-sum-of-errors fitness from an error vector.
-	 * 
-	 * @return the total error value for the vector.
-	 */
-
-	protected float AbsoluteSumOfErrors(ArrayList<Float> inArray) {
-		float total = 0.0f;
-
-		for (int n = 0; n < inArray.size(); n++){
-			total += Math.abs(inArray.get(n));
-		}
-
-		return total;
 	}
 	
 	/**

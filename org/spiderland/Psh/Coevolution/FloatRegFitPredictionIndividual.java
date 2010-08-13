@@ -63,8 +63,6 @@ public class FloatRegFitPredictionIndividual extends PredictionGAIndividual {
 		_solutionGA = inSolutionGA;
 	}
 	
-	
-	
 	@Override
 	public float PredictSolutionFitness(PushGPIndividual pgpIndividual) {
 		ArrayList<Float> errors = new ArrayList<Float>();

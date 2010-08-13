@@ -96,14 +96,10 @@ public abstract class PredictionGA extends GA {
 		if (_generationCount % _generationsBetweenTrainers == _generationsBetweenTrainers - 1) {
 			// Time to add a new trainer
 			PushGPIndividual newTrainer = (PushGPIndividual) ChooseNewTrainer().clone();
-			EvaluateTrainer(newTrainer);
+			EvaluateSolutionIndividual(newTrainer);
 			
 			_trainerPopulation.remove(0);
 			_trainerPopulation.add(newTrainer);
-			
-			//trh
-			System.out.println("ADDING NEW TRAINER: " + newTrainer);
-			
 			
 			EvaluateTrainerFitnesses();
 		}
@@ -150,13 +146,28 @@ public abstract class PredictionGA extends GA {
 				.GetIndividualFromPopulation(highestVarianceIndividual);
 	}
 
+	protected PredictionGAIndividual GetBestPredictor(){
+		float bestFitness = Float.MAX_VALUE;
+		GAIndividual bestPredictor = _populations[_currentPopulation][0];
+		
+		for(GAIndividual ind : _populations[_currentPopulation]){
+			if(ind.GetFitness() < bestFitness){
+				bestPredictor = ind;
+				bestFitness = ind.GetFitness();
+			}
+		}
+		
+		return (PredictionGAIndividual) bestPredictor;		
+	}
+	
 	/**
-	 * Calculates and sets inTrainer's fitness.
+	 * Calculates and sets the exact fitness from any individual of the
+	 * _solutionGA population. This includes trainers.
 	 * 
-	 * @param inTrainer
+	 * @param inIndividual
 	 */
-	protected void EvaluateTrainer(PushGPIndividual inTrainer) {
-		_solutionGA.EvaluateTrainerExactFitness(inTrainer);
+	protected void EvaluateSolutionIndividual(PushGPIndividual inIndividual) {
+		_solutionGA.EvaluateIndividual(inIndividual);
 	}
 	
 	protected void SetSolutionGA(PushGP inGA) {
@@ -181,7 +192,7 @@ public abstract class PredictionGA extends GA {
 	}
 
 	protected String Report() {
-		return "";
+		return "\n\n;;################################## Predictor Generation " + _generationCount + " ##################################\n\n";
 	}
 
 	protected String FinalReport() {

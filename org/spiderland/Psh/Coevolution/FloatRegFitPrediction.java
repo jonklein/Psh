@@ -60,7 +60,7 @@ public class FloatRegFitPrediction extends PredictionGA {
 	protected void EvaluateTrainerFitnesses() {
 		for(PushGPIndividual trainer : _trainerPopulation){
 			if(!trainer.FitnessIsSet()){
-				EvaluateTrainer(trainer);
+				EvaluateSolutionIndividual(trainer);
 			}	
 		}
 	}

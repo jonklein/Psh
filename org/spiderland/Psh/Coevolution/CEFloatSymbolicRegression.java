@@ -109,56 +109,39 @@ public class CEFloatSymbolicRegression extends PushGP {
 
 		
 		//trh
-		System.out.println("\n\n BEGIN PREDICTOR.RUN");
+		//System.out.println("\n\n BEGIN PREDICTOR.RUN");
 		
 		//trh
-		_predictorGA.Run();
+		//_predictorGA.Run();
 		
 		//trh
-		System.out.println("&&&&&&&&&&&&made it through run");
-		System.exit(0);
+		////System.out.println("&&&&&&&&&&&&made it through run");
+		//System.exit(0);
 
 	}
 
 	protected void InitInterpreter(Interpreter inInterpreter) {
 	}
-
+	
+	@Override
+	protected void BeginGeneration() throws Exception {
+		//trh Temporary solution, needs to actually use effort info
+		if(_generationCount % 2 == 1){
+			_predictorGA.Run(1);			
+		}	
+	}
+	
 	/**
 	 * Evaluates a solution individual using the best predictor so far.
 	 */
 	protected void EvaluateIndividual(GAIndividual inIndividual,
 			boolean duringSimplify) {
-		ArrayList<Float> errors = new ArrayList<Float>();
+		
+		FloatRegFitPredictionIndividual predictor = (FloatRegFitPredictionIndividual) _predictorGA.GetBestPredictor();
+		float fitness = predictor.PredictSolutionFitness((PushGPIndividual) inIndividual);
 
-		if (!duringSimplify)
-			_averageSize += ((PushGPIndividual) inIndividual)._program
-					.programsize();
-
-		for (int n = 0; n < _testCases.size(); n++) {
-			GATestCase test = _testCases.get(n);
-			float e = EvaluateTestCase(inIndividual, test._input, test._output);
-			errors.add(e);
-		}
-
-		inIndividual.SetFitness(AbsoluteSumOfErrors(errors));
-		inIndividual.SetErrors(errors);
-
-	}
-
-	/**
-	 * Evaluates a trainer's exact fitness and sets it.
-	 */
-	public void EvaluateTrainerExactFitness(PushGPIndividual inTrainer) {
-		ArrayList<Float> errors = new ArrayList<Float>();
-
-		for (int n = 0; n < _testCases.size(); n++) {
-			GATestCase test = _testCases.get(n);
-			float e = EvaluateTestCase(inTrainer, test._input, test._output);
-			errors.add(e);
-		}
-
-		inTrainer.SetFitness(AbsoluteAverageOfErrors(errors));
-		inTrainer.SetErrors(errors);
+		inIndividual.SetFitness(fitness);
+		inIndividual.SetErrors(new ArrayList<Float>());
 	}
 
 	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
@@ -182,6 +165,7 @@ public class CEFloatSymbolicRegression extends PushGP {
 		float result = stack.top();
 		// System.out.println( _interpreter + " " + result );
 
+		//trh
 		/*
 		 * System.out.println("\nevaluations according to interpreter " +
 		 * Interpreter.GetEvaluationExecutions());
@@ -192,13 +176,24 @@ public class CEFloatSymbolicRegression extends PushGP {
 	}
 
 	protected boolean Success() {
-		return _bestFitness <= 0.1 * _testCases.size();
+		GAIndividual best = _populations[_currentPopulation][_bestIndividual];
+		float predictedFitness = best.GetFitness();
+		
+		_predictorGA.EvaluateSolutionIndividual((PushGPIndividual) best);
+		
+		float actualFitness = best.GetFitness();
+		best.SetFitness(predictedFitness);
+		
+		return actualFitness <= 0.1 * _testCases.size();
 	}
 
 	private HashMap<String, String> GetPredictorParameters(
 			HashMap<String, String> parameters) throws Exception {
 
 		HashMap<String, String> predictorParameters = new HashMap<String, String>();
+
+		predictorParameters.put("max-generations", Integer
+				.toString(Integer.MAX_VALUE));
 
 		predictorParameters.put("problem-class",
 				GetParam("PREDICTOR-problem-class"));
@@ -229,7 +224,6 @@ public class CEFloatSymbolicRegression extends PushGP {
 		//predictorParameters.put("reproduction-simplifications", "20");
 		//predictorParameters.put("report-simplifications", "100");
 		//predictorParameters.put("final-simplifications", "1000");
-		predictorParameters.put("max-generations", "100");
 		// predictorParameters.put("instruction-set","(registered.integer registered.input)");
 		// predictorParameters.put("test-cases","((1 1) (2 3) (3 5) (4 7) (5 9) (6 11) (7 13) (8 15) (9 17) (10 19))");
 

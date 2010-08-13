@@ -317,8 +317,10 @@ public abstract class GA implements Serializable {
 		// set, revert back to previous state.
 		_currentPopulation = (_currentPopulation == 0 ? 1 : 0);
 		
-		Print(FinalReport());
-
+		if(_generationCount >= _maxGenerations){
+			Print(FinalReport());
+		}
+		
 		return (_generationCount < _maxGenerations);
 	}
 
@@ -557,9 +559,10 @@ public abstract class GA implements Serializable {
 	/**
 	 * Called at the beginning of each generation. This method may be overridden
 	 * by subclasses to customize GA behavior.
+	 * @throws Exception 
 	 */
-	protected void BeginGeneration() {
-	};
+	protected void BeginGeneration() throws Exception {
+	}
 
 	/**
 	 * Called at the end of each generation. This method may be overridden by

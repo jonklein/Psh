@@ -186,7 +186,7 @@ abstract public class PushGP extends GA {
 		i.SetProgram(p);
 	}
 	
-	protected void BeginGeneration() {
+	protected void BeginGeneration() throws Exception {
 		_averageSize = 0;
 	}
 
@@ -216,10 +216,10 @@ abstract public class PushGP extends GA {
 		_meanFitness = totalFitness / _populations[_currentPopulation].length;	
 	}
 
-	protected void EvaluateIndividual(GAIndividual inIndividual) {
+	public void EvaluateIndividual(GAIndividual inIndividual) {
 		EvaluateIndividual(inIndividual, false);
 	}
-
+	
 	protected void EvaluateIndividual(GAIndividual inIndividual,
 			boolean duringSimplify) {
 		ArrayList<Float> errors = new ArrayList<Float>();
@@ -246,9 +246,6 @@ abstract public class PushGP extends GA {
 
 	abstract protected void InitInterpreter(Interpreter inInterpreter)
 			throws Exception;
-	
-	public void EvaluateTrainerExactFitness(PushGPIndividual inTrainer){
-	}
 
 	protected String Report() {
 		String report = super.Report();
@@ -259,14 +256,18 @@ abstract public class PushGP extends GA {
 		report += ";; Best Program Fitness: " + _bestFitness + "\n";
 		report += ";; Best Program Mean Fitness: "
 				+ (_bestFitness / _testCases.size()) + "\n";
-		report += ";; Best Program Errors: (";
-		for (int i = 0; i < _testCases.size(); i++) {
-			if (i != 0)
-				report += " ";
-			report += "(" + _testCases.get(i)._input + " ";
-			report += Math.abs(_bestErrors.get(i)) + ")";
+
+		if(_testCases.size() == _bestErrors.size()){
+			report += ";; Best Program Errors: (";
+			for (int i = 0; i < _testCases.size(); i++) {
+				if (i != 0)
+					report += " ";
+				report += "(" + _testCases.get(i)._input + " ";
+				report += Math.abs(_bestErrors.get(i)) + ")";
+			}
+			report += ")\n";
 		}
-		report += ")\n";
+		
 		report += ";; Best Program Size: " + _bestSize + "\n\n";
 
 		report += ";; Mean Fitness: " + _meanFitness + "\n";

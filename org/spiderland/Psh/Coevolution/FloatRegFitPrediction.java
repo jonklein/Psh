@@ -65,6 +65,38 @@ public class FloatRegFitPrediction extends PredictionGA {
 		}
 	}
 
+	protected void Reproduce() {
+		int nextPopulation = _currentPopulation == 0 ? 1 : 0;
+
+		for (int n = 0; n < _populations[_currentPopulation].length; n++) {
+			float method = _RNG.nextInt(100);
+			GAIndividual next;
+
+			if (method < _mutationPercent) {
+				next = ReproduceByMutation(n);
+			} else if (method < _crossoverPercent + _mutationPercent) {
+				next = ReproduceByCrossover(n);
+			} else {
+				next = ReproduceByClone(n);
+			}
+
+			// Make sure next isn't already in the population, so that all
+			// predictors are unique.
+			for (int k = 0; k < n; k++) {
+				if (((FloatRegFitPredictionIndividual) next)
+						.equalPredictors(_populations[nextPopulation][k])) {
+					int index = _RNG
+							.nextInt(FloatRegFitPredictionIndividual._sampleSize);
+					((FloatRegFitPredictionIndividual) next).SetSampleIndex(
+							index, _RNG.nextInt(_solutionGA._testCases.size()));
+				}
+			}
+			
+			_populations[nextPopulation][n] = next;
+			
+		}
+	}
+	
 	/**
 	 * Mutates an individual by choosing an index at random and randomizing
 	 * its training point among possible individuals.
@@ -95,5 +127,6 @@ public class FloatRegFitPrediction extends PredictionGA {
 
 		return a;
 	}
+
 	
 }

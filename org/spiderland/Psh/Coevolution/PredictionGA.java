@@ -103,17 +103,6 @@ public abstract class PredictionGA extends GA {
 			
 			EvaluateTrainerFitnesses();
 			
-			
-			
-			//trh
-			System.out.println("\n\n %%%%% Here are the trainers!\n");
-			for(PushGPIndividual aaa : _trainerPopulation){
-				System.out.println("      " + aaa + "\n");
-				
-				
-			}
-			
-			
 		}
 	}
 
@@ -158,27 +147,6 @@ public abstract class PredictionGA extends GA {
 				highestVariance = individualVariances.get(i);
 			}
 		}
-		
-		
-		
-		
-		//trh
-		PushGPIndividual individual = (PushGPIndividual) _solutionGA
-			.GetIndividualFromPopulation(highestVarianceIndividual);
-		ArrayList<Float> predictions = new ArrayList<Float>();
-		for (int j = 0; j < _populations[_currentPopulation].length; j++) {
-			PredictionGAIndividual predictor = (PredictionGAIndividual) _populations[_currentPopulation][j];
-			predictions.add(predictor.PredictSolutionFitness(individual));		
-		}
-		System.out.println("predictions from highest variance ind:");
-		for(float aaaa : predictions){
-
-			System.out.println("     " + aaaa);
-			
-		}
-		System.exit(0);
-		
-		
 
 		return (PushGPIndividual) _solutionGA
 				.GetIndividualFromPopulation(highestVarianceIndividual);
@@ -240,13 +208,14 @@ public abstract class PredictionGA extends GA {
 
 		report += ";; Mean Predictor Fitness: " + _populationMeanFitness + "\n";
 				
-		//trh
-		report += "\nhere's the predictors\n";
-		for(GAIndividual aaa : _populations[_currentPopulation]){
-			report += "          " + aaa + "\n";
+		// The following code prints all of the predictors.
+		/*
+		report += "\n;; Mean Predictor Fitness: \n";
+		for(GAIndividual predictor : _populations[_currentPopulation]){
+			report += "          " + predictor + "\n";
 			
 		}
-		
+		*/
 		
 		report += ";;########################################################;;\n\n";
 		

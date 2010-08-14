@@ -2,14 +2,14 @@ package org.spiderland.Psh.TestCase;
 
 import org.spiderland.Psh.ObjectPair;
 
-public class CEFloatRegTestCases1 extends TestCaseGenerator {
+public class FloatRegTestCases2 extends TestCaseGenerator {
 
 	private static int _testCaseCount = 200;
-	private static float _firstSample = -10;
-	private static float _lastSample = 10;
-	
 	private float[] _testCasesX = null;
 	private float[] _testCasesY = null;
+
+	private static float _firstSample = -3;
+	private static float _lastSample = 3;
 
 	@Override
 	public int TestCaseCount() {
@@ -37,8 +37,7 @@ public class CEFloatRegTestCases1 extends TestCaseGenerator {
 	}
 
 	private float TestCaseFunction(float x) {
-		// y = 3x^2 + 4x
-		return (3 * x * x) + (4 * x);
+		return (float) (Math.exp(Math.abs(x)) * Math.sin(2.0 * Math.PI * x));
 	}
 
 }

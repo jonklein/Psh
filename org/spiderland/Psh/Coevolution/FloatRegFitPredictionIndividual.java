@@ -1,6 +1,7 @@
 package org.spiderland.Psh.Coevolution;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.spiderland.Psh.GAIndividual;
 import org.spiderland.Psh.GATestCase;
@@ -89,6 +90,22 @@ public class FloatRegFitPredictionIndividual extends PredictionGAIndividual {
 		}
 		str += "]";
 		return str;
+	}
+
+	public boolean equalPredictors(GAIndividual inB) {
+		int[] a = new int[_sampleSize];
+		int[] b = new int[_sampleSize];
+		
+		a = Arrays.copyOf(_sampleIndices, _sampleSize);
+		b = Arrays.copyOf(((FloatRegFitPredictionIndividual)inB)._sampleIndices, _sampleSize);
+		
+		Arrays.sort(a);
+		Arrays.sort(b);
+		if(Arrays.equals(a, b)){
+			return true;
+		}
+		
+		return false;
 	}
 
 }

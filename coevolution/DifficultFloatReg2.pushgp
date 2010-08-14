@@ -13,20 +13,22 @@
 # limitations under the License.
 
 #
-# Evolving symbolic regression for y = 3x^2 + 4x
+# A difficult symbolic regression problem that needs many test cases. Will be
+# used to test TestCaseGenerator.java. The problem to be solved is 
+#                          y = (e ^ |x|) * sin(x)
 #
 # Tom Helmuth
-# 8/14/10
+# 8/9/10
 #
 
 ### Setup required parameters
 
-population-size = 200
-max-generations = 1000
-execution-limit = 150
+population-size = 150
+max-generations = 20000
+execution-limit = 200
 
-mutation-percent = 15
-crossover-percent = 75
+mutation-percent = 10
+crossover-percent = 80
 simplification-percent = 5
 
 tournament-size = 7
@@ -44,7 +46,7 @@ final-simplifications = 2000
 problem-class = org.spiderland.Psh.ProbClass.FloatSymbolicRegression
 instruction-set = (registered.float input.makeinputs1)
 
-test-case-class = org.spiderland.Psh.TestCase.FloatRegTestCases1
+test-case-class = org.spiderland.Psh.TestCase.FloatRegTestCases2
 
 ### Setup Optional Parameters
 
@@ -55,4 +57,4 @@ fair-mutation-range = .5
 
 min-random-float = -10.0
 max-random-float = 10.0
-random-float-resolution = 0.01
+random-float-resolution = 0.001

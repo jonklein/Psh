@@ -313,7 +313,7 @@ public abstract class GA implements Serializable {
 			inGenerations--;
 		}
 		
-		if(Success()){
+		if(Terminate()){
 			// Since this value was changed after termination conditions were
 			// set, revert back to previous state.
 			_currentPopulation = (_currentPopulation == 0 ? 1 : 0);

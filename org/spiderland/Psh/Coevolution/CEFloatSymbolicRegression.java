@@ -45,6 +45,8 @@ public class CEFloatSymbolicRegression extends PushGP {
 	protected long _effort;
 	protected float _predictorEffortPercent;
 	protected PredictionGA _predictorGA;
+	
+	private boolean _success;
 
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
@@ -108,17 +110,6 @@ public class CEFloatSymbolicRegression extends PushGP {
 		_predictorGA = PredictionGA.PredictionGAWithParameters(this,
 				GetPredictorParameters(_parameters));
 
-		
-		//trh
-		//System.out.println("\n\n BEGIN PREDICTOR.RUN");
-		
-		//trh
-		//_predictorGA.Run();
-		
-		//trh
-		////System.out.println("&&&&&&&&&&&&made it through run");
-		//System.exit(0);
-
 	}
 
 	protected void InitInterpreter(Interpreter inInterpreter) {
@@ -175,17 +166,32 @@ public class CEFloatSymbolicRegression extends PushGP {
 
 		return result - ((Float) inOutput);
 	}
-
+	
 	protected boolean Success() {
+		if(_success){
+			return true;
+		}
+		
 		GAIndividual best = _populations[_currentPopulation][_bestIndividual];
 		float predictedFitness = best.GetFitness();
 		
 		_predictorGA.EvaluateSolutionIndividual((PushGPIndividual) best);
 		
-		float actualFitness = best.GetFitness();
-		best.SetFitness(predictedFitness);
+		_bestMeanFitness = best.GetFitness();
 		
-		return actualFitness <= 0.1 * _testCases.size();
+		if(_bestMeanFitness <= 0.1){
+			_success = true;
+			return true;
+		}
+		
+		best.SetFitness(predictedFitness);
+		return false;
+	}
+	
+	protected String Report() {
+		Success(); // Finds the real fitness of the best individual
+		
+		return super.Report();
 	}
 
 	private HashMap<String, String> GetPredictorParameters(

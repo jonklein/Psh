@@ -313,11 +313,11 @@ public abstract class GA implements Serializable {
 			inGenerations--;
 		}
 		
-		// Since this value was changed after termination conditions were
-		// set, revert back to previous state.
-		_currentPopulation = (_currentPopulation == 0 ? 1 : 0);
+		if(Success()){
+			// Since this value was changed after termination conditions were
+			// set, revert back to previous state.
+			_currentPopulation = (_currentPopulation == 0 ? 1 : 0);
 		
-		if(_generationCount >= _maxGenerations){
 			Print(FinalReport());
 		}
 		
@@ -389,6 +389,7 @@ public abstract class GA implements Serializable {
 			}
 
 			_populations[nextPopulation][n] = next;
+			
 		}
 	}
 

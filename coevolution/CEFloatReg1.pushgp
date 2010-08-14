@@ -58,10 +58,10 @@ PREDICTOR-population-size = 10
 PREDICTOR-effort-percent = 5
 
 PREDICTOR-trainer-population-size = 10
-PREDICTOR-generations-between-trainers = 50
+PREDICTOR-generations-between-trainers = 20
 
-PREDICTOR-mutation-percent = 10
-PREDICTOR-crossover-percent = 75
+PREDICTOR-mutation-percent = 25
+PREDICTOR-crossover-percent = 70
 
 PREDICTOR-tournament-size = 2
 PREDICTOR-trivial-geography-radius = 0

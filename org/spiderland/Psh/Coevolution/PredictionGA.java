@@ -102,11 +102,28 @@ public abstract class PredictionGA extends GA {
 			_trainerPopulation.add(newTrainer);
 			
 			EvaluateTrainerFitnesses();
+			
+			
+			
+			//trh
+			System.out.println("\n\n %%%%% Here are the trainers!\n");
+			for(PushGPIndividual aaa : _trainerPopulation){
+				System.out.println("      " + aaa + "\n");
+				
+				
+			}
+			
+			
 		}
 	}
 
 	@Override
 	protected boolean Terminate() {
+		return false;
+	}
+	
+	@Override
+	protected boolean Success() {
 		return false;
 	}
 
@@ -141,6 +158,27 @@ public abstract class PredictionGA extends GA {
 				highestVariance = individualVariances.get(i);
 			}
 		}
+		
+		
+		
+		
+		//trh
+		PushGPIndividual individual = (PushGPIndividual) _solutionGA
+			.GetIndividualFromPopulation(highestVarianceIndividual);
+		ArrayList<Float> predictions = new ArrayList<Float>();
+		for (int j = 0; j < _populations[_currentPopulation].length; j++) {
+			PredictionGAIndividual predictor = (PredictionGAIndividual) _populations[_currentPopulation][j];
+			predictions.add(predictor.PredictSolutionFitness(individual));		
+		}
+		System.out.println("predictions from highest variance ind:");
+		for(float aaaa : predictions){
+
+			System.out.println("     " + aaaa);
+			
+		}
+		System.exit(0);
+		
+		
 
 		return (PushGPIndividual) _solutionGA
 				.GetIndividualFromPopulation(highestVarianceIndividual);
@@ -190,9 +228,29 @@ public abstract class PredictionGA extends GA {
 		
 		EvaluateTrainerFitnesses();
 	}
-
+	
 	protected String Report() {
-		return "\n\n;;################################## Predictor Generation " + _generationCount + " ##################################\n\n";
+		String report = super.Report();
+		report = report.replace('-', '#');
+		report = report.replaceFirst("Report for", " Predictor");
+
+		report += ";; Best Predictor: "
+				+ _populations[_currentPopulation][_bestIndividual] + "\n";
+		report += ";; Best Predictor Fitness: " + _bestMeanFitness + "\n\n";
+
+		report += ";; Mean Predictor Fitness: " + _populationMeanFitness + "\n";
+				
+		//trh
+		report += "\nhere's the predictors\n";
+		for(GAIndividual aaa : _populations[_currentPopulation]){
+			report += "          " + aaa + "\n";
+			
+		}
+		
+		
+		report += ";;########################################################;;\n\n";
+		
+		return report;
 	}
 
 	protected String FinalReport() {

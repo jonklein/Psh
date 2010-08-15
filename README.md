@@ -62,6 +62,25 @@ PshInspector allows you to examine every step of a Psh program as it executes. T
 
 This push file runs the psh program '(2994 5 integer.+)' for 100 steps after pushing the inputs '44, 22, true, 17.76'. Other sample psh programs are available in 'pushsamples/'.
 
+Using Psh in Eclipse
+====================
+
+Getting Psh
+-----------
+Use _Getting Started with Git_ above, or use [Egit](http://www.eclipse.org/egit/) with help [on this page](http://wiki.eclipse.org/EGit/User_Guide). Note on installing Egit: the link provided on the download page does not download any files directly; instead, it is meant to be pasted in Eclipse under 'Help > Install New Software'.
+
+Loading Psh in Eclipse
+----------------------
+Start a new Java project by clicking 'File > New > Java Project'. From there, select 'Create project from existing source' and browse for and select the Psh project folder. Click 'Finish'.
+
+Adding JUnit to the Build Path
+------------------------------
+JUnit, while not essential to using Psh, will allow for some automatic testing and will make Eclipse not complain about errors in Psh whenever you try to run it. JUnit can be downloaded [here](http://www.junit.org/), and should be placed wherever you want to store Java jar libraries. To add JUnit to your Psh project, click 'Project > Properties'. Then select 'Java Build Path' followed by the 'Libraries' tab, and then click 'Add External JARs...'. Select your JUnit jar file wherever you saved it, click 'Open', and then 'Ok'. Now, JUnit should be added to your build path.
+
+Using PshGP from Eclipse
+------------------------
+Since PshGP requires command-line arguments, you must first specify them in Eclipse by setting up a Run Configuration. To do so, click 'Run > Run Configurations...'. From here, click 'New launch configuration' in the upper left corner. Give your configuration a name, and select the project by browsing or by typing Psh in the project line. Then, select PshGP as the main class by clicking 'Search > PshGP > Ok'. Now, click the 'Arguments' tab, and type in the configuration file you wish to run, for example 'gpsamples/intreg1.pushgp'. From here, you can click 'Run' to directly run this configuration, or 'Apply' then 'Close' if you don't want to run it right away. To run a run configuration, click the arrow to the right of the 'Run' arrow, and select the run configuration you wish to execute.
+
 Psh In More Detail
 ==================
 

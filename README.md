@@ -79,7 +79,7 @@ JUnit, while not essential to using Psh, will allow for some automatic testing a
 
 Using PshGP from Eclipse
 ------------------------
-Since PshGP requires command-line arguments, you must first specify them in Eclipse by setting up a Run Configuration. To do so, click `Run > Run Configurations...`. From here, click `New launch configuration` in the upper left corner. Give your configuration a name, and select the project by browsing or by typing Psh in the project line. Then, select PshGP as the main class by clicking `Search > PshGP > Ok`. Now, click the `Arguments` tab, and type in the configuration file you wish to run, for example `gpsamples/intreg1.pushgp`. From here, you can click `Run` to directly run this configuration, or `Apply` then `Close` if you don`t want to run it right away. To run a run configuration, click the arrow to the right of the `Run` arrow, and select the run configuration you wish to execute.
+Since PshGP requires command-line arguments, you must first specify them in Eclipse by setting up a Run Configuration. To do so, click `Run > Run Configurations...`. From here, click `New launch configuration` in the upper left corner. Give your configuration a name, and select the project by browsing or by typing Psh in the project line. Then, select PshGP as the main class by clicking `Search > PshGP > Ok`. Now, click the `Arguments` tab, and type in the configuration file you wish to run, for example `gpsamples/intreg1.pushgp`. From here, you can click `Run` to directly run this configuration, or `Apply` then `Close` if you don't want to run it right away. To run a run configuration, click the arrow to the right of the `Run` arrow, and select the run configuration you wish to execute.
 
 Psh In More Detail
 ==================

@@ -34,6 +34,8 @@ public class IntSymbolicRegression extends PushGP {
 	private static final long serialVersionUID = 1L;
 
 	protected int _currentInput;
+	
+	protected float _noResultPenalty = 1000;
 
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
@@ -112,6 +114,11 @@ public class IntSymbolicRegression extends PushGP {
 		int result = stack.top();
 		// System.out.println( _interpreter + " " + result );
 
+		// Penalize individual if there is no result on the stack.
+		if(stack.size() == 0){
+			return _noResultPenalty;
+		}
+		
 		return result - ((Integer) inOutput);
 	}
 

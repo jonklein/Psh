@@ -44,9 +44,10 @@ final-simplifications = 2000
 ### Setup problem class and test cases.
 
 problem-class = org.spiderland.Psh.ProbClass.FloatSymbolicRegression
-instruction-set = (registered.float input.makeinputs1)
-
 test-case-class = org.spiderland.Psh.TestCase.FloatRegTestCases2
+
+#instruction-set = (registered.float input.makeinputs1)
+instruction-set = (input.makeinputs1 float.+ float.- float.* float./ float.exp float.log float.sin float.cos)
 
 ### Setup Optional Parameters
 

@@ -52,8 +52,9 @@ random-float-resolution = 0.001
 
 problem-class = org.spiderland.Psh.Coevolution.CEFloatSymbolicRegression
 test-case-class = org.spiderland.Psh.TestCase.FloatRegTestCases2
-instruction-set = (registered.float input.makeinputs1)
 
+#instruction-set = (registered.float input.makeinputs1)
+instruction-set = (input.makeinputs1 float.+ float.- float.* float./ float.exp float.log float.sin float.cos)
 
 ### Setup predictor GP parameters
 

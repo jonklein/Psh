@@ -26,8 +26,12 @@ public class FloatRegFitPrediction extends PredictionGA {
 		ArrayList<Float> errors = new ArrayList<Float>();
 
 		for(int i = 0; i < _trainerPopulationSize; i++){			
-			float e = predictor.PredictSolutionFitness(_trainerPopulation.get(i));
-			errors.add(e);
+			float predictedError = predictor.PredictSolutionFitness(_trainerPopulation.get(i));
+			
+			// Error is difference between predictedError and the actual fitness
+			// of the trainer.
+			float error = Math.abs(predictedError) - Math.abs(_trainerPopulation.get(i).GetFitness());
+			errors.add(error);
 		}
 		
 		predictor.SetFitness(AbsoluteAverageOfErrors(errors));

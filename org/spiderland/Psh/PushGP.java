@@ -250,6 +250,9 @@ abstract public class PushGP extends GA {
 	protected String Report() {
 		String report = super.Report();
 
+		if(Double.isInfinite(_populationMeanFitness))
+			_populationMeanFitness = Double.MAX_VALUE;
+		
 		report += ";; Best Program:\n  "
 				+ _populations[_currentPopulation][_bestIndividual] + "\n\n";
 

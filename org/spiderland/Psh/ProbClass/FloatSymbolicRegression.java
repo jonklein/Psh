@@ -34,6 +34,8 @@ public class FloatSymbolicRegression extends PushGP {
 	private static final long serialVersionUID = 1L;
 
 	protected float _currentInput;
+	
+	private float _noResultPenalty = 1000;
 
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
@@ -111,6 +113,11 @@ public class FloatSymbolicRegression extends PushGP {
 				_executionLimit);
 
 		float result = stack.top();
+		
+		// Penalize individual if there is no result on the stack.
+		if(stack.size() == 0){
+			return _noResultPenalty;
+		}
 		
 		return result - ((Float) inOutput);
 	}

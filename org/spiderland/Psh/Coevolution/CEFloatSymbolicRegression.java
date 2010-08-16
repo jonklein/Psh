@@ -47,6 +47,8 @@ public class CEFloatSymbolicRegression extends PushGP {
 	protected PredictionGA _predictorGA;
 	
 	private boolean _success;
+	
+	private float _noResultPenalty = 1000f;
 
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
@@ -144,17 +146,18 @@ public class CEFloatSymbolicRegression extends PushGP {
 
 		_currentInput = (Float) inInput;
 
-		floatStack stack = _interpreter.floatStack();
+		floatStack fstack = _interpreter.floatStack();
 
-		stack.push(_currentInput);
+		fstack.push(_currentInput);
 
 		// Must be included in order to use the input stack.
 		_interpreter.inputStack().push(_currentInput);
 
 		_interpreter.Execute(((PushGPIndividual) inIndividual)._program,
 				_executionLimit);
+		
+		float result = fstack.top();
 
-		float result = stack.top();
 		// System.out.println( _interpreter + " " + result );
 
 		//trh
@@ -164,6 +167,11 @@ public class CEFloatSymbolicRegression extends PushGP {
 		 * System.out.println("evaluations according to effort " + _effort);
 		 */
 
+		// Penalize individual if there is no result on the stack.
+		if(fstack.size() == 0){
+			return _noResultPenalty;
+		}
+		
 		return result - ((Float) inOutput);
 	}
 	

@@ -48,6 +48,9 @@ public abstract class PredictionGAIndividual extends GAIndividual {
 		for (int n = 0; n < inArray.size(); n++)
 			total += Math.abs(inArray.get(n));
 
+		if(Float.isInfinite(total))
+			return Float.MAX_VALUE;
+		
 		return (total / inArray.size());
 	}
 

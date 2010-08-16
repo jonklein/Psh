@@ -74,7 +74,7 @@ public class FloatRegFitPredictionIndividual extends PredictionGAIndividual {
 					test._output);
 			errors.add(e);
 		}
-
+		
 		return AbsoluteAverageOfErrors(errors);
 	}
 

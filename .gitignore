@@ -1,3 +1,4 @@
 *.class
 .project
 .classpath
+/Run from CEFloatReg2

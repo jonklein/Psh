@@ -1,0 +1,3 @@
+(float.sin input.in0 float.sin input.in0 float.* float.* float.sin input.in0 float.* float.cos input.in0 float./ input.in0 float.+ input.in0 float.+ input.in0 float.* float.2pi float.2pi float.sin float.2pi float.2pi input.in0 float./ float.* float.* input.in0 input.in0 float.cos float./ float.* float.2pi float.2pi float.2pi float.* float.* float.* float.- float.2pi float.2pi float.sin input.in0 (input.in0 input.in0) float.* float.* input.in0 float.* float.* float.2pi (input.in0) float.- float.* float.* float.- input.in0 float.* float.sin float.*)
+200
+0.884483851852

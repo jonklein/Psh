@@ -21,7 +21,7 @@ all: Psh.jar docs
 
 Psh.jar: $(SOURCES) 
 	javac -source 1.5 -target 1.5 -Xlint $(SOURCES)
-	jar cf Psh.jar Manifest $(CLASSES)
+	jar cf Psh.jar Manifest LICENSE NOTICE README.md $(CLASSES)
 
 clean:
 	rm -f org/spiderland/Psh/*.class *.class Psh.jar

@@ -134,7 +134,7 @@ public class Params {
 	 * @return The contents of a file represented as a string.
 	 */
 
-	static String ReadFileString(File inFile) throws Exception {
+	public static String ReadFileString(File inFile) throws Exception {
 		InputStream s = new FileInputStream(inFile);
 		byte[] tmp = new byte[1024];
 		int read;

@@ -140,6 +140,12 @@ public class Interpreter implements Serializable {
 
 		DefineInstruction("frame.push", new PushFrame());
 		DefineInstruction("frame.pop", new PopFrame());
+		
+		
+		
+		//trh
+		DefineInstruction("float.2pi", new FloatConstant(6.283185f));
+		
 
 		_generators.put("float.erc", new FloatAtomGenerator());
 		_generators.put("integer.erc", new IntAtomGenerator());
@@ -184,9 +190,9 @@ public class Interpreter implements Serializable {
 						name = key;
 						break;
 					}
-			} else if (o instanceof String)
+			} else if (o instanceof String){
 				name = (String) o;
-			else
+			} else
 				throw new RuntimeException(
 						"Instruction list must contain a list of Push instruction names only");
 
@@ -246,7 +252,7 @@ public class Interpreter implements Serializable {
 				AtomGenerator g = _generators.get(name);
 
 				if (g == null) {
-					System.out.println("Unknown instruction \"" + name
+					throw new RuntimeException("Unknown instruction \"" + name
 							+ "\" in instruction set");
 				} else {
 					_randomGenerators.add(g);

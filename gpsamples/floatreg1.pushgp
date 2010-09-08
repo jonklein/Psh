@@ -42,7 +42,7 @@ simplification-percent	= 5
 simplify-flatten-percent= 20
 
 reproduction-simplifications = 25
-report-simplifications	= 100
+report-simplifications	= 10
 final-simplifications	= 1000
 
 ### The problem class determines how test cases are setup and

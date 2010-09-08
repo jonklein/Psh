@@ -107,7 +107,7 @@ public abstract class PredictionGA extends GA {
 	}
 
 	@Override
-	protected boolean Terminate() {
+	public boolean Terminate() {
 		return false;
 	}
 	

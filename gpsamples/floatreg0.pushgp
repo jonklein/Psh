@@ -13,49 +13,43 @@
 # limitations under the License.
 
 #
-# A difficult symbolic regression problem that needs many test cases. Will be
-# used to test TestCaseGenerator.java. The problem to be solved is 
-#                          y = (e ^ |x|) * sin(x)
+# A sample PushGP file for a simple test symbolic regression problem.
+# In this demo, the system solves the equation y = x^2 - 7, using
+# floating point symbolic regression
 #
-# Tom Helmuth
-# 8/9/10
+# Tom Helmuth <thelmuth (at) cs.umass.edu>
+# 06/08/2010
 #
 
 ### Setup required parameters
 
-population-size = 150
-max-generations = 20000
-execution-limit = 200
+problem-class = org.spiderland.Psh.ProbClass.FloatSymbolicRegression
 
-mutation-percent = 10
-crossover-percent = 80
-simplification-percent = 5
+max-generations = 1000
+population-size = 200
+execution-limit = 100
+max-points-in-program = 50
+max-random-code-size = 30
 
 tournament-size = 7
-max-points-in-program = 100
-
-max-random-code-size = 40
-simplify-flatten-percent = 10
+mutation-percent = 20
+crossover-percent = 70
+simplification-percent = 5
 
 reproduction-simplifications = 25
 report-simplifications = 100
-final-simplifications = 2000
+final-simplifications = 1000
 
-### Setup problem class and test cases.
-
-problem-class = org.spiderland.Psh.ProbClass.FloatSymbolicRegression
-test-case-class = org.spiderland.Psh.TestCase.FloatRegTestCases2
-
-#instruction-set = (registered.float input.makeinputs1)
-instruction-set = (input.makeinputs1 float.+ float.- float.* float./ float.exp float.sin float.cos)
+test-cases = ((-5 18) (-4 9) (-3 2) (-2 -3) (-1 -6) (0 -7) (1 -6) (2 -3) (3 2) (4 9) (5 18))
+instruction-set = (float.* float.+ float.- float./  float.dup float.flush float.stackdepth float.swap float.erc input.makeinputs1)
 
 ### Setup Optional Parameters
 
 trivial-geography-radius = 10
-simplify-flatten-percent = 5
+simplify-flatten-percent = 20
 mutation-mode = fair
 fair-mutation-range = .5
 
 min-random-float = -10.0
 max-random-float = 10.0
-random-float-resolution = 0.001
+random-float-resolution = 1.0

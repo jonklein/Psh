@@ -329,7 +329,7 @@ public abstract class GA implements Serializable {
 	 * by subclasses to customize GA behavior.
 	 */
 
-	protected boolean Terminate() {
+	public boolean Terminate() {
 		return (_generationCount >= _maxGenerations || Success());
 	}
 
@@ -538,10 +538,34 @@ public abstract class GA implements Serializable {
 	}
 	
 	/**
+	 * Retrieves best individual from the current population.
+	 * @return best GAIndividual in population
+	 */
+	public GAIndividual GetBestIndividual(){
+		if(Terminate()){
+			return _populations[_currentPopulation][_bestIndividual];
+		}
+		int oldpop = (_currentPopulation == 0 ? 1 : 0);
+		return _populations[oldpop][_bestIndividual];
+	}
+	
+	/**
 	 * @return population size
 	 */
 	public int GetPopulationSize(){
 		return _populations[_currentPopulation].length;
+	}
+	
+	/**
+	 * 
+	 * @return generation count
+	 */
+	public int GetGenerationCount(){
+		return _generationCount;
+	}
+	
+	public int GetMaxGenerations(){
+		return _maxGenerations;
 	}
 	
 	/**

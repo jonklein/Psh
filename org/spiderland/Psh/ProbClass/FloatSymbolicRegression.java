@@ -35,7 +35,7 @@ public class FloatSymbolicRegression extends PushGP {
 
 	protected float _currentInput;
 	
-	private float _noResultPenalty = 1000;
+	private float _noResultPenalty = 10000;
 
 	protected void InitFromParameters() throws Exception {
 		super.InitFromParameters();
@@ -120,6 +120,31 @@ public class FloatSymbolicRegression extends PushGP {
 		}
 		
 		return result - ((Float) inOutput);
+	}
+	
+	public float GetIndividualTestCaseResult(GAIndividual inIndividual, GATestCase inTestCase){
+		_interpreter.ClearStacks();
+
+		_currentInput = (Float) inTestCase._input;
+
+		floatStack stack = _interpreter.floatStack();
+
+		stack.push(_currentInput);
+
+		// Must be included in order to use the input stack.
+		_interpreter.inputStack().push(_currentInput);
+
+		_interpreter.Execute(((PushGPIndividual) inIndividual)._program,
+				_executionLimit);
+
+		float result = stack.top();
+		
+		// If no result, return 0
+		if(stack.size() == 0){
+			return 0;
+		}
+		
+		return result;
 	}
 
 	protected boolean Success() {

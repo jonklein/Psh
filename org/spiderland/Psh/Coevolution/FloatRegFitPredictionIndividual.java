@@ -96,6 +96,7 @@ public class FloatRegFitPredictionIndividual extends PredictionGAIndividual {
 		int[] a = new int[_sampleSize];
 		int[] b = new int[_sampleSize];
 		
+		
 		a = Arrays.copyOf(_sampleIndices, _sampleSize);
 		b = Arrays.copyOf(((FloatRegFitPredictionIndividual)inB)._sampleIndices, _sampleSize);
 		

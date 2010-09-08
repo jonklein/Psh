@@ -32,8 +32,6 @@ import org.spiderland.Psh.TestCase.TestCaseGenerator;
  */
 public class FloatSymbolicRegression extends PushGP {
 	private static final long serialVersionUID = 1L;
-
-	protected float _currentInput;
 	
 	private float _noResultPenalty = 10000;
 
@@ -100,14 +98,14 @@ public class FloatSymbolicRegression extends PushGP {
 			Object inOutput) {
 		_interpreter.ClearStacks();
 
-		_currentInput = (Float) inInput;
+		float currentInput = (Float) inInput;
 
 		floatStack stack = _interpreter.floatStack();
 
-		stack.push(_currentInput);
+		stack.push(currentInput);
 
 		// Must be included in order to use the input stack.
-		_interpreter.inputStack().push(_currentInput);
+		_interpreter.inputStack().push(currentInput);
 
 		_interpreter.Execute(((PushGPIndividual) inIndividual)._program,
 				_executionLimit);
@@ -125,14 +123,14 @@ public class FloatSymbolicRegression extends PushGP {
 	public float GetIndividualTestCaseResult(GAIndividual inIndividual, GATestCase inTestCase){
 		_interpreter.ClearStacks();
 
-		_currentInput = (Float) inTestCase._input;
+		float currentInput = (Float) inTestCase._input;
 
 		floatStack stack = _interpreter.floatStack();
 
-		stack.push(_currentInput);
+		stack.push(currentInput);
 
 		// Must be included in order to use the input stack.
-		_interpreter.inputStack().push(_currentInput);
+		_interpreter.inputStack().push(currentInput);
 
 		_interpreter.Execute(((PushGPIndividual) inIndividual)._program,
 				_executionLimit);

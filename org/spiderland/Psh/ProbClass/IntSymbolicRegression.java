@@ -32,8 +32,6 @@ import org.spiderland.Psh.TestCase.TestCaseGenerator;
  */
 public class IntSymbolicRegression extends PushGP {
 	private static final long serialVersionUID = 1L;
-
-	protected int _currentInput;
 	
 	protected float _noResultPenalty = 1000;
 
@@ -99,14 +97,14 @@ public class IntSymbolicRegression extends PushGP {
 			Object inOutput) {
 		_interpreter.ClearStacks();
 
-		_currentInput = (Integer) inInput;
+		int currentInput = (Integer) inInput;
 
 		intStack stack = _interpreter.intStack();
 
-		stack.push(_currentInput);
+		stack.push(currentInput);
 
 		// Must be included in order to use the input stack.
-		_interpreter.inputStack().push(_currentInput);
+		_interpreter.inputStack().push(currentInput);
 
 		_interpreter.Execute(((PushGPIndividual) inIndividual)._program,
 				_executionLimit);

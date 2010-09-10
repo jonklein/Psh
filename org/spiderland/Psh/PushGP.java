@@ -23,7 +23,7 @@ import java.util.*;
  */
 abstract public class PushGP extends GA {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected Interpreter _interpreter;
 	protected int _maxRandomCodeSize;
 	protected int _maxPointsInProgram;
@@ -33,13 +33,13 @@ abstract public class PushGP extends GA {
 
 	protected float _averageSize;
 	protected int _bestSize;
-	
+
 	protected float _simplificationPercent;
 	protected float _simplifyFlattenPercent;
 	protected int _reproductionSimplifications;
 	protected int _reportSimplifications;
 	protected int _finalSimplifications;
-	
+
 	protected void InitFromParameters() throws Exception {
 		// Default parameters to be used when optional parameters are not
 		// given.
@@ -47,23 +47,24 @@ abstract public class PushGP extends GA {
 		float defaultsimplifyFlattenPercent = 20f;
 		String defaultInterpreterClass = "org.spiderland.Psh.Interpreter";
 		String defaultInputPusherClass = "org.spiderland.Psh.InputPusher";
-		
+
 		_maxRandomCodeSize = (int) GetFloatParam("max-random-code-size");
 		_executionLimit = (int) GetFloatParam("execution-limit");
 		_maxPointsInProgram = (int) GetFloatParam("max-points-in-program");
-		
+
 		_useFairMutation = "fair".equals(GetParam("mutation-mode", true));
 		_fairMutationRange = GetFloatParam("fair-mutation-range", true);
-		if(Float.isNaN(_fairMutationRange)){
+		if (Float.isNaN(_fairMutationRange)) {
 			_fairMutationRange = defaultFairMutationRange;
 		}
 
 		_simplificationPercent = GetFloatParam("simplification-percent");
-		_simplifyFlattenPercent = GetFloatParam("simplify-flatten-percent", true);
-		if(Float.isNaN(_simplifyFlattenPercent)){
+		_simplifyFlattenPercent = GetFloatParam("simplify-flatten-percent",
+				true);
+		if (Float.isNaN(_simplifyFlattenPercent)) {
 			_simplifyFlattenPercent = defaultsimplifyFlattenPercent;
 		}
-		
+
 		_reproductionSimplifications = (int) GetFloatParam("reproduction-simplifications");
 		_reportSimplifications = (int) GetFloatParam("report-simplifications");
 		_finalSimplifications = (int) GetFloatParam("final-simplifications");
@@ -75,55 +76,51 @@ abstract public class PushGP extends GA {
 		int defaultMaxRandomInt = 10;
 		int randomIntResolution;
 		int defaultRandomIntResolution = 1;
-		
-		if(Float.isNaN(GetFloatParam("min-random-integer", true))){
+
+		if (Float.isNaN(GetFloatParam("min-random-integer", true))) {
 			minRandomInt = defaultMinRandomInt;
-		}
-		else {
+		} else {
 			minRandomInt = (int) GetFloatParam("min-random-integer", true);
 		}
-		if(Float.isNaN(GetFloatParam("max-random-integer", true))){
+		if (Float.isNaN(GetFloatParam("max-random-integer", true))) {
 			maxRandomInt = defaultMaxRandomInt;
-		}
-		else {
+		} else {
 			maxRandomInt = (int) GetFloatParam("max-random-integer", true);
 		}
-		if(Float.isNaN(GetFloatParam("random-integer-resolution", true))){
+		if (Float.isNaN(GetFloatParam("random-integer-resolution", true))) {
 			randomIntResolution = defaultRandomIntResolution;
+		} else {
+			randomIntResolution = (int) GetFloatParam(
+					"random-integer-resolution", true);
 		}
-		else {
-			randomIntResolution = (int) GetFloatParam("random-integer-resolution", true);
-		}
-		
+
 		float minRandomFloat;
 		float defaultMinRandomFloat = -10.0f;
 		float maxRandomFloat;
 		float defaultMaxRandomFloat = 10.0f;
 		float randomFloatResolution;
 		float defaultRandomFloatResolution = 0.01f;
-		
-		if(Float.isNaN(GetFloatParam("min-random-float", true))){
+
+		if (Float.isNaN(GetFloatParam("min-random-float", true))) {
 			minRandomFloat = defaultMinRandomFloat;
-		}
-		else {
+		} else {
 			minRandomFloat = GetFloatParam("min-random-float", true);
 		}
-		if(Float.isNaN(GetFloatParam("max-random-float", true))){
+		if (Float.isNaN(GetFloatParam("max-random-float", true))) {
 			maxRandomFloat = defaultMaxRandomFloat;
-		}
-		else {
+		} else {
 			maxRandomFloat = GetFloatParam("max-random-float", true);
 		}
-		if(Float.isNaN(GetFloatParam("random-float-resolution", true))){
+		if (Float.isNaN(GetFloatParam("random-float-resolution", true))) {
 			randomFloatResolution = defaultRandomFloatResolution;
+		} else {
+			randomFloatResolution = GetFloatParam("random-float-resolution",
+					true);
 		}
-		else {
-			randomFloatResolution = GetFloatParam("random-float-resolution", true);
-		}
-		
+
 		// Setup our custom interpreter class based on the params we're given
 		String interpreterClass = GetParam("interpreter-class", true);
-		if(interpreterClass == null){
+		if (interpreterClass == null) {
 			interpreterClass = defaultInterpreterClass;
 		}
 		Class<?> iclass = Class.forName(interpreterClass);
@@ -142,10 +139,10 @@ abstract public class PushGP extends GA {
 		String framemode = GetParam("push-frame-mode", true);
 
 		String inputpusherClass = GetParam("inputpusher-class", true);
-		if(inputpusherClass == null){
+		if (inputpusherClass == null) {
 			inputpusherClass = defaultInputPusherClass;
 		}
-		
+
 		iclass = Class.forName(inputpusherClass);
 
 		iObject = iclass.newInstance();
@@ -162,18 +159,30 @@ abstract public class PushGP extends GA {
 			_interpreter.SetUseFrames(true);
 
 		super.InitFromParameters();
-		
+
 		// Print important parameters
 		Print("  Important Parameters\n");
 		Print(" ======================\n");
-		Print("Population Size: " + (int)GetFloatParam("population-size") + "\n");
+		Print("Population Size: " + (int) GetFloatParam("population-size")
+				+ "\n");
 		Print("Generations: " + _maxGenerations + "\n");
 		Print("Execution Limit: " + _executionLimit + "\n\n");
+
 		Print("Crossover Percent: " + _crossoverPercent + "\n");
 		Print("Mutation Percent: " + _mutationPercent + "\n");
 		Print("Simplification Percent: " + _simplificationPercent + "\n");
-		Print("Clone Percent: "+ (100 - _crossoverPercent - _mutationPercent -
-				_simplificationPercent) + "\n");
+		Print("Clone Percent: "
+				+ (100 - _crossoverPercent - _mutationPercent - _simplificationPercent)
+				+ "\n\n");
+
+		Print("Tournament Size: " + _tournamentSize + "\n");
+		if (_trivialGeographyRadius != 0) {
+			Print("Trivial Geography Radius: " + _trivialGeographyRadius + "\n");
+		}
+		Print("\n");
+
+		Print("Instructions: " + _interpreter.GetInstructionsString() + "\n");
+
 		Print("\n");
 	}
 
@@ -185,7 +194,7 @@ abstract public class PushGP extends GA {
 
 		i.SetProgram(p);
 	}
-	
+
 	protected void BeginGeneration() throws Exception {
 		_averageSize = 0;
 	}
@@ -193,7 +202,7 @@ abstract public class PushGP extends GA {
 	protected void EndGeneration() {
 		_averageSize /= _populations[0].length;
 	}
-	
+
 	protected void Evaluate() {
 		float totalFitness = 0;
 		_bestMeanFitness = Float.MAX_VALUE;
@@ -204,7 +213,7 @@ abstract public class PushGP extends GA {
 			EvaluateIndividual(i);
 
 			totalFitness += i.GetFitness();
-			
+
 			if (i.GetFitness() < _bestMeanFitness) {
 				_bestMeanFitness = i.GetFitness();
 				_bestIndividual = n;
@@ -212,14 +221,15 @@ abstract public class PushGP extends GA {
 				_bestErrors = i.GetErrors();
 			}
 		}
-		
-		_populationMeanFitness = totalFitness / _populations[_currentPopulation].length;	
+
+		_populationMeanFitness = totalFitness
+				/ _populations[_currentPopulation].length;
 	}
 
 	public void EvaluateIndividual(GAIndividual inIndividual) {
 		EvaluateIndividual(inIndividual, false);
 	}
-	
+
 	protected void EvaluateIndividual(GAIndividual inIndividual,
 			boolean duringSimplify) {
 		ArrayList<Float> errors = new ArrayList<Float>();
@@ -240,8 +250,8 @@ abstract public class PushGP extends GA {
 		inIndividual.SetFitness(AbsoluteAverageOfErrors(errors));
 		inIndividual.SetErrors(errors);
 
-		//System.out.println("Evaluated individual in " + t + " msec: fitness "
-		//		+ inIndividual.GetFitness());
+		// System.out.println("Evaluated individual in " + t + " msec: fitness "
+		// + inIndividual.GetFitness());
 	}
 
 	abstract protected void InitInterpreter(Interpreter inInterpreter)
@@ -250,14 +260,14 @@ abstract public class PushGP extends GA {
 	protected String Report() {
 		String report = super.Report();
 
-		if(Double.isInfinite(_populationMeanFitness))
+		if (Double.isInfinite(_populationMeanFitness))
 			_populationMeanFitness = Double.MAX_VALUE;
-		
+
 		report += ";; Best Program:\n  "
 				+ _populations[_currentPopulation][_bestIndividual] + "\n\n";
 
 		report += ";; Best Program Fitness (mean): " + _bestMeanFitness + "\n";
-		if(_testCases.size() == _bestErrors.size()){
+		if (_testCases.size() == _bestErrors.size()) {
 			report += ";; Best Program Errors: (";
 			for (int i = 0; i < _testCases.size(); i++) {
 				if (i != 0)
@@ -302,12 +312,12 @@ abstract public class PushGP extends GA {
 		// during simplification count towards the total number of
 		// simplifications.
 		report += ">> Number of Evaluations: "
-			+ _interpreter.GetEvaluationExecutions() + "\n";
+				+ _interpreter.GetEvaluationExecutions() + "\n";
 
 		report += ">> Best Program: "
 				+ _populations[_currentPopulation][_bestIndividual] + "\n";
 		report += ">> Fitness (mean): " + _bestMeanFitness + "\n";
-		if(_testCases.size() == _bestErrors.size()){
+		if (_testCases.size() == _bestErrors.size()) {
 			report += ">> Errors: (";
 			for (int i = 0; i < _testCases.size(); i++) {
 				if (i != 0)
@@ -318,7 +328,7 @@ abstract public class PushGP extends GA {
 			report += ")\n";
 		}
 		report += ">> Size: " + _bestSize + "\n\n";
-		
+
 		report += "<<<<<<<<<< After Simplification >>>>>>>>>>\n";
 		report += ">> Best Program: ";
 		report += simplified._program + "\n";
@@ -327,7 +337,7 @@ abstract public class PushGP extends GA {
 
 		return report;
 	}
-	
+
 	protected PushGPIndividual Autosimplify(PushGPIndividual inIndividual,
 			int steps) {
 
@@ -438,7 +448,7 @@ abstract public class PushGP extends GA {
 		int newsize = 0;
 
 		if (_useFairMutation) {
-			int range = (int) Math.max(1, _fairMutationRange * oldsize);			
+			int range = (int) Math.max(1, _fairMutationRange * oldsize);
 			newsize = Math.max(1, oldsize + _RNG.nextInt(2 * range) - range);
 		} else {
 			newsize = _RNG.nextInt(_maxRandomCodeSize);
@@ -475,5 +485,5 @@ abstract public class PushGP extends GA {
 
 		System.out.println(_interpreter);
 	}
-	
+
 }

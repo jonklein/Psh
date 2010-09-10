@@ -47,6 +47,6 @@ public class PshApplet extends Applet {
 	}
 
 	public String GetInstructionString() {
-		return "=> " + _interpreter.GetInstructionString();
+		return "=> " + _interpreter.GetRegisteredInstructionsString();
 	}
 }

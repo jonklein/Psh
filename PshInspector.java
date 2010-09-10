@@ -50,7 +50,7 @@ public class PshInspector {
 
 		// Print registered instructions
 		System.out.println("Registered Instructions: "
-				+ _interpreter.GetInstructionString() + "\n");
+				+ _interpreter.GetRegisteredInstructionsString() + "\n");
 
 		// Run the Psh Inspector
 		System.out.println("====== State after " + executed + " steps ======");

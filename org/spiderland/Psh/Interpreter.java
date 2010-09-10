@@ -580,7 +580,7 @@ public class Interpreter implements Serializable {
 	 * Returns a string list of all instructions enabled in the interpreter.
 	 */
 
-	public String GetInstructionString() {
+	public String GetRegisteredInstructionsString() {
 		Object keys[] = _instructions.keySet().toArray();
 		Arrays.sort(keys);
 		String list = "";
@@ -589,6 +589,22 @@ public class Interpreter implements Serializable {
 			list += keys[n] + " ";
 
 		return list;
+	}
+	
+	public String GetInstructionsString(){
+		Object keys[] = _instructions.keySet().toArray();
+		String str = "";
+
+		for (int i = 0; i < keys.length; i++) {
+			String key = (String) keys[i];
+			//TODO: finish here, including making sure float.erc is included
+			//TODO: Also, sort the list of instructions before making the string
+			if(_randomGenerators.contains(_generators.get(key))){
+				str += key + " ";
+			}
+			
+		}
+		return str;
 	}
 
 	/**
@@ -714,6 +730,8 @@ public class Interpreter implements Serializable {
 	private class InstructionAtomGenerator extends AtomGenerator {
 		private static final long serialVersionUID = 1L;
 
+		String _instruction;
+
 		InstructionAtomGenerator(String inInstructionName) {
 			_instruction = inInstructionName;
 		}
@@ -721,8 +739,6 @@ public class Interpreter implements Serializable {
 		Object Generate(Interpreter inInterpreter) {
 			return _instruction;
 		}
-
-		String _instruction;
 	}
 
 	private class FloatAtomGenerator extends AtomGenerator {

@@ -58,3 +58,5 @@ fair-mutation-range = .5
 min-random-integer = -100
 max-random-integer = 100
 random-integer-resolution = 1
+
+target-function-string = y = 9x^3 + 24x^2 - 3x + 10

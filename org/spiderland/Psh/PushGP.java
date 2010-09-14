@@ -39,6 +39,8 @@ abstract public class PushGP extends GA {
 	protected int _reproductionSimplifications;
 	protected int _reportSimplifications;
 	protected int _finalSimplifications;
+	
+	protected String _targetFunctionString;
 
 	protected void InitFromParameters() throws Exception {
 		// Default parameters to be used when optional parameters are not
@@ -47,6 +49,7 @@ abstract public class PushGP extends GA {
 		float defaultsimplifyFlattenPercent = 20f;
 		String defaultInterpreterClass = "org.spiderland.Psh.Interpreter";
 		String defaultInputPusherClass = "org.spiderland.Psh.InputPusher";
+		String defaultTargetFunctionString = "";
 
 		_maxRandomCodeSize = (int) GetFloatParam("max-random-code-size");
 		_executionLimit = (int) GetFloatParam("execution-limit");
@@ -137,7 +140,7 @@ abstract public class PushGP extends GA {
 				randomFloatResolution);
 
 		String framemode = GetParam("push-frame-mode", true);
-
+		
 		String inputpusherClass = GetParam("inputpusher-class", true);
 		if (inputpusherClass == null) {
 			inputpusherClass = defaultInputPusherClass;
@@ -157,12 +160,22 @@ abstract public class PushGP extends GA {
 
 		if (framemode != null && framemode.equals("pushstacks"))
 			_interpreter.SetUseFrames(true);
+		
+		_targetFunctionString = GetParam("target-function-string", true);
+		if(_targetFunctionString == null){
+			_targetFunctionString = defaultTargetFunctionString;
+		}
 
 		super.InitFromParameters();
 
 		// Print important parameters
 		Print("  Important Parameters\n");
 		Print(" ======================\n");
+
+		if(!_targetFunctionString.isEmpty()){
+			Print("Target Function: " + _targetFunctionString + "\n\n");
+		}
+		
 		Print("Population Size: " + (int) GetFloatParam("population-size")
 				+ "\n");
 		Print("Generations: " + _maxGenerations + "\n");
@@ -301,7 +314,13 @@ abstract public class PushGP extends GA {
 	}
 
 	protected String FinalReport() {
-		String report = super.FinalReport();
+		String report = "";
+		
+		report += super.FinalReport();
+		
+		if(!_targetFunctionString.isEmpty()){
+			report += ">> Target Function: " + _targetFunctionString + "\n\n";
+		}
 
 		PushGPIndividual simplified = Autosimplify(
 				(PushGPIndividual) _populations[_currentPopulation][_bestIndividual],

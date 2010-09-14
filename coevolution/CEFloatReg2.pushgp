@@ -48,6 +48,8 @@ min-random-float = -10.0
 max-random-float = 10.0
 random-float-resolution = 0.001
 
+target-function-string = y = (e ^ |x|) * sin(x)
+
 ### Setup problem class and test cases.
 
 problem-class = org.spiderland.Psh.Coevolution.CEFloatSymbolicRegression

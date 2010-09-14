@@ -59,3 +59,5 @@ fair-mutation-range = .5
 min-random-float = -10.0
 max-random-float = 10.0
 random-float-resolution = 0.001
+
+target-function-string = y = (e ^ |x|) * sin(x)

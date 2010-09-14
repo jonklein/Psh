@@ -112,7 +112,7 @@ The following parameters must be defined in the configuration file, given with e
     test-cases = ((1 1) (2 2) (3 6) (4 24) (5 120) (6 720))
     instruction-set = (registered.exec registered.boolean integer.% integer.* integer.+ integer.- integer./ integer.dup)
 
-The following parameters are optional. If not specified, the default values below will be used for these parameters, except for the parameters `mutation-mode`, `output-file`, and `push-frame-mode`, which significantly change the run when specified.
+The following parameters are optional. If not specified, the default values below will be used for these parameters, except for the parameters `mutation-mode`, `output-file`, and `push-frame-mode`, which significantly change the run when specified. Also, `target-function-string` defaults to not displaying a string, but a representative example is given below.
 
     trivial-geography-radius = 10
     simplify-flatten-percent = 20
@@ -125,6 +125,8 @@ The following parameters are optional. If not specified, the default values belo
     min-random-float = -10.0
     max-random-float = 10.0
     random-float-resolution = 0.01
+    
+    target-function-string = "y = x^4 - 2x + 7"
     
     interpreter-class = org.spiderland.Psh.Interpreter
     individual-class = org.spiderland.Psh.PushGPIndividual
@@ -169,6 +171,7 @@ Major Changes since v1.0:
 - Fixed holes in many integer and float instructions that could cause underflow, overflow, or NaN errors.
 - Made FloatSymbolicRegression and IntSymbolicRegression as well as co-evolved FloatSymbolicRegression work with test-case generators.
 - PshGP now primarily uses the mean of test case errors for an individual's error instead of the total sum of the errors.
+- Added optional parameter `target-function-string`, which specifies a human-readable version of the target function, which is only used in I/O.
 
 Major Changes since v0.3:
 -------------------------

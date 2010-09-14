@@ -45,6 +45,8 @@ reproduction-simplifications = 25
 report-simplifications	= 100
 final-simplifications	= 1000
 
+target-function-string = y = 12x^2 + 5
+
 
 ### The problem class determines how test cases are setup and
 ### how fitness scores are computed.  The IntSymbolicRegression

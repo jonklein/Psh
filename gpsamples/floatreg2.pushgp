@@ -53,3 +53,5 @@ fair-mutation-range = .5
 min-random-float = -2.0
 max-random-float = 2.0
 random-float-resolution = 0.01
+
+target-function-string = y = 1.72x^2 - 0.68x^3

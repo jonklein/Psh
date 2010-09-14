@@ -53,6 +53,8 @@ population-size 	= 50
 execution-limit		= 80
 max-random-code-size	= 40
 
+target-function-string = y = x
+
 ### The problem class determines how test cases are setup and
 ### how fitness scores are computed.  The IntSymbolicRegression
 ### class uses a set of int inputs and a single output.

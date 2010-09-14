@@ -47,6 +47,7 @@ Done Minor Changes
 - Release v1.0 of Psh, including changing the README version number.
 - The parameters that affect Ephemeral Random Constant creation, such as the minimum random integer, are now available as optional .pushgp parameters. 
 - Fixed a bug in float.max
+- Added optional parameter `target-function-string`, which specifies a human-readable version of the target function, which is only used in I/O.
 
 
 To Do Still

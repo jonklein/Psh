@@ -42,6 +42,7 @@ reproduction-simplifications = 25
 report-simplifications = 100
 final-simplifications = 2000
 
+target-function-string = y = 3x^2 + 4x
 
 ### Setup problem class and test cases.
 

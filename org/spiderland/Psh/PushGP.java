@@ -356,6 +356,10 @@ abstract public class PushGP extends GA {
 
 		return report;
 	}
+	
+	public String GetTargetFunctionString(){
+		return _targetFunctionString;
+	}
 
 	protected PushGPIndividual Autosimplify(PushGPIndividual inIndividual,
 			int steps) {

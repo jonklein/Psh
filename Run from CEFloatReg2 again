@@ -1,0 +1,1611 @@
+  ((input.in0 float./ input.in0 (((input.in0) float.* float.2pi) (float.exp) ((input.in0 (float.sin)) float.exp ((((float./ ((float.cos) (float.exp (input.in0 float.2pi)))))) ((input.in0) (input.in0)) float.+ float.-) (float.cos float.+ (((float.cos (float.* ((float.cos))) ((((float.exp float.2pi) (float.* (float.exp (input.in0 float.2pi)))))) float.2pi) float.- float.+ float.sin float.*) float.+ input.in0) (float.cos)))) (((input.in0 float.2pi)))) (((float./ (input.in0 (float.exp (input.in0 float.2pi)))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9052613
+;; Best Program Size: 91
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 92.262054
+;; Number of Evaluations Thus Far: 3438704
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.exp (input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 8
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 754 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((input.in0 float./ input.in0 (((input.in0) input.in0 float.2pi) ((input.in0 float.2pi)) ((input.in0 (float.sin)) float.exp ((((float./ ((float.cos) (float.exp (input.in0 float.2pi)))))) ((input.in0) (input.in0)) float.+ float.-) (float.cos float.+ (((float.cos (float.* ((float.cos))) ((((float.exp float.2pi) (float.* (float.exp (input.in0 float.2pi)))))) float.2pi) float.- float.+ float.2pi float.*) float.+ input.in0) (float.cos)))) (((input.in0 float.2pi)))) (((float./ (input.in0 (float.exp (input.in0 float.2pi)))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9052613
+;; Best Program Size: 93
+
+;; Mean Fitness: 5.75594806902784E14
+;; Mean Program Size: 94.23508
+;; Number of Evaluations Thus Far: 3441680
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((((float.exp input.in0 float.2pi))))) float.* float.sin float.*)
+;; Partial Simplification Size: 11
+
+
+;;########################################################;;
+;;###############  Predictor Generation 377 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 56 61 15 ]
+;; Best Predictor Fitness: 2560271.8
+
+;; Mean Predictor Fitness: 3642500.0
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 755 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((input.in0 float./ input.in0 (((float.*) float.* float.2pi) (input.in0) ((input.in0 ((float.2pi))) (((input.in0) (input.in0 float.2pi) (input.in0 ((float.*)))) (input.in0)) ((((float./ (input.in0 float.2pi)))) ((input.in0) (float.-)) (float./) float.-) (float.cos float.+ ((float.exp (input.in0)) float.+ float.exp) (float.cos)))) (((float.- float.2pi)))) (((float./ (input.in0 (float.exp (input.in0 float.2pi)))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9052613
+;; Best Program Size: 79
+
+;; Mean Fitness: 8.448455810546875
+;; Mean Program Size: 80.1549
+;; Number of Evaluations Thus Far: 3446776
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float./ float.exp input.in0 float.2pi) float.* float.sin float.*)
+;; Partial Simplification Size: 8
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 756 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((input.in0 float.2pi input.in0 (((float.*) float.exp float.2pi) (input.in0) ((input.in0 ((float.2pi))) (((input.in0) float./ (input.in0 ((float.*)))) (input.in0)) (float.sin ((((float.2pi))) (input.in0 (float.exp (input.in0 float.2pi)))) (float./) float.-) (float.+ float.+ (((float.cos (float.* ((float.cos))) ((((float.cos) float./ ((float./ float./)) input.in0))) float.2pi) float.- float.+ float.sin float.*) float.+ (float./)) (float.cos)))) (((input.in0 float.2pi)))) (float./ (input.in0 (float.exp (input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9052613
+;; Best Program Size: 97
+
+;; Mean Fitness: 14393.2900390625
+;; Mean Program Size: 98.18103
+;; Number of Evaluations Thus Far: 3450144
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (((float.exp input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 8
+
+
+;;########################################################;;
+;;###############  Predictor Generation 378 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 56 61 15 ]
+;; Best Predictor Fitness: 2560271.8
+
+;; Mean Predictor Fitness: 4191397.875
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 757 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((input.in0 float./ input.in0 (((float.*) float.* float.2pi) (input.in0) (float.exp (((input.in0) (input.in0 float.2pi) (input.in0 ((float.*)))) (input.in0)) (((float./ (input.in0 (input.in0 float./)))) ((input.in0) (float.-)) (float./) float.-) (float.cos float.+ (((float.cos (float.* ((float.cos))) (float.-) float.2pi) input.in0 float.+ float.sin float.*) float.+ float.exp) (float.cos)))) (((input.in0 float.2pi)))) (((float./ (input.in0 (float.exp (input.in0 float.2pi)))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9052613
+;; Best Program Size: 87
+
+;; Mean Fitness: 18446.830078125
+;; Mean Program Size: 88.23454
+;; Number of Evaluations Thus Far: 3454848
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((float.exp (input.in0 float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 10
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 758 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.* float.* (float.+ ()) ((float.exp input.in0) float.* ((float.sin (input.in0 (((((float.* ()))))) float.exp)) input.in0 ((() (float.2pi)) (()) float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 2.141771
+;; Best Program Size: 45
+
+;; Mean Fitness: 2.2685490092814574E36
+;; Mean Program Size: 46.0949
+;; Number of Evaluations Thus Far: 3457624
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.* (float.exp input.in0) ((float.sin (input.in0 (((((float.*))))))) (() float.2pi) () float.2pi float./ float./ float.exp float.+) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 32
+
+
+;;########################################################;;
+;;###############  Predictor Generation 379 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 56 61 15 ]
+;; Best Predictor Fitness: 2560271.8
+
+;; Mean Predictor Fitness: 3647670.775
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 759 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.exp float.* (float.+ ()) ((float.exp input.in0) float.* ((float.sin (input.in0 (((((float.* ()))))) float.exp)) input.in0 ((() (float.2pi)) (()) float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.648718
+;; Best Program Size: 45
+
+;; Mean Fitness: 2.2685490092814574E36
+;; Mean Program Size: 46.233967
+;; Number of Evaluations Thus Far: 3475984
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (float.exp ((float.exp input.in0) float.* ((float.sin (input.in0 ((((float.*)))) float.exp)) input.in0 (((float.2pi)) float.2pi) float./ float./ float.exp float.+)) ((input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 34
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 760 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.exp float.* (float.+ ()) ((float.exp input.in0) float.* ((float.sin (input.in0 (((((float.* ()))))) float.exp)) input.in0 ((() (float.2pi)) (()) float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.648718
+;; Best Program Size: 45
+
+;; Mean Fitness: 23.256553649902344
+;; Mean Program Size: 45.60156
+;; Number of Evaluations Thus Far: 3479728
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.exp (()) ((float.exp input.in0) float.* ((float.sin input.in0 ((((float.*)))) float.exp) input.in0 ((float.2pi) float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 36
+
+
+;;########################################################;;
+;;###############  Predictor Generation 380 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 73 193 87 105 51 83 61 36 ]
+;; Best Predictor Fitness: 2560271.5
+
+;; Mean Predictor Fitness: 3.016929834205972E36
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 761 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.exp float.* (()) ((float.exp input.in0) float.* ((float.sin (input.in0 (((((float.* ()))))) float.exp)) input.in0 (((float.2pi)) (()) float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.648718
+;; Best Program Size: 43
+
+;; Mean Fitness: 2.2685490092814574E36
+;; Mean Program Size: 43.590675
+;; Number of Evaluations Thus Far: 3484704
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.exp float.* (float.exp input.in0 float.* ((float.sin (input.in0 (((((float.* ()))))) float.exp)) input.in0 ((float.2pi) float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 37
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 762 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.exp float.* () ((float.exp input.in0) float.* ((float.sin (input.in0 (((((float.* ()))))) float.exp)) input.in0 (((float.2pi)) () float.2pi) (float./ float./ float.exp) float.+)) (input.in0 float.2pi)) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.648718
+;; Best Program Size: 40
+
+;; Mean Fitness: 5.020906535975845E35
+;; Mean Program Size: 40.57727
+;; Number of Evaluations Thus Far: 3488520
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (float.exp float.* (float.exp input.in0) float.* ((float.sin (input.in0 (((((float.*))))) float.exp)) input.in0 (((float.2pi)) () float.2pi) (float./ float./ float.exp) float.+) (input.in0 float.2pi) float.* float.sin float.*)
+;; Partial Simplification Size: 36
+
+
+;;########################################################;;
+;;###############  Predictor Generation 381 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 73 193 87 105 51 83 61 36 ]
+;; Best Predictor Fitness: 2560271.5
+
+;; Mean Predictor Fitness: 3104006.225
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 763 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.exp float.* (()) ((float.exp input.in0) float.* ((float.sin (input.in0 (((((float.* float./))))) float.exp)) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.648718
+;; Best Program Size: 39
+
+;; Mean Fitness: 5.97568396460032E14
+;; Mean Program Size: 39.510513
+;; Number of Evaluations Thus Far: 3493656
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.exp float.* (float.exp input.in0 float.* ((float.sin (input.in0 (((((float.* float./))))) float.exp)) input.in0 float.2pi float.2pi float./ float./ float.exp float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 34
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 764 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.exp float.* () ((float.exp input.in0) float.* ((float.sin (input.in0 (((((float.* float./))))) float.exp)) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.648718
+;; Best Program Size: 38
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 38.683403
+;; Number of Evaluations Thus Far: 3497408
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.exp float.* ((float.exp input.in0) float.* (float.sin input.in0 (((((float.* float./))))) float.exp) input.in0 float.2pi float.2pi float./ float./ float.exp float.+) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 33
+
+
+;;########################################################;;
+;;###############  Predictor Generation 382 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 73 193 87 105 51 83 61 36 ]
+;; Best Predictor Fitness: 2560271.5
+
+;; Mean Predictor Fitness: 5146405.125
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 765 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin float.* (()) ((float.exp input.in0) float.* ((float.sin input.in0 ((((float.* ())))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.7944478
+;; Best Program Size: 39
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 39.551224
+;; Number of Evaluations Thus Far: 3501368
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.sin float.* () ((float.exp input.in0) float.* (float.sin input.in0 ((float.* ())) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float./ float.exp) float.+) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 35
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 766 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin float.* (()) ((float.exp input.in0) float.* ((float.sin input.in0 ((((float.* ())))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin (((float.* ()))))
+
+;; Best Program Fitness (mean): 0.7944478
+;; Best Program Size: 43
+
+;; Mean Fitness: 2.51283538463162368E17
+;; Mean Program Size: 43.523674
+;; Number of Evaluations Thus Far: 3504720
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.sin float.* (float.* ((input.in0 ((((float.* ())))) float.exp) input.in0 ((float.2pi) float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin (((float.*))))
+;; Partial Simplification Size: 35
+
+
+;;########################################################;;
+;;###############  Predictor Generation 383 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 73 193 87 105 51 83 61 36 ]
+;; Best Predictor Fitness: 2560271.5
+
+;; Mean Predictor Fitness: 3.016929834205972E36
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 767 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin float.* (()) ((float.exp input.in0) float.* ((float.sin input.in0 ((((float.* ())))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin ((float.*)))
+
+;; Best Program Fitness (mean): 0.7944478
+;; Best Program Size: 41
+
+;; Mean Fitness: 66124.4296875
+;; Mean Program Size: 41.716824
+;; Number of Evaluations Thus Far: 3509464
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.sin () float.exp input.in0 ((float.sin input.in0 (((float.*))) float.exp) input.in0 (float.2pi float.2pi) float./ float./ float.exp float.+) (input.in0 float.2pi)) float.* float.sin (float.*))
+;; Partial Simplification Size: 29
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 768 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin (((()))) (()) ((float.exp input.in0) float.+ ((float.sin input.in0 ((((float.* ())))) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.5226453
+;; Best Program Size: 40
+
+;; Mean Fitness: 13.181299209594727
+;; Mean Program Size: 40.551445
+;; Number of Evaluations Thus Far: 3513160
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (float.sin ((())) ((float.exp input.in0) float.+ (float.sin input.in0 ((float.* ())) float.exp) input.in0 float.2pi float.2pi (float./ float./ float.exp) float.+) ((input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 32
+
+
+;;########################################################;;
+;;###############  Predictor Generation 384 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 73 193 87 105 51 83 61 36 ]
+;; Best Predictor Fitness: 2560271.5
+
+;; Mean Predictor Fitness: 2560656.075
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 769 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin (((()))) (()) ((float.exp input.in0) float.+ ((float.sin input.in0 ((((float.* ())))) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.5226453
+;; Best Program Size: 40
+
+;; Mean Fitness: 4.8450880103094682E17
+;; Mean Program Size: 40.53701
+;; Number of Evaluations Thus Far: 3518896
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (float.sin () (float.exp input.in0) float.+ ((float.sin input.in0 (((float.*))) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+) ((input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 31
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 770 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin (((()))) (()) ((((input.in0 ((input.in0 float.*)))) input.in0) float.* ((float.sin input.in0 ((((float.* ((())))))) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9695597
+;; Best Program Size: 48
+
+;; Mean Fitness: 2.2685490092814574E36
+;; Mean Program Size: 48.510246
+;; Number of Evaluations Thus Far: 3522848
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((((input.in0 (float.*))) input.in0) float.* (float.sin input.in0 (((float.*))) float.exp input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) (input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 33
+
+
+;;########################################################;;
+;;###############  Predictor Generation 385 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 73 193 87 105 51 83 61 36 ]
+;; Best Predictor Fitness: 2560271.5
+
+;; Mean Predictor Fitness: 2560292.75
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 771 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  (float.sin (()) (()) ((float.exp input.in0) float.+ ((float.sin input.in0 ((((((float.* ((())))) ())))) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) (input.in0 float.2pi) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.5226453
+;; Best Program Size: 41
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 41.65007
+;; Number of Evaluations Thus Far: 3527792
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (float.sin (float.exp input.in0) float.+ ((float.sin input.in0 (((((float.*))))) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+) (input.in0 float.2pi) float.* float.sin float.*)
+;; Partial Simplification Size: 31
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 772 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((((float.* ())))) (() (float.exp input.in0 ((float.sin input.in0 ((((float.* ())))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854627
+;; Best Program Size: 42
+
+;; Mean Fitness: 7.0988419039232E13
+;; Mean Program Size: 42.544334
+;; Number of Evaluations Thus Far: 3531312
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((() (()) (((float.sin input.in0 ((((float.* ())))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) (input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 33
+
+
+;;########################################################;;
+;;###############  Predictor Generation 386 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 46 60 36 ]
+;; Best Predictor Fitness: 2560271.8
+
+;; Mean Predictor Fitness: 3097456.825
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 773 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.exp input.in0 input.in0 ((float.* input.in0) float.* ((float.sin input.in0 ((((float.* ())))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9695597
+;; Best Program Size: 38
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 38.310295
+;; Number of Evaluations Thus Far: 3535272
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((input.in0 float.* input.in0 float.* ((float.sin input.in0 (((float.* ()))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) (input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 32
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 774 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float./ input.in0 input.in0 ((float.* input.in0) float.* ((float.sin input.in0 ((((float.* ())))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9695597
+;; Best Program Size: 38
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 38.76207
+;; Number of Evaluations Thus Far: 3538600
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float./ input.in0 ((float.* input.in0) float.* ((float.sin input.in0 (((float.* ()))) float.exp) input.in0 float.2pi float.2pi (float./ float.* float.exp) float.+)) (input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 32
+
+
+;;########################################################;;
+;;###############  Predictor Generation 387 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 46 60 36 ]
+;; Best Predictor Fitness: 2560271.8
+
+;; Mean Predictor Fitness: 2560275.175
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 775 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp input.in0) ((float.sin input.in0 ((((float.* ())))) float.exp) float.sin (((input.in0)) float.2pi) (float./ float.* input.in0) float.+)) (() ((float.exp input.in0) ((float.sin input.in0 ((((float.* ())))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854627
+;; Best Program Size: 63
+
+;; Mean Fitness: 1.3016232401735334E36
+;; Mean Program Size: 63.82508
+;; Number of Evaluations Thus Far: 3542944
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (((() (() float.exp (() float.2pi) (float./ input.in0) float.+)) (((float.sin input.in0 ((float.*)) float.exp) input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+) ((input.in0 float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 39
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 776 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.- (float.2pi) ((float./ float.* float.exp) ((float.* (input.in0 float.*))) ((float.sin input.in0 ((((float.*)))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.68024695
+;; Best Program Size: 43
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 43.958836
+;; Number of Evaluations Thus Far: 3547264
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.- (float.2pi) (float./ float.exp (((input.in0 float.*))) (float.sin input.in0 ((((float.*)))) float.exp input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+)) (input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 37
+
+
+;;########################################################;;
+;;###############  Predictor Generation 388 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 46 61 36 ]
+;; Best Predictor Fitness: 2560272.2
+
+;; Mean Predictor Fitness: 3103991.9
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 777 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin (((()))) (()) (((float.sin (((()))) (()) ((float.exp input.in0) float.* ((float.2pi input.in0 ((float./ float./ float.exp)) ((input.in0 (float.exp (input.in0 float.2pi))))) input.in0 (input.in0 (float.exp (input.in0 float.2pi))) (float./ float.exp float.exp) float.+)) ((input.in0 float.2pi))) input.in0) float.* ((float.sin (((()))) ((((float.* (input.in0 float.*))))) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 50.519318
+;; Best Program Size: 91
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 91.57306
+;; Number of Evaluations Thus Far: 3552544
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.sin (((float.sin (()) (((input.in0) input.in0)) ((float.2pi))) input.in0) float.* ((float.sin ((((float.* float.*)))) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 44
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 778 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin (((()))) (()) (((float.sin () () ((input.in0) ((float.2pi input.in0) (float./ float.exp float.exp) float.+)) (((float.*)))) input.in0) float.* (float.sin ((())) ((((float.* (input.in0 float.*))))) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.80555445
+;; Best Program Size: 62
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 62.98382
+;; Number of Evaluations Thus Far: 3556096
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.sin () (((float.sin (input.in0 ((float.2pi input.in0) (float./ float.exp float.exp) float.+)) ((float.*))) input.in0) float.* (float.sin () (((input.in0 float.*))) float.exp) input.in0 float.2pi float.2pi (float./ float./ float.exp) float.+) (input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 46
+
+
+;;########################################################;;
+;;###############  Predictor Generation 389 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 46 61 36 ]
+;; Best Predictor Fitness: 2560272.2
+
+;; Mean Predictor Fitness: 3469665.275
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 779 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  (float.- () float.* ((float.sin input.in0 (((float.* ()))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) (input.in0 float.2pi) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854627
+;; Best Program Size: 30
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 30.833225
+;; Number of Evaluations Thus Far: 3560864
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (((float.sin input.in0 ((float.*)) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) input.in0 float.2pi float.* float.sin float.*)
+;; Partial Simplification Size: 24
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 780 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  (float.- () float.* ((float.sin input.in0 (((float.* ()))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) (input.in0 float.2pi) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854627
+;; Best Program Size: 30
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 30.472221
+;; Number of Evaluations Thus Far: 3564624
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (float.- float.* (float.sin input.in0 ((float.*)) float.exp input.in0 ((float.2pi)) float.2pi float./ float.* float.exp float.+) input.in0 float.2pi float.* float.sin float.*)
+;; Partial Simplification Size: 23
+
+
+;;########################################################;;
+;;###############  Predictor Generation 390 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 46 61 36 ]
+;; Best Predictor Fitness: 2560272.2
+
+;; Mean Predictor Fitness: 3196415.575
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 781 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin (input.in0) () (((float.sin (float.exp ((()))) ((float.sin (()) ((((float.* ((float.+)))))) ((input.in0 float.exp))) input.in0 (float.2pi float.2pi) (float./) float.+) ((input.in0 float.2pi))) input.in0) float.* ((float.sin (((()))) (float.*) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9890225
+;; Best Program Size: 70
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 70.78982
+;; Number of Evaluations Thus Far: 3570368
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.sin () (((input.in0 float.2pi)) input.in0) float.* ((float.sin () (float.*) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+) input.in0 float.2pi) float.* float.sin float.*)
+;; Partial Simplification Size: 31
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 782 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin (input.in0) () (((float.sin (float.exp ((()))) ((float.sin (()) (((float.*))) ((input.in0 float.exp))) input.in0 (float.2pi float.2pi) (float./) float.+) ((input.in0 float.2pi))) input.in0) float.* ((float.sin (((()))) (float.*) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9890225
+;; Best Program Size: 66
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 66.5386
+;; Number of Evaluations Thus Far: 3574120
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.sin (input.in0 (float.2pi) ()) input.in0 float.* (float.sin (float.*) float.exp input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+) (input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 29
+
+
+;;########################################################;;
+;;###############  Predictor Generation 391 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 46 61 36 ]
+;; Best Predictor Fitness: 2560272.2
+
+;; Mean Predictor Fitness: 2796119.1
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 783 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin ((input.in0 (((float.2pi)) float.2pi) (float./ float./ ((input.in0) input.in0 float.exp float.+ float.* ((input.in0 (float.*)) float.2pi) float.+)) float.+) ((float.sin input.in0 (((float.* float./))) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.8925861
+;; Best Program Size: 56
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 57.06359
+;; Number of Evaluations Thus Far: 3578472
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.sin (input.in0 (((float.2pi)) float.2pi) (float./ float./ ((input.in0) input.in0 float.exp float.+ float.* (input.in0 (float.*)) float.2pi float.+)) float.+ (float.sin input.in0 (((float.* float./))) float.exp) input.in0 (float.2pi) float.2pi (float./ float.* float.exp) float.+) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 51
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 784 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.sin (((()))) (()) (((float.sin () () ((input.in0) ((float.2pi float.-) (float./ float.exp float.exp) float.+)) (((float.*)))) input.in0) float.* (float.sin ((())) ((((float.* (input.in0 float.*))))) float.exp) input.in0 (float.2pi float.2pi) (float./ float./ float.exp) float.+) ((input.in0 float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.425208
+;; Best Program Size: 62
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 62.580425
+;; Number of Evaluations Thus Far: 3582008
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.sin (((float.sin ((input.in0) float.2pi float.- float.exp float.exp float.+)) input.in0) float.* (float.sin (()) (((float.* (input.in0 float.*)))) float.exp) input.in0 (float.2pi float.2pi) float./ float./ float.exp float.+) (input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 42
+
+
+;;########################################################;;
+;;###############  Predictor Generation 392 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 56 61 36 ]
+;; Best Predictor Fitness: 2560272.8
+
+;; Mean Predictor Fitness: 4333926.4
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 785 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  (((float.exp input.in0 (input.in0 (((float.sin input.in0 (()) float.exp) (float.2pi) (float./ float./ float.exp) float.+)))) (() (() ((float.sin input.in0 (((float.*))) float.exp) input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 ((float.2pi)))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.195074
+;; Best Program Size: 53
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 54.090538
+;; Number of Evaluations Thus Far: 3585792
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (((float.exp input.in0 input.in0 (((float.sin input.in0 float.exp) (float.2pi) (float./ float./ float.exp) float.+))) (((float.sin input.in0 (((float.*))) float.exp) input.in0 (float.2pi float.2pi) (float./ float.* float.exp) float.+) ((input.in0 ((float.2pi)))))) float.* float.sin float.*)
+;; Partial Simplification Size: 46
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 786 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  (((input.in0 (input.in0 (((float.sin input.in0 () float.exp) (float.2pi) (float./ float./ float.exp) float.+)))) (() (() ((float.sin ((float.*)) float.exp) input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+)) (input.in0 ((float.2pi))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.195074
+;; Best Program Size: 48
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 48.713936
+;; Number of Evaluations Thus Far: 3589184
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (((input.in0 (input.in0 ((float.sin input.in0 () float.exp (float.2pi) (float./ float./ float.exp) float.+)))) (((float.sin ((float.*)) float.exp) input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+) (input.in0 ((float.2pi))))) float.* float.sin float.*)
+;; Partial Simplification Size: 44
+
+
+;;########################################################;;
+;;###############  Predictor Generation 393 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 46 61 36 ]
+;; Best Predictor Fitness: 2560272.2
+
+;; Mean Predictor Fitness: 4233147.95
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 787 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- float.* ((float.sin input.in0 float.* float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) (input.in0 float.2pi) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 27
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 27.718094
+;; Number of Evaluations Thus Far: 3593296
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.2pi) float.- float.* (float.sin input.in0 float.* float.exp input.in0 (float.2pi float.2pi) float./ float.* float.exp float.+) (input.in0 float.2pi) float.* float.sin float.*)
+;; Partial Simplification Size: 23
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 788 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- float.* (float.sin input.in0 float.* float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+ (input.in0 float.2pi) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 26
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 26.37812
+;; Number of Evaluations Thus Far: 3596792
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (float.2pi float.- float.sin input.in0 float.* float.exp input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+ (input.in0 float.2pi) float.* float.sin float.*)
+;; Partial Simplification Size: 22
+
+
+;;########################################################;;
+;;###############  Predictor Generation 394 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 46 61 36 ]
+;; Best Predictor Fitness: 2560272.2
+
+;; Mean Predictor Fitness: 3247412.45
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 789 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- float.* (float.sin input.in0 float.* float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+ (input.in0 float.2pi) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 26
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 26.269188
+;; Number of Evaluations Thus Far: 3600880
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.2pi) float.- float.sin input.in0 float.* float.exp input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+ input.in0 float.2pi float.* float.sin float.*)
+;; Partial Simplification Size: 23
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 790 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- ((float.sin input.in0 float.* float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) (input.in0 float.2pi) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 26
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 26.368462
+;; Number of Evaluations Thus Far: 3604392
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.2pi) float.- float.sin input.in0 float.* float.exp input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+ (input.in0 float.2pi) float.* float.sin float.*)
+;; Partial Simplification Size: 23
+
+
+;;########################################################;;
+;;###############  Predictor Generation 395 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 56 23 36 ]
+;; Best Predictor Fitness: 2560274.0
+
+;; Mean Predictor Fitness: 4902131.475
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 791 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- float.* ((float.sin input.in0 float.* float.exp) input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+) (input.in0 ((float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 28
+
+;; Mean Fitness: 1.2449469779781418E36
+;; Mean Program Size: 28.73579
+;; Number of Evaluations Thus Far: 3609496
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.2pi) float.- ((float.sin input.in0 float.* float.exp) input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+) (input.in0 (float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 26
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 792 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- float.* ((float.sin input.in0 float.* float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) (input.in0 ((float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 29
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 29.364904
+;; Number of Evaluations Thus Far: 3613448
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (float.2pi float.- float.* ((float.sin input.in0 float.* float.exp) input.in0 (((float.2pi)) float.2pi) float./ float.* float.exp float.+) input.in0 (float.2pi) float.* float.sin float.*)
+;; Partial Simplification Size: 25
+
+
+;;########################################################;;
+;;###############  Predictor Generation 396 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 38 83 58 36 ]
+;; Best Predictor Fitness: 2560273.0
+
+;; Mean Predictor Fitness: 2708039.425
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 793 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- float.* ((float.sin input.in0 float.* float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) (input.in0 ((float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 29
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 29.3891
+;; Number of Evaluations Thus Far: 3619568
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.2pi) float.* ((float.sin input.in0 float.* float.exp) input.in0 float.2pi float.2pi float./ float.* float.exp float.+) (input.in0 (float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 23
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 794 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- ((float.sin input.in0 float.* float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) (input.in0 ((float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 28
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 28.835928
+;; Number of Evaluations Thus Far: 3623920
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.2pi) float.- ((float.sin input.in0 float.* float.exp) input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+) (input.in0 (float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 26
+
+
+;;########################################################;;
+;;###############  Predictor Generation 397 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 64 23 36 ]
+;; Best Predictor Fitness: 2560273.2
+
+;; Mean Predictor Fitness: 3609390.875
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 795 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- ((float.sin input.in0 float.* float.exp) input.in0 ((float.2pi)) float.2pi (float./ float.* float.exp) float.+) (input.in0 ((float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 27
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 27.718906
+;; Number of Evaluations Thus Far: 3628408
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.2pi) float.- ((float.sin input.in0 float.* float.exp) input.in0 (float.2pi) float.2pi (float./ float.* float.exp) float.+) (input.in0 (float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 25
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 796 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- ((float.sin input.in0 float.* float.exp) input.in0 ((((float.2pi)))) float.2pi (float./ float.* float.exp) float.+) (input.in0 ((float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 29
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 29.358126
+;; Number of Evaluations Thus Far: 3632280
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (float.2pi float.- (float.sin input.in0 float.* float.exp input.in0 ((float.2pi)) float.2pi (float./ float.* float.exp) float.+) input.in0 ((float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 24
+
+
+;;########################################################;;
+;;###############  Predictor Generation 398 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 87 105 69 64 23 36 ]
+;; Best Predictor Fitness: 2560273.2
+
+;; Mean Predictor Fitness: 3.175776088559131E36
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 797 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((float.2pi) float.- ((float.sin input.in0 float.* float.exp) input.in0 ((((float.2pi)))) float.2pi (float./ float.* float.exp) float.+) (input.in0 ((float.2pi))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.9854621
+;; Best Program Size: 29
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 29.362387
+;; Number of Evaluations Thus Far: 3637224
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.2pi) float.- (float.sin input.in0 float.* float.exp) input.in0 ((float.2pi)) float.2pi (float./ float.* float.exp) float.+ (input.in0 float.2pi) float.* float.sin float.*)
+;; Partial Simplification Size: 24
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 798 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() (((((((float.2pi)) float.2pi) float.*) ((()))) (((input.in0 float.*) input.in0 (float.exp) (float./)) float.* float.exp) float.+)) (() ((input.in0) ((float.sin input.in0 (((float.*))) float.exp) input.in0 (((float.2pi)) float.2pi) (((((float.* float.sin)))) float.* float.exp) float.+)) ((input.in0 (float.2pi))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.8947514
+;; Best Program Size: 66
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 66.382416
+;; Number of Evaluations Thus Far: 3640784
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((input.in0 ((float.sin input.in0 (((float.*))) float.exp) input.in0 (float.2pi float.2pi) ((((float.* float.sin))) float.* float.exp) float.+)) (input.in0 (float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 33
+
+
+;;########################################################;;
+;;###############  Predictor Generation 399 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 177 193 34 105 69 56 23 36 ]
+;; Best Predictor Fitness: 2867885.5
+
+;; Mean Predictor Fitness: 2.4135438673647775E37
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 799 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((((float.* ((float.sin))) ((()))) (((input.in0 float.*) input.in0 (float.exp) (float./)) float.* float.exp) float.+)) (() ((input.in0) ((float.sin input.in0 (((float.*))) float.exp) input.in0 (((float.2pi)) float.2pi) (((((float.* float.sin)))) float.* float.exp) float.+)) ((input.in0 (float.2pi))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.8947514
+;; Best Program Size: 64
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 65.58255
+;; Number of Evaluations Thus Far: 3657736
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((())) (((input.in0) ((float.sin ((float.*)) float.exp) input.in0 ((float.2pi) float.2pi) ((((float.* float.sin)))) float.* float.exp float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 36
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 800 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((((float.* ((float.sin))) ((()))) (((input.in0 float.*) input.in0 (float.cos) (float./)) float.* float.exp) float.+)) (() ((input.in0) ((float.sin input.in0 (((float.*))) float.exp) input.in0 (((float.2pi)) float.2pi) (((((float.* float.sin)))) float.* float.exp) float.+)) ((input.in0 (float.2pi))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.8947514
+;; Best Program Size: 64
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 64.863884
+;; Number of Evaluations Thus Far: 3661112
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((((float.*) ()) ((() (float.cos))))) ((float.sin input.in0 (((float.*))) float.exp input.in0 (((float.2pi)) float.2pi) ((float.* float.sin)) float.* float.exp float.+) ((input.in0 (float.2pi))))) float.* float.sin float.*)
+;; Partial Simplification Size: 42
+
+
+;;########################################################;;
+;;###############  Predictor Generation 400 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 177 193 34 105 69 48 23 36 ]
+;; Best Predictor Fitness: 2867882.2
+
+;; Mean Predictor Fitness: 1.5106734686847276E37
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 801 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() () (((input.in0) ((float.sin float.* (((float.*))) float.exp) input.in0 (((float.2pi)) float.2pi) (((((float.* float.sin)))) float.* float.exp) float.+)) ((input.in0 (float.2pi))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.8947514
+;; Best Program Size: 40
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 40.919094
+;; Number of Evaluations Thus Far: 3665280
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (((((input.in0) ((float.sin float.* () float.exp) input.in0 (((float.2pi)) float.2pi) ((((float.* float.sin))) float.* float.exp) float.+)) (input.in0 (float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 33
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 802 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  (((float./) (((float.* ((()))) (((input.in0 float.*) input.in0 (float.exp) (float./)) float.2pi float.exp) float.+)) (() ((input.in0) ((float.sin input.in0 (((float.*))) float.exp) input.in0 (((float.2pi)) float.2pi) (((((float.* float.sin)))) float.* float.exp) float.+)) ((input.in0 (float.2pi))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.8947514
+;; Best Program Size: 61
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 61.679462
+;; Number of Evaluations Thus Far: 3668656
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((() ((float.* () float.+)) (((input.in0) ((float.sin input.in0 ((float.*)) float.exp) input.in0 ((float.2pi) float.2pi) ((((float.* float.sin))) float.* float.exp) float.+)) (input.in0 (float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 40
+
+
+;;########################################################;;
+;;###############  Predictor Generation 401 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 177 193 34 105 69 56 23 86 ]
+;; Best Predictor Fitness: 2867883.2
+
+;; Mean Predictor Fitness: 9.050789502617915E36
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 803 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  (((float./) (((float.* ((()))) (((input.in0 float.*) input.in0 (float.exp) (float./)) float.* float.exp) float.+)) (() ((input.in0) ((float.sin input.in0 (((float.*))) float.exp) input.in0 (((float.2pi)) float.2pi) (((((float.* float.sin)))) float.* float.exp) float.+)) ((input.in0 (float.2pi))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.8947514
+;; Best Program Size: 61
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 61.817863
+;; Number of Evaluations Thus Far: 3673864
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((float.*)) (input.in0 (float.sin ((float.*)) float.exp input.in0 (float.2pi) float.2pi (((float.* float.sin))) float.* float.exp float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 31
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 804 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  (((float./) ((float.* float.sin)) (float.2pi ((input.in0) ((float.sin input.in0 (((float.*))) float.exp) input.in0 (((float.2pi)) float.2pi) (((((float.* float.sin)))) float.* float.exp) float.+)) ((input.in0 (float.2pi))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.8947514
+;; Best Program Size: 45
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 45.71212
+;; Number of Evaluations Thus Far: 3677464
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((input.in0) ((float.sin input.in0 (((float.*))) float.exp) input.in0 (((float.2pi)) float.2pi) (((((float.* float.sin)))) float.* float.exp) float.+)) ((input.in0 (float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 37
+
+
+;;########################################################;;
+;;###############  Predictor Generation 402 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 83 193 34 105 69 56 23 175 ]
+;; Best Predictor Fitness: 2758670.8
+
+;; Mean Predictor Fitness: 3.016929834205972E36
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 805 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  (((float./) ((((float.*)) (((input.in0 float.*) input.in0 (float.exp) (float./)) float.2pi float.exp) input.in0)) (() ((input.in0) ((float.sin input.in0 (((float.*))) float.exp) input.in0 (((float.2pi)) ((input.in0) ((float.sin input.in0 (((float.*))) float.exp) input.in0 (((float.2pi)) float.2pi) (((((float.* float.sin)))) float.* float.exp) float.+))) (((((float.* float.sin)))) float.* float.exp) float.+)) ((input.in0 (float.2pi))))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 1.7375199
+;; Best Program Size: 86
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 86.72475
+;; Number of Evaluations Thus Far: 3682008
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((() (() (input.in0) ((float.sin ((float.*)) float.exp) input.in0 (((float.2pi)) ((input.in0) (float.sin input.in0 ((float.*)) float.exp input.in0 ((float.2pi)) float.2pi (((((float.* float.sin)))) float.* float.exp) float.+))) ((((float.* float.sin))) float.* float.exp) float.+) ((input.in0 (float.2pi))))) float.* float.sin float.*)
+;; Partial Simplification Size: 60
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 806 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* float.2pi)) ((float.sin input.in0 () float.exp) float.sin float./ ((((input.in0 float.2pi) float./ ((((float.* ((((float.* ())))))))) float.exp) input.in0 (float./ float.2pi) (float./ float./ float.exp) float.*) (float./ float.* float.exp) float.exp) float.exp)) (() ((((float.exp float.2pi) (float.sin))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975582
+;; Best Program Size: 85
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 85.8515
+;; Number of Evaluations Thus Far: 3685944
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((float.exp (float.2pi))) (() (((())) (float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) ((input.in0 float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 36
+
+
+;;########################################################;;
+;;###############  Predictor Generation 403 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 177 193 34 105 69 56 23 68 ]
+;; Best Predictor Fitness: 2867883.5
+
+;; Mean Predictor Fitness: 9.072875018435332E36
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 807 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* float.2pi)) ((float.sin input.in0 () float.exp) float.sin float./ ((((input.in0 float.2pi) float./ ((((float.* ((((float.* ())))))))) (input.in0 float.*)) input.in0 (float./ float.2pi) (float./ float./ float.exp) float.*) (float./ float.* float.exp) float.exp) float.exp)) (() ((((float.exp float.2pi) (float.sin))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975582
+;; Best Program Size: 87
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 87.59901
+;; Number of Evaluations Thus Far: 3690336
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((() ((float.exp)) (() (((float.exp float.2pi)) ((float.sin input.in0 (float.-) float.exp) input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 36
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 808 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.exp float.2pi)) ((float.sin input.in0 () float.exp) float.sin float./ ((((input.in0 float.2pi) float./ ((((float.* ((((float.* ())))))))) (input.in0 float.*)) input.in0 (float./ float.2pi) (float./ float./ float.exp) float.*) (float./ float.* float.exp) float.exp) float.exp)) (() ((((float.exp float.2pi) (float.sin))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975582
+;; Best Program Size: 87
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 88.163994
+;; Number of Evaluations Thus Far: 3694848
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (((() (float.2pi float.sin ((input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 30
+
+
+;;########################################################;;
+;;###############  Predictor Generation 404 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 177 193 34 105 69 56 103 68 ]
+;; Best Predictor Fitness: 2867879.5
+
+;; Mean Predictor Fitness: 6.033859668411944E36
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 809 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* float.2pi)) ((float.sin input.in0 () float.exp) float.sin float./ ((((input.in0 float.2pi) float./ ((((float.* ((((float.* ())))))))) (input.in0 float.*)) input.in0 (float./ float.2pi) (float./ float./ float.exp) float.*) (float./ float.* float.exp) float.exp) float.exp)) (() ((((float.exp float.2pi) (float.sin))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975582
+;; Best Program Size: 87
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 88.06776
+;; Number of Evaluations Thus Far: 3699376
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((() (((float.2pi))) ((float.sin input.in0 (float.-) float.exp) input.in0 ((float.2pi) float.2pi) float./ float.* float.exp float.+) (input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 28
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 810 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* float.2pi)) ((float.sin input.in0 () float.exp) float.sin float./ ((((input.in0 float.2pi) float./ ((((float.* ((((float.* ())))))))) (input.in0 float.*)) input.in0 (float./ float.2pi) (float./ float./ (float.sin input.in0 (float.-) float.exp)) float.*) (float./ float.* float.exp) float.exp) float.exp)) (() ((((float.exp float.2pi) (float.sin))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975582
+;; Best Program Size: 92
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 93.247116
+;; Number of Evaluations Thus Far: 3702496
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (((float.exp (float.2pi))) ((() (float.sin input.in0 (float.-) float.exp input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 32
+
+
+;;########################################################;;
+;;###############  Predictor Generation 405 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 177 193 34 105 69 56 103 68 ]
+;; Best Predictor Fitness: 2867879.5
+
+;; Mean Predictor Fitness: 3.039015350023388E36
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 811 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* float.2pi)) ((float.sin input.in0 () float.exp) float.sin float./ ((((input.in0 float.2pi) float./ ((((float.* ((((float.* ())))))))) (input.in0 float.*)) input.in0 (float./ float.2pi) (float./ float./ float.exp) float.*) (float./ float.* float.exp) float.exp) ((float.exp float.2pi) (float.sin)))) (() ((((float.exp float.2pi) (float.sin))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975582
+;; Best Program Size: 92
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 93.22165
+;; Number of Evaluations Thus Far: 3706848
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((() ((())) ((((float.2pi) (float.sin))) ((input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 36
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 812 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* float.2pi)) input.in0) (() ((((float.exp float.2pi) (float.sin))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975582
+;; Best Program Size: 44
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 45.048145
+;; Number of Evaluations Thus Far: 3711176
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (((float.2pi float.sin) (input.in0 (float.-) float.exp input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 26
+
+
+;;########################################################;;
+;;###############  Predictor Generation 406 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 177 193 34 105 69 56 103 68 ]
+;; Best Predictor Fitness: 2867879.5
+
+;; Mean Predictor Fitness: 2868190.3
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 813 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.2pi)) ((float.sin input.in0 () float.exp) float.sin float./ ((((input.in0 float.2pi) float./ ((((float.* ((((float.* ())))))))) (input.in0 float.*)) input.in0 (float./ float.2pi) (float./ float./ (float.sin (float.sin input.in0 () float.exp) (float.-) float.exp)) float.*) (float./ float.* float.exp) float.exp) float.exp)) (() ((((float.exp float.2pi) (float.sin))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975582
+;; Best Program Size: 95
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 95.74032
+;; Number of Evaluations Thus Far: 3716088
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (((() ((((float.2pi))) ((float.sin input.in0 float.- float.exp) input.in0 ((float.2pi)) float.2pi (float./ float.* float.exp) float.+)) (input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 30
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 814 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* (float.* float.sin))) ((float.sin input.in0 () float.exp) float.sin float./ ((((input.in0 float.2pi) float./ ((((float.* ((((float.* ())))))))) (input.in0 (float./ float.* float.exp))) input.in0 (float./ float.2pi) ((((((float.* float.sin)))) float.* (input.in0 float.*)) float./ float.exp) float.*) (float./ float.* float.exp) float.exp) float.exp)) (() (((float.exp (float.2pi float.sin))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975582
+;; Best Program Size: 101
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 102.2716
+;; Number of Evaluations Thus Far: 3720048
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  (() (((float.exp (float.2pi))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+) ((input.in0 float.2pi))) float.* float.sin float.*)
+;; Partial Simplification Size: 32
+
+
+;;########################################################;;
+;;###############  Predictor Generation 407 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 177 193 34 105 69 56 78 68 ]
+;; Best Predictor Fitness: 2867880.5
+
+;; Mean Predictor Fitness: 3576470.6
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 815 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* (float.* float.sin))) ((float.sin input.in0 () float.exp) float.sin float./ ((((input.in0 float.2pi) float./ ((((float.* ((((float.* ())))))))) (input.in0 (float./ float.* float.exp))) input.in0 (float./ float.2pi) ((((((float.* float.sin)))) float.* (input.in0 float.*)) float./ float.exp) float.*) (float./ float.* float.exp) float.exp) float.exp)) (() (((float.exp (float.2pi float.sin))) ((float.sin input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975582
+;; Best Program Size: 101
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 102.34181
+;; Number of Evaluations Thus Far: 3724008
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((((float.2pi)) float.sin input.in0 (float.-) float.exp input.in0 ((float.2pi)) float.2pi (float./ float.* float.exp) float.+) ((input.in0 float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 28
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 816 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* (float.* float.sin))) (float./ float./ (float.sin (float.sin input.in0 () float.exp) (float.-) float.exp))) (() (((float.exp (float.2pi float.sin))) ((((float.* ())) input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19975486
+;; Best Program Size: 60
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 61.355614
+;; Number of Evaluations Thus Far: 3727544
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((float.exp) (((input.in0 float.exp) float.exp)) (((float.exp (float.2pi float.sin))) (((float.*) input.in0 float.- float.exp) input.in0 ((float.2pi) float.2pi) float./ float.* float.exp float.+)) input.in0 float.2pi float.* float.sin float.*)
+;; Partial Simplification Size: 36
+
+
+;;########################################################;;
+;;###############  Predictor Generation 408 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 177 193 34 94 69 85 23 36 ]
+;; Best Predictor Fitness: 2867882.0
+
+;; Mean Predictor Fitness: 9.117046050070165E36
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 817 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* (float.* float.sin))) (float./ float./ (float.sin (float.sin ((float.exp (float.* (float.* float.sin))) (float./ float./ (float.sin float.2pi (float.-) float.exp))) () float.exp) (float.-) float.exp))) (() (((float.exp (float.2pi float.sin))) ((((float.* ())) input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19974682
+;; Best Program Size: 76
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 76.98904
+;; Number of Evaluations Thus Far: 3731672
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((() ((float.exp float.* float.*) (float./ ((() float.exp) float.exp))) (() (((float.exp (float.2pi float.sin))) (((float.*)) input.in0 (float.-) float.exp input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 48
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 818 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp (float.* (float.* float.sin))) ((float./ float./ (float.sin float.2pi (float.-) float.exp)) float./ (float.sin (float.sin ((float.exp (float.* (float.* float.sin))) (float./ float./ (float.sin float.2pi (float.-) float.exp))) () float.exp) (float.-) float.exp))) (() (((float.exp (float.2pi float.sin))) ((((float.* ())) input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.19974682
+;; Best Program Size: 84
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 85.18659
+;; Number of Evaluations Thus Far: 3736272
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((() ((float.exp) (float./ ((() float.exp) (float.-) float.exp))) (() ((float.exp (float.2pi float.sin)) ((((float.* ())) input.in0 (float.-) float.exp) input.in0 ((float.2pi) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+;; Partial Simplification Size: 49
+
+
+;;########################################################;;
+;;###############  Predictor Generation 409 ##############;;
+;;########################################################;;
+;; Best Predictor: Prediction Indices: [ 177 193 34 105 69 56 81 68 ]
+;; Best Predictor Fitness: 2867880.2
+
+;; Mean Predictor Fitness: 3.039015350023388E36
+;;########################################################;;
+
+
+;;--------------------------------------------------------;;
+;;--------------- Report for Generation 819 --------------;;
+;;--------------------------------------------------------;;
+;; Best Program:
+  ((() ((float.exp ()) (float./ (float.sin (float.sin ((float.exp (float.* (float.* float.sin))) (float./ ((input.in0 float.*) (float.-) float.exp))) () float.exp) float.exp))) (() (((float.exp (float.2pi float.sin))) ((((float.* ())) input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+
+;; Best Program Fitness (mean): 0.0986813
+;; Best Program Size: 69
+
+;; Mean Fitness: 1.7976931348623157E308
+;; Mean Program Size: 70.07458
+;; Number of Evaluations Thus Far: 3740864
+;; Memory usage: 1.6318464
+
+;; Partial Simplification (may beat best):
+  ((((()) ((float.sin (float.exp ((float.* float.sin)) (float./ ((input.in0 float.*) (float.-) float.exp))) () float.exp) float.exp)) (((float.exp (float.2pi float.sin)) ((((float.* ())) input.in0 float.- float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) input.in0 float.2pi)) float.* float.sin float.*)
+;; Partial Simplification Size: 57
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                        Success at Generation 819
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+>> Number of Evaluations: 3755360
+>> Best Program: ((() ((float.exp ()) (float./ (float.sin (float.sin ((float.exp (float.* (float.* float.sin))) (float./ ((input.in0 float.*) (float.-) float.exp))) () float.exp) float.exp))) (() (((float.exp (float.2pi float.sin))) ((((float.* ())) input.in0 (float.-) float.exp) input.in0 (((float.2pi)) float.2pi) (float./ float.* float.exp) float.+)) ((input.in0 float.2pi)))) float.* float.sin float.*)
+>> Fitness (mean): 0.0986813
+>> Size: 69
+
+<<<<<<<<<< After Simplification >>>>>>>>>>
+>> Best Program: (float.exp input.in0 float.* float.exp float.exp float.exp float.exp float.2pi float.sin float.* input.in0 float.- float.exp input.in0 float.2pi float.2pi float./ float.* float.exp float.+ input.in0 float.2pi float.* float.sin float.*)
+>> Size: 25
+

@@ -36,7 +36,7 @@ mutation-percent = 20
 crossover-percent = 70
 simplification-percent = 5
 
-reproduction-simplifications = 25
+reproduction-simplifications = 20
 report-simplifications = 100
 final-simplifications = 1000
 

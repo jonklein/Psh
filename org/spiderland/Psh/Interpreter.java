@@ -143,7 +143,7 @@ public class Interpreter implements Serializable {
 		
 		
 		
-		//trh
+		//TODO: remove this later
 		DefineInstruction("float.2pi", new FloatConstant(6.283185f));
 		
 
@@ -593,18 +593,31 @@ public class Interpreter implements Serializable {
 	
 	public String GetInstructionsString(){
 		Object keys[] = _instructions.keySet().toArray();
+		ArrayList<String> strings = new ArrayList<String>();
 		String str = "";
 
 		for (int i = 0; i < keys.length; i++) {
 			String key = (String) keys[i];
-			//TODO: finish here, including making sure float.erc is included
-			//TODO: Also, sort the list of instructions before making the string
-			if(_randomGenerators.contains(_generators.get(key))){
-				str += key + " ";
-			}
 			
+			if(_randomGenerators.contains(_generators.get(key))){
+				strings.add(key);
+			}
+	
 		}
-		return str;
+		
+		if(_randomGenerators.contains(_generators.get("float.erc"))){
+			strings.add("float.erc");
+		}
+		if(_randomGenerators.contains(_generators.get("integer.erc"))){
+			strings.add("integer.erc");
+		}
+
+		Collections.sort(strings);
+		for(String s : strings){
+			str += s + " ";
+		}
+		
+		return str.substring(0, str.length() - 1);
 	}
 
 	/**

@@ -197,6 +197,7 @@ abstract public class PushGP extends GA {
 		Print("Instructions: " + _interpreter.GetInstructionsString() + "\n");
 
 		Print("\n");
+		
 	}
 
 	public void InitIndividual(GAIndividual inIndividual) {

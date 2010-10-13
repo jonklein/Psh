@@ -200,3 +200,7 @@ Major Changes since v0.1:
 - Fixed 'code' and 'exec' stack iteration functions, which were not executing correctly according to Push 3.0 standards.
 - PshGP now displays the error values for the best program during the generation report.
 - PshInspector was created to inspect interpreter stacks of push programs as they execute. This can be used to catch errors and trace executions. To run, see Using PshInspector section above.
+
+Acknowledgement
+===============
+This material is based upon work supported by the National Science Foundation under Grant No. 1017817. Any opinions, findings, and conclusions or recommendations expressed in this publication are those of the authors and do not necessarily reflect the views of the National Science Foundation.

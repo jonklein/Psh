@@ -229,19 +229,6 @@ public class CEFloatSymbolicRegression extends PushGP {
 		predictorParameters.put("trainer-population-size",
 				GetParam("PREDICTOR-trainer-population-size"));
 
-		// /trh// ??? remove below
-		// predictorParameters.put("problem-class",
-		// "org.spiderland.Psh.ProbClass.IntSymbolicRegression");
-		//predictorParameters.put("max-random-code-size", "35");
-		//predictorParameters.put("execution-limit", "150");
-		//predictorParameters.put("max-points-in-program", "50");
-		//predictorParameters.put("simplification-percent", "5");
-		//predictorParameters.put("reproduction-simplifications", "20");
-		//predictorParameters.put("report-simplifications", "100");
-		//predictorParameters.put("final-simplifications", "1000");
-		// predictorParameters.put("instruction-set","(registered.integer registered.input)");
-		// predictorParameters.put("test-cases","((1 1) (2 3) (3 5) (4 7) (5 9) (6 11) (7 13) (8 15) (9 17) (10 19))");
-
 		return predictorParameters;
 	}
 	

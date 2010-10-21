@@ -33,6 +33,7 @@ public class Interpreter implements Serializable {
 	protected HashMap<String, AtomGenerator> _generators = new HashMap<String, AtomGenerator>();
 	protected ArrayList<AtomGenerator> _randomGenerators = new ArrayList<AtomGenerator>();
 
+	// Create the stacks.
 	protected intStack _intStack;
 	protected floatStack _floatStack;
 	protected booleanStack _boolStack;
@@ -40,10 +41,15 @@ public class Interpreter implements Serializable {
 	protected ObjectStack _nameStack;
 	protected ObjectStack _execStack = new ObjectStack();
 
-	protected ObjectStack _inputStack = new ObjectStack(); // Since the
-	// _inputStack will not change after initialization, it will not need
-	// a frame stack.
+	protected ObjectStack _inputStack = new ObjectStack();
+	
+	// This arraylist will hold all custom stacks that can be created by the
+	// problem classes
+	protected ArrayList<Stack> _customStacks = new ArrayList<Stack>();
 
+	/* Since the _inputStack will not change after initialization, it will not
+	 * need a frame stack.
+	 */
 	protected ObjectStack _intFrameStack = new ObjectStack();
 	protected ObjectStack _floatFrameStack = new ObjectStack();
 	protected ObjectStack _boolFrameStack = new ObjectStack();
@@ -140,12 +146,6 @@ public class Interpreter implements Serializable {
 
 		DefineInstruction("frame.push", new PushFrame());
 		DefineInstruction("frame.pop", new PopFrame());
-		
-		
-		
-		//TODO: remove this later
-		DefineInstruction("float.2pi", new FloatConstant(6.283185f));
-		
 
 		_generators.put("float.erc", new FloatAtomGenerator());
 		_generators.put("integer.erc", new IntAtomGenerator());
@@ -262,8 +262,10 @@ public class Interpreter implements Serializable {
 	}
 
 	public void AddInstruction(String inName, Instruction inInstruction) {
-		DefineInstruction(inName, inInstruction);
-		_randomGenerators.add(new InstructionAtomGenerator(inName));
+		InstructionAtomGenerator iag = new InstructionAtomGenerator(inName);
+		_instructions.put(inName, inInstruction);
+		_generators.put(inName, iag);
+		_randomGenerators.add(iag);
 	}
 
 	protected void DefineInstruction(String inName, Instruction inInstruction) {
@@ -466,6 +468,21 @@ public class Interpreter implements Serializable {
 	public ObjectStack inputStack() {
 		return _inputStack;
 	}
+	
+	/**
+	 * Fetch the indexed custom stack
+	 */
+	public Stack getCustomStack(int inIndex){
+		return _customStacks.get(inIndex);
+	}
+	
+	/**
+	 * Add a custom stack, and return that stack's index
+	 */
+	public int addCustomStack(Stack inStack){
+		_customStacks.add(inStack);
+		return _customStacks.size() - 1;
+	}
 
 	protected void AssignStacksFromFrame() {
 		_floatStack = (floatStack) _floatFrameStack.top();
@@ -574,12 +591,16 @@ public class Interpreter implements Serializable {
 		_boolStack.clear();
 		_codeStack.clear();
 		_inputStack.clear();
+		
+		// Clear all custom stacks
+		for(Stack s : _customStacks){
+			s.clear();
+		}
 	}
 
 	/**
 	 * Returns a string list of all instructions enabled in the interpreter.
 	 */
-
 	public String GetRegisteredInstructionsString() {
 		Object keys[] = _instructions.keySet().toArray();
 		Arrays.sort(keys);
@@ -591,6 +612,10 @@ public class Interpreter implements Serializable {
 		return list;
 	}
 	
+	/**
+	 * Returns a string of all the instructions used in this run.
+	 * @return
+	 */
 	public String GetInstructionsString(){
 		Object keys[] = _instructions.keySet().toArray();
 		ArrayList<String> strings = new ArrayList<String>();
@@ -598,7 +623,7 @@ public class Interpreter implements Serializable {
 
 		for (int i = 0; i < keys.length; i++) {
 			String key = (String) keys[i];
-			
+
 			if(_randomGenerators.contains(_generators.get(key))){
 				strings.add(key);
 			}

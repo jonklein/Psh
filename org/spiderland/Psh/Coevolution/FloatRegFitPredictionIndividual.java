@@ -93,11 +93,13 @@ public class FloatRegFitPredictionIndividual extends PredictionGAIndividual {
 	}
 
 	public boolean equalPredictors(GAIndividual inB) {
-		int[] a = new int[_sampleSize];
-		int[] b = new int[_sampleSize];
-		
+		int[] a = copyArray(_sampleIndices);
+		int[] b = copyArray(((FloatRegFitPredictionIndividual)inB)._sampleIndices);
+
+		/*
 		a = Arrays.copyOf(_sampleIndices, _sampleSize);
 		b = Arrays.copyOf(((FloatRegFitPredictionIndividual)inB)._sampleIndices, _sampleSize);
+		*/
 		
 		Arrays.sort(a);
 		Arrays.sort(b);
@@ -106,6 +108,16 @@ public class FloatRegFitPredictionIndividual extends PredictionGAIndividual {
 		}
 		
 		return false;
+	}
+	
+	private int[] copyArray(int[] inArray){
+		int[] newArray = new int[inArray.length];
+		
+		for(int i = 0; i < inArray.length; i++){
+			newArray[i] = inArray[i];
+		}
+		
+		return newArray;
 	}
 
 }

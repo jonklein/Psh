@@ -6,29 +6,29 @@ package org.spiderland.Psh.PushBrush;
  *
  */
 public class BrushAttributes {
-	public int x, y, radius, red, green, blue;
-	public int t;
+	public float x, y, radius, red, green, blue;
+	public float t;
 	
 	public BrushAttributes(){
 		x = y = radius = red = green = blue = t = -1;
 	}
 
-	public BrushAttributes(int newx, int newy, int newradius, int newr, int newg,
-			int newb) {
-		
+	public BrushAttributes(float newx, float newy, float newradius, float newr,
+			float newg, float newb) {
+
 		x = newx;
 		y = newy;
 		radius = newradius;
 		red = newr;
 		green = newg;
 		blue = newb;
-		
+
 		t = 0;
 	}
-	
-	public BrushAttributes(int newx, int newy, int newradius, int newr, int newg,
-			int newb, int newt) {
-		
+
+	public BrushAttributes(float newx, float newy, float newradius, float newr,
+			float newg, float newb, float newt) {
+
 		x = newx;
 		y = newy;
 		radius = newradius;

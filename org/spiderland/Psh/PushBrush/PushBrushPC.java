@@ -36,8 +36,7 @@ public class PushBrushPC extends PushGP{
 	@Override
 	protected void InitInterpreter(Interpreter inInterpreter) throws Exception {
 		
-		attributeStackIndex = inInterpreter.addCustomStack(new intStack());
-		//intStack attributeStack = (intStack) inInterpreter.getCustomStack(_attributeStackIndex);
+		attributeStackIndex = inInterpreter.addCustomStack(new floatStack());
 		
 		/* Attribute indices:
 		 * 0 = x;
@@ -47,29 +46,37 @@ public class PushBrushPC extends PushGP{
 		 * 4 = green;
 		 * 5 = blue;
 		 */
+		
+		
 		inInterpreter.AddInstruction("brush.x.increment", new BrushIncrement(0));
 		inInterpreter.AddInstruction("brush.x.decrement", new BrushDecrement(0));
-		inInterpreter.AddInstruction("brush.x.input", new BrushInput(0));
+		inInterpreter.AddInstruction("brush.x.get", new BrushGet(0));
+		inInterpreter.AddInstruction("brush.x.set", new BrushSet(0));
 		
 		inInterpreter.AddInstruction("brush.y.increment", new BrushIncrement(1));
 		inInterpreter.AddInstruction("brush.y.decrement", new BrushDecrement(1));
-		inInterpreter.AddInstruction("brush.y.input", new BrushInput(1));
+		inInterpreter.AddInstruction("brush.y.get", new BrushGet(1));
+		inInterpreter.AddInstruction("brush.y.set", new BrushSet(1));
 		
 		inInterpreter.AddInstruction("brush.radius.increment", new BrushIncrement(2));
 		inInterpreter.AddInstruction("brush.radius.decrement", new BrushDecrement(2));
-		inInterpreter.AddInstruction("brush.radius.input", new BrushInput(2));
+		inInterpreter.AddInstruction("brush.radius.get", new BrushGet(2));
+		inInterpreter.AddInstruction("brush.radius.set", new BrushSet(2));
 		
 		inInterpreter.AddInstruction("brush.red.increment", new BrushIncrement(3));
 		inInterpreter.AddInstruction("brush.red.decrement", new BrushDecrement(3));
-		inInterpreter.AddInstruction("brush.red.input", new BrushInput(3));
+		inInterpreter.AddInstruction("brush.red.get", new BrushGet(3));
+		inInterpreter.AddInstruction("brush.red.set", new BrushSet(3));
 		
 		inInterpreter.AddInstruction("brush.green.increment", new BrushIncrement(4));
 		inInterpreter.AddInstruction("brush.green.decrement", new BrushDecrement(4));
-		inInterpreter.AddInstruction("brush.green.input", new BrushInput(4));
+		inInterpreter.AddInstruction("brush.green.get", new BrushGet(4));
+		inInterpreter.AddInstruction("brush.green.set", new BrushSet(4));
 		
 		inInterpreter.AddInstruction("brush.blue.increment", new BrushIncrement(5));
 		inInterpreter.AddInstruction("brush.blue.decrement", new BrushDecrement(5));
-		inInterpreter.AddInstruction("brush.blue.input", new BrushInput(5));
+		inInterpreter.AddInstruction("brush.blue.get", new BrushGet(5));
+		inInterpreter.AddInstruction("brush.blue.set", new BrushSet(5));
 		
 	}
 
@@ -210,8 +217,8 @@ public class PushBrushPC extends PushGP{
 		// Prepare the interpreter
 		_interpreter.ClearStacks();
 		
-		intStack attributeStack = (intStack) _interpreter.getCustomStack(attributeStackIndex);
-		intStack integerStack = _interpreter.intStack();
+		floatStack attributeStack = (floatStack) _interpreter.getCustomStack(attributeStackIndex);
+		floatStack fStack = _interpreter.floatStack();
 		ObjectStack inputStack = _interpreter.inputStack();
 		
 		// Push things on stacks
@@ -222,8 +229,28 @@ public class PushBrushPC extends PushGP{
 		attributeStack.push(inBrush.green);
 		attributeStack.push(inBrush.blue);
 		
-		integerStack.push(inBrush.t);
+		fStack.push(inBrush.t);
 		inputStack.push(inBrush.t);
+		
+		// Testing to see if I can make an interesting program
+		/*try {
+			Program aa = new Program("(float.dup float.sin 150.0 float.* brush.x.set float.cos 150.0 float.* brush.y.set)");
+
+			_interpreter.PrintStacks();
+			System.out.println("attribute stack: " + _interpreter.getCustomStack(0) + "\n\n");
+			
+			_interpreter.Execute(aa, _executionLimit);
+			
+			_interpreter.PrintStacks();
+			System.out.println("attribute stack: " + _interpreter.getCustomStack(0));
+			
+			System.out.println("\n\n\n");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		*/
+
 		
 		// Execute the individual
 		_interpreter.Execute(i._program, _executionLimit);
@@ -237,13 +264,6 @@ public class PushBrushPC extends PushGP{
 		nextBrush.blue = attributeStack.peek(5);
 
 		return nextBrush;
-	}
-
-	@Override
-	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
-			Object inOutput) {
-		// This isn't being used at this time
-		return 0;
 	}
 	
 	protected String Report() {
@@ -268,8 +288,8 @@ public class PushBrushPC extends PushGP{
 		report += ";; Best Program:\n  "
 				+ _populations[_currentPopulation][_bestIndividual] + "\n\n";
 
-		report += ";; Best Program Fitness (higher is better, out of 100): "
-				+ (100 - _bestMeanFitness) + "\n";
+		report += ";; Best Program Fitness (higher is better, out of 500): "
+				+ (500 - _bestMeanFitness) + "\n";
 		report += ";; Best Program Size: " + _bestSize + "\n\n";
 
 		report += ";; Mean Fitness: " + _populationMeanFitness + "\n";
@@ -283,6 +303,13 @@ public class PushBrushPC extends PushGP{
 
 		return report;
 	}
+
+	@Override
+	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
+			Object inOutput) {
+		// This isn't being used at this time
+		return 0;
+	}
 	
 	
 	class BrushIncrement extends Instruction {
@@ -295,7 +322,7 @@ public class PushBrushPC extends PushGP{
 		}
 		
 		public void Execute(Interpreter inInterpreter) {
-			intStack attributeStack = (intStack) inInterpreter
+			floatStack attributeStack = (floatStack) inInterpreter
 					.getCustomStack(attributeStackIndex);
 			attributeStack.set(_attribute, attributeStack.peek(_attribute) + 1);
 		}	
@@ -311,27 +338,48 @@ public class PushBrushPC extends PushGP{
 		}
 		
 		public void Execute(Interpreter inInterpreter) {
-			intStack attributeStack = (intStack) inInterpreter
+			floatStack attributeStack = (floatStack) inInterpreter
 					.getCustomStack(attributeStackIndex);
 			attributeStack.set(_attribute, attributeStack.peek(_attribute) - 1);
 		}	
 	}
 	
-	class BrushInput extends Instruction {
+	class BrushGet extends Instruction {
 		private static final long serialVersionUID = 1L;
 		
 		int _attribute;
 		
-		BrushInput(int inAttribute){
+		BrushGet(int inAttribute){
 			_attribute = inAttribute;
 		}
 		
 		public void Execute(Interpreter inInterpreter) {
-			intStack attributeStack = (intStack) inInterpreter
+			floatStack attributeStack = (floatStack) inInterpreter
 					.getCustomStack(attributeStackIndex);
-			intStack integerStack = inInterpreter.intStack();
-			int val = attributeStack.peek(_attribute);
-			integerStack.push(val);
+			floatStack fStack = inInterpreter.floatStack();
+			float val = attributeStack.peek(_attribute);
+			fStack.push(val);
+		}	
+	}
+	
+	class BrushSet extends Instruction {
+		private static final long serialVersionUID = 1L;
+		
+		int _attribute;
+		
+		BrushSet(int inAttribute){
+			_attribute = inAttribute;
+		}
+		
+		public void Execute(Interpreter inInterpreter) {
+			floatStack attributeStack = (floatStack) inInterpreter
+					.getCustomStack(attributeStackIndex);
+			floatStack fStack = inInterpreter.floatStack();
+
+			if (fStack.size() > 0) {
+				float val = fStack.pop();
+				attributeStack.set(_attribute, val);
+			}
 		}	
 	}
 	

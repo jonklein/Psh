@@ -172,7 +172,7 @@ abstract public class PushGP extends GA {
 		Print("  Important Parameters\n");
 		Print(" ======================\n");
 
-		if(!_targetFunctionString.isEmpty()){
+		if(!_targetFunctionString.equals("")){
 			Print("Target Function: " + _targetFunctionString + "\n\n");
 		}
 		
@@ -319,7 +319,7 @@ abstract public class PushGP extends GA {
 		
 		report += super.FinalReport();
 		
-		if(!_targetFunctionString.isEmpty()){
+		if(!_targetFunctionString.equals("")){
 			report += ">> Target Function: " + _targetFunctionString + "\n\n";
 		}
 

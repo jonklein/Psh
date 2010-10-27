@@ -119,6 +119,11 @@ public class floatStack extends Stack {
 		}
 	}
 
+	public void set(int inIndex, float inValue){
+		if (inIndex >= 0 && inIndex < _size)
+			_stack[inIndex] = inValue;
+	}
+
 	public String toString() {
 		String result = "[";
 

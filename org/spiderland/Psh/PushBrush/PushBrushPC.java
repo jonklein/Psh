@@ -52,31 +52,37 @@ public class PushBrushPC extends PushGP{
 		inInterpreter.AddInstruction("brush.x.decrement", new BrushDecrement(0));
 		inInterpreter.AddInstruction("brush.x.get", new BrushGet(0));
 		inInterpreter.AddInstruction("brush.x.set", new BrushSet(0));
+		inInterpreter.AddInstruction("brush.x.randincrement", new BrushRandomIncrement(0));
 		
 		inInterpreter.AddInstruction("brush.y.increment", new BrushIncrement(1));
 		inInterpreter.AddInstruction("brush.y.decrement", new BrushDecrement(1));
 		inInterpreter.AddInstruction("brush.y.get", new BrushGet(1));
 		inInterpreter.AddInstruction("brush.y.set", new BrushSet(1));
+		inInterpreter.AddInstruction("brush.y.randincrement", new BrushRandomIncrement(1));
 		
 		inInterpreter.AddInstruction("brush.radius.increment", new BrushIncrement(2));
 		inInterpreter.AddInstruction("brush.radius.decrement", new BrushDecrement(2));
 		inInterpreter.AddInstruction("brush.radius.get", new BrushGet(2));
 		inInterpreter.AddInstruction("brush.radius.set", new BrushSet(2));
+		inInterpreter.AddInstruction("brush.radius.randincrement", new BrushRandomIncrement(2));
 		
 		inInterpreter.AddInstruction("brush.red.increment", new BrushIncrement(3));
 		inInterpreter.AddInstruction("brush.red.decrement", new BrushDecrement(3));
 		inInterpreter.AddInstruction("brush.red.get", new BrushGet(3));
 		inInterpreter.AddInstruction("brush.red.set", new BrushSet(3));
+		inInterpreter.AddInstruction("brush.red.randincrement", new BrushRandomIncrement(3));
 		
 		inInterpreter.AddInstruction("brush.green.increment", new BrushIncrement(4));
 		inInterpreter.AddInstruction("brush.green.decrement", new BrushDecrement(4));
 		inInterpreter.AddInstruction("brush.green.get", new BrushGet(4));
 		inInterpreter.AddInstruction("brush.green.set", new BrushSet(4));
+		inInterpreter.AddInstruction("brush.green.randincrement", new BrushRandomIncrement(4));
 		
 		inInterpreter.AddInstruction("brush.blue.increment", new BrushIncrement(5));
 		inInterpreter.AddInstruction("brush.blue.decrement", new BrushDecrement(5));
 		inInterpreter.AddInstruction("brush.blue.get", new BrushGet(5));
 		inInterpreter.AddInstruction("brush.blue.set", new BrushSet(5));
+		inInterpreter.AddInstruction("brush.blue.randincrement", new BrushRandomIncrement(5));
 		
 	}
 
@@ -380,6 +386,24 @@ public class PushBrushPC extends PushGP{
 				float val = fStack.pop();
 				attributeStack.set(_attribute, val);
 			}
+		}	
+	}
+
+	class BrushRandomIncrement extends Instruction {
+		private static final long serialVersionUID = 1L;
+		
+		int _attribute;
+		
+		BrushRandomIncrement(int inAttribute){
+			_attribute = inAttribute;
+		}
+		
+		public void Execute(Interpreter inInterpreter) {
+			floatStack attributeStack = (floatStack) inInterpreter
+					.getCustomStack(attributeStackIndex);
+			float change = _RNG.nextInt(3) - 1;
+			
+			attributeStack.set(_attribute, attributeStack.peek(_attribute) + change);
 		}	
 	}
 	

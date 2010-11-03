@@ -18,7 +18,7 @@ public class PushBrushPC extends PushGP{
 
 	boolean newGeneration; // Tells RunUntilHumanEvaluation() whether a new
 	                       // generation has just started.
-	int bestIndividualPreviousGeneration;
+	PushGPIndividual bestIndividualPreviousGeneration;
 	
 	// Variables for evaluation
 	double totalFitness;
@@ -151,8 +151,9 @@ public class PushBrushPC extends PushGP{
 	}
 	
 	protected void EndGeneration(){
-		_populationMeanFitness = totalFitness / _populations[_currentPopulation].length;
-		bestIndividualPreviousGeneration = _bestIndividual;
+		_populationMeanFitness = totalFitness
+				/ _populations[_currentPopulation].length;
+		bestIndividualPreviousGeneration = (PushGPIndividual) _populations[_currentPopulation][_bestIndividual];
 		super.EndGeneration();
 	}
 	
@@ -216,7 +217,7 @@ public class PushBrushPC extends PushGP{
 	 * 
 	 * @return new brush attributes
 	 */
-	public BrushAttributes getNextBrush(BrushAttributes inBrush) {
+	public BrushAttributes GetNextBrush(BrushAttributes inBrush) {
 		BrushAttributes nextBrush = new BrushAttributes();
 		PushGPIndividual i = (PushGPIndividual) currentIndividual;
 		
@@ -237,27 +238,7 @@ public class PushBrushPC extends PushGP{
 		
 		fStack.push(inBrush.t);
 		inputStack.push(inBrush.t);
-		
-		// Testing to see if I can make an interesting program
-		/*try {
-			Program aa = new Program("(float.dup float.sin 150.0 float.* brush.x.set float.cos 150.0 float.* brush.y.set)");
-
-			_interpreter.PrintStacks();
-			System.out.println("attribute stack: " + _interpreter.getCustomStack(0) + "\n\n");
-			
-			_interpreter.Execute(aa, _executionLimit);
-			
-			_interpreter.PrintStacks();
-			System.out.println("attribute stack: " + _interpreter.getCustomStack(0));
-			
-			System.out.println("\n\n\n");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		*/
-
-		
+	
 		// Execute the individual
 		_interpreter.Execute(i._program, _executionLimit);
 		
@@ -270,6 +251,57 @@ public class PushBrushPC extends PushGP{
 		nextBrush.blue = attributeStack.peek(5);
 
 		return nextBrush;
+	}
+
+	/**
+	 * Uses the parameter Push program to get the brush attributes for the next
+	 * time step. Note that the returned brush is not constrained, in that some
+	 * of its values may be out of the available ranges (e.g. x = -4)
+	 * 
+	 * @return new brush attributes
+	 */
+	public BrushAttributes GetNextBrushFromProgram(BrushAttributes inBrush,
+			Program inProgram) {
+		BrushAttributes nextBrush = new BrushAttributes();
+
+		// Prepare the interpreter
+		_interpreter.ClearStacks();
+		
+		floatStack attributeStack = (floatStack) _interpreter.getCustomStack(attributeStackIndex);
+		floatStack fStack = _interpreter.floatStack();
+		ObjectStack inputStack = _interpreter.inputStack();
+		
+		// Push things on stacks
+		attributeStack.push(inBrush.x);
+		attributeStack.push(inBrush.y);
+		attributeStack.push(inBrush.radius);
+		attributeStack.push(inBrush.red);
+		attributeStack.push(inBrush.green);
+		attributeStack.push(inBrush.blue);
+		
+		fStack.push(inBrush.t);
+		inputStack.push(inBrush.t);
+	
+		// Execute the individual
+		_interpreter.Execute(inProgram, _executionLimit);
+		
+		// Retrieve the attributes
+		nextBrush.x = attributeStack.peek(0);
+		nextBrush.y = attributeStack.peek(1);
+		nextBrush.radius = attributeStack.peek(2);
+		nextBrush.red = attributeStack.peek(3);
+		nextBrush.green = attributeStack.peek(4);
+		nextBrush.blue = attributeStack.peek(5);
+
+		return nextBrush;
+	}
+	
+	public String GetCurrentIndividualCode(){
+		return ((PushGPIndividual) currentIndividual).toString();
+	}
+	
+	public PushGPIndividual GetPrevGenBestIndividual(){
+		return bestIndividualPreviousGeneration;
 	}
 	
 	protected String Report() {

@@ -308,8 +308,6 @@ public abstract class GA implements Serializable {
 
 			System.gc();
 			
-			// TODO Run bookmark
-			
 			_currentPopulation = (_currentPopulation == 0 ? 1 : 0);
 			_generationCount++;
 			inGenerations--;
@@ -351,8 +349,6 @@ public abstract class GA implements Serializable {
 	protected void Evaluate() {
 		double totalFitness = 0;
 		_bestMeanFitness = Float.MAX_VALUE;
-		
-		//TODO Evaluate bookmark
 
 		for (int n = 0; n < _populations[_currentPopulation].length; n++) {
 			GAIndividual i = _populations[_currentPopulation][n];

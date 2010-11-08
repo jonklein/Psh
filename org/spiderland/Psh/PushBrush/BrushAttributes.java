@@ -37,4 +37,16 @@ public class BrushAttributes {
 		blue = newb;
 		t = newt;
 	}
+	
+	public String toString(){
+		String str = "Brush:\tx =\t" + x + "\n";
+		str += "\ty =\t" + y + "\n";
+		str += "\tradius =" + radius + "\n";
+		str += "\tred =\t" + red + "\n";
+		str += "\tgreen =\t" + green + "\n";
+		str += "\tblue =\t" + blue + "\n";
+		str += "\tt =\t" + t + "\n";
+		
+		return str;
+	}
 }

@@ -1,10 +1,7 @@
 package org.spiderland.Psh.PushBrush;
 
 import java.util.ArrayList;
-
 import org.spiderland.Psh.*;
-
-import org.spiderland.Psh.PushBrush.BrushAttributes;
 
 /**
  * The PushBrush problem class
@@ -46,7 +43,6 @@ public class PushBrushPC extends PushGP{
 		 * 4 = green;
 		 * 5 = blue;
 		 */
-		
 		
 		inInterpreter.AddInstruction("brush.x.increment", new BrushIncrement(0));
 		inInterpreter.AddInstruction("brush.x.decrement", new BrushDecrement(0));

@@ -172,6 +172,7 @@ Major Changes since v1.0:
 - Made FloatSymbolicRegression and IntSymbolicRegression as well as co-evolved FloatSymbolicRegression work with test-case generators.
 - PshGP now primarily uses the mean of test case errors for an individual's error instead of the total sum of the errors.
 - Added optional parameter `target-function-string`, which specifies a human-readable version of the target function, which is only used in I/O.
+- Added many instructions that were missing from the Push 3.0 specification.
 
 Major Changes since v0.3:
 -------------------------

@@ -1,0 +1,92 @@
+Instructions to Add
+===================
+x boolean.fromfloat
+x boolean.frominteger
+boolean.rand
+boolean.shove
+boolean.yank
+boolean.yankdup
+
+x code.fromboolean
+x code.fromfloat
+x code.frominteger
+code.shove
+code.yank
+code.yankdup
+
+exec.shove
+exec.yank
+exec.yankdup
+exec.k
+exec.s
+exec.y
+
+code.rand
+exec.rand
+
+x float.fromboolean
+x float.frominteger
+float.rand
+float.shove
+float.yank
+float.yankdup
+
+x integer.fromboolean
+x integer.fromfloat
+integer.rand
+integer.shove
+integer.yank
+integer.yankdup
+
+
+Instructions to Possibly Add.
+==============================================
+These code and exec instructions could be useful for generic fitness prediction
+-------------------------------------------------------------------------------
+code.append
+code.atom
+code.car
+code.cdr
+code.cons
+code.container
+code.contains
+code.discrepancy
+code.do
+code.do*
+code.extract
+code.fromname
+code.insert
+code.length
+code.list
+code.member
+code.nth
+code.nthcdr
+code.null
+code.position
+code.size
+code.subst
+
+
+Missing Instructions
+====================
+boolean.define
+
+code.define
+code.definition
+code.instructions
+code.noop
+
+exec.define
+
+float.define
+
+integer.define
+
+name.=
+name.quote
+name.rand
+name.randboundname
+name.shove
+name.yank
+name.yankdup
+

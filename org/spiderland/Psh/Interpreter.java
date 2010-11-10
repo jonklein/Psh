@@ -91,6 +91,8 @@ public class Interpreter implements Serializable {
 		DefineInstruction("integer.max", new IntegerMax());
 		DefineInstruction("integer.abs", new IntegerAbs());
 		DefineInstruction("integer.neg", new IntegerNeg());
+		DefineInstruction("integer.fromfloat", new IntegerFromFloat());
+		DefineInstruction("integer.fromboolean", new IntegerFromBoolean());
 
 		DefineInstruction("float.+", new FloatAdd());
 		DefineInstruction("float.-", new FloatSub());
@@ -109,14 +111,21 @@ public class Interpreter implements Serializable {
 		DefineInstruction("float.exp", new FloatExp());
 		DefineInstruction("float.abs", new FloatAbs());
 		DefineInstruction("float.neg", new FloatNeg());
-
+		DefineInstruction("float.frominteger", new FloatFromInteger());
+		DefineInstruction("float.fromboolean", new FloatFromBoolean());
+		
 		DefineInstruction("boolean.=", new BoolEquals());
 		DefineInstruction("boolean.not", new BoolNot());
 		DefineInstruction("boolean.and", new BoolAnd());
 		DefineInstruction("boolean.or", new BoolOr());
 		DefineInstruction("boolean.xor", new BoolXor());
+		DefineInstruction("boolean.frominteger", new BooleanFromInteger());
+		DefineInstruction("boolean.fromfloat", new BooleanFromFloat());
 
 		DefineInstruction("code.quote", new Quote());
+		DefineInstruction("code.fromboolean", new CodeFromBoolean());
+		DefineInstruction("code.frominteger", new CodeFromInteger());
+		DefineInstruction("code.fromfloat", new CodeFromFloat());
 
 		DefineInstruction("exec.do*times", new ExecDoTimes(this));
 		DefineInstruction("code.do*times", new CodeDoTimes(this));

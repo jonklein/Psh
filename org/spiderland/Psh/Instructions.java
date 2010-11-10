@@ -417,6 +417,43 @@ class IntegerNeg extends UnaryIntInstruction {
 }
 
 //
+// Conversion instructions to integer
+//
+
+class IntegerFromFloat extends Instruction {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void Execute(Interpreter inI) {
+		intStack iStack = inI.intStack();
+		floatStack fStack = inI.floatStack();
+		
+		if(fStack.size() > 0){
+			iStack.push((int) fStack.pop());
+		}
+	}
+}
+
+class IntegerFromBoolean extends Instruction {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void Execute(Interpreter inI) {
+		booleanStack bStack = inI.boolStack();
+		intStack iStack = inI.intStack();
+		
+		if(bStack.size() > 0){
+			if(bStack.pop()){
+				iStack.push(1);
+			}
+			else {
+				iStack.push(0);
+			}
+		}
+	}
+}
+
+//
 // Integer instructions with boolean output
 //
 
@@ -712,6 +749,43 @@ class FloatNeg extends UnaryFloatInstruction {
 }
 
 //
+// Conversion instructions to float
+//
+
+class FloatFromInteger extends Instruction {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void Execute(Interpreter inI) {
+		intStack iStack = inI.intStack();
+		floatStack fStack = inI.floatStack();
+		
+		if(iStack.size() > 0){
+			fStack.push(iStack.pop());
+		}
+	}
+}
+
+class FloatFromBoolean extends Instruction {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void Execute(Interpreter inI) {
+		booleanStack bStack = inI.boolStack();
+		floatStack fStack = inI.floatStack();
+		
+		if(bStack.size() > 0){
+			if(bStack.pop()){
+				fStack.push(1);
+			}
+			else {
+				fStack.push(0);
+			}
+		}
+	}
+}
+
+//
 // Binary float instructions with boolean output
 //
 
@@ -822,14 +896,43 @@ class BoolXor extends BinaryBoolInstruction {
 
 class BoolNot extends Instruction {
 	private static final long serialVersionUID = 1L;
-	
-	BoolNot() {
-	}
 
 	@Override
 	public void Execute(Interpreter inI) {
 		if (inI.boolStack().size() > 0)
 			inI.boolStack().push(!inI.boolStack().pop());
+	}
+}
+
+//
+// Conversion instructions to boolean
+//
+
+class BooleanFromInteger extends Instruction {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void Execute(Interpreter inI) {
+		booleanStack bStack = inI.boolStack();
+		intStack iStack = inI.intStack();
+		
+		if(iStack.size() > 0){
+			bStack.push(iStack.pop() != 0);
+		}
+	}
+}
+
+class BooleanFromFloat extends Instruction {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void Execute(Interpreter inI) {
+		booleanStack bStack = inI.boolStack();
+		floatStack fStack = inI.floatStack();
+		
+		if(fStack.size() > 0){
+			bStack.push(fStack.pop() != 0.0);
+		}
 	}
 }
 
@@ -1053,6 +1156,54 @@ class CodeDoCount extends ObjectStackInstruction {
 }
 
 // End code iteration functions
+
+
+
+//
+// Conversion instructions to code
+//TODO
+
+class CodeFromBoolean extends Instruction {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void Execute(Interpreter inI) {
+		ObjectStack codeStack = inI.codeStack();
+		booleanStack bStack = inI.boolStack();
+		
+		if(bStack.size() > 0){
+			codeStack.push(bStack.pop());
+		}
+	}
+}
+
+class CodeFromInteger extends Instruction {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void Execute(Interpreter inI) {
+		ObjectStack codeStack = inI.codeStack();
+		intStack iStack = inI.intStack();
+		
+		if(iStack.size() > 0){
+			codeStack.push(iStack.pop());
+		}
+	}
+}
+
+class CodeFromFloat extends Instruction {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void Execute(Interpreter inI) {
+		ObjectStack codeStack = inI.codeStack();
+		floatStack fStack = inI.floatStack();
+		
+		if(fStack.size() > 0){
+			codeStack.push(fStack.pop());
+		}
+	}
+}
 
 // Begin exec iteration functions
 

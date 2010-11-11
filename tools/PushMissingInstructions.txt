@@ -17,7 +17,7 @@ x code.yankdup
 x exec.shove
 x exec.yank
 x exec.yankdup
-exec.k
+x exec.k
 exec.s
 exec.y
 

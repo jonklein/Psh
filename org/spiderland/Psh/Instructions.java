@@ -1448,6 +1448,24 @@ class ExecDoCount extends ObjectStackInstruction {
 
 // End exec iteration functions.
 
+class ExecK extends ObjectStackInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	ExecK(ObjectStack inStack) {
+		super(inStack);
+	}
+	
+	@Override
+	public void Execute(Interpreter inI) {
+		// Removes the second item on the stack
+		if(_stack.size() > 1){
+			_stack.swap();
+			_stack.popdiscard();
+		}
+	}
+}
+
+
 class ObjectEquals extends ObjectStackInstruction {
 	private static final long serialVersionUID = 1L;
 	

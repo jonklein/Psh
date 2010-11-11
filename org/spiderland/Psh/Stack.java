@@ -37,6 +37,8 @@ abstract class Stack implements Serializable {
 	abstract void dup();
 
 	abstract void rot();
+	
+	abstract void shove(int inIndex);
 
 	abstract void swap();
 

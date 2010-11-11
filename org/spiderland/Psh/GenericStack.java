@@ -143,6 +143,26 @@ public class GenericStack<T> extends Stack {
 	}
 
 	@Override
+	public void shove(int inIndex) {
+		if (_size > 0) {
+			if(inIndex < 0){
+				inIndex = 0;
+			}
+			if(inIndex > _size - 1){
+				inIndex = _size - 1;
+			}
+			
+			T toShove = top();
+			int shovedIndex = _size - inIndex - 1;
+
+			for (int i = _size - 1; i > shovedIndex; i--) {
+				_stack[i] = _stack[i - 1];
+			}
+			_stack[shovedIndex] = toShove;
+		}
+	}
+	
+	@Override
 	public void swap() {
 		if (_size > 1) {
 			T tmp = _stack[_size - 2];

@@ -3,18 +3,18 @@ Instructions to Add
 x boolean.fromfloat
 x boolean.frominteger
 x boolean.rand
-boolean.shove
+x boolean.shove
 boolean.yank
 boolean.yankdup
 
 x code.fromboolean
 x code.fromfloat
 x code.frominteger
-code.shove
+x code.shove
 code.yank
 code.yankdup
 
-exec.shove
+x exec.shove
 exec.yank
 exec.yankdup
 exec.k
@@ -27,16 +27,20 @@ exec.rand
 x float.fromboolean
 x float.frominteger
 x float.rand
-float.shove
+x float.shove
 float.yank
 float.yankdup
 
 x integer.fromboolean
 x integer.fromfloat
 x integer.rand
-integer.shove
+x integer.shove
 integer.yank
 integer.yankdup
+
+x name.shove
+name.yank
+name.yankdup
 
 
 Instructions to Possibly Add.
@@ -86,7 +90,4 @@ name.=
 name.quote
 name.rand
 name.randboundname
-name.shove
-name.yank
-name.yankdup
 

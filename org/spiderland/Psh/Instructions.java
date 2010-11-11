@@ -122,6 +122,30 @@ class Rot extends StackInstruction {
 	}
 }
 
+class Shove extends StackInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	Shove(Stack inStack){
+		super(inStack);
+	}
+
+	@Override
+	public void Execute(Interpreter inI) {
+		intStack iStack = inI.intStack();
+		
+		if (iStack.size() > 0) {
+			int index = iStack.pop();
+			if (_stack.size() > 0) {
+				_stack.shove(index);
+			}
+			else {
+				iStack.push(index);
+			}
+		}
+	}
+	
+}
+
 class Swap extends StackInstruction {
 	private static final long serialVersionUID = 1L;
 	

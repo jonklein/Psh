@@ -2,7 +2,7 @@ Instructions to Add
 ===================
 x boolean.fromfloat
 x boolean.frominteger
-boolean.rand
+x boolean.rand
 boolean.shove
 boolean.yank
 boolean.yankdup
@@ -26,14 +26,14 @@ exec.rand
 
 x float.fromboolean
 x float.frominteger
-float.rand
+x float.rand
 float.shove
 float.yank
 float.yankdup
 
 x integer.fromboolean
 x integer.fromfloat
-integer.rand
+x integer.rand
 integer.shove
 integer.yank
 integer.yankdup

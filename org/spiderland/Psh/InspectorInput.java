@@ -90,6 +90,14 @@ public class InspectorInput {
 
 		// Parse the inputs and load them into the interpreter
 		parseAndLoadInputs(fileString);
+		
+		// Add random integer and float parameters
+		_interpreter._minRandomInt = -10;
+		_interpreter._maxRandomInt = 10;
+		_interpreter._randomIntResolution = 1;
+		_interpreter._minRandomFloat = -10.0f;
+		_interpreter._maxRandomFloat = 10.0f;
+		_interpreter._randomFloatResolution = 0.01f;
 
 		// Load the program
 		_program = new Program(_interpreter, programString);

@@ -16,6 +16,8 @@
 
 package org.spiderland.Psh;
 
+import java.util.Random;
+
 //
 // All instructions 
 //
@@ -145,21 +147,6 @@ class Depth extends StackInstruction {
 	public void Execute(Interpreter inI) {
 		intStack stack = inI.intStack();
 		stack.push(_stack.size());
-	}
-}
-
-class IntegerDefine extends Instruction {
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	public void Execute(Interpreter inI) {
-		intStack istack = inI.intStack();
-		// ObjectStack nstack = inI.nameStack();
-
-		int value = istack.pop();
-		// String name = (String)nstack.pop();
-
-		new IntegerConstant(value);
 	}
 }
 
@@ -413,6 +400,25 @@ class IntegerNeg extends UnaryIntInstruction {
 			return Integer.MAX_VALUE;
 		
 		return -inValue;
+	}
+}
+
+class IntegerRand extends Instruction {
+	private static final long serialVersionUID = 1L;
+	
+	Random _RNG;
+	
+	IntegerRand(){
+		_RNG = new Random();
+	}
+
+	@Override
+	public void Execute(Interpreter inI) {
+		int range = (inI._maxRandomInt - inI._minRandomInt)
+				/ inI._randomIntResolution;
+		int randInt = (_RNG.nextInt(range) * inI._randomIntResolution)
+				+ inI._minRandomInt;
+		inI.intStack().push(randInt);
 	}
 }
 
@@ -748,6 +754,28 @@ class FloatNeg extends UnaryFloatInstruction {
 	}
 }
 
+class FloatRand extends Instruction {
+	private static final long serialVersionUID = 1L;
+	
+	Random _RNG;
+	
+	FloatRand(){
+		_RNG = new Random();
+	}
+
+	@Override
+	public void Execute(Interpreter inI) {
+		
+		
+		
+		float range = (inI._maxRandomFloat - inI._minRandomFloat)
+				/ inI._randomFloatResolution;
+		float randFloat = (_RNG.nextFloat() * range * inI._randomFloatResolution)
+				+ inI._minRandomFloat;
+		inI.floatStack().push(randFloat);
+	}
+}
+
 //
 // Conversion instructions to float
 //
@@ -901,6 +929,21 @@ class BoolNot extends Instruction {
 	public void Execute(Interpreter inI) {
 		if (inI.boolStack().size() > 0)
 			inI.boolStack().push(!inI.boolStack().pop());
+	}
+}
+
+class BoolRand extends Instruction {
+	private static final long serialVersionUID = 1L;
+	
+	Random _RNG;
+	
+	BoolRand(){
+		_RNG = new Random();
+	}
+
+	@Override
+	public void Execute(Interpreter inI) {
+		inI.boolStack().push(_RNG.nextBoolean());
 	}
 }
 
@@ -1161,7 +1204,7 @@ class CodeDoCount extends ObjectStackInstruction {
 
 //
 // Conversion instructions to code
-//TODO
+//
 
 class CodeFromBoolean extends Instruction {
 	private static final long serialVersionUID = 1L;

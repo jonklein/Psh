@@ -155,6 +155,25 @@ public class ObjectStack extends Stack {
 		}
 	}
 
+	public void yank(int inIndex) {
+		if (_size > 0) {
+			if(inIndex < 0){
+				inIndex = 0;
+			}
+			if(inIndex > _size - 1){
+				inIndex = _size - 1;
+			}
+
+			int yankedIndex = _size - inIndex - 1;
+			Object toYank = peek(yankedIndex);
+
+			for (int i = yankedIndex; i < _size - 1; i++) {
+				_stack[i] = _stack[i + 1];
+			}
+			_stack[_size - 1] = toYank;
+		}
+	}
+
 	public String toString() {
 		String result = "[";
 

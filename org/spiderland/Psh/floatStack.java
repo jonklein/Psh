@@ -138,6 +138,25 @@ public class floatStack extends Stack {
 		}
 	}
 
+	public void yank(int inIndex) {
+		if (_size > 0) {
+			if(inIndex < 0){
+				inIndex = 0;
+			}
+			if(inIndex > _size - 1){
+				inIndex = _size - 1;
+			}
+
+			int yankedIndex = _size - inIndex - 1;
+			float toYank = peek(yankedIndex);
+
+			for (int i = yankedIndex; i < _size - 1; i++) {
+				_stack[i] = _stack[i + 1];
+			}
+			_stack[_size - 1] = toYank;
+		}
+	}
+
 	public void set(int inIndex, float inValue){
 		if (inIndex >= 0 && inIndex < _size)
 			_stack[inIndex] = inValue;

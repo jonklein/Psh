@@ -42,6 +42,8 @@ abstract class Stack implements Serializable {
 
 	abstract void swap();
 
+	abstract void yank(int inIndex);
+
 	public void clear() {
 		_size = 0;
 	}

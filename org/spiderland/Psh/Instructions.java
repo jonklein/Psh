@@ -143,7 +143,6 @@ class Shove extends StackInstruction {
 			}
 		}
 	}
-	
 }
 
 class Swap extends StackInstruction {
@@ -157,6 +156,29 @@ class Swap extends StackInstruction {
 	public void Execute(Interpreter inI) {
 		if (_stack.size() > 1)
 			_stack.swap();
+	}
+}
+
+class Yank extends StackInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	Yank(Stack inStack){
+		super(inStack);
+	}
+
+	@Override
+	public void Execute(Interpreter inI) {
+		intStack iStack = inI.intStack();
+		
+		if (iStack.size() > 0) {
+			int index = iStack.pop();
+			if (_stack.size() > 0) {
+				_stack.yank(index);
+			}
+			else {
+				iStack.push(index);
+			}
+		}
 	}
 }
 

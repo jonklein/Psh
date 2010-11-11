@@ -4,18 +4,18 @@ x boolean.fromfloat
 x boolean.frominteger
 x boolean.rand
 x boolean.shove
-boolean.yank
+x boolean.yank
 boolean.yankdup
 
 x code.fromboolean
 x code.fromfloat
 x code.frominteger
 x code.shove
-code.yank
+x code.yank
 code.yankdup
 
 x exec.shove
-exec.yank
+x exec.yank
 exec.yankdup
 exec.k
 exec.s
@@ -28,18 +28,18 @@ x float.fromboolean
 x float.frominteger
 x float.rand
 x float.shove
-float.yank
+x float.yank
 float.yankdup
 
 x integer.fromboolean
 x integer.fromfloat
 x integer.rand
 x integer.shove
-integer.yank
+x integer.yank
 integer.yankdup
 
 x name.shove
-name.yank
+x name.yank
 name.yankdup
 
 

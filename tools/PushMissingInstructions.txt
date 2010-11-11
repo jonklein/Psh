@@ -5,18 +5,18 @@ x boolean.frominteger
 x boolean.rand
 x boolean.shove
 x boolean.yank
-boolean.yankdup
+x boolean.yankdup
 
 x code.fromboolean
 x code.fromfloat
 x code.frominteger
 x code.shove
 x code.yank
-code.yankdup
+x code.yankdup
 
 x exec.shove
 x exec.yank
-exec.yankdup
+x exec.yankdup
 exec.k
 exec.s
 exec.y
@@ -29,18 +29,18 @@ x float.frominteger
 x float.rand
 x float.shove
 x float.yank
-float.yankdup
+x float.yankdup
 
 x integer.fromboolean
 x integer.fromfloat
 x integer.rand
 x integer.shove
 x integer.yank
-integer.yankdup
+x integer.yankdup
 
 x name.shove
 x name.yank
-name.yankdup
+x name.yankdup
 
 
 Instructions to Possibly Add.

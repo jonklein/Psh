@@ -148,6 +148,20 @@ public class intStack extends Stack {
 		}
 	}
 
+	public void yankdup(int inIndex) {
+		if (_size > 0) {
+			if(inIndex < 0){
+				inIndex = 0;
+			}
+			if(inIndex > _size - 1){
+				inIndex = _size - 1;
+			}
+
+			int yankedIndex = _size - inIndex - 1;
+			push(peek(yankedIndex));
+		}
+	}
+	
 	public void set(int inIndex, int inValue){
 		if (inIndex >= 0 && inIndex < _size)
 			_stack[inIndex] = inValue;

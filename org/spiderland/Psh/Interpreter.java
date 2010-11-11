@@ -294,6 +294,7 @@ public class Interpreter implements Serializable {
 		DefineInstruction(inTypeName + ".stackdepth", new Depth(inStack));
 		DefineInstruction(inTypeName + ".shove", new Shove(inStack));
 		DefineInstruction(inTypeName + ".yank", new Yank(inStack));
+		DefineInstruction(inTypeName + ".yankdup", new YankDup(inStack));
 	}
 	
 	/**

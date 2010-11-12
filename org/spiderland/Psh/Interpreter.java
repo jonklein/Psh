@@ -131,6 +131,8 @@ public class Interpreter implements Serializable {
 		DefineInstruction("code.fromfloat", new CodeFromFloat());
 		
 		DefineInstruction("exec.k", new ExecK(_execStack));
+		DefineInstruction("exec.s", new ExecS(_execStack));
+		DefineInstruction("exec.y", new ExecY(_execStack));
 
 		DefineInstruction("exec.do*times", new ExecDoTimes(this));
 		DefineInstruction("code.do*times", new CodeDoTimes(this));

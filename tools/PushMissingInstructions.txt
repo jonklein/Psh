@@ -18,8 +18,8 @@ x exec.shove
 x exec.yank
 x exec.yankdup
 x exec.k
-exec.s
-exec.y
+x exec.s
+x exec.y
 
 code.rand
 exec.rand

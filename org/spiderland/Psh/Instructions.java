@@ -1197,13 +1197,12 @@ class CodeDoTimes extends ObjectStackInstruction {
 
 				if (bodyObj instanceof Program) {
 					// insert integer.pop in front of program
-					((Program) bodyObj).shove(inI._instructions
-							.get("integer.pop"), ((Program) bodyObj)._size);
+					((Program) bodyObj).shove("integer.pop", ((Program) bodyObj)._size);
 				} else {
 					// create a new program with integer.pop in front of
 					// the popped object
 					Program newProgram = new Program(inI);
-					newProgram.push(inI._instructions.get("integer.pop"));
+					newProgram.push("integer.pop");
 					newProgram.push(bodyObj);
 					bodyObj = newProgram;
 				}
@@ -1381,13 +1380,12 @@ class ExecDoTimes extends ObjectStackInstruction {
 
 				if (bodyObj instanceof Program) {
 					// insert integer.pop in front of program
-					((Program) bodyObj).shove(inI._instructions
-							.get("integer.pop"), ((Program) bodyObj)._size);
+					((Program) bodyObj).shove("integer.pop", ((Program) bodyObj)._size);
 				} else {
 					// create a new program with integer.pop in front of
 					// the popped object
 					Program newProgram = new Program(inI);
-					newProgram.push(inI._instructions.get("integer.pop"));
+					newProgram.push("integer.pop");
 					newProgram.push(bodyObj);
 					bodyObj = newProgram;
 				}
@@ -1398,8 +1396,7 @@ class ExecDoTimes extends ObjectStackInstruction {
 					Program doRangeMacroProgram = new Program(inI);
 					doRangeMacroProgram.push(Integer.valueOf(0));
 					doRangeMacroProgram.push(Integer.valueOf(stop));
-					doRangeMacroProgram.push(inI._instructions
-							.get("exec.do*range"));
+					doRangeMacroProgram.push("exec.do*range");
 					doRangeMacroProgram.push(bodyObj);
 					estack.push(doRangeMacroProgram);
 				} catch (Exception e) {
@@ -1433,8 +1430,7 @@ class ExecDoCount extends ObjectStackInstruction {
 					Program doRangeMacroProgram = new Program(inI);
 					doRangeMacroProgram.push(Integer.valueOf(0));
 					doRangeMacroProgram.push(Integer.valueOf(stop));
-					doRangeMacroProgram.push(inI._instructions
-							.get("exec.do*range"));
+					doRangeMacroProgram.push("exec.do*range");
 					doRangeMacroProgram.push(bodyObj);
 					estack.push(doRangeMacroProgram);
 				} catch (Exception e) {
@@ -1461,6 +1457,55 @@ class ExecK extends ObjectStackInstruction {
 		if(_stack.size() > 1){
 			_stack.swap();
 			_stack.popdiscard();
+		}
+	}
+}
+
+class ExecS extends ObjectStackInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	ExecS(ObjectStack inStack) {
+		super(inStack);
+	}
+	
+	@Override
+	public void Execute(Interpreter inI) {
+		// Removes the second item on the stack
+		if(_stack.size() > 2){
+			Object a = _stack.pop();
+			Object b = _stack.pop();
+			Object c = _stack.pop();
+			Program listBC = new Program(inI);
+
+			listBC.push(b);
+			listBC.push(c);
+			
+			_stack.push(listBC);
+			_stack.push(c);
+			_stack.push(a);
+		}
+	}
+}
+
+class ExecY extends ObjectStackInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	ExecY(ObjectStack inStack) {
+		super(inStack);
+	}
+	
+	@Override
+	public void Execute(Interpreter inI) {
+		// Removes the second item on the stack
+		if(_stack.size() > 0){
+			Object a = _stack.pop();
+			Program listExecYA = new Program(inI);
+
+			listExecYA.push("exec.y");
+			listExecYA.push(a);
+			
+			_stack.push(listExecYA);
+			_stack.push(a);
 		}
 	}
 }

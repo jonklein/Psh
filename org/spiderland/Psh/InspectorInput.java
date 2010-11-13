@@ -49,7 +49,13 @@ public class InspectorInput {
 	}
 
 	/**
-	 * Initializes an InspectorInput
+	 * Initializes an InspectorInput. The file should be organized as follows:
+	 * 
+	 * 1 Program to execute
+	 * 2 Execution limit
+	 * 3 Integer, float, or boolean inputs
+	 * 4 Available instructions. This is only used for creating random code
+	 *   with code.rand or exec.rand
 	 * 
 	 * @param inFile
 	 *            The file to input from.
@@ -68,7 +74,6 @@ public class InspectorInput {
 		// Get _executionLimit
 		indexNewline = fileString.indexOf("\n");
 		if (indexNewline != -1) {
-			
 			String limitString = fileString.substring(0,indexNewline).trim();
 			
 			_executionLimit = Integer.parseInt(limitString);
@@ -82,14 +87,26 @@ public class InspectorInput {
 		// Get inputs and push them onto correct stacks. If fileString = ""
 		// at this point, then can still do the following with correct result.
 		indexNewline = fileString.indexOf("\n");
-		if (indexNewline != -1)
-			fileString = fileString.substring(0, indexNewline).trim();
+		if (indexNewline != -1) {
+			String inputsString = fileString.substring(0, indexNewline).trim();
+			fileString = fileString.substring(indexNewline + 1);
+			
+			// Parse the inputs and load them into the interpreter
+			parseAndLoadInputs(inputsString);
+		}
+		else {
+			parseAndLoadInputs(fileString);
+			fileString = "";
+		}
+		
+		// Get the available instructions for random code generation
+		indexNewline = fileString.indexOf("\n");
+		if (!fileString.trim().equals("")) {
+			_interpreter.SetInstructions(new Program(_interpreter, fileString.trim()));
+		}
 
 		// Check for input.inN instructions
 		checkForInputIn(programString);
-
-		// Parse the inputs and load them into the interpreter
-		parseAndLoadInputs(fileString);
 		
 		// Add random integer and float parameters
 		_interpreter._minRandomInt = -10;
@@ -98,6 +115,8 @@ public class InspectorInput {
 		_interpreter._minRandomFloat = -10.0f;
 		_interpreter._maxRandomFloat = 10.0f;
 		_interpreter._randomFloatResolution = 0.01f;
+		
+		_interpreter._maxRandomCodeSize = 50;
 
 		// Load the program
 		_program = new Program(_interpreter, programString);

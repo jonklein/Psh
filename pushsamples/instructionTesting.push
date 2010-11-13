@@ -1,3 +1,4 @@
-(exec.y 1 2 3)
+(exec.s exec.s exec.s exec.s exec.s exec.s )
 100
 
+(registered.integer registered.code registered.float registered.exec)

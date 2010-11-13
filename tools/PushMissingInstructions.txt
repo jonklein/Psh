@@ -21,8 +21,8 @@ x exec.k
 x exec.s
 x exec.y
 
-code.rand
-exec.rand
+x code.rand
+x exec.rand
 
 x float.fromboolean
 x float.frominteger

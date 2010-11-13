@@ -68,6 +68,9 @@ public class Interpreter implements Serializable {
 	protected float _maxRandomFloat;
 	protected float _minRandomFloat;
 	protected float _randomFloatResolution;
+	
+	protected int _maxRandomCodeSize;
+	protected int _maxPointsInProgram;
 
 	protected Random _RNG = new Random();
 
@@ -130,8 +133,9 @@ public class Interpreter implements Serializable {
 		DefineInstruction("code.frominteger", new CodeFromInteger());
 		DefineInstruction("code.fromfloat", new CodeFromFloat());
 		
+		//TODO exec.s - should we keep?
 		DefineInstruction("exec.k", new ExecK(_execStack));
-		DefineInstruction("exec.s", new ExecS(_execStack));
+		DefineInstruction("exec.s", new ExecS(_execStack, _maxPointsInProgram));
 		DefineInstruction("exec.y", new ExecY(_execStack));
 
 		DefineInstruction("exec.do*times", new ExecDoTimes(this));
@@ -144,7 +148,9 @@ public class Interpreter implements Serializable {
 		DefineInstruction("exec.=", new ObjectEquals(_execStack));
 		DefineInstruction("code.if", new If(_codeStack));
 		DefineInstruction("exec.if", new If(_execStack));
-
+		DefineInstruction("code.rand", new RandomPushCode(_codeStack));
+		DefineInstruction("exec.rand", new RandomPushCode(_execStack));
+		
 		DefineInstruction("true", new BooleanConstant(true));
 		DefineInstruction("false", new BooleanConstant(false));
 
@@ -313,8 +319,9 @@ public class Interpreter implements Serializable {
 	 */
 	public void SetRandomParameters(int minRandomInt, int maxRandomInt,
 			int randomIntResolution, float minRandomFloat,
-			float maxRandomFloat, float randomFloatResolution) {
-		
+			float maxRandomFloat, float randomFloatResolution,
+			int maxRandomCodeSize, int maxPointsInProgram) {
+
 		_minRandomInt = minRandomInt;
 		_maxRandomInt = maxRandomInt;
 		_randomIntResolution = randomIntResolution;
@@ -322,6 +329,9 @@ public class Interpreter implements Serializable {
 		_minRandomFloat = minRandomFloat;
 		_maxRandomFloat = maxRandomFloat;
 		_randomFloatResolution = randomFloatResolution;
+		
+		_maxRandomCodeSize = maxRandomCodeSize;
+		_maxPointsInProgram = maxPointsInProgram;
 	}
 
 	/**
@@ -373,7 +383,7 @@ public class Interpreter implements Serializable {
 
 	public int Step(int inMaxSteps) {
 		int executed = 0;
-		while (inMaxSteps != 0 && _execStack.size() > 0) {
+		while (inMaxSteps != 0 && _execStack.size() > 0) {			
 			ExecuteInstruction(_execStack.pop());
 			inMaxSteps--;
 			executed++;

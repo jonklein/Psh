@@ -1163,11 +1163,9 @@ class CodeDoRange extends ObjectStackInstruction {
 					Program recursiveCallProgram = new Program(inI);
 					recursiveCallProgram.push(Integer.valueOf(start));
 					recursiveCallProgram.push(Integer.valueOf(stop));
-					recursiveCallProgram.push(inI._instructions
-							.get("code.quote"));
+					recursiveCallProgram.push("code.quote");
 					recursiveCallProgram.push(code);
-					recursiveCallProgram.push(inI._instructions
-							.get("code.do*range"));
+					recursiveCallProgram.push("code.do*range");
 					estack.push(recursiveCallProgram);
 				} catch (Exception e) {
 					System.err.println("Error while initializing a program.");
@@ -1213,11 +1211,9 @@ class CodeDoTimes extends ObjectStackInstruction {
 					Program doRangeMacroProgram = new Program(inI);
 					doRangeMacroProgram.push(Integer.valueOf(0));
 					doRangeMacroProgram.push(Integer.valueOf(stop));
-					doRangeMacroProgram.push(inI._instructions
-							.get("code.quote"));
+					doRangeMacroProgram.push("code.quote");
 					doRangeMacroProgram.push(bodyObj);
-					doRangeMacroProgram.push(inI._instructions
-							.get("code.do*range"));
+					doRangeMacroProgram.push("code.do*range");
 					estack.push(doRangeMacroProgram);
 				} catch (Exception e) {
 					System.err.println("Error while initializing a program.");
@@ -1250,11 +1246,9 @@ class CodeDoCount extends ObjectStackInstruction {
 					Program doRangeMacroProgram = new Program(inI);
 					doRangeMacroProgram.push(Integer.valueOf(0));
 					doRangeMacroProgram.push(Integer.valueOf(stop));
-					doRangeMacroProgram.push(inI._instructions
-							.get("code.quote"));
+					doRangeMacroProgram.push("code.quote");
 					doRangeMacroProgram.push(bodyObj);
-					doRangeMacroProgram.push(inI._instructions
-							.get("code.do*range"));
+					doRangeMacroProgram.push("code.do*range");
 					estack.push(doRangeMacroProgram);
 				} catch (Exception e) {
 					System.err.println("Error while initializing a program.");
@@ -1348,8 +1342,7 @@ class ExecDoRange extends ObjectStackInstruction {
 					Program recursiveCallProgram = new Program(inI);
 					recursiveCallProgram.push(Integer.valueOf(start));
 					recursiveCallProgram.push(Integer.valueOf(stop));
-					recursiveCallProgram.push(inI._instructions
-							.get("exec.do*range"));
+					recursiveCallProgram.push("exec.do*range");
 					recursiveCallProgram.push(code);
 					estack.push(recursiveCallProgram);
 				} catch (Exception e) {
@@ -1464,8 +1457,11 @@ class ExecK extends ObjectStackInstruction {
 class ExecS extends ObjectStackInstruction {
 	private static final long serialVersionUID = 1L;
 	
-	ExecS(ObjectStack inStack) {
+	int _maxPointsInProgram;
+	
+	ExecS(ObjectStack inStack, int inMaxPointsInProgram) {
 		super(inStack);
+		_maxPointsInProgram = inMaxPointsInProgram;
 	}
 	
 	@Override
@@ -1480,9 +1476,19 @@ class ExecS extends ObjectStackInstruction {
 			listBC.push(b);
 			listBC.push(c);
 			
-			_stack.push(listBC);
-			_stack.push(c);
-			_stack.push(a);
+			if(listBC.programsize() > _maxPointsInProgram){
+				// If the new list is too large, turn into a noop by re-pushing
+				// the popped instructions
+				_stack.push(c);
+				_stack.push(b);
+				_stack.push(a);
+			}
+			else {
+				// If not too big, continue as planned
+				_stack.push(listBC);
+				_stack.push(c);
+				_stack.push(a);
+			}
 		}
 	}
 }
@@ -1506,6 +1512,38 @@ class ExecY extends ObjectStackInstruction {
 			
 			_stack.push(listExecYA);
 			_stack.push(a);
+		}
+	}
+}
+
+class RandomPushCode extends ObjectStackInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	Random _RNG;
+	
+	RandomPushCode(ObjectStack inStack) {
+		super(inStack);
+		_RNG = new Random();
+	}
+	
+	@Override
+	public void Execute(Interpreter inI) {
+		int randCodeMaxPoints = 0;
+		
+		if (inI.intStack().size() > 0) {
+			randCodeMaxPoints = inI.intStack().pop();
+			randCodeMaxPoints = Math.min(Math.abs(randCodeMaxPoints),
+					inI._maxRandomCodeSize);
+
+			int randomCodeSize;
+			if (randCodeMaxPoints > 0) {
+				randomCodeSize = _RNG.nextInt(randCodeMaxPoints) + 2;
+			} else {
+				randomCodeSize = 2;
+			}
+			Program p = inI.RandomCode(randomCodeSize);
+
+			_stack.push(p);
 		}
 	}
 }

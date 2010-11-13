@@ -37,7 +37,7 @@ public class PushBrushPC extends PushGP {
 
 		/*
 		 * Attribute indices: 0 = x; 1 = y; 2 = radius; 3 = red; 4 = green; 5 =
-		 * blue;
+		 * blue; 6 = alpha;
 		 */
 
 		inInterpreter
@@ -94,6 +94,15 @@ public class PushBrushPC extends PushGP {
 		inInterpreter.AddInstruction("brush.blue.randincrement",
 				new BrushRandomIncrement(5));
 
+		inInterpreter.AddInstruction("brush.alpha.increment",
+				new BrushIncrement(6));
+		inInterpreter.AddInstruction("brush.alpha.decrement",
+				new BrushDecrement(6));
+		inInterpreter.AddInstruction("brush.alpha.get", new BrushGet(6));
+		inInterpreter.AddInstruction("brush.alpha.set", new BrushSet(6));
+		inInterpreter.AddInstruction("brush.alpha.randincrement",
+				new BrushRandomIncrement(6));
+
 	}
 
 	/**
@@ -120,7 +129,7 @@ public class PushBrushPC extends PushGP {
 		}
 
 		newGeneration = HumanEvaluate(inFitness);
-
+		
 		if (!newGeneration) {
 			return false;
 		}
@@ -261,6 +270,7 @@ public class PushBrushPC extends PushGP {
 		attributeStack.push(inBrush.red);
 		attributeStack.push(inBrush.green);
 		attributeStack.push(inBrush.blue);
+		attributeStack.push(inBrush.alpha);
 
 		fStack.push(inBrush.t);
 		inputStack.push(inBrush.t);
@@ -287,6 +297,7 @@ public class PushBrushPC extends PushGP {
 		nextBrush.red = attributeStack.peek(3);
 		nextBrush.green = attributeStack.peek(4);
 		nextBrush.blue = attributeStack.peek(5);
+		nextBrush.alpha = attributeStack.peek(6);
 
 		return nextBrush;
 	}

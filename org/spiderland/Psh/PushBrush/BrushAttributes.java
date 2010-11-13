@@ -6,7 +6,7 @@ package org.spiderland.Psh.PushBrush;
  *
  */
 public class BrushAttributes {
-	public float x, y, radius, red, green, blue;
+	public float x, y, radius, red, green, blue, alpha;
 	public float t;
 	
 	public boolean MOUSE_INTERACTION_ENABLED;
@@ -27,6 +27,7 @@ public class BrushAttributes {
 		green = newg;
 		blue = newb;
 
+		alpha = 255;
 		t = 0;
 		MOUSE_INTERACTION_ENABLED = false;
 		mouse_x = 0;
@@ -35,7 +36,7 @@ public class BrushAttributes {
 	}
 
 	public BrushAttributes(float newx, float newy, float newradius, float newr,
-			float newg, float newb, float newt) {
+			float newg, float newb, float newalpha, float newt) {
 
 		x = newx;
 		y = newy;
@@ -43,6 +44,7 @@ public class BrushAttributes {
 		red = newr;
 		green = newg;
 		blue = newb;
+		alpha = newalpha;
 		t = newt;
 		
 		MOUSE_INTERACTION_ENABLED = false;
@@ -52,7 +54,8 @@ public class BrushAttributes {
 	}
 	
 	public BrushAttributes(float newx, float newy, float newradius, float newr,
-			float newg, float newb, float newt, boolean newmouseinteraction) {
+			float newg, float newb, float newalpha, float newt,
+			boolean newmouseinteraction) {
 
 		x = newx;
 		y = newy;
@@ -60,6 +63,7 @@ public class BrushAttributes {
 		red = newr;
 		green = newg;
 		blue = newb;
+		alpha = newalpha;
 		t = newt;
 		
 		MOUSE_INTERACTION_ENABLED = newmouseinteraction;
@@ -72,6 +76,7 @@ public class BrushAttributes {
 		str += "\tred =\t" + red + "\n";
 		str += "\tgreen =\t" + green + "\n";
 		str += "\tblue =\t" + blue + "\n";
+		str += "\talpha =\t" + alpha + "\n";
 		str += "\tt =\t" + t + "\n";
 		
 		return str;

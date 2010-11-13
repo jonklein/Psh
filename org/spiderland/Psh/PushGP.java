@@ -137,7 +137,7 @@ abstract public class PushGP extends GA {
 				GetParam("instruction-set")));
 		_interpreter.SetRandomParameters(minRandomInt, maxRandomInt,
 				randomIntResolution, minRandomFloat, maxRandomFloat,
-				randomFloatResolution);
+				randomFloatResolution, _maxRandomCodeSize, _maxPointsInProgram);
 
 		String framemode = GetParam("push-frame-mode", true);
 		

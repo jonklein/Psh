@@ -133,7 +133,6 @@ public class Interpreter implements Serializable {
 		DefineInstruction("code.frominteger", new CodeFromInteger());
 		DefineInstruction("code.fromfloat", new CodeFromFloat());
 		
-		//TODO exec.s - should we keep?
 		DefineInstruction("exec.k", new ExecK(_execStack));
 		DefineInstruction("exec.s", new ExecS(_execStack, _maxPointsInProgram));
 		DefineInstruction("exec.y", new ExecY(_execStack));

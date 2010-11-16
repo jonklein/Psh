@@ -446,10 +446,10 @@ abstract public class PushGP extends GA {
 		PushGPIndividual b = (PushGPIndividual) TournamentSelect(
 				_tournamentSize, inIndex);
 
-		if (a._program.programsize() == 0) {
+		if (a._program.programsize() <= 0) {
 			return b;
 		}
-		if (b._program.programsize() == 0) {
+		if (b._program.programsize() <= 0) {
 			return a;
 		}
 

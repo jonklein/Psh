@@ -349,6 +349,78 @@ public class PushBrushPC extends PushGP {
 	}
 
 	@Override
+	protected GAIndividual ReproduceByCrossover(int inIndex) {
+		// This implementation uses a random number of crossovers between
+		// 1 and 10 of the same two individuals.
+		
+		PushGPIndividual a = (PushGPIndividual) ReproduceByClone(inIndex);
+		PushGPIndividual b = (PushGPIndividual) TournamentSelect(
+				_tournamentSize, inIndex);
+
+		if (a._program.programsize() <= 0) {
+			return b;
+		}
+		if (b._program.programsize() <= 0) {
+			return a;
+		}
+
+		int numberCrossovers = _RNG.nextInt(10) + 1;
+		for (int i = 0; i < numberCrossovers; i++) {
+			int aindex = _RNG.nextInt(a._program.programsize());
+			int bindex = _RNG.nextInt(b._program.programsize());
+
+			if (a._program.programsize() + b._program.SubtreeSize(bindex)
+					- a._program.SubtreeSize(aindex) <= _maxPointsInProgram){
+				a._program.ReplaceSubtree(aindex, b._program.Subtree(bindex));
+			}
+		}
+		
+		return a;
+	}
+
+	@Override
+	protected GAIndividual ReproduceByMutation(int inIndex) {
+		PushGPIndividual i = (PushGPIndividual) ReproduceByClone(inIndex);
+
+		int numberMutations = _RNG.nextInt(10) + 1;
+		
+		int nummutes = 0;
+		
+		for (int jj = 0; jj < numberMutations; jj++) {
+			int totalsize = i._program.programsize();
+			int which = totalsize > 1 ? _RNG.nextInt(totalsize) : 0;
+			int oldsize = i._program.SubtreeSize(which);
+			int newsize = 0;
+
+			if (_useFairMutation) {
+				int range = (int) Math.max(1, _fairMutationRange * oldsize);
+				newsize = Math
+						.max(1, oldsize + _RNG.nextInt(2 * range) - range);
+			} else {
+				newsize = _RNG.nextInt(_maxRandomCodeSize);
+			}
+
+			if (newsize + totalsize - oldsize <= _maxPointsInProgram) {
+				Object newtree;
+				
+				nummutes++;
+
+				if (newsize == 1) {
+					newtree = _interpreter.RandomAtom();
+				} else {
+					newtree = _interpreter.RandomCode(newsize);
+				}
+
+				i._program.ReplaceSubtree(which, newtree);
+			}
+		}
+		
+		System.out.println("MUTES = " + nummutes);
+
+		return i;
+	}
+	
+	@Override
 	public float EvaluateTestCase(GAIndividual inIndividual, Object inInput,
 			Object inOutput) {
 		// This isn't being used at this time

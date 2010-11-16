@@ -383,9 +383,6 @@ public class PushBrushPC extends PushGP {
 		PushGPIndividual i = (PushGPIndividual) ReproduceByClone(inIndex);
 
 		int numberMutations = _RNG.nextInt(10) + 1;
-		
-		int nummutes = 0;
-		
 		for (int jj = 0; jj < numberMutations; jj++) {
 			int totalsize = i._program.programsize();
 			int which = totalsize > 1 ? _RNG.nextInt(totalsize) : 0;
@@ -402,8 +399,6 @@ public class PushBrushPC extends PushGP {
 
 			if (newsize + totalsize - oldsize <= _maxPointsInProgram) {
 				Object newtree;
-				
-				nummutes++;
 
 				if (newsize == 1) {
 					newtree = _interpreter.RandomAtom();
@@ -415,8 +410,6 @@ public class PushBrushPC extends PushGP {
 			}
 		}
 		
-		System.out.println("MUTES = " + nummutes);
-
 		return i;
 	}
 	

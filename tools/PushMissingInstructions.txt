@@ -1,53 +1,3 @@
-Instructions to Add
-===================
-x boolean.fromfloat
-x boolean.frominteger
-x boolean.rand
-x boolean.shove
-x boolean.yank
-x boolean.yankdup
-
-x code.fromboolean
-x code.fromfloat
-x code.frominteger
-x code.shove
-x code.yank
-x code.yankdup
-
-x exec.shove
-x exec.yank
-x exec.yankdup
-x exec.k
-x exec.s
-x exec.y
-
-x code.rand
-x exec.rand
-
-x float.fromboolean
-x float.frominteger
-x float.rand
-x float.shove
-x float.yank
-x float.yankdup
-
-x integer.fromboolean
-x integer.fromfloat
-x integer.rand
-x integer.shove
-x integer.yank
-x integer.yankdup
-
-x name.shove
-x name.yank
-x name.yankdup
-
-x integer.log
-x integer.ln
-x float.log
-x float.ln
-
-
 Instructions to Possibly Add.
 ==============================================
 These code and exec instructions could be useful for generic fitness prediction
@@ -83,7 +33,6 @@ boolean.define
 code.define
 code.definition
 code.instructions
-code.noop
 
 exec.define
 

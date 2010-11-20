@@ -1600,6 +1600,15 @@ class ExecY extends ObjectStackInstruction {
 	}
 }
 
+class ExecNoop extends Instruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	public void Execute(Interpreter inI) {
+		// Does Nothing
+	}
+}
+
 class RandomPushCode extends ObjectStackInstruction {
 	private static final long serialVersionUID = 1L;
 	

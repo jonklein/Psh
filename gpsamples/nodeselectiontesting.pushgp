@@ -1,0 +1,65 @@
+# Copyright 2009-2010 Jon Klein
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#
+# A sample PushGP file for a simple test symbolic regression problem.
+# In this demo, the system solves the equation y = 12x^2 + 5.
+#
+# Tom Helmuth
+# 11/20/2010
+#
+
+### Setup required parameters
+
+problem-class = org.spiderland.Psh.ProbClass.FloatSymbolicRegression
+
+max-generations = 500
+population-size = 200
+execution-limit = 150
+max-points-in-program = 100
+max-random-code-size = 40
+
+tournament-size = 7
+mutation-percent = 20
+crossover-percent = 65
+simplification-percent = 10
+
+reproduction-simplifications = 25
+report-simplifications = 100
+final-simplifications = 10000
+
+test-cases = ( ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) (6 437) (7 593))
+instruction-set = ( float.* float.+ float.% float.- float.dup float.swap float.erc input.makeinputs1 )
+
+### Setup Optional Parameters
+
+trivial-geography-radius = 10
+simplify-flatten-percent = 20
+
+min-random-float = -20.0
+max-random-float = 20.0
+random-float-resolution = 0.5
+
+target-function-string = y = 12x^2 + 5
+
+### Setup optional parameters having to do with node selection and replacement
+
+node-selection-mode = unbiased
+koza-ratio-internal = 90
+node-tournament-size = 2
+
+#mutation-mode = fair
+#fair-mutation-range = .5
+
+

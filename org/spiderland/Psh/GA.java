@@ -67,7 +67,7 @@ public abstract class GA implements Serializable {
 			throws Exception {
 		
 		Class<?> cls = Class.forName(inParams.get("problem-class"));
-
+		
 		Object gaObject = cls.newInstance();
 
 		if (!(gaObject instanceof GA))

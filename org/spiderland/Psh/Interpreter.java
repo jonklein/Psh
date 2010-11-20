@@ -87,6 +87,7 @@ public class Interpreter implements Serializable {
 		DefineInstruction("integer.%", new IntegerMod());
 		DefineInstruction("integer.*", new IntegerMul());
 		DefineInstruction("integer.pow", new IntegerPow());
+		DefineInstruction("integer.log", new IntegerLog());
 		DefineInstruction("integer.=", new IntegerEquals());
 		DefineInstruction("integer.>", new IntegerGreaterThan());
 		DefineInstruction("integer.<", new IntegerLessThan());
@@ -94,6 +95,7 @@ public class Interpreter implements Serializable {
 		DefineInstruction("integer.max", new IntegerMax());
 		DefineInstruction("integer.abs", new IntegerAbs());
 		DefineInstruction("integer.neg", new IntegerNeg());
+		DefineInstruction("integer.ln", new IntegerLn());
 		DefineInstruction("integer.fromfloat", new IntegerFromFloat());
 		DefineInstruction("integer.fromboolean", new IntegerFromBoolean());
 		DefineInstruction("integer.rand", new IntegerRand());
@@ -104,6 +106,7 @@ public class Interpreter implements Serializable {
 		DefineInstruction("float.%", new FloatMod());
 		DefineInstruction("float.*", new FloatMul());
 		DefineInstruction("float.pow", new FloatPow());
+		DefineInstruction("float.log", new FloatLog());
 		DefineInstruction("float.=", new FloatEquals());
 		DefineInstruction("float.>", new FloatGreaterThan());
 		DefineInstruction("float.<", new FloatLessThan());
@@ -115,6 +118,7 @@ public class Interpreter implements Serializable {
 		DefineInstruction("float.exp", new FloatExp());
 		DefineInstruction("float.abs", new FloatAbs());
 		DefineInstruction("float.neg", new FloatNeg());
+		DefineInstruction("float.ln", new FloatLn());
 		DefineInstruction("float.frominteger", new FloatFromInteger());
 		DefineInstruction("float.fromboolean", new FloatFromBoolean());
 		DefineInstruction("float.rand", new FloatRand());

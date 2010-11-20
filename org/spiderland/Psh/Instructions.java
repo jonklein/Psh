@@ -414,6 +414,27 @@ class IntegerPow extends BinaryIntegerInstruction {
 	}
 }
 
+class IntegerLog extends BinaryIntegerInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	int BinaryOperator(int inA, int inB) {
+		// Test for overflow
+		double result = Math.log(inB) / Math.log(inA);
+		if(Double.isInfinite(result) && result > 0){
+			return Integer.MAX_VALUE;
+		}
+		if(Double.isInfinite(result) && result < 0){
+			return Integer.MIN_VALUE;
+		}
+		if(Double.isNaN(result)){
+			return 0;
+		}
+		
+		return (int) result;
+	}
+}
+
 class IntegerMin extends BinaryIntegerInstruction {
 	private static final long serialVersionUID = 1L;
 	
@@ -469,6 +490,27 @@ class IntegerNeg extends UnaryIntInstruction {
 			return Integer.MAX_VALUE;
 		
 		return -inValue;
+	}
+}
+
+class IntegerLn extends UnaryIntInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	int UnaryOperator(int inA) {
+		// Test for overflow
+		double result = Math.log(inA);
+		if(Double.isInfinite(result) && result > 0){
+			return Integer.MAX_VALUE;
+		}
+		if(Double.isInfinite(result) && result < 0){
+			return Integer.MIN_VALUE;
+		}
+		if(Double.isNaN(result)){
+			return 0;
+		}
+		
+		return (int) result;
 	}
 }
 
@@ -708,6 +750,27 @@ class FloatPow extends BinaryFloatInstruction {
 	}
 }
 
+class FloatLog extends BinaryFloatInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	float BinaryOperator(float inA, float inB) {
+		// Test for overflow
+		float result = (float) (Math.log(inB) / Math.log(inA));
+		if(Double.isInfinite(result) && result > 0){
+			return Float.MAX_VALUE;
+		}
+		if(Double.isInfinite(result) && result < 0){
+			return (1.0f - Float.MAX_VALUE);
+		}
+		if(Double.isNaN(result)){
+			return 0.0f;
+		}
+		
+		return result;
+	}
+}
+
 class FloatMin extends BinaryFloatInstruction {
 	private static final long serialVersionUID = 1L;
 	
@@ -820,6 +883,27 @@ class FloatNeg extends UnaryFloatInstruction {
 	@Override
 	float UnaryOperator(float inValue) {
 		return -inValue;
+	}
+}
+
+class FloatLn extends UnaryFloatInstruction {
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	float UnaryOperator(float inA) {
+		// Test for overflow
+		float result = (float) Math.log(inA);
+		if(Double.isInfinite(result) && result > 0){
+			return Float.MAX_VALUE;
+		}
+		if(Double.isInfinite(result) && result < 0){
+			return (1.0f - Float.MAX_VALUE);
+		}
+		if(Double.isNaN(result)){
+			return 0.0f;
+		}
+		
+		return result;
 	}
 }
 

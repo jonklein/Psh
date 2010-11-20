@@ -1,4 +1,2 @@
-(exec.s exec.s exec.s exec.s exec.s exec.s )
+(0 integer.ln)
 100
-
-(registered.integer registered.code registered.float registered.exec)

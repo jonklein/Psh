@@ -42,6 +42,11 @@ x name.shove
 x name.yank
 x name.yankdup
 
+x integer.log
+x integer.ln
+x float.log
+x float.ln
+
 
 Instructions to Possibly Add.
 ==============================================

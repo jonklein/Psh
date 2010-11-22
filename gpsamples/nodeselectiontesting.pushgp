@@ -39,7 +39,7 @@ reproduction-simplifications = 25
 report-simplifications = 100
 final-simplifications = 10000
 
-test-cases = ( ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) (6 437) (7 593))
+test-cases = ((0 5) ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) (6 437) (7 593) (8 773) (9 977) (10 1205))
 instruction-set = ( float.* float.+ float.% float.- float.dup float.swap float.erc input.makeinputs1 )
 
 ### Setup Optional Parameters
@@ -49,17 +49,17 @@ simplify-flatten-percent = 20
 
 min-random-float = -20.0
 max-random-float = 20.0
-random-float-resolution = 0.5
+random-float-resolution = 1.0
 
 target-function-string = y = 12x^2 + 5
 
 ### Setup optional parameters having to do with node selection and replacement
 
-node-selection-mode = unbiased
-koza-ratio-internal = 90
-node-tournament-size = 2
+#Options: unbiased, leaf-probability, size-tournament
+node-selection-mode = size-tournament
+node-selection-leaf-probability = 10
+node-selection-tournament-size = 2
 
 #mutation-mode = fair
 #fair-mutation-range = .5
-
 

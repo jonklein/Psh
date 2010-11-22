@@ -119,6 +119,10 @@ The following parameters are optional. If not specified, the default values belo
     mutation-mode = fair
     fair-mutation-range = .3
     
+    node-selection-mode = unbiased  (others available are leaf-probability and size-tournament)
+	node-selection-leaf-probability = 10  (only used if node-selection-mode = leaf-probability)
+	node-selection-tournament-size = 2  (only used if node-selection-mode = size-tournament)
+    
     min-random-integer = -10
     max-random-integer = 10
     random-integer-resolution = 1
@@ -173,6 +177,7 @@ Major Changes since v1.0:
 - PshGP now primarily uses the mean of test case errors for an individual's error instead of the total sum of the errors.
 - Added optional parameter `target-function-string`, which specifies a human-readable version of the target function, which is only used in I/O.
 - Added many instructions that were missing from the Push 3.0 specification.
+- Added node-selection-mode as an optional parameter, as well as node size tournaments for node selection.
 
 Major Changes since v0.3:
 -------------------------

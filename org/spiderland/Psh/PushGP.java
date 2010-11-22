@@ -27,9 +27,13 @@ abstract public class PushGP extends GA {
 	protected Interpreter _interpreter;
 	protected int _maxRandomCodeSize;
 	protected int _maxPointsInProgram;
-	protected float _fairMutationRange;
 	protected int _executionLimit;
+	
 	protected boolean _useFairMutation;
+	protected float _fairMutationRange;
+	protected String _nodeSelectionMode;
+	protected float _nodeSelectionLeafProbability;
+	protected int _nodeSelectionTournamentSize;
 
 	protected float _averageSize;
 	protected int _bestSize;
@@ -50,17 +54,50 @@ abstract public class PushGP extends GA {
 		String defaultInterpreterClass = "org.spiderland.Psh.Interpreter";
 		String defaultInputPusherClass = "org.spiderland.Psh.InputPusher";
 		String defaultTargetFunctionString = "";
+		float defaultNodeSelectionLeafProbability = 10;
+		int defaultNodeSelectionTournamentSize = 2;
 
+		// Limits
 		_maxRandomCodeSize = (int) GetFloatParam("max-random-code-size");
 		_executionLimit = (int) GetFloatParam("execution-limit");
 		_maxPointsInProgram = (int) GetFloatParam("max-points-in-program");
 
+		// Fair mutation parameters
 		_useFairMutation = "fair".equals(GetParam("mutation-mode", true));
 		_fairMutationRange = GetFloatParam("fair-mutation-range", true);
 		if (Float.isNaN(_fairMutationRange)) {
 			_fairMutationRange = defaultFairMutationRange;
 		}
+		
+		// Node selection parameters
+		_nodeSelectionMode = GetParam("node-selection-mode", true);
+		if (_nodeSelectionMode != null) {
+			if (!_nodeSelectionMode.equals("unbiased")
+					&& !_nodeSelectionMode.equals("leaf-probability")
+					&& !_nodeSelectionMode.equals("size-tournament")) {
+				throw new Exception(
+						"node-selection-mode must be set to unbiased,\n"
+								+ "leaf-probability, or size-tournament. Currently set to "
+								+ _nodeSelectionMode);
+			}
 
+			_nodeSelectionLeafProbability = GetFloatParam(
+					"node-selection-leaf-probability", true);
+			if (Float.isNaN(_nodeSelectionLeafProbability)) {
+				_nodeSelectionLeafProbability = defaultNodeSelectionLeafProbability;
+			}
+
+			_nodeSelectionTournamentSize = (int) GetFloatParam(
+					"node-selection-tournament-size", true);
+			if (Float.isNaN(GetFloatParam("node-selection-tournament-size", true))) {
+				_nodeSelectionTournamentSize = defaultNodeSelectionTournamentSize;
+			}
+
+		} else {
+			_nodeSelectionMode = "unbiased";
+		}
+
+		// Simplification parameters
 		_simplificationPercent = GetFloatParam("simplification-percent");
 		_simplifyFlattenPercent = GetFloatParam("simplify-flatten-percent",
 				true);
@@ -72,7 +109,7 @@ abstract public class PushGP extends GA {
 		_reportSimplifications = (int) GetFloatParam("report-simplifications");
 		_finalSimplifications = (int) GetFloatParam("final-simplifications");
 
-		// Setup ERC parameters
+		// ERC parameters
 		int minRandomInt;
 		int defaultMinRandomInt = -10;
 		int maxRandomInt;
@@ -139,6 +176,7 @@ abstract public class PushGP extends GA {
 				randomIntResolution, minRandomFloat, maxRandomFloat,
 				randomFloatResolution, _maxRandomCodeSize, _maxPointsInProgram);
 
+		// Frame mode and input pusher class
 		String framemode = GetParam("push-frame-mode", true);
 		
 		String inputpusherClass = GetParam("inputpusher-class", true);
@@ -156,16 +194,19 @@ abstract public class PushGP extends GA {
 
 		_interpreter.setInputPusher((InputPusher) iObject);
 
+		// Initialize the interpreter
 		InitInterpreter(_interpreter);
 
 		if (framemode != null && framemode.equals("pushstacks"))
 			_interpreter.SetUseFrames(true);
-		
+
+		// Target function string
 		_targetFunctionString = GetParam("target-function-string", true);
 		if(_targetFunctionString == null){
 			_targetFunctionString = defaultTargetFunctionString;
 		}
 
+		// Init the GA
 		super.InitFromParameters();
 
 		// Print important parameters
@@ -192,6 +233,7 @@ abstract public class PushGP extends GA {
 		if (_trivialGeographyRadius != 0) {
 			Print("Trivial Geography Radius: " + _trivialGeographyRadius + "\n");
 		}
+		Print("Node Selection Mode: " + _nodeSelectionMode);
 		Print("\n");
 
 		Print("Instructions: " + _interpreter.GetInstructionsString() + "\n");
@@ -452,10 +494,10 @@ abstract public class PushGP extends GA {
 		if (b._program.programsize() <= 0) {
 			return a;
 		}
-
-		int aindex = _RNG.nextInt(a._program.programsize());
-		int bindex = _RNG.nextInt(b._program.programsize());
-
+		
+		int aindex = ReproductionNodeSelection(a);
+		int bindex = ReproductionNodeSelection(b);
+		
 		if (a._program.programsize() + b._program.SubtreeSize(bindex)
 				- a._program.SubtreeSize(aindex) <= _maxPointsInProgram)
 			a._program.ReplaceSubtree(aindex, b._program.Subtree(bindex));
@@ -467,7 +509,8 @@ abstract public class PushGP extends GA {
 		PushGPIndividual i = (PushGPIndividual) ReproduceByClone(inIndex);
 
 		int totalsize = i._program.programsize();
-		int which = totalsize > 1 ? _RNG.nextInt(totalsize) : 0;
+		int which = ReproductionNodeSelection(i);
+		
 		int oldsize = i._program.SubtreeSize(which);
 		int newsize = 0;
 
@@ -489,6 +532,49 @@ abstract public class PushGP extends GA {
 			i._program.ReplaceSubtree(which, newtree);
 
 		return i;
+	}
+	
+	/**
+	 * Selects a node to use during crossover or mutation. The selection
+	 * mechanism depends on the global parameter _nodeSelectionMode.
+	 * @param inInd = Individual to select node from.
+	 * @return Index of the node to use for reproduction.
+	 */
+	protected int ReproductionNodeSelection(PushGPIndividual inInd) {
+		int totalSize = inInd._program.programsize();;
+		int selectedNode = 0;
+		
+		if(totalSize <= 1){
+			selectedNode = 0;
+		}
+		else if(_nodeSelectionMode.equals("unbiased")){
+			selectedNode = _RNG.nextInt(totalSize);
+		}
+		else if(_nodeSelectionMode.equals("leaf-probability")){
+			// TODO Implement. Currently runs unbiased
+			
+			// note: if there aren't any internal nodes, must select leaf, and
+			// if no leaf, must select internal
+			
+			selectedNode = _RNG.nextInt(totalSize);
+		}
+		else {
+			// size-tournament
+			int maxSize = -1;
+			selectedNode = 0;
+			
+			for(int j = 0; j < _nodeSelectionTournamentSize; j++){
+				int nextwhich = _RNG.nextInt(totalSize);
+				int nextwhichsize = inInd._program.SubtreeSize(nextwhich);
+
+				if(nextwhichsize > maxSize){
+					selectedNode = nextwhich;
+					maxSize = nextwhichsize;
+				}
+			}
+		}
+		
+		return selectedNode;
 	}
 
 	protected GAIndividual ReproduceBySimplification(int inIndex) {

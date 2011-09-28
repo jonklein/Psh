@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCES = *.java  org/spiderland/Psh/*.java  
-CLASSES	= *.class org/spiderland/Psh/*.class
+SOURCES = *.java  org/spiderland/Psh/*.java org/spiderland/Psh/ProbClass/*.java org/spiderland/Psh/Coevolution/*.java
+CLASSES	= *.class org/spiderland/Psh/*.class org/spiderland/Psh/ProbClass/*.class org/spiderland/Psh/Coevolution/*.class
 
 .PHONY: docs
 
 all: Psh.jar docs
 
 Psh.jar: $(SOURCES) 
-	javac -source 1.5 -target 1.5 -Xlint $(SOURCES)
+	javac -source 1.6 -target 1.6 -Xlint $(SOURCES)
 	jar cf Psh.jar Manifest LICENSE NOTICE README.md $(CLASSES)
 
 clean:

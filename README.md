@@ -42,15 +42,19 @@ Getting Started with Psh
 
 Building Psh
 ------------
-After getting Psh with get, build the package:
+After downloading the source code from git, build the package with Maven (preferably version 3):
 
-    $ make
+    $ mvn install
+
+And run tests with
+
+    $ mvn test
 
 Using PshGP
 ----------
 To run PshGP on a sample problem:
 
-    $ java PshGP gpsamples/intreg1.pushgp
+    $ java -jar target/psh-*.jar examples/gpsamples/intreg1.pushgp
 
 This problem uses integer symbolic regression to solve the equation y = 12x^2 + 5. Other sample problems are available, with descriptions, in `gpsamples/`. For example, `intreg2.pushgp` uses integer symbolic regression to solve the factorial function, and `regression1.pushgp` uses float symbolic regression to solve y = 12x^2 + 5.
 

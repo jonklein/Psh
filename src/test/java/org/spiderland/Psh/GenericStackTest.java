@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.spiderland.Psh.test;
+package org.spiderland.Psh;
 
 import java.util.Vector;
 import junit.framework.TestCase;
 import org.spiderland.Psh.GenericStack;
 
-public class GenericStackTest extends TestCase
-{
-    public void testPushPop() throws Exception
-    {
+public class GenericStackTest extends TestCase {
+
+    public void testPushPop() throws Exception {
         GenericStack<String> stringStack = new GenericStack<String>();
         GenericStack<Vector<String>> stringVectorStack = new GenericStack<Vector<String>>();
 
@@ -52,8 +50,7 @@ public class GenericStackTest extends TestCase
         assertEquals(0, stringStack.size());
     }
 
-    public void testPushAllReverse() throws Exception
-    {
+    public void testPushAllReverse() throws Exception {
         GenericStack<String> stringStack = new GenericStack<String>();
 
         stringStack.push("value 1");
@@ -69,8 +66,7 @@ public class GenericStackTest extends TestCase
         assertEquals("value 2", stringStack2.pop());
     }
 
-    public void testEquals() throws Exception
-    {
+    public void testEquals() throws Exception {
         GenericStack<String> stringStack = new GenericStack<String>();
         GenericStack<String> stringStack2 = new GenericStack<String>();
         GenericStack<Vector<String>> stringVectorStack = new GenericStack<Vector<String>>();
@@ -93,8 +89,7 @@ public class GenericStackTest extends TestCase
         assertEquals(stringStack.hashCode(), stringStack2.hashCode());
     }
 
-    public void testPeek() throws Exception
-    {
+    public void testPeek() throws Exception {
         GenericStack<String> stringStack = new GenericStack<String>();
 
         stringStack.push("value 1");
@@ -107,8 +102,7 @@ public class GenericStackTest extends TestCase
         assertEquals("value 2", stringStack.peek(1));
     }
 
-    public void testDup() throws Exception
-    {
+    public void testDup() throws Exception {
         GenericStack<String> stringStack = new GenericStack<String>();
 
         stringStack.dup();
@@ -124,8 +118,7 @@ public class GenericStackTest extends TestCase
         assertEquals("value 1", stringStack.peek(0));
     }
 
-    public void testSwap() throws Exception
-    {
+    public void testSwap() throws Exception {
         GenericStack<String> stringStack = new GenericStack<String>();
 
         stringStack.push("value 1");
@@ -141,8 +134,7 @@ public class GenericStackTest extends TestCase
         assertEquals("value 2", stringStack.peek(0));
     }
 
-    public void testRot() throws Exception
-    {
+    public void testRot() throws Exception {
         GenericStack<String> stringStack = new GenericStack<String>();
 
         stringStack.push("value 1");
@@ -161,10 +153,9 @@ public class GenericStackTest extends TestCase
         assertEquals("value 4", stringStack.peek(2));
         assertEquals("value 3", stringStack.peek(1));
         assertEquals("value 1", stringStack.peek(0));
-   }
+    }
 
-    public void testShove() throws Exception
-    {
+    public void testShove() throws Exception {
         GenericStack<String> stringStack = new GenericStack<String>();
 
         stringStack.shove("value 1", 0);

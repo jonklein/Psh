@@ -1,3 +1,5 @@
+package org.spiderland.Psh;
+
 /*
  * Copyright 2009-2010 Jon Klein
  *
@@ -13,12 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import org.spiderland.Psh.*;
-
 /**
  * PshInspector pshFile
- * 
+ *
  * PshInspector can be used to inspect the execution of a Psh program.
  * After every step of the program, the stacks of the interpreter
  * are displayed. The Psh program is given to PshInspector through
@@ -28,61 +27,64 @@ import org.spiderland.Psh.*;
  * - Program: The psh program to run
  * - ExecutionLimit: Maximum execution steps
  * - Input(optional): Any inputs to be pushed before execution,
- *                    separated by spaces. Note: Only int, float, and
- *                    boolean inputs are accepted.
+ * separated by spaces. Note: Only int, float, and
+ * boolean inputs are accepted.
  */
 public class PshInspector {
-	public static void main(String args[]) throws Exception {		
 
-		if (args.length != 1) {
-			System.out.println("Usage: PshInspector inputfile");
-			System.exit(0);
-		}
+    public static void main(String args[]) throws Exception {
 
-		// _input will allow easy initialization of the interpreter.
-		InspectorInput _input = new InspectorInput(args[0]);
-		Interpreter _interpreter = _input.getInterpreter();
+        if (args.length != 1) {
+            System.out.println("Usage: PshInspector inputfile");
+            System.exit(0);
+        }
 
-		int _executionLimit = _input.getExecutionLimit();
-		int executed = 0;
-		int stepsTaken = 1;
-		String stepPrint = "";
+        // _input will allow easy initialization of the interpreter.
+        InspectorInput _input = new InspectorInput(args[0]);
+        Interpreter _interpreter = _input.getInterpreter();
 
-		// Print registered instructions
-		System.out.println("Registered Instructions: "
-				+ _interpreter.GetRegisteredInstructionsString() + "\n");
+        int _executionLimit = _input.getExecutionLimit();
+        int executed = 0;
+        int stepsTaken = 1;
+        String stepPrint = "";
 
-		// Run the Psh Inspector
-		System.out.println("====== State after " + executed + " steps ======");
-		_interpreter.PrintStacks();
+        // Print registered instructions
+        System.out.println("Registered Instructions: "
+                + _interpreter.GetRegisteredInstructionsString() + "\n");
 
-		while (executed < _executionLimit && stepsTaken == 1) {
-			executed += 1;
+        // Run the Psh Inspector
+        System.out.println("====== State after " + executed + " steps ======");
+        _interpreter.PrintStacks();
 
-			// Create output string
-			if (executed == 1)
-				stepPrint = "====== State after " + executed + " step ";
-			else
-				stepPrint = "====== State after " + executed + " steps ";
-			
-			stepPrint += "(last step: ";
-			Object execTop = _interpreter.execStack().top();
-			
-			if (execTop instanceof Program)
-				stepPrint += "(...)";
-			else
-				stepPrint += execTop;
-			
-			stepPrint += ") ======";
+        while (executed < _executionLimit && stepsTaken == 1) {
+            executed += 1;
 
-			// Execute 1 instruction
-			stepsTaken = _interpreter.Step(1);
+            // Create output string
+            if (executed == 1) {
+                stepPrint = "====== State after " + executed + " step ";
+            } else {
+                stepPrint = "====== State after " + executed + " steps ";
+            }
 
-			if (stepsTaken == 1) {
-				System.out.println(stepPrint);
-				_interpreter.PrintStacks();
-			}
-		}
+            stepPrint += "(last step: ";
+            Object execTop = _interpreter.execStack().top();
 
-	}
+            if (execTop instanceof Program) {
+                stepPrint += "(...)";
+            } else {
+                stepPrint += execTop;
+            }
+
+            stepPrint += ") ======";
+
+            // Execute 1 instruction
+            stepsTaken = _interpreter.Step(1);
+
+            if (stepsTaken == 1) {
+                System.out.println(stepPrint);
+                _interpreter.PrintStacks();
+            }
+        }
+
+    }
 }

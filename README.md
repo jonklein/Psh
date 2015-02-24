@@ -46,6 +46,8 @@ After downloading the source code from git, build the package with Maven (prefer
 
     $ mvn install
 
+Which will create a JAR file in folder `target/`.
+
 And run tests with
 
     $ mvn test
@@ -54,15 +56,19 @@ Using PshGP
 ----------
 To run PshGP on a sample problem:
 
-    $ java -jar target/psh-*.jar examples/gpsamples/intreg1.pushgp
+    $ ./pshgp examples/gpsamples/cartcenter.pushgp
 
-This problem uses integer symbolic regression to solve the equation y = 12x^2 + 5. Other sample problems are available, with descriptions, in `gpsamples/`. For example, `intreg2.pushgp` uses integer symbolic regression to solve the factorial function, and `regression1.pushgp` uses float symbolic regression to solve y = 12x^2 + 5.
+or directly with Java command
+
+    $ java -jar target/psh-*.jar examples/gpsamples/cartcenter.pushgp
+
+This problem uses integer symbolic regression to solve the equation `y = 12x^2 + 5`. Other sample problems are available, with descriptions, in `gpsamples/`. For example, `intreg2.pushgp` uses integer symbolic regression to solve the factorial function, and `regression1.pushgp` uses float symbolic regression to solve `y = 12x^2 + 5`.
 
 Using PshInspector
 ------------------
 PshInspector allows you to examine every step of a Psh program as it executes. To run PshInspector on a sample psh program:
 
-    $ java PshInspector pushsamples/exampleProgram1.push
+    $ ./pshinspector examples/pushsamples/exampleProgram1.push
 
 This push file runs the psh program `(2994 5 integer.+)` for 100 steps after pushing the inputs `44, 22, true, 17.76`. Other sample psh programs are available in `pushsamples/`.
 
